@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
+
 # Transcriptomic Analysis and Visualization
 **Dr Olin Silander**
 
@@ -8,7 +10,7 @@
 1. Understand the steps involved in analysing RNA-seq data
 2. Understand how small read count numbers can lead to uncertainty
 3. Calculate differences in gene expression between samples (DGE)
-4. Use two methods to visualise differences in gene expression: volcano plots and MDS 
+4. Use two methods to visualise differences in gene expression: volcano plots and MDS
 
 
 ## Introduction
@@ -46,7 +48,7 @@ We'll make some pretend RNA-seq data. First, we will make a toy dataset with a v
 ```R
 # To make a toy dataset
 # we'll use R's built-in Poisson random number generator rpois()
-# This will give us a set of random numbers that 
+# This will give us a set of random numbers that
 # are Poisson-distributed.
 #
 # In the rpois function, the first argument is the number of random numbers
@@ -63,7 +65,7 @@ n.samples <- 6
 # average number of reads per gene
 avg.reads <- 4
 
-# We will make our data all at once. The total number 
+# We will make our data all at once. The total number
 # of Poisson distributed "reads per gene" is the total number
 # of samples multiplied by the number of genes.
 # However, we'll divide our six "samples" into two
@@ -84,7 +86,7 @@ rownames(low.read.counts) <- paste0("gene_",1:n.genes)
 colnames(low.read.counts) <- c(paste0("normal_",1:(n.samples/2)), paste0("cancer_",1:(n.samples/2)))
 # Did it work?
 head(low.read.counts)
-``` 
+```
 
 Using `head` you should see a matrix with columns labeled "cancer_1 etc. and rows labeled "gene_1" etc.
 
@@ -148,8 +150,8 @@ We also have to set up our sample data so that `edgeR` can handle it. This is re
 
 ```R
 # for this to work you must have named your
-# sample number variable "n.samples" 
-# this gives us a 6-element vector of names 
+# sample number variable "n.samples"
+# this gives us a 6-element vector of names
 # for our samples
 sample.data <- c(rep("normal",n.samples/2),rep("cancer",n.samples/2))
 
@@ -194,7 +196,7 @@ We can filter our results so that we only include genes that have mapped read **
 
 ```R
 # find out which rows to keep
-# here cpm(dge.low.counts)>100 gives a TRUE or FALSE - 
+# here cpm(dge.low.counts)>100 gives a TRUE or FALSE -
 # TRUE when the counts are above 100 and FALSE when not.
 # TRUE is also interpreted as "1" by R, and FALSE as "0".
 # Thus the sum function below "sums" up the TRUE rows
@@ -294,7 +296,7 @@ It looks like there are some "significantly" differentially expressed genes with
 ### Our SECOND volcano plot - the FDR
 
 ```R
-# What if we *correct for multiple tests*, and instead use a statistic similar to 
+# What if we *correct for multiple tests*, and instead use a statistic similar to
 # a corrected p-value (here, called False Discovery Rate, or FDR). Instead
 # of the p-value, we cbind the FDR
 volcanoData <- cbind(sort.dge$table$logFC, -log10(sort.dge$table$FDR))
@@ -313,7 +315,7 @@ We can now make our toy data set a bit more interesting. For example, we can cha
 # to do that we first find random genes (rows) using "sample"
 rand.genes <- sample(1:n.genes,20)
 #
-# Then we increase the counts for those genes, but *only* in 
+# Then we increase the counts for those genes, but *only* in
 # the cancer samples (the 2nd half of the samples)
 # Here I am multiplying the expression levels by 3.
 # You should be able to understand the basic syntax here
@@ -332,7 +334,7 @@ Now we have a new dataset. Here, a number of genes have higher expression in can
 
 ```R
 # Does this change anything? Let's check. First, we will plot an MDS
-# plot again. This time, some of the genes ("foods") *do* differ between the 
+# plot again. This time, some of the genes ("foods") *do* differ between the
 # samples ("countries"). The MDS analysis can use those genes to separate the samples
 plotMDS(dge.low.counts, method="bcv", col=as.numeric(dge.low.counts$samples$group))
 ```

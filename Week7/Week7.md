@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
+
 # Phylogenetics and Evolutionary Visualization
 **Dr Olin Silander**
 
@@ -12,7 +14,7 @@ After studying this section of the tutorial you should be able to:
 3. Use bioinformatic tools to align sequences and infer a phylogeny.
 4. Identify different ways of visualising phylogenies and the advantages and disadvantages of each.
 
-### Reminder of the steps you have completed 
+### Reminder of the steps you have completed
 <img src="graphics/flowchart-by-day.png" title="Makin' progress" width="700"/><br>
 **Today is the last day of this section**.
 
@@ -42,7 +44,7 @@ To reconstruct new genomes, we will simply use of old reference, and input our c
 # and use the new filtered variant calls to make a new .fasta consensus
 # Don't call it "consensus" (you MUST name your kwazulu and
 # montana .fasta files differently)
-# This time, DO NOT include the -p argument, which places a prefix 
+# This time, DO NOT include the -p argument, which places a prefix
 # on your new sequence
 # Note that below "bcftools consensus" is the command
 cat nCoV-2019.reference.fasta | bcftools consensus my_variants.q150.vcf.gz > kwazulu-natal.fasta
@@ -68,7 +70,7 @@ If you have not already, please install `bedtools` using `mamba` (or `conda`) an
 We will next make a `.bed format file` that we will use to *mask* the new fasta files that we have made from the variant calls. Please see the `.bed` format [here](https://bedtools.readthedocs.io/en/latest/index.html "Nice logo, bedtools")
 
 ```bash
-# here we mask all regions with coverage less than 12 - we assume that 
+# here we mask all regions with coverage less than 12 - we assume that
 # regions with coverage more than 12 have successully called variants
 # we make a new .bed format file
 # "genomecov" is part of the bedtools command
@@ -123,7 +125,7 @@ Now we can use this to align all nucleotide sequences from the other SARS-CoV-2 
 
 ```bash
 # We need to put our sequences at the bottom of the list.
-# note the first fasta below is not the original reference, but the 
+# note the first fasta below is not the original reference, but the
 # (now unzipped) file you downloded above
 cat hcov-19_2022_04_07_22.fasta montana-mask.fasta kwazulu-mask.fasta > all_your_sequences_belong_to_us.fasta
 ```
@@ -140,7 +142,7 @@ We will use `mafft` to perform our alignment on all the sequences in the downloa
 This syntax is very simple (change the filenames accordingly):
 
 ```bash
-mafft --auto --reorder all_genomes.fasta > all_genomes.aln 
+mafft --auto --reorder all_genomes.fasta > all_genomes.aln
 ```
 
 The suffix here is `.aln` ("alignment"). Some people may have different opinions on the proper name for an alignment file.
@@ -156,10 +158,10 @@ The arguments are (for now):
 
 - ``-s``: an alignment file
 
-  
+
 ```bash
 # note that there is no need to pipe this into a file.
-iqtree -s my_genomes.aln -m MF 
+iqtree -s my_genomes.aln -m MF
 ```
 - `-m MF` use modelfinder to find the "best model" of evolution
 
@@ -223,4 +225,3 @@ Above, you have inferred a phylogeny, but have not calculated any level of *cert
 ### Reminder of the steps you have completed today
 <img src="graphics/flowchart-by-day.png" title="TMakin' progress" width="700"/><br>
 **Done**.
-

@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
+
 # Transcriptomics
 **Dr Olin Silander**
 
@@ -44,7 +46,7 @@ Dimensional reduction is an important technique. In fact when you have any biolo
 Before reading further, please take five minutes and read [this quick intro to PCA](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues "eigen-who?") before continuing.
 
 Becuase this is such an important concept, we are going to spend some time on this.
-First some examples that have *nothing* to do with RNA or cells or sequencing. 
+First some examples that have *nothing* to do with RNA or cells or sequencing.
 But hopefully they give us some insight into how dimensional reduction works and why it's important.
 
 **Important Note**: I have put some extremely informative (imho) youtube videos up on Stream that explain PCA, UMAP, RNA-seq normalisation, and from there you can find explanations on other RNA-seq related topics. Also linked here:<br>
@@ -70,7 +72,7 @@ We can visualise food consumption as a heatmap (here I have used the `heatmap.2`
 <img src="graphics/diet_heat.png" width="300" title="cookin"/><br>
 **It's getting hot in here**<br><br>
 
-In contrast to a heatmap or barchart, PCA will help us to figure out which countries are the most similar or different in their combined diet. This is because PCA finds the **combinations** of diet items (components) that vary the most between countries. We can then take these components and plot them. Below, I show the first two components (Dim1 and Dim2) - these are the two most important components, although there are a total of 17 components (the same as the number of variables). Clearly, Wales and N. Ireland differ the most in the combinations of items in their diets (the "components"). I have made the x-axis (Dim1) approximately three times longer than the y-axis (Dim2), as Dim1 accounts for approximately three times more variance (68%) than Dim2 (25%). 
+In contrast to a heatmap or barchart, PCA will help us to figure out which countries are the most similar or different in their combined diet. This is because PCA finds the **combinations** of diet items (components) that vary the most between countries. We can then take these components and plot them. Below, I show the first two components (Dim1 and Dim2) - these are the two most important components, although there are a total of 17 components (the same as the number of variables). Clearly, Wales and N. Ireland differ the most in the combinations of items in their diets (the "components"). I have made the x-axis (Dim1) approximately three times longer than the y-axis (Dim2), as Dim1 accounts for approximately three times more variance (68%) than Dim2 (25%).
 
 <img src="graphics/diet_pca.png" width="700" title="N. Ireland is a different place"/><br>
 **England is central to it all**<br><br>
@@ -137,13 +139,13 @@ Now we start on the path toward cocktail PCA.
 
 # Tell the recipe what's happening but have no model ( ~. )
 pca_rec <- recipe(~., data = cocktails_df) %>%
-  # Note that the name and category of cocktail 
+  # Note that the name and category of cocktail
   # are just labels not predictors
   update_role(name, category, new_role = "id") %>%
-  # Normalise so all the 
+  # Normalise so all the
   # variables have mean 0 and stdev 1
-  # note that the %>% thing is the *pipe* 
-  # operator and performs similarly to the 
+  # note that the %>% thing is the *pipe*
+  # operator and performs similarly to the
   # pipe | in the terminal
   step_normalize(all_predictors()) %>%
   step_pca(all_predictors())
@@ -176,12 +178,12 @@ juice(pca_prep) %>%
   ggplot(aes(PC1, PC2, label = name)) +
   # make the points colored by category
   geom_point(aes(color = category), alpha = 0.7, size = 2) +
-  # add text 
+  # add text
   geom_text(check_overlap = TRUE, hjust = "inward", size = 2) +
   # and don't add more colour anywhere
   labs(color = NULL)
 ```
-Note that you can change the `PC1` and `PC2` in the `ggplot` function to 
+Note that you can change the `PC1` and `PC2` in the `ggplot` function to
 plot the next principal components. Feel free to try this (e.g. to plot `PC2` and `PC3`).
 
 Wow, a few cocktails are very different from others. What's in an Applejack punch?
@@ -201,11 +203,11 @@ my.cocktail <- "Applejack Punch"
 ingredients <- cocktails_df[cocktails_df$name==my.cocktail,]
 # Now we can see the ingredients
 # What is this code doing? It has a new method, which()
-# that we use to only report the ingredients that are 
+# that we use to only report the ingredients that are
 # greater than 0 (i.e. they're in the cocktail)
 cocktails_df[cocktails_df$name==my.cocktail,which(ingredients>0)]
 
-# repeat the above steps but with a 
+# repeat the above steps but with a
 # cocktail of your choice, or, for example, this one:
 my.cocktail <- "Sphinx Cocktail"
 ```
@@ -223,7 +225,7 @@ my.cocktails <- c("Silver Fizz", "Peach Blow Fizz")
 # we repeat the same as above, but
 # "loop" over all values of the my.cocktails vector above
 # of course here, coi means "cocktail of interest"
-# for each coi, we get the ingredients and print them 
+# for each coi, we get the ingredients and print them
 # to the screen
 for(coi in my.cocktails) {
   ingredients <- cocktails_df[cocktails_df$name==coi,]
@@ -323,7 +325,7 @@ We can do a quick install:
 # all at once
 # might briefly redline your RAM
 mamba install -c bioconda fastqc multiqc
-``` 
+```
 Now we run the QC steps
 
 ```bash
@@ -463,6 +465,3 @@ Next time: What about volcanoes? And heatmaps? And the Poisson?
 
 <img src="graphics/single-cell.jpeg" width="500"/><br>
 **Unfortunately we won't be able to look at scRNA-seq data. We'll save that for your writing assignment.**<br><br>
-
-
-

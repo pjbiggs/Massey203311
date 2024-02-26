@@ -21,4 +21,4 @@ This practice-oriented course differs from many of the other courses you may hav
 | 11 | Human Genomics                  | [Transcriptomics](Week11/Week11.html) |
 | 12 | Human Genomics               | [Transcriptomic Visualization](Week12/Week12.html) |
 
-NB: Week 5 is the week before Easter, and the lab should take place on Good Friday (29-Mar-2024).  We will look at options etc. for this.
+NB: Week 5 is the week before Easter, and the lab should take place on Good Friday (29-Mar-2024).  We will look at options etc. for this soon.

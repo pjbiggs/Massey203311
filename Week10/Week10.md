@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **19-May-2023 - Hard copy will be available shortly on the 'Wiki | Week 10' Stream page.**
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
 
 # Metagenomic and metabarcoding visualisation
 
@@ -51,8 +51,8 @@ As a reminder, in what follows, we shall use the following typographical convent
 
 -   Characters written in `this programming style` are commands to be typed into the computer as they stand.
 -   Characters written in _`this programming style`_ are objects and file names.
--   Characters written after something like `###` indicate comments within the code that will help you.  They do not run code. 
--   Characters written in without `>` at the start of the line **(e.g. lines starting with "\[1\]")** indicate responses back from the R console inside RStudio that will help you too. 
+-   Characters written after something like `###` indicate comments within the code that will help you.  They do not run code.
+-   Characters written in without `>` at the start of the line **(e.g. lines starting with "\[1\]")** indicate responses back from the R console inside RStudio that will help you too.
 -   Words inserted within square brackets **\[Enter\]** indicate keys to be pressed.
 
 So, for example,
@@ -82,7 +82,7 @@ The machines we are using for the course are Apple iMacs. Please use your normal
 
 The machines are Windows PC's so logging into them should be the same as any other Massey Windows PC.
 
-#### Outside Massey 
+#### Outside Massey
 
 Most likely this is your own machine, so this should not be an issue.
 
@@ -101,7 +101,7 @@ We have 6 exercises -- with questions along the way --  to work through before g
 - We will perform some initial data ordination.
 - We will have a quick look at some network visualisations.
 - Finally, we will download some new data for further analysis.
- 
+
 The commands below have been checked and should work fine.
 
 ---
@@ -139,7 +139,7 @@ We'll also include the small amount of metadata we have – the samples are name
 > samples.out <- rownames(seqtab.nochim)
 > samples.out
  [1] "F3D0"   "F3D1"   "F3D141" "F3D142" "F3D143" "F3D144" "F3D145" "F3D146" "F3D147" "F3D148" "F3D149"
-[12] "F3D150" "F3D2"   "F3D3"   "F3D5"   "F3D6"   "F3D7"   "F3D8"   "F3D9" 
+[12] "F3D150" "F3D2"   "F3D3"   "F3D5"   "F3D6"   "F3D7"   "F3D8"   "F3D9"
 ```
 
 We will now make our other columns of data to add to the metadata:
@@ -194,8 +194,8 @@ Now we construct our initial phyloseq object as a combination to bring all these
 
 ```R
 ### this is all one line of code
-> ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows=FALSE), 
-+                sample_data(samdf), 
+> ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows=FALSE),
++                sample_data(samdf),
 +                tax_table(taxa))
 > ps
 phyloseq-class experiment-level object
@@ -277,7 +277,7 @@ We do not have very rich metadata for this set (that was not its purpose).  Howe
 
 ---
 
-## Exercise 2: Going back to the beginning with phyloseq 
+## Exercise 2: Going back to the beginning with phyloseq
 
 Before we start, a lot of the information in this section comes from the various phyloseq tutorials and vignettes that are available, and are acknowledged as such.  From the introduction to the vignette:
 
@@ -333,7 +333,7 @@ We are going to now perform a couple of exploratory data analyses, using richnes
 ### plot diversity measures from a vector
 > alpha_meas = c("Observed", "Chao1", "ACE", "Shannon", "Simpson", "InvSimpson")
 > p <- plot_richness(GP, "human", "SampleType", measures=alpha_meas)
-> p 
+> p
 Warning message:
 Removed 104 rows containing missing values (geom_errorbar)
 
@@ -379,7 +379,7 @@ You should see something like the following:
 An unbelievably complex figure plotted “relatively” easily.  Next, we shall look at the barplot.  These are key functions and are seen often in research papers about metabarcoding.  We shall also use the enterotype dataset for these plots.  We shall start with a simple rank-abundance barplot, using the cumulative fractional abundance of each OTU in the dataset. In the enterotype dataset, the available published data are simplified as sample-wise fractional occurrences, rather than counts of individuals, and we will further normalize them by the total number of samples (280).  In doing this from the code, we get the figure below:
 
 ```R
-### on to the enterotype data 
+### on to the enterotype data
 > data(enterotype)
 
 ### Exploratory bar plots
@@ -409,7 +409,7 @@ This means the OTUs in this dataset have been grouped at the level of genera, an
 
 ```R
 ### trim our data to the top 10 OTUs
-> TopNOTUs <- names(sort(taxa_sums(enterotype), TRUE)[1:10]) 
+> TopNOTUs <- names(sort(taxa_sums(enterotype), TRUE)[1:10])
 > ent10   <- prune_taxa(TopNOTUs, enterotype)
 > print(ent10)
 phyloseq-class experiment-level object
@@ -461,7 +461,7 @@ Our next exercise for this module is to look at some ways we can ordinate the da
 - Principal Coordinates Analysis (PCoA)
 - Correspondence Analysis (CA)
 
-We take as our first example, a reproduction of Figure 5 from the “Global Patterns” article (Caporaso 2011). The authors show a 3-dimensional representation of the first three axes of a Principal Coordinates Analysis (PCoA; This is also sometimes referred to as “Multi-Dimensional Scaling”, or “MDS”) performed on the unweighted-UniFrac distance using all of the available sequences (their approach included both 5’ and 3’ sequences). 
+We take as our first example, a reproduction of Figure 5 from the “Global Patterns” article (Caporaso 2011). The authors show a 3-dimensional representation of the first three axes of a Principal Coordinates Analysis (PCoA; This is also sometimes referred to as “Multi-Dimensional Scaling”, or “MDS”) performed on the unweighted-UniFrac distance using all of the available sequences (their approach included both 5’ and 3’ sequences).
 
 > From: <https://en.wikipedia.org/wiki/UniFrac>: “UniFrac is a distance metric used for comparing biological communities. It differs from dissimilarity measures such as Bray-Curtis dissimilarity in that it incorporates information on the relative relatedness of community members by incorporating phylogenetic distances between observed organisms in the computation. Both weighted (quantitative) and unweighted (qualitative) variants of UniFrac are widely used in microbial ecology, where the former accounts for abundance of observed organisms, while the latter only considers their presence or absence.”
 
@@ -492,14 +492,14 @@ We can see that ~43% of the variation in the data comes from the first 3 axes.  
 
 ```R
 ### plot axes 1 and 2 (left hand side):
-> p12 <- plot_ordination(GlobalPatterns, GloPa.pcoa, "samples", 
-+                color="SampleType") + geom_point(size=4) + 
+> p12 <- plot_ordination(GlobalPatterns, GloPa.pcoa, "samples",
++                color="SampleType") + geom_point(size=4) +
 +                geom_path() + scale_colour_hue(guide = FALSE)
 > p12
 
 ### plot axes 1 and 3, but with a legend (right hand side):
-> p13 <- plot_ordination(GlobalPatterns, GloPa.pcoa, "samples", 
-+                color="SampleType", axes=c(1, 3)) + 
+> p13 <- plot_ordination(GlobalPatterns, GloPa.pcoa, "samples",
++                color="SampleType", axes=c(1, 3)) +
 +                geom_point(size=4) + geom_line()
 > p13
 ```
@@ -551,12 +551,12 @@ We can now choose axes to investigate the data.  We can plot data for axes 1 and
 
 ```R
 ### CA plot for axes 1 and 2
-> p12 <- plot_ordination(GP, gpca, "samples", color="SampleType") + 
+> p12 <- plot_ordination(GP, gpca, "samples", color="SampleType") +
 +     geom_line() + geom_point(size=4)
 > p12
 
 ### CA plot for axes 3 and 4
-> p34 <- plot_ordination(GP, gpca, "samples", color="SampleType", 
+> p34 <- plot_ordination(GP, gpca, "samples", color="SampleType",
 +     axes=c(3, 4)) + geom_line() + geom_point(size=4)
 > p34
 ```
@@ -579,7 +579,7 @@ However, again because of the power of our analysis system we can easily plot in
 
 ```R
 ### facet plot of the top 9 phyla
-> p1 <- ggplot(p1$data, p1$mapping) + geom_point(size=4, alpha=0.5) + 
+> p1 <- ggplot(p1$data, p1$mapping) + geom_point(size=4, alpha=0.5) +
 +     facet_wrap(~Phylum) + scale_colour_hue(guide = FALSE)
 > p1
 ```
@@ -627,7 +627,7 @@ Our “distance” here is a measure of dissimilarity between samples, and in th
 > ____________________
 > </td></tr></table>
 
-The last thing we will look at is a different way to the plot the same data to see how it compares.  This is using a different function, but applying the same max.dist value at 0.3.  We will make an object to then plot with default setting. 
+The last thing we will look at is a different way to the plot the same data to see how it compares.  This is using a different function, but applying the same max.dist value at 0.3.  We will make an object to then plot with default setting.
 
 NB: _`maxdist`_ in `plot_net()` is called _`max.dist`_ in `make_network()`, so try not to get these two mixed up!
 
@@ -648,7 +648,7 @@ The names here indicate there maybe a structure here.  Let’s colour this the s
 
 ---
 
-## Exercise 6: Retrieval of new data 
+## Exercise 6: Retrieval of new data
 
 ### Introduction
 
@@ -665,19 +665,19 @@ The paper is interesting in that is refers to the analysis of 35 postmenopausal 
 I have chosen a subset of the data for you: 60 samples in which I have removed the 15 samples with both the least and most numbers of reads.  You can see the effect on read number and the summary in the below:
 
 ```R
-## this is for demonstration only - there is no need to type anything in this box, 
+## this is for demonstration only - there is no need to type anything in this box,
 ## move on, nothing to see here!
 
 ### summary code to show read summary
 > all90 <- c(3428, 8329, 7876, 10681, 5860, 2799, 5594, 7139, 7946, 738, 7202, 105193, 521, 4813, 5364, 1043, 7527, 6607, 15328, 9503, 11029, 6874, 12746, 5312, 81, 39, 8623, 5922, 6999, 9600, 5502, 7137, 7778, 326, 7651, 9637, 2338, 7405, 11160, 7192, 6565, 10997, 563, 9322, 122949, 14620, 6685, 5089, 8794, 5777, 8613, 549, 3271, 9339, 10453, 182085, 5095, 9576, 13100, 7405, 5070, 6908, 5898, 5842, 6263, 2685, 2310, 8604, 2811, 3482, 7287, 5993, 1460, 9761, 6203, 3226, 5630, 4, 8047, 604, 9260, 277, 26800, 74311, 157038, 1719, 107046, 16522, 2, 1)
 > summary(all90)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-      1    3442    6891   14319    9335  182085 
-	  
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+      1    3442    6891   14319    9335  182085
+
 > chosen60 <- c(3428, 8329, 7876, 10681, 5860, 2799, 5594, 7139, 7946, 7202, 4813, 5364, 7527, 6607, 9503, 6874, 5312, 8623, 5922, 6999, 9600, 5502, 7137, 7778, 7651, 9637, 2338, 7405, 7192, 6565, 9322, 6685, 5089, 8794, 5777, 8613, 3271, 9339, 10453, 5095, 9576, 7405, 5070, 6908, 5898, 5842, 6263, 2685, 2310, 8604, 2811, 3482, 7287, 5993, 9761, 6203, 3226, 5630, 8047, 9260)
 > summary(chosen60)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   2310    5468    6891    6665    8118   10681 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+   2310    5468    6891    6665    8118   10681
 
 ## end of code you do not need to type.
 ```
@@ -742,7 +742,7 @@ Using the code described in this practical, and maybe from the Week 10 lecture, 
 - plot (i): plot the values for _`Sample`_ on the x-axis colouring by _`env_broad_scale`_ with the _`Shannon`_ diversity measure
 - plot (ii): plot the values for _`env_local_scale`_ on the x-axis colouring by _`env_broad_scale`_ with both the _`Shannon`_ and _`Simpson`_ diversity measures.  The order of these measures is unimportant here.
 
-**You must plot both of these plots for Part A, and include all code as to how you got there.** 
+**You must plot both of these plots for Part A, and include all code as to how you got there.**
 
 
 #### Part B
@@ -754,7 +754,7 @@ Using the code described in this practical, and maybe from the Week 10 lecture, 
 - prune the taxa
 - plot the barplot by _`env_local_scale`_ on the x-axis with colouring by _`Genus`_  and `facet_wrap` on _`env_broad_scale`_  
 
-**You include all code as to how you got to generate the plots.** 
+**You include all code as to how you got to generate the plots.**
 
 
 ### Guiding thoughts for the portfolio
@@ -814,5 +814,3 @@ This is how you put in an image file:
 <img src="graphics/giphy.gif" width="300"/>
 ```
 <img src="graphics/giphy.gif" width="300"/> -->
-
-

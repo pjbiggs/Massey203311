@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
+
 **There is no project to clone for this week; you can do all work in your own project**
 
 # Sequencing and Mapping
@@ -41,7 +43,7 @@ A flowchart of the process we will follow is below. It is unlikely that you will
 
 ## Background
 
-Soon after the birth of Next Generation Sequencing in 2005 (or so), the technology rapidly proliferated into a number of 
+Soon after the birth of Next Generation Sequencing in 2005 (or so), the technology rapidly proliferated into a number of
 [different platforms](https://en.wikipedia.org/wiki/Massive_parallel_sequencing "NGS sequencing platforms") (e.g. 454, IonTorrent, Helicos, and others). Over the last decade and a half, companies came and went, and currently there are three dominant NGS sequencing platforms: [Illumina](https://en.wikipedia.org/wiki/Illumina,_Inc. "Illumina on Wikipedai"), which dominates the market; [PacBio](https://en.wikipedia.org/wiki/Pacific_Biosciences "PacBio on Wikipedia"); and [Oxford Nanopore](https://en.wikipedia.org/wiki/Oxford_Nanopore_Technologies "Oxford Nanopore on Wikipedia").
 These three technologies differ considerably in their methodologies. For all three, sequencing output ranges from tens of gigabases (billions of nucleotides) to terabases (trillions of nucleotides), depending on the specific platform (e.g. Illumina MiSeq, Illumina NovaSeq, Oxford Nanopore MinION, Oxford Nanopore P2, etc.). However, these are not the only methods available, and recently a number of other possibly disruptive technologies have come onto the scene (see below). Lest we forget, when Fred Sanger first started sequencing, he was averaging one base pair per day at his peak.
 
@@ -88,7 +90,7 @@ It's difficult to know what the sequencing landscape will look like in five year
 Today we will deal with DNA sequence data from two of the most widely-available technologies, Illumina and Oxford Nanopore. The primary difference between these two technolgies is that Illumina provides short, highly accurate reads using a very expensive machine (~ $1 million USD), while Oxford Nanopore provides long, less accurate reads using a very cheap machine (~ $1000 USD). As you can imagine, these characteristics provide different advantages.
 
 Oxford Nanopore and Illumina also differ in other ways, but we will not discuss those in detail today. Perhaps the primary difference is that Oxford Nanopore sequences the *original* molecules of DNA and RNA with all their various modifications (cytosine methylation, adenine methylation, and others), whereas Illumia sequences *copies* of DNA only.
- 
+
 <img src="graphics/ont-ill.png" title="Scary car ride" width="500"/><br>
 **Oxford Nanopore - the original DNA in all its glory**
 
@@ -141,7 +143,7 @@ Navigate to the command line tab on your RStudio window ("Terminal"). This is on
 
 ```bash
     # Download the latest conda installer.
-    # We cry because we can't use tab-complete here as 
+    # We cry because we can't use tab-complete here as
     # the file does not yet exist on our computers.
     # you should be able to copy the line below and  
     # paste it on the command line
@@ -181,16 +183,16 @@ Let's now actually install `conda` (in our case we install a miniature version o
 ```bash
     # Run the conda installer
     # Note: now you can use tab-complete.
-    # During installation. You will need to 
+    # During installation. You will need to
     # press enter and the spacebar several
-    # times at the --More-- prompt, and 
+    # times at the --More-- prompt, and
     # type "yes" each time it prompts you to. It should
     # be readily apparent where to do this:
     # "Miniconda3 will now be installed into this location:" yes
     # "Do you wish the installer to initialize Miniconda3
     # by running conda init?" yes
     bash Miniconda3-latest-Linux-x86_64.sh
-    
+
     # delete the installer after successful run
     rm Miniconda3-latest-Linux-x86_64.sh
 ```
@@ -201,14 +203,14 @@ Let's now actually install `conda` (in our case we install a miniature version o
 ```bash
 # Make sure you type this EXACTLY, including the $ !!!
 export PATH="$HOME/miniconda3/bin:$PATH"
-``` 
+```
 **If you keep your terminal session active (i.e. don't close it) then you should be able to use `conda` for the rest of the Semester in the terminal. If you do close the terminal, repeat the above step**.
 
 Now, you should be able to use the `conda` command. Again, one useful way to check that `conda` (*or most other command line programs*) is working is to ask the program for help. This is **almost always** done by typing `--help` or `-h` after the command. For example try:
 
 ```bash
 conda --help
-``` 
+```
 
 This should bring up a list of sub-commands that `conda` can do (assuming you have installed it correctly). If this does not work, ask someone for help (lecturer, demonstrator, or classmate). Note that this is different from the `R` help command.
 
@@ -342,8 +344,8 @@ Check out the `tree` command using the `--help` subcommand. What do the `-L --du
 Next, let's next look quickly inside the sequence data files. However, we don't want to open them up - they're quite large (well, not *that* large for genome sequence data). We will use the simple terminal command you know well, `head` (you could also use `less` or `tail`. You have encountered all of them previously):
 ```bash
 # Here we first have to use zcat, not head directly, or cat,
-# as the files are zipped. 
-# We then pipe | the result to head (remember, head is the command used to 
+# as the files are zipped.
+# We then pipe | the result to head (remember, head is the command used to
 # look at the first few lines of a file - by default, ten lines).
 # You've also encountered the pipe before - it takes the output of one command
 # and feeds it to another.
@@ -354,7 +356,7 @@ zcat choose_one_fastq_file_to_look_at.fastq.gz | head
 Once we have the data and have decided that it looks as we expect (*or does it?* &#129300;), the first thing we will do is get some summary statistics (all good data science and bioinformatics and, indeed, *any science* should begin with actually *looking* at the data). Luckily, there are a number of other pieces of software that have been written to do this, so we will not need to re-invent the wheel. Today we will use two pieces of software. The first is [seqkit](https://bioinf.shenwei.me/seqkit/ "seqkit site"), a blazingly fast and flexible piece of software. Install:
 
 ```bash
-# Below we use mamba (of course) and 
+# Below we use mamba (of course) and
 # tell mamba which *channel* to look in
 # for the recipe using the -c option
 mamba install -c bioconda seqkit
@@ -393,7 +395,7 @@ Let's look at whole distributions of read lengths instead of just the *average* 
 
 ```bash
 # A histogram of read lengths.
-# We use the *watch* subcommand and the --bins option to clean up the 
+# We use the *watch* subcommand and the --bins option to clean up the
 # histograms a tiny bit. The --bins options tells the program
 # how many different histogram bins you want (here, I chose 15)
 # If you want, you can leave the --bins 15 part of the command out.
@@ -409,9 +411,9 @@ Use this `seqkit watch` command for all of your sequencing files. You can also t
 It is also possible to make a simple plot of the average *quality* of each read. In this case, quality of a base (A,C,G,T) in a read refers to the likelihood that the base is correct. See the explanation of quality scores [here](https://en.wikipedia.org/wiki/FASTQ_format#Quality "Wikipedia quality scores"). Recall that Illumina and Oxford Nanopore data differ in their read accuracy, and thus quality. Which technology has higher accuracy? Go ahead and plot the quality scores. Here we also use `seqkit`.
 
 ```bash
-# Below we add a new argument, --fields, to specify which 
-# read characteristic we would like to plot. Above seqkit used 
-# the default field for watch, MeanLength. Now we can get MeanQual. 
+# Below we add a new argument, --fields, to specify which
+# read characteristic we would like to plot. Above seqkit used
+# the default field for watch, MeanLength. Now we can get MeanQual.
 # We leave the --bins option in (you don't have to).
 # When you leave in --bins you need to specify a number (I chose 15)
 seqklt wutch --fielbs MoanQual --bins 15 choose_one_fastq_file_to_plot.fastq.gz
@@ -451,7 +453,7 @@ To begin, we make some files with the new data we would like. In this case, we w
 # Again, fx2tab is a *subcommand* of seqkit and will not tab-complete
 seqkit fx2tab --help
 # -q and -l options give the length and quality for each sequence.
-# -n supresses the output of the sequences and qualities for *every bp* 
+# -n supresses the output of the sequences and qualities for *every bp*
 # of each read
 # note that here we can squish them into a single option, -qln rather
 # than -q -l -n (also possible)
@@ -524,7 +526,7 @@ Finally, you can plot the data. If you have used `seqkit fx2tab` as suggested ab
 **Getting there**.
 
 
-## Portfolio TLDR help 
+## Portfolio TLDR help
 TLDR summary of how to approach to Portfolio Assessment from Week 4.
 
 1. Find a way to get the GC content and any other useful info from the fastq.gz sequence files using `fx2tab`
@@ -617,4 +619,3 @@ This is from [Albert Vielella](https://docs.google.com/spreadsheets/d/1GMMfhyLK0
     After installation, `conda` would usually adjust your `$PATH` variable by adding the directory `~/miniconda3/bin` to your `$PATH` variable -- so that the program `conda` can be found anytime you open a new shell, and any program that `conda` installs will be used first because the computer will look in this directory first. *However*, `RStudioCloud` does not recognise the addition of `conda` to the path, so we add it manually.
 
 [^2]: Paired end Illumina `.fastq` files are often named with an internal "R1" and "R2". This refers the "Read 1" and "Read 2" and indicates, for convencience, that the files are paired.
-

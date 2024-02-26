@@ -1,7 +1,9 @@
 **[Return to the Course Home Page](../index.html)**
 
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
+
 # Introduction to Visualization
-**Professor Murray Cox**
+**Professor Patrick Biggs**
 
 [Purpose](#purpose)<br>
 [Introduction](#introduction)<br>
@@ -85,7 +87,7 @@ R lets you modify almost every feature of a graph.  Although often a simple grap
 >
 > ```x <- runif(100)```<br>
 > ```y <- 2 + 3 * x^2 + rnorm(100, 0, 0.25)```
-> 
+>
 > Let's assume this dataset shows the production of a metabolite in mg/L (*x* axis data) relative to the cellular expression of a gene in read counts per million (*y* axis data).
 > Can you make a scatter plot that clearly and simply shows the trend between metabolite levels and gene expression?
 

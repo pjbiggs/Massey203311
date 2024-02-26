@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
+
 # Introduction to R
 
 **Professor Patrick Biggs**
@@ -65,8 +67,8 @@ First thing, you have an electronic copy of this practical -- which you will see
 
 In what follows, we shall use the following typographical conventions for working with R:
 -   Characters written in `this programming style` are commands to be typed into the computer as they stand. In a difference to practical 1, this will be for both functions and filenames, *[and all these commands should be typed in for this afternoon's practical]*.
--   Characters written after something like `###` indicate comments within the code that will help you.  They do not run code. 
--   Characters written in without `>` at the start of the line **(e.g. lines starting with "\[1\]")** indicate responses back from the R console inside RStudio that will help you too. 
+-   Characters written after something like `###` indicate comments within the code that will help you.  They do not run code.
+-   Characters written in without `>` at the start of the line **(e.g. lines starting with "\[1\]")** indicate responses back from the R console inside RStudio that will help you too.
 -   Words inserted within square brackets **\[Enter\]** indicate keys to be pressed.
 
 So, for example,
@@ -96,7 +98,7 @@ The machines we are using for the course are Apple iMacs. Please use your normal
 
 The machines are Windows PC's so logging into them should be the same as any other Massey Windows PC.
 
-#### outside Massey 
+#### outside Massey
 
 Most likely this is your own machine, so this should not be an issue.
 
@@ -170,7 +172,7 @@ An alternative way to help you with these practicals would be to rewrite the cod
 
 ```R
 ### this is a comment and it can be at the top of a code block
-> 1 + 1 
+> 1 + 1
 [1] 2
 ```
 
@@ -250,7 +252,7 @@ Try some ideas out for yourself, and place some code examples in the box below. 
 >
 > </td></tr></table>
 >
-> What does `vec * vec` do to the values of `vec`? 
+> What does `vec * vec` do to the values of `vec`?
 
 
 
@@ -295,9 +297,9 @@ To make integers in R, we need to specific them as such. We can be assured that 
 ```R
 > y <- as.integer(3)
 > y               ### print the value of y
-[1] 3 
+[1] 3
 > class(y)        ### print the class name of y
-[1] "integer" 
+[1] "integer"
 > is.integer(y)   ### is y an integer?
 > [1] TRUE
 ```
@@ -464,21 +466,21 @@ We can combine vectors, even of different types:
 Following on from the initial concepts of maths mentioned above, we can perform arithmetic operations of vectors are member-by-member, i.e., member-wise.  For example, suppose we have two vectors `a` and `b`.
 
 ```R
-a <- c(5, 8, 12, 15) 
+a <- c(5, 8, 12, 15)
 b <- c(1, 2, 3, 8)
 ```
 
 Then, if we multiply a by 5, we would get a vector with each of its members multiplied by 5.
 
 ```R
-5 * a 
+5 * a
 [1] 25 40 60 75
 ```
 
 And if we add `a` and `b` together, the sum would be a vector whose members are the sum of the corresponding members from `a` and `b`.
 
 ```R
-> a + b 
+> a + b
 [1]  6 10 15 23
 ```
 
@@ -503,12 +505,12 @@ If we have two vectors of unequal length, the shorter one will be recycled in or
 ```
 
 > **Exercise E:**
-> 
+>
 > Rerun the above but with a new vector `u` with only 2 members (it doesn’t matter what they are).  Write the result of `u + v` in the box below.  What has happened?
 > <table><tr><td>
 > ____________________
 > </td></tr></table>
- 
+
 In subsequent practicals we will be using indexed positions in vectors, matrices and data frames.  Consider vector `s` above, which should still be in your session.  To find the third member, we simply type:
 
 ```R
@@ -520,10 +522,10 @@ In subsequent practicals we will be using indexed positions in vectors, matrices
 
 ### Matrix
 
-This is a collection of data elements in a 2D format, also known as a table.  Consider a matrix A with 2 rows and 3 columns, such as:	
- 
+This is a collection of data elements in a 2D format, also known as a table.  Consider a matrix A with 2 rows and 3 columns, such as:
+
 <img src="graphics/matrixA.PNG" width="150"/>
- 
+
 As long as the elements are of the same type, we can use our first multi-line R code to make a matrix.  Remember from the lectures that is no need to type the `+`, this indicates that you input runs over more than one line:
 
 ```R
@@ -541,7 +543,7 @@ As long as the elements are of the same type, we can use our first multi-line R 
 We can find the element in the mth row and nth column as `A[m, n]`.
 
 > **Exercise F:**
-> 
+>
 > What is the number in the second column and second row in matrix A?  Write your code and the answer below:
 > <table><tr><td>
 > ____________________
@@ -554,9 +556,9 @@ In the next 6 lines of entered code (those with a `>`), we will look at extracti
 [1] 5 3 7
 > A[ ,3]                         ### the 3rd column
 [1] 4 7
-> dimnames(A) = list( 
-+    c("row1", "row2"),          ### row names 
-+    c("col1", "col2", "col3"))  ### column names 
+> dimnames(A) = list(
++    c("row1", "row2"),          ### row names
++    c("col1", "col2", "col3"))  ### column names
 > A
      col1 col2 col3
 row1    2    1    4
@@ -589,7 +591,7 @@ Other ways exist to make matrices.  Let’s make another matrix called B of a di
 ```
 
 > **Exercise G:**
-> 
+>
 > If you multiply matrix A by the transposed matrix B to make a new matrix AB what is the value in the first column and second row?  Write your code and numeric answer below.
 > <table><tr><td>
 > ____________________
@@ -598,9 +600,9 @@ Other ways exist to make matrices.  Let’s make another matrix called B of a di
 The columns of two matrices having the same number of rows can be combined into a larger matrix. For example, suppose we have another matrix `C` also with 3 rows.
 
 ```R
-> C <- matrix( 
-+   c(7, 4, 2), 
-+   nrow = 3, 
+> C <- matrix(
++   c(7, 4, 2),
++   nrow = 3,
 +   ncol = 1)
 > C                ### C has 3 rows
      [,1]
@@ -634,8 +636,8 @@ The same principle works with the row bind `rbind()` function.  Enter the follow
 Let’s make 3 vectors together, and combine them into a list:
 
 ```R
-> n <- c(5, 6, 1) 
-> s <- c("xx", "yy", "zz", "aa", "bb") 
+> n <- c(5, 6, 1)
+> s <- c("xx", "yy", "zz", "aa", "bb")
 > b <- c(FALSE, FALSE, TRUE, FALSE)
 > x <- list(n, s, b, 4)
 > x
@@ -725,7 +727,7 @@ To retrieve data in a cell, we would enter its row and column coordinates in the
 We can also see the extent of the data with the `nrow()` and `ncol()` functions:
 
 ```R
-> nrow(mtcars)      ### number of data rows 
+> nrow(mtcars)      ### number of data rows
 [1] 32
 > ncol(mtcars)      ### number of data columns
 [1] 11
@@ -769,7 +771,7 @@ Camaro Z28 13.3   8  350 245 3.73 3.84 15.41  0  0    3    4
 ```
 
 > **Exercise H:**
-> 
+>
 > How many cylinders does the Hornet Sportabout (row 5) have?  Write your code, and then your answer in the box below:
 > <table><tr><td>
 > ____________________
@@ -784,7 +786,7 @@ As you will remember from the lecture, we have come across lots of functions alr
 Let’s investigate some arguments of some simple packages.  We will combine this with a little more work with help functions.  Most of your work in R will require knowledge of the functions, and what arguments they take.  Go to window #4 and go to the “Help” tab.  Type `dist` in the search bar, and choose the first one – plain `dist`.
 
 > **Exercise I:**
-> 
+>
 > How can you open up the help for dist() using the console?
 > <table><tr><td>
 > ____________________
@@ -823,7 +825,7 @@ The first line of the “usage” section gives you an example of what the funct
 ```
 
 > **Exercise J:**
-> 
+>
 > Taking the last line of code you entered, how would you modify this to generate a distance matrix on `x` using the “manhattan” method?
 > <table><tr><td>
 > ____________________
@@ -839,7 +841,7 @@ There are many basic packages R comes with:
 * Utils: another 200 including such essentials as `head()`, `tail()` and `write()`.
 * Graphics:  `plot()`, `boxplot()`, `barplot()` and `hist()`.
 
-Let’s now theoretically install a couple of new packages – `survey` and `hexbin` – and then try using them to see the effect of one package on another.  As I said in the lecture, some packages have data within them that we can use such a dataset as an example. 
+Let’s now theoretically install a couple of new packages – `survey` and `hexbin` – and then try using them to see the effect of one package on another.  As I said in the lecture, some packages have data within them that we can use such a dataset as an example.
 
 ```R
 > install.packages("survey")   ### this has been done for you and there is no need to do it, but this is the code
@@ -891,12 +893,12 @@ Do not update any packages at this time, so type "n" to answer the question abov
 Let’s go to https://www.bioconductor.org and find a new package to load.  
 
 > **Exercise K:**
-> 
+>
 > How many Bioconductor packages are there at the current version, according to the website:
 > <table><tr><td>
 > ____________________
 > </td></tr></table>
-   
+
 We shall choose `ggtree`, so let’s go back to our R console and load it:
 
 ```R
@@ -907,8 +909,8 @@ Update all/some/none? [a/s/n]:
 Do not update any packages at this time, so type "n" to answer the question above (this is very important).  If you have time, explore the help to see what this package can do.
 
 > **Exercise L:**
-> 
-> Load the package “ggtree” first.  What is the package version for ggtree? Hint: use the help commands such as `apropos()` to find it.  Hint 2: start typing `package` into the console, and what happens? 
+>
+> Load the package “ggtree” first.  What is the package version for ggtree? Hint: use the help commands such as `apropos()` to find it.  Hint 2: start typing `package` into the console, and what happens?
 > <table><tr><td>
 > ____________________
 > </td></tr></table>
@@ -960,9 +962,9 @@ From the help pages:
 Now, let’s add some colour to the plot.  Say we wanted to plot all the values for the results for the automatic cars (`“am” = 1`), and show them as red bars, with black borders we would type:
 
 ```R
-### perform a test to colour the ‘am’ dataset 
-> alluvial(mtcars[8:11], freq = mtcars$cyl, 
-    col = ifelse(mtcars$am == "1", "red", "grey"), 
+### perform a test to colour the ‘am’ dataset
+> alluvial(mtcars[8:11], freq = mtcars$cyl,
+    col = ifelse(mtcars$am == "1", "red", "grey"),
     border = ifelse(mtcars$am == "1", "black", "grey"))
 ```
 
@@ -971,8 +973,8 @@ Let’s now do something new – don’t worry we will do this in detail again i
 ```R
 ### set up a file for an image, but make it for orange colours on non-automatic cars – so this code is wrong…..
 > png('/cloud/project/testAlluvial.png')
-> alluvial(mtcars[8:11], freq = mtcars$cyl, 
-+          col = ifelse(mtcars$am == "1", "red", "grey"), 
+> alluvial(mtcars[8:11], freq = mtcars$cyl,
++          col = ifelse(mtcars$am == "1", "red", "grey"),
 +          border = ifelse(mtcars$am == "1", "black", "grey"))
 > dev.off()
 RDStudioGD
@@ -990,23 +992,23 @@ As a little final exercise, we will look at the answers we have generated today,
 One last question: if you take the following numbers from your answers returned to the console from the short exercises, and place a comma between each answer what famous series of numbers do you get?  Count only numeric characters from the first to the last, ignore spaces and the `[1]` line count from the R console.  Some answers involve simple addition or subtraction e.g. '+1' on the 4th line.  Write your answer in the box below:
 
 > Exercise A:	character 1
-> 
+>
 > Exercise C:	character 1
 >
 > Exercise D:	character 1
-> 
+>
 > Exercise D:	character 1 (+1)
-> 
+>
 > Exercise F:	character 1 of your returned numeric answer
-> 
+>
 > Exercise G:	character 1 of your returned numeric answer
-> 
+>
 > Exercise H:	your numeric answer
-> 
+>
 > Exercise K:	character 1 (-1), character 4
-> 
+>
 > Exercise L: character 2 (-1), character 3 (-1)
-> 
+>
 
 This is the series called:
 <table><tr><td>
@@ -1017,7 +1019,7 @@ Use the internet or your own understanding to find out what the 17th number in t
 <table><tr><td>
 ____________________
 </td></tr></table>
- 
+
 That is today’s practical completed.
 
 For those of you on the iMacs, please remember to go to the Apple Menu on your iMac and click on “Log Out Student” to log out of the system.

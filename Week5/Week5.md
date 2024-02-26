@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
+
 # Variants and Phylogenies
 **Dr Olin Silander**
 
@@ -25,10 +27,10 @@ One option would be to assemble a new genome from our sequence reads and compare
 **I warned you**<br>
 
 
-Thirdly, and most importantly, we would not get any measure of how *sure* we are that a change occurred. For these reasons we will instead **map** our reads onto a SARS-CoV-2 genome that is considered the standard "reference" (ancestral) genome. We will then figure out which mutations have occurred. 
+Thirdly, and most importantly, we would not get any measure of how *sure* we are that a change occurred. For these reasons we will instead **map** our reads onto a SARS-CoV-2 genome that is considered the standard "reference" (ancestral) genome. We will then figure out which mutations have occurred.
 
 
-This process of finding mutations is often called *variant-calling*. A "variant" might be a single nucleotide substitution (e.g. T --> C), or it could be a deletion, a repeat expansion, etc. The aim in "variant calling" is to figure out how your sequence sample *differs* from the reference sequence that you have. For humans, this is usually done to infer SNPs that exist between individuals. Here, we are doing it to find *mutations* that have occurred during the evolution of SARS-CoV-2. 
+This process of finding mutations is often called *variant-calling*. A "variant" might be a single nucleotide substitution (e.g. T --> C), or it could be a deletion, a repeat expansion, etc. The aim in "variant calling" is to figure out how your sequence sample *differs* from the reference sequence that you have. For humans, this is usually done to infer SNPs that exist between individuals. Here, we are doing it to find *mutations* that have occurred during the evolution of SARS-CoV-2.
 
 #### QUESTIONS
 1. Do you think you need more or less data to do a genome assembly compared to read mapping and calling variants? A question to ponder.
@@ -112,7 +114,7 @@ Let's first make the index. We can't do that without the reference genome. First
 
 Wait, are you looking around your `data/` directory? Do a quick `ls` or `ls -lh`. Are there a lot of extra files there? Remove them if so (you can also look in the "Files" tab of the *RStudio Cloud* browser window). Be careful when removing!
 
-Now download the reference SARS-CoV-2 genome [here](./data/nCoV-2019.reference.fasta "it's me!") (right click, copy link, and `wget`). _If_ this does not work and you get an `html` file, then you should instead be able to click on the link, which will open a text file, copy all the text, and `cat` this into a new file using `cat <paste text here> > nCoV-2019.reference.fasta`. 
+Now download the reference SARS-CoV-2 genome [here](./data/nCoV-2019.reference.fasta "it's me!") (right click, copy link, and `wget`). _If_ this does not work and you get an `html` file, then you should instead be able to click on the link, which will open a text file, copy all the text, and `cat` this into a new file using `cat <paste text here> > nCoV-2019.reference.fasta`.
 
 ```bash
 # if you don't remember
@@ -134,7 +136,7 @@ Remember to use the redirect (`>`) and that the output will be in `.sam` format,
 
 #### Mapping Illumina reads in a paired-end manner
 
-Use the correct `bwa mem` command structure from above and map the Illumina 
+Use the correct `bwa mem` command structure from above and map the Illumina
 Kwazulu-natal reads to the reference genome.
 Remember to use the redirect (`>`). Do NOT make an output file with the same name as the Montana ONT output file.
 
@@ -167,7 +169,7 @@ Most importantly, this line defines the read name (`QNAME`), the position in the
 
 We are going to produce compressed [bam](https://www.zymoresearch.com/blogs/blog/what-are-sam-and-bam-files "Great SAM BAM Blog post") output for efficient storage and access to the mapped reads. To understand why we are going to compress the file, take a look at the size of your original `fastq` files that you used for mapping, and the size of the `sam` file that resulted. Ack.
 
-Along the way toward compressing, we will also sort our reads for easier access. This simply means we will order the reads by the position in the genome that they map to. 
+Along the way toward compressing, we will also sort our reads for easier access. This simply means we will order the reads by the position in the genome that they map to.
 
 To perform all of these steps, we will rely on a powerful bit of kit that has been implemented in the `samtools` software package. One very important aspect of `samtools` that you should always remember is that in almost all cases the default behaviour of `samtools` is to output to the terminal (standard out). For that reason, we will be using the redirect arrow `>` quite a bit. In other cases, we will use the "pipe" operator `|`. We use the pipe operator so that we do not have to deal with intermediate files. Also below make sure you are following the file naming conventions for your suffixes. Simple mapped files will be in `.sam` format and should be denoted by that suffix. The *compressed* version will be in `.bam` format, and should be denoted by that suffix.
 
@@ -386,17 +388,17 @@ bcftools mpileup -f reference.fasta my_mapped_q20.bam | bcftools call -v -m -o m
 - `-v` output variant sites only
 
 
-This is a rather complicated instruction, which is partly due to 
-the fact that there has been a relatively 
+This is a rather complicated instruction, which is partly due to
+the fact that there has been a relatively
 recent change from the tool used previously for this step, [samtools mpileup](http://www.htslib.org/doc/1.11/samtools-mpileup.html "Why'd they throw you out?").
 With `bcftools mpileup` we use the pipe (`|`) operator
 because we have no need for the intermediate output,
 and instead feed the output of ``bcftools mpileup`` directly to ``bcftools call``. There are several options that we invoke, explained below:
-   
+
 `bcftools` mpileup parameter:
 
 - ``-f FILE``: faidx indexed reference sequence file
-  
+
 |bcftools| call parameters:
 
 - ``-v``: output variant sites only
@@ -440,7 +442,7 @@ MN908947.3      1631    .       AAAGA   AA      95.4026 .       INDEL;IDV=26;IMF
 MN908947.3      1738    .       GAAA    GAAAA   18.5335 .       INDEL;IDV=48;IMF=0.258065;DP=186;VDB=8.75517e-07;SGB=-0.691153;RPBZ=-1.04304;MQBZ=0;MQSBZ=0;BQBZ=-2.76108;SCBZ=-0.535838;FS=0;MQ0F=0;AC=1;AN=2;DP4=26,14,18,0;MQ=60     GT:PL   0/1:51,0,19
 ```
 
-If you look carefully, you might notice that your variant calls are 
+If you look carefully, you might notice that your variant calls are
 not spread evenly throughout the genome. This is because there are certain error-prone locations in your assembly. These are areas in which the assembly **is not correct** (or, is not likely to be correct), and in these places, many variants get called. Also note in the above (depending on how this is displaying in your browser) that the column names might appear as one-off. Hopwever, the second numbers you see are the *qualities* of the variant calls. The first are the positions.)
 
 #### Statistics
@@ -478,7 +480,7 @@ Indel/SNP+MNP ratio          : 2.11 (97/46)
 ```
 
 #### QUESTION
-1. Look at the statistics. One ratio that is mentioned in the statistics is transition transversion ratio (*ts/tv*). Does the observed ratio makes sense? Why or why not? 
+1. Look at the statistics. One ratio that is mentioned in the statistics is transition transversion ratio (*ts/tv*). Does the observed ratio makes sense? Why or why not?
 
 
 ### Variant filtration
@@ -507,11 +509,11 @@ rtg vcffilter -q 150 -i my_variants.vcf -o my_variants.q150
 
 
 Quick stats for the filtered variants:
-  
-```bash 
-# look at stats for filtered 
+
+```bash
+# look at stats for filtered
 rtg vcfstats my_variant_calls_bcftools.q150.vcf.gz
-``` 
+```
 
 #### QUESTION
 Which types of variants were filtered out?
@@ -530,7 +532,7 @@ First we make a *new* genome using our variant calls.
 cat nCoV-2019.reference.fasta | bcftools consensus -p montana_ my_variants.q150.vcf.gz > consensus.fasta
 ```
 
-For reasons I cannot understand, *some* of you have had issues making this new fasta. If so, download this fasta from [here](data/montana.fasta "new fasta"). 
+For reasons I cannot understand, *some* of you have had issues making this new fasta. If so, download this fasta from [here](data/montana.fasta "new fasta").
 
 Now a quick alignment. Select *only* your ONT (Montana) genome (made from the variant calls above), and cat the two genomes into a single file. This becomes a multi-fasta file now. If you do this only using `cat`, then the sequences will not be separated by a "newline". This "newline" is important however, as it is required in `fasta` format. Thus, we will perform this `cat` in three steps. Note that you have to be very careful here - the double `>>` is required so that you _append_ the file rather than just write over it. So the process here is:
 1. `cat` to a new file (this is also possible with `cp`)
@@ -586,4 +588,3 @@ Check your file list in the `RStudio Cloud` bottom right corner window. There sh
 ### Reminder of the steps you have completed today
 <img src="graphics/flowchart-by-day.png" title="Makin' progress" width="700"/><br>
 **Getting there**.
-

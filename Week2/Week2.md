@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
+
 # Introduction to UNIX
 **Professor Patrick Biggs**
 
@@ -52,11 +54,11 @@ Windows has clearly come on a long way with a shorter history than Unix. You wil
 
 
 <table><tr><td>
-<strong>Note:</strong> The practicals for 203311 this year are being performed inside a new cloud-based RStudio environment called "RStudio Cloud". We will discuss the use of this shortly. 
+<strong>Note:</strong> The practicals for 203311 this year are being performed inside a new cloud-based RStudio environment called "RStudio Cloud". We will discuss the use of this shortly.
 </td></tr></table>
 
 
-This lab practical is on basic usage of Linux/Unix.  From now on we will call this Linux.  We will explore some commands and try to work with a set of small files. Your aim is to get familiar with this environment, so when we use them for the rest of the course, you have the knowledge to perform the tasks asked for, as well as others we shall learn. 
+This lab practical is on basic usage of Linux/Unix.  From now on we will call this Linux.  We will explore some commands and try to work with a set of small files. Your aim is to get familiar with this environment, so when we use them for the rest of the course, you have the knowledge to perform the tasks asked for, as well as others we shall learn.
 
 This module is an introduction to the worlds of Linux and R, with a mastery test as an assessment.  Please use this practical lab as a learning experience for a new set of tools, which in this case might go beyond this course, and into future study.
 
@@ -84,7 +86,7 @@ So, for example,
 ```bash
 $ ls <<anydirectory>> [Enter]	- {NOTE: do not do this, it is an example.}
 ```
-  
+
 means "at the UNIX prompt $, type `ls` followed by the name of some directory, then press the key marked Enter."
 
 Don't forget to press the [Enter] key: commands are not sent to the computer until this is done.
@@ -107,7 +109,7 @@ The machines we are using for the course are Apple iMacs. Please use your normal
 
 The machines are Windows PC's so logging into them should be the same as any other Massey Windows PC.
 
-#### outside Massey 
+#### outside Massey
 
 Most likely this is your own machine, so this should not be an issue.
 
@@ -124,7 +126,7 @@ The line that says `:/cloud/project$` is the current line that can accept input 
 | ------------- | ------------- |
 | Our location in our environment:  | `/cloud/project`  |
 | The command prompt:               | `$`  |
-   
+
 I have used a testing environment for developing these resources, so my command prompt is different when it is shown in the below.  
 
 On the right-hand side we have "window #4", which again needs to be switched to be in the "Files" tab, as in the below.  Folders of use for today give us the following view:
@@ -181,16 +183,16 @@ We can now see another file called _`.hiddenfile.txt`_.  What is going on here? 
 
 ## Making and moving around directories
 
-We will now make a subdirectory in your working directory to hold the files you will be creating and using in the course of this tutorial. To make a subdirectory called FridayFolder in your current working directory type 
+We will now make a subdirectory in your working directory to hold the files you will be creating and using in the course of this tutorial. To make a subdirectory called FridayFolder in your current working directory type
 
 ```bash
 $ mkdir FridayFolder
 ```
 
-To see the directory you have just created, type 
+To see the directory you have just created, type
 
 ```bash
-$ ls 
+$ ls
 ```
 
 The command `cd`_`directory`_ means change the current working directory to 'directory'. The current working directory may be thought of as the directory you are in, i.e. your current position in the file-system tree.  To change to the directory you have just made, type
@@ -199,7 +201,7 @@ The command `cd`_`directory`_ means change the current working directory to 'dir
 $ cd FridayFolder
 ```
 
-Type `ls` to see the contents (which should be empty).  Inside this directory, type 
+Type `ls` to see the contents (which should be empty).  Inside this directory, type
 
 ```bash
 $ ls -a
@@ -226,7 +228,7 @@ $ cd ..  {NOTE: there is a space between cd and the dots}
 
 will take you one directory up the hierarchy (back to your home directory). Try it now.
 
-> __Note:__ Typing `cd` with no argument always returns you to your home directory (wherever that is set to be). This is very useful if you are lost in the file system. 
+> __Note:__ Typing `cd` with no argument always returns you to your home directory (wherever that is set to be). This is very useful if you are lost in the file system.
 
 Pathnames enable you to work out where you are in relation to the whole filesystem. For example, to find out the absolute pathname of your current directory, type `cd` to get back to your home directory and then type
 
@@ -234,7 +236,7 @@ Pathnames enable you to work out where you are in relation to the whole filesyst
 $ pwd
 ```
 
-With these two commands, the full pathname will look something like this - 
+With these two commands, the full pathname will look something like this -
 
 ```bash
 /cloud/project/Lab2UnixAndR/FridayFolder$ cd ..
@@ -322,7 +324,7 @@ $ cp ../../Lab2Other/science.txt .
 > <table><tr><td>
 > ____________________
 > </td></tr></table>
-   
+
 `mv` _`<<file1>> <<file2>>`_ moves (or renames) _`<<file1>>`_ to _`<<file2>>`_.  To move a file from one place to another, use the `mv` command. This has the effect of moving rather than copying the file, so you end up with only one file rather than two.  It can also be used to rename a file, by moving the file to the same directory, but giving it a different name.
 
 We are now going to move the file _`science.bak`_ to your backup directory.  Inside the _`FridayFolder`_ directory, type
@@ -337,14 +339,14 @@ The last backslash is important.  You get an error, like the below.
 /cloud/project/Lab2UnixAndR/FridayFolder$ mv science.bak backups/
 mv: failed to access 'backups/': Not a directory
 ```
-  
+
 >**Exercise B:**
 >
 > Create the backups directory inside the _`FridayFolder`_ folder and try again to move the file _`science.bak`_ to your backup directory.  Write the two lines of code you have used in the box below:
 > <table><tr><td>
 > ____________________
 > </td></tr></table>
-  
+
 Now type `ls` and `ls backups` to see if it has worked.
 
 To delete (remove) a file, use the `rm` command. As an example, we are going to create a copy of the _`science.txt`_ file then delete it.  Inside your _`FridayFolder`_ directory, type
@@ -352,7 +354,7 @@ To delete (remove) a file, use the `rm` command. As an example, we are going to 
 ```bash
 $ cp science.txt tempfile.txt
 $ ls
-$ rm tempfile.txt 
+$ rm tempfile.txt
 $ ls
 ```
 
@@ -364,7 +366,7 @@ You can use the `rmdir` command to remove a directory (make sure it is empty fir
 > <table><tr><td>
 > ____________________
 > </td></tr></table>
-  
+
 
 ## Working with files
 
@@ -390,7 +392,7 @@ $ cat science.txt
 
 As you can see (well no actualy - see below), the file is longer than the size of the window, so it scrolls past making it unreadable.  Check this by scrolling up and down in the terminal window using the bar on the right hand side.
 
-> __Note:__ For us in this somewhat restricted environment the way `cat` works is unconventional.  You will probably have to press [Ctrl] and [c] to stop this behaviour, and return to the command prompt.  Hence you will not see this scrolling past the screen, but that is OK for today. 
+> __Note:__ For us in this somewhat restricted environment the way `cat` works is unconventional.  You will probably have to press [Ctrl] and [c] to stop this behaviour, and return to the command prompt.  Hence you will not see this scrolling past the screen, but that is OK for today.
 
 ### `less`
 
@@ -477,10 +479,10 @@ $ grep -i 'spinning top' science.txt
 ```
 
 Some of the other options of grep are:
-- `-v` display those lines that do NOT match 
-- `-n` precede each matching line with the line number 
+- `-v` display those lines that do NOT match
+- `-n` precede each matching line with the line number
 - `-c` print only the total count of matched lines
-- 
+-
 Try some of them and see the different results. Don't forget, you can use more than one option at a time. For example, the number of lines without the words 'science' or 'Science' is
 
 ```bash
@@ -596,8 +598,8 @@ The output will be:
 
 ```bash
 ape
-bird 
-cat 
+bird
+cat
 dog
 ```
 
@@ -705,7 +707,7 @@ DESCRIPTION
 
        With no FILE, or when FILE is -, read standard input.
 
-       The options below may be used to select which counts are printed, always in the following order: newline, word, 
+       The options below may be used to select which counts are printed, always in the following order: newline, word,
        character, byte, maximum line length.
 
        -c, --bytes
@@ -740,7 +742,7 @@ REPORTING BUGS
        Report wc translation bugs to <http://translationproject.org/team/>
 
 COPYRIGHT
-       Copyright © 2017 Free Software Foundation, Inc.  License GPLv3+: GNU GPL version 3 or later 
+       Copyright © 2017 Free Software Foundation, Inc.  License GPLv3+: GNU GPL version 3 or later
        <http://gnu.org/licenses/gpl.html>. This is free software: you are free to change and redistribute it.  
        There is NO WARRANTY, to the extent permitted by law.
 
@@ -808,7 +810,7 @@ drwxrwxr-x 2 rstudio-user rstudio-user 4096 Jul 18 03:11 backups
 -rw-rw-r-- 1 rstudio-user rstudio-user   37 Jul 18 05:10 list1
 -rw-rw-r-- 1 rstudio-user rstudio-user   29 Jul 18 05:11 list2
 -rw-rw-r-- 1 rstudio-user rstudio-user 7767 Jul 18 05:12 science.txt
--rw-rw-r-- 1 rstudio-user rstudio-user   65 Jul 18 05:17 slist 
+-rw-rw-r-- 1 rstudio-user rstudio-user   65 Jul 18 05:17 slist
 ```
 
 Below is the figure from the lecture to remind you of what the columns mean.  Each file (and directory) has associated security access rights, which may be found by typing `ls -l`. In the left-hand column is a 10 symbol string consisting of the symbols d, r, w, x, -, and, occasionally, s or S. If d is present, it will be at the left-hand end of the string, and indicates a directory: otherwise - will be the starting symbol of the string.
@@ -817,14 +819,14 @@ Below is the figure from the lecture to remind you of what the columns mean.  Ea
 
 The 9 remaining symbols indicate the permissions, or access rights, and are taken as three groups of 3.
 
-- The left group of 3 gives the file permissions for the user that owns the file (or directory) (bioinformatics in the above example); 
+- The left group of 3 gives the file permissions for the user that owns the file (or directory) (bioinformatics in the above example);
 - The middle group gives the permissions for the group of people to whom the file (or directory) belongs (staff in the above example);
 - The rightmost group gives the permissions for all others.
 - The symbols r, w, etc., have slightly different meanings depending on whether they refer to a simple file or to a directory.
 
 Access rights on files.
-r (or -), indicates read permission (or otherwise), that is, the presence or absence of permission to read and copy the file 
-w (or -), indicates write permission (or otherwise), that is, the permission (or otherwise) to change a file 
+r (or -), indicates read permission (or otherwise), that is, the presence or absence of permission to read and copy the file
+w (or -), indicates write permission (or otherwise), that is, the permission (or otherwise) to change a file
 x (or -), indicates execution permission (or otherwise), that is, the permission to execute a file, where appropriate
 
 Access rights on directories:
@@ -982,7 +984,7 @@ $ kill 595 {your number of course will be different}
 and then type `ps` again to see if it has been removed from the list.  If a process refuses to be killed, uses the `-9` option, i.e. type
 
 ```bash
-$ kill -9 595 
+$ kill -9 595
 ```
 
 Note: It is not possible to kill off other users' processes !!!
@@ -1207,7 +1209,7 @@ Perhaps the most well-known use for `sed` is substituting text.  `sed` can searc
 << 's/old_word/new_word/' >>
 ```
 
-The `s` is the substitute command. The three slashes (/) are used to separate the different text fields, this is called a delimiter. You can use other characters to delimit the fields if it would be more helpful, but that is not for now.  So how does this work in practice? 
+The `s` is the substitute command. The three slashes (/) are used to separate the different text fields, this is called a delimiter. You can use other characters to delimit the fields if it would be more helpful, but that is not for now.  So how does this work in practice?
 
  Let's replace or substitute the word "the" with the word "our", so type:
 
@@ -1243,17 +1245,17 @@ One last question: if you take the following characters from the first lines of 
 > _Exercise A:_	character 3
 >
 > Exercise B:	character 8
-> 
+>
 > Exercise D:	character 3
-> 
+>
 > Exercise C:	character 7
-> 
+>
 > Exercise A: character 7, character 1, character 6
-> 
+>
 > _Exercise I:_	character 10, character 1
-> 
+>
 > Exercise I:	character 2, character 5
-> 
+>
 > _Exercise H:_	characters 1 to 5
 >
 > <table><tr><td>
@@ -1316,5 +1318,3 @@ This is how you put in an image file:
 <img src="graphics/giphy.gif" width="300"/>
 ```
 <img src="graphics/giphy.gif" width="300"/> --->
-
-

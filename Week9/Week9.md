@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### **15-May-2023 - Hard copy available on the 'Wiki | Week 9' Stream page with changes to reflect that there will be no work with Krona visualisations**
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
 
 # Introduction to Metagenomic analysis
 
@@ -55,8 +55,8 @@ As a reminder, in what follows, we shall use the following typographical convent
 
 -   Characters written in `this programming style` are commands to be typed into the computer as they stand.
 -   Characters written in _`this programming style`_ are objects and file names.
--   Characters written after something like `###` indicate comments within the code that will help you.  They do not run code. 
--   Characters written in without `>` at the start of the line **(e.g. lines starting with "\[1\]")** indicate responses back from the R console inside RStudio that will help you too. 
+-   Characters written after something like `###` indicate comments within the code that will help you.  They do not run code.
+-   Characters written in without `>` at the start of the line **(e.g. lines starting with "\[1\]")** indicate responses back from the R console inside RStudio that will help you too.
 -   Words inserted within square brackets **\[Enter\]** indicate keys to be pressed.
 
 So, for example,
@@ -86,7 +86,7 @@ The machines we are using for the course are Apple iMacs. Please use your normal
 
 The machines are Windows PC's so logging into them should be the same as any other Massey Windows PC.
 
-#### Outside Massey 
+#### Outside Massey
 
 Most likely this is your own machine, so this should not be an issue.
 
@@ -98,7 +98,7 @@ We will continue to use our RStudio cloud environment as a source and location f
 
 ### What we are going to do today?
 
-We are primarily going to be using webtools, and the Microsoft product Excel to explore some reads from an experiment, but under different analysis conditions, varying both the analysis methods and the database we are comparing our reads to. 
+We are primarily going to be using webtools, and the Microsoft product Excel to explore some reads from an experiment, but under different analysis conditions, varying both the analysis methods and the database we are comparing our reads to.
 - We will upload a pair of reads to the Kaiju website for analysis against a variety of databases.
 - We will download these data, and open them in Excel to explore them in a comparative way.  
 - We will then look at the results in a completely different way using Krona
@@ -120,11 +120,11 @@ The below screenshot shows the folder structure within `/cloud/project/` for the
 
 <img src="graphics/window4_2023.png" width="600"/>
 
-The first thing we are going to do is upload a set of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – to the Kaiju webserver and perform a taxonomic analysis on the reads. 
+The first thing we are going to do is upload a set of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – to the Kaiju webserver and perform a taxonomic analysis on the reads.
 
 <img src="graphics/kaijuLogo.png" width="400"/>
 
-These are environmental samples taken as part of a Massey University research project I was involved with a few years ago.  So, to do that, we need to use the reads from the _`kaiju`_ folder in the `/cloud/project/` project within the "weeks8to10" project within the "MicrobialDiversity_2023" workspace.  There are other files in there too, but more on those later. 
+These are environmental samples taken as part of a Massey University research project I was involved with a few years ago.  So, to do that, we need to use the reads from the _`kaiju`_ folder in the `/cloud/project/` project within the "weeks8to10" project within the "MicrobialDiversity_2023" workspace.  There are other files in there too, but more on those later.
 
 We have 3 set of analyses to perform so, your job name for each analysis will vary according to what we are going to run.  Replace `XXX` with your initials.  The combinations of names for the jobs is shown in the table below:
 
@@ -198,7 +198,7 @@ Now let’s go to the website, and start the uploading process:
 
 NB2: There is a bit of waiting for this first part of the process, so I suggest whilst you are waiting, you read the “Behind the Paper” feature on the Nature Microbiology website for the Kaiju publication.  The link is below:
 
-<https://naturemicrobiologycommunity.nature.com/users/10226-peter-menzel/posts/6200-from-metagenomics-of-hot-springs-to-bioinformatics-software-development> 
+<https://naturemicrobiologycommunity.nature.com/users/10226-peter-menzel/posts/6200-from-metagenomics-of-hot-springs-to-bioinformatics-software-development>
 
 This is not super-long but gives you a chance to see the motivation for the paper from the authors.  It is also important to note that we are relying on the Internet here, so this is a little risky.  If the worst happens, and things do not go to plan, please let a demonstrator know, and magically a set of results can be made to appear for you.
 
@@ -285,7 +285,7 @@ I have performed the same 3 analyses (against the same 3 databases), but with th
 
 Open this file in Excel.  Immediately you will notice that there are actually 5 tabs here, where the data has been trimmed to remove any taxa that are present at fewer than 1, 10, 100, 1000 or 10000 counts.  These are unsurprisingly called _`Cutoff1, Cutoff10, Cutoff10, Cutoff1000`_ and _`Cutoff10000`_ respectively.
 
->**Question 4:** 
+>**Question 4:**
 >
 >The original file - _`500k_cutoffs.xlsx`_ - has the taxon count numbers from 500,000 sequences that were classified by Kaiju.  We might be interested in focusing our analysis only on taxa that are present above a certain count, or above a certain percentage.  If we use count as a cutoff for including a taxon in the analysis, what percentage of total reads would the following specific counts correspond to?
 >
@@ -312,7 +312,7 @@ We have to go to the next two tabs - _`Cutoff100`_ and _`Cutoff10`_ – to reall
 **NB: Any sorting you are going to do shortly on the sheets needs to be across the columns A to I, otherwise things will go badly awry, and you will make incorrect inferences.  If that happens, download the file again, and start sorting again.**
 
 The data are sorted by the descending average value (column G).  If we sort on the coefficient of variation (COV; column H), we are looking at the most equal counts.
- 
+
 >**Question 7:**
 >
 >What do you notice about the location of the “Unclassfied” taxa?
@@ -333,7 +333,7 @@ For our final look at the data, we will move to the _`Cutoff10`_ tab.  Sort this
 
 >**Question 9:**
 >
->In column C, what is the eukaryote with the highest count? 
+>In column C, what is the eukaryote with the highest count?
 > Why do you think there is a difference between columns C and F in terms of counts for a given taxon?
 >
 > <table><tbody><tr><td>Highest count:</td><td></td></tr><tr><td>Reason for differences in columns C and F:</td><td></td></tr></tbody></table>
@@ -407,7 +407,7 @@ Within the Gammaproteobacteria is the order Legionellales (one member of which i
 
 >**Question 13:**
 >
->Using the chart, and by clicking in various parts of the Krona image, what are the proportions of each of the two families? 
+>Using the chart, and by clicking in various parts of the Krona image, what are the proportions of each of the two families?
 >
 > <table><tbody><tr><td>Legionellaceae:</td><td></td></tr><tr><td>Coxillaceae:</td><td></td></tr></tbody></table>
 
@@ -516,7 +516,7 @@ To draw a very basic heatmap, we use the `pheatmap()` command from the `pheatmap
 ### draw a basic heatmap
 > pheatmap(onlyTaxaOfInterest)
 ```
-This command can be modified very extensively - have a look at `?pheatmap()` in the `R` console to get the help pages.  Try out a few things out if you like. 
+This command can be modified very extensively - have a look at `?pheatmap()` in the `R` console to get the help pages.  Try out a few things out if you like.
 
 In window #4, this will look at little weird due to the long taxa names (which is why we have shortened them).  Click in the "Zoom" for the image to go to a new window.  This window is stretchable, so you can make it look how you want, right click it and save it as an image.
 
@@ -538,7 +538,7 @@ To make the plot, we have to apply a transformation to our data to make it an ab
 ### convert all non-zero values to 1
 > cutDataFileUpSet[cutDataFileUpSet != 0] <- 1
 
-### add taxonomy back in 
+### add taxonomy back in
 > cutDataFileUpSetTaxa <- cbind(cutDataFileUpSet, cutDataFile$taxonomy)
 > colnames(cutDataFileUpSetTaxa)[7] <- "taxonomy"
 
@@ -556,7 +556,7 @@ We have fixed the order of the sets here with the _`setOrder`_ object, have a go
 
 ## Portfolio analysis
 
-Once again, this is a two part analysis for the week 9 Portfolio analysis. This will result in a figure with a part A and a part B.  In the section above, the code and principles described are what you need for this Portfolio analysis.  You will have to apply them to the conditions and files listed in the sections below.  The code requirement, images and figure legends from this Week's analysis are as previously described. 
+Once again, this is a two part analysis for the week 9 Portfolio analysis. This will result in a figure with a part A and a part B.  In the section above, the code and principles described are what you need for this Portfolio analysis.  You will have to apply them to the conditions and files listed in the sections below.  The code requirement, images and figure legends from this Week's analysis are as previously described.
 
 #### Part A
 
@@ -573,7 +573,7 @@ As with the code above, you are required to trim out the constant part of the ta
 In the "Visualising data in different ways" section above, for the "UpSet plots", we worked with an example file - _`500k_Cutoff1000.txt`_ - to understand the relationship between the databases, and how these overlap.  In this part, I would like you to choose one  -- and only one -- of the following files to visualise how the number of times a taxonomic result varies based on searching algorithm and database:
 
 - file 1: file _`500k_Cutoff10.txt`_
-- file 2: file _`500k_Cutoff1.txt`_ 
+- file 2: file _`500k_Cutoff1.txt`_
 
 
 ### Guiding thoughts for the portfolio
@@ -598,7 +598,7 @@ iii) A random thought - if you have issues with viewing plots and you are writin
 
 ```R
 > dev.off()
-null device 
+null device
           1
 ```
 
@@ -649,5 +649,3 @@ This is how you put in an image file:
 <img src="graphics/giphy.gif" width="300"/>
 ```
 <img src="graphics/giphy.gif" width="300"/> -->
-
-

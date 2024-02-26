@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
+
 # Barcodes and diversity - Fastq read analysis for 16S rRNA metabarcoding using the R package DADA2
 
 **Professor Patrick Biggs**
@@ -39,7 +41,7 @@ To learn how to perform an analysis of 16S rRNA sequencing data from raw sequenc
 
 Microbial diversity has been revolutionised by the rapid advances in sequencing technology, given us new insights into the role of the microbial world in all environments on Earth. Sequencing of metagenomes (all the DNA in a given sample etc) or of specific markers (metabarcodes e.g. 16S rRNA amplicons) have been crucial in this regard. Knowing what is there, and what it is potentially doing are two of the main research areas of interest.  How we then analyse the data, visualise and interpret the results is thus of importance.
 
-Week 8 focusses on introducing ideas around the analysis of microbial diversity - for bacteria - within the 16S rRNA amplicon, and performing a typical workflow analysis on such sequences in `R` using a piece of software called DADA2. These ideas will be developed further in the next two weeks (weeks 9 and 10) of this module. 
+Week 8 focusses on introducing ideas around the analysis of microbial diversity - for bacteria - within the 16S rRNA amplicon, and performing a typical workflow analysis on such sequences in `R` using a piece of software called DADA2. These ideas will be developed further in the next two weeks (weeks 9 and 10) of this module.
 
 An outline of the labs during Weeks 8 and 10 is below.<br>
 
@@ -95,7 +97,7 @@ The machines we are using for the course are Apple iMacs. Please use your normal
 
 The machines are Windows PC's so logging into them should be the same as any other Massey Windows PC.
 
-#### outside Massey 
+#### outside Massey
 
 Most likely this is your own machine, so this should not be an issue.
 
@@ -116,7 +118,7 @@ However, the process of amplicon sequencing introduces errors into the DNA seque
 
 The starting point for the DADA2 pipeline is a set of demultiplexed Fastq files corresponding to the samples an amplicon sequencing study. That is, DADA2 expects there to be an individual Fastq file for each sample (or two Fastq files, one forward and one reverse, for each sample).   Once demultiplexed Fastq files are in hand, the DADA2 pipeline proceeds as follows:
 
-- Filter and Trim: `filterAndTrim()` 
+- Filter and Trim: `filterAndTrim()`
 - Dereplicate: `derepFastq()`
 - Learn error rates: `learnErrors()`
 - Infer sample composition: `dada()`
@@ -159,7 +161,7 @@ We will check we have all we need to do the analysis first.  The commands below 
 [1] ‘3.4.2’
 ```
 
-The next thing we want to do is to set a working path and then define a path variable to check it is all OK for the work we are going to do today. 
+The next thing we want to do is to set a working path and then define a path variable to check it is all OK for the work we are going to do today.
 
 ```R
 ### is our path OK?
@@ -289,12 +291,12 @@ Now to perform the actual filtering and trimming on our samples and place the re
 > names(filtRs) <- sample.names
 
 ### make a list of the arguments
-> trim_arguments <- list(truncLen=c(240,160), 
+> trim_arguments <- list(truncLen=c(240,160),
                     maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
                     compress=TRUE)
 
 ### run the filterAndTrim function on each set of files, returning a list
-> out <- mapply(filterAndTrim, fnFs, filtFs, fnRs, filtRs, 
+> out <- mapply(filterAndTrim, fnFs, filtFs, fnRs, filtRs,
          MoreArgs = trim_arguments, SIMPLIFY = FALSE)
 
 ### work on our object out to tidy it up for later analyses
@@ -309,7 +311,7 @@ F3D142     3183      2914
 F3D143     3178      2941
 F3D144     4827      4312
 
-### You would then see the 6 lines like those in red, indicating 
+### You would then see the 6 lines like those in red, indicating
 ### what is happening to each sample under this process as it is running
 ```
 
@@ -317,10 +319,10 @@ Ideally the code to run this same command would be the following, but please **d
 
 ```R
 ### Perform the trimming and filtering
-> out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(240,160), 
+> out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(240,160),
          maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
          compress=TRUE, multithread=TRUE)
-> head(out) 
+> head(out)
 
 ### Please do not run this code, it is for completeness and so you can see the code as it should be run
 ### You could be tested on the code in this box
@@ -405,7 +407,7 @@ Sample 3 - 5463 reads in 1335 unique sequences.
 > ____________________
 > </td></tr></table>
 
-Now we use the power of `R` to simply plot a very complicated data structure and figure for the error profiles on our forward reads. 
+Now we use the power of `R` to simply plot a very complicated data structure and figure for the error profiles on our forward reads.
 
 ```R
 ### plot the errors as a trellis plot
@@ -499,7 +501,7 @@ We can now construct a sequence table of our samples that is analogous to the �
 > seqtab <- makeSequenceTable(mergers)
 ```
 
-The sequence table – _`seqtab`_ – is a matrix with rows corresponding to (and named by) the samples, and columns corresponding to (and named by) the sequence variants. 
+The sequence table – _`seqtab`_ – is a matrix with rows corresponding to (and named by) the samples, and columns corresponding to (and named by) the sequence variants.
 
 >**Question 8**
 > Use the dim() function to find out the size of _`seqtab`_.
@@ -525,7 +527,7 @@ Our merged sequences all fall in the expected range for the V4 amplicon as descr
 The core `dada()` method removes substitution and indel errors, but chimaeras remain. Fortunately, the accuracy of the sequences after this denoising process makes identifying chimaeras easier than it is when dealing with fuzzy OTUs: all sequences which can be exactly reconstructed as a bimera (two-parent chimera) from more abundant sequences.  Let’s see what happens when we remove chimaeras:
 
 ```R
-### Remove chimeric sequences 
+### Remove chimeric sequences
 > seqtab.nochim <- removeBimeraDenovo(seqtab, verbose=TRUE)
 Identified 61 bimeras out of 293 input sequences.
 ```
@@ -552,14 +554,14 @@ The fraction of chimeras varies based on factors including experimental procedur
 We can do a quick check of how our samples have performed over the process to get to this stage.  This is important as it can be regarded as a “sanity check” before we went on and did more analyses if we so wished.  If we saw an over-large drop associated with one step, we might want to have a look at our parameters throughout our sequence processing.
 
 ```R
-### Remove chimeric sequences with some complicated code 
+### Remove chimeric sequences with some complicated code
 > getN <- function(x) sum(getUniques(x)) # our first function
 > track <- cbind(trim_data, sapply(dadaFs, getN), sapply(dadaRs, getN),
            sapply(mergers, getN), rowSums(seqtab.nochim))
 
 > colnames(track) <- c("input", "filtered", "denoisedF", "denoisedR", "merged",
                        "nonchim")
-                       
+
 > rownames(track) <- sample.names
 
 > head(track)
@@ -576,7 +578,7 @@ F3D144  4827     4312      4151      4228   3646    3507
 
 ## Exercise 11: Assigning taxonomy
 
-So, here we are at last, at the point, after having done all this quality control work, of actually looking at what all these sequences mean, as far as a taxonomic classification is concerned.  It is common at this point in 16S/18S/ITS amplicon sequencing, to classify sequence variants taxonomically. 
+So, here we are at last, at the point, after having done all this quality control work, of actually looking at what all these sequences mean, as far as a taxonomic classification is concerned.  It is common at this point in 16S/18S/ITS amplicon sequencing, to classify sequence variants taxonomically.
 
 The DADA2 package provides a native implementation of the RDP’s naive Bayesian classifier for this purpose. The `assignTaxonomy()` function takes a set of sequences and a training set of taxonomically classified sequences, and outputs the taxonomic assignments with at least minBoot bootstrap confidence.  Again, this step might take three minutes or so, so please be patient.  We will use a small reference dataset to classify the _`seqtab.nochim`_ sequences to, and then use the `taxa.print()` function to remove the names and print them out:
 
@@ -589,7 +591,7 @@ The DADA2 package provides a native implementation of the RDP’s naive Bayesian
 > taxa <- assignTaxonomy(seqtab.nochim, training, multithread=TRUE)
 
 ### Removing sequence rownames for display only
-> taxa.print <- taxa 
+> taxa.print <- taxa
 > rownames(taxa.print) <- NULL
 > head(taxa.print)
      Kingdom    Phylum          Class         Order           Family           Genus        
@@ -605,7 +607,7 @@ So, at this point we could stop, as we have a taxonomy, ready for phyloseq in Pr
 
 
 
-## Exercise 12: Evaluating the accuracy 
+## Exercise 12: Evaluating the accuracy
 
 Our last thing to do with this dataset from a DADA2 point of view is to evaluate the accuracy in terms of how well the process has gone with these sequence data, and we can use a “mock community” for this purpose.  This is a mixture of 20 known strains (this mock community is supposed to be 21 strains, but the bacterium P. acnes was absent). Reference sequences corresponding to these strains were provided in the downloaded zip archive. Previously, the Mock sample was removed when we made the sequence table, but we return to that sample now and compare the sequence variants inferred by DADA2 to the expected composition of the community.
 
@@ -636,13 +638,13 @@ This mock community dataset contained 20 bacterial strains. DADA2 found 20 uniqu
 
 I covered the theory around sequence logos in the Tuesday tutorial, but if you are interested in the maths behind this (information content and bits), the base information can be found on the [Wikipedia sequence logo](https://en.wikipedia.org/wiki/Sequence_logo) page.
 
-We have created a dataframe of 232 16S rRNA sequences called _`seqtab.nochim`_ that represent the sequences in our experiment.  We now consider these sequences as *unique* sequences, even though we know that they are present at vastly different proportions in the 20 samples we have.  However, we are going to ignore that fact for now and make a fasta file of these sequences for illustrating the principles required for the Portfolio Analysis.  To do this, we need to load some pre-installed packages in order to create a fasta file that we can do further analysis on. 
+We have created a dataframe of 232 16S rRNA sequences called _`seqtab.nochim`_ that represent the sequences in our experiment.  We now consider these sequences as *unique* sequences, even though we know that they are present at vastly different proportions in the 20 samples we have.  However, we are going to ignore that fact for now and make a fasta file of these sequences for illustrating the principles required for the Portfolio Analysis.  To do this, we need to load some pre-installed packages in order to create a fasta file that we can do further analysis on.
 
 ```R
 > library(FastaUtils)
 > library(msa)
 > library(seqLogo)
- 
+
 ### make a fasta file from the nochim dataframe
 > uniquesToFasta(seqtab.nochim, "nochimSeqs232.fa")
 
@@ -659,7 +661,7 @@ To illustrate the path from fasta sequence file to aligned sequence to a sequenc
 > seqs16S <- readDNAStringSet("sub100_nochimSeqs.fa")
 
 ### run the sequence alignment and view in the console
-> my16SAlignment <- msa(seqs16S) 
+> my16SAlignment <- msa(seqs16S)
 use default substitution matrix
 
 > my16SAlignment
@@ -676,7 +678,7 @@ MsaDNAMultipleAlignment with 100 rows and 258 columns
 
 [100] GACGGGGGGGGCAAGTGTTCTTCGGAATGACTGGGCGTAAAGGGC...CCCT-ACCGACGCTGGG-GTGCGAAAGCATGGGGAGCGAACAGG sq107;size=117;
   Con TACGTAGGGGGCAAGCGTTATCCGGATTTACTGGGTGTAAAGGGA...?GTA-ACTGACGCTGAG-GCTCGAAAGCGTGGGGAGCAAACAGG Consensus
-  
+
 > print(my16SAlignment, show="complete") # view the results
 
 MsaDNAMultipleAlignment with 100 rows and 258 columns
@@ -688,7 +690,7 @@ MsaDNAMultipleAlignment with 100 rows and 258 columns
 
  [99] AACACCGGTGGCGAAGGCGGGTCTCTGGGCCGTT-ACTGACGCTGAG-GAGCGAAAGCGTGGGGAGCGAACAGG sq58;size=325;
 [100] AACGCCAAAAGCGAAGGCAGCTCTCTGGGTCCCT-ACCGACGCTGGG-GTGCGAAAGCATGGGGAGCGAACAGG sq107;size=117;
-  Con AACACCAGTGGCGAAGGCGGCTT?CTGGAC?GTA-ACTGACGCTGAG-GCTCGAAAGCGTGGGGAGCAAACAGG Consensus 
+  Con AACACCAGTGGCGAAGGCGGCTT?CTGGAC?GTA-ACTGACGCTGAG-GCTCGAAAGCGTGGGGAGCAAACAGG Consensus
 
 ### print out the alignment
 > msaPrettyPrint(my16SAlignment, output="pdf", showNames="left", file = "ourSet.pdf",
@@ -697,7 +699,7 @@ MsaDNAMultipleAlignment with 100 rows and 258 columns
 
 The `msaPrettyPrint()` command has lots of options including showing the sequence names and printing out certain regions only.  I would **strongly suggest giving `?msaPrettyPrint` a look and to understand what is going on**.
 
-We can also use the `seqLogo` package to generate a sequence logo only.  This package has limited functionality and printing ability and is probably designed for shorter sequence stretches, as discussed in the tutorial.  The code is a little complex, so it has comments for each code section.  *Please do not worry too much about what the code is doing here.* 
+We can also use the `seqLogo` package to generate a sequence logo only.  This package has limited functionality and printing ability and is probably designed for shorter sequence stretches, as discussed in the tutorial.  The code is a little complex, so it has comments for each code section.  *Please do not worry too much about what the code is doing here.*
 
 ```R
 ### generate a sequence logo only using the seqLogo package
@@ -739,7 +741,7 @@ Your task is to plot this dataframe in a way that shows whether the multiple ste
 From Exercise 13, you worked with a method to generate a sequence logo from the sequences from the DADA2 tutorial.  Unfortunately, due to its scale, this is not a dataset with a lot of sequence variation within it. To get to looking at a truer represenation of the 9 hypervariable regions within 16S rRNA, we need to use a reference fasta file such as _`rdp_train_set_14.fa`_.  
 
 Your task is to generate a new fasta file of 50 sequences chosen at random, and search with the `msa` and `seqLogo` packages to find a region of ~100 - 150 bp in length that shows a high degree of sequence similarity and then variability.  You should then also plot the same region with the `msa` package showing the alignment and the sequence logo, describing what you observe in the figure legend.  
- 
+
 
 ### Guiding thoughts for the portfolio
 
@@ -747,7 +749,7 @@ Your task is to generate a new fasta file of 50 sequences chosen at random, and 
 
 Things to consider for plotting:
 
-i) Even though _`track`_ is a dataframe, do you want to keep it like that?  Would it help if was of a different data class? 
+i) Even though _`track`_ is a dataframe, do you want to keep it like that?  Would it help if was of a different data class?
 
 ```R
 > class(track)
@@ -757,9 +759,9 @@ i) Even though _`track`_ is a dataframe, do you want to keep it like that?  Woul
 What about converting it to a data matrix ([Goolging](https://www.statology.org/r-convert-data-frame-to-matrix/) will find an answer to this quickly) to give more flexibility?  Please remember the difference between dataframes and data matrices.  A data matrix allows you to consider other plotting functions such as:
 
   -> [Barplots](https://r-graph-gallery.com/barplot.html)
-  
+
   -> [Heatmaps](https://r-graph-gallery.com/heatmap.html)
-  
+
   -> [Stacked barplot](https://r-graph-gallery.com/stacked-barplot.html)
 
 ii) Now you have decided on a visualisation method, do you plot the data as raw data -- the numbers you have already in _`track`_ -- or do you transform them somehow?  I mentioned `prop.table()` above as a potential function to use.  Have a look at the help with:
@@ -795,7 +797,7 @@ rdp_train_set_14.fa  FASTA   DNA     10,678  15,409,307      320  1,443.1    2,2
 
 so as you can see, a wide range.  This will result in a large alignment visualised with `msaPrettyPrint()`.  In orer to find an area of interest as above with the way the printing works, look at the options with `msaPrettyPrint()` to find a way to remove the names temporaily as this will maximise the alignment in the PDF, and there are less pages to visually inspect.
 
-iii) Choosing the ~100 - 150bp region is up to you.  Once you have a region, I would suggest getting that smaller region clarified with `msa` (as a new object maybe), and then using the same region coordinates (i.e., `start` and `end`) for visualising the alignment with  `seqLogo`. 
+iii) Choosing the ~100 - 150bp region is up to you.  Once you have a region, I would suggest getting that smaller region clarified with `msa` (as a new object maybe), and then using the same region coordinates (i.e., `start` and `end`) for visualising the alignment with  `seqLogo`.
 
 
 
