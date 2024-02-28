@@ -47,7 +47,7 @@ We discussed the extensive help and support that these around R and its use, all
 
 
 <table><tr><td>
-<strong>Note:</strong> The practicals for 203311 this year are being performed inside a new cloud-based RStudio environment called "RStudio Cloud". We will discuss the use of this shortly.
+<strong>Note:</strong> The practicals for 203311 this year are being performed inside a new Massey University-based RStudio environment called "Massey RStudio". We will discuss the use of this shortly.
 <!--- Due to Covid-19 and the uncertainties this can still cause us, t--->
 </td></tr></table>
 
@@ -84,34 +84,31 @@ Don\'t forget to press the **\[Enter\]** key: commands are not sent to the R con
 
 ## Accessing the resources needed
 
+#### Important Note
+
+**Please see the separate document -- "Access_to_RStudio_2024.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. You must do this before you can do any work in this course.**
+
 ### Computing
 
 #### General
 
-We will be working within web browsers, and Firefox and Chrome are installed on the machines, or Safari if you are an Apple user. We will then login to RStudio Cloud using your personalised account.  If you would like to use your own laptop in the labs on either campus, please feel free to do so.
+We will be working within web browsers, and Firefox and Chrome are installed on the machines, or Safari if you are an Apple user. We will then login to Massey RStudio using your personalised account.  If you would like to use your own laptop in the labs please feel free to do so.
 
-#### Manawatu (iMacs)
+#### Manawatu ScC5.10 (iMacs)
 
-The machines we are using for the course are Apple iMacs. Please use your normal Massey username and password to login to these machines.  Please remember to ignore (i.e. cancel) the dialogue box about the network when you log in.
-
-#### Albany (PCs)
-
-The machines are Windows PC's so logging into them should be the same as any other Massey Windows PC.
+The machines we can use for the course are Apple iMacs. Please follow the information in "Access_to_RStudio_2024.pdf" to log into these machines through the use of the VMware Horizon application.  Please use your normal Massey username and password to login to the Windows 10 machines.
 
 #### outside Massey
 
-Most likely this is your own machine, so this should not be an issue.
+Most likely this is your own machine, so this should not be an issue, but please follow the general instructions in "Access_to_RStudio_2024.pdf" about the use of your own machine and these resources.
 
 
-### Opening up RStudio Cloud
+### Opening up Massey RStudio
 
-#### Setting up an account on RStudio Cloud
+#### Setting up an account on Massey RStudio
 
-We have organised a student account for you at <https://posit.cloud/> to be valid until mid June 2023 (i.e. for the nearly all of the Semester). The information for the working area for this module has been sent to you separately via a Stream announcement.
+We have organised a student account for you at <https://rstudio.massey.ac.nz/> to be valid until mid June 2024 (i.e. for the nearly all of the Semester). The information for this process has been sent to you separately via a Stream announcement.
 
-#### Important Note
-
-**Please see the separate document -- "Access_to_RStudio_Cloud2023.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your RStudio Cloud environment. You must do this before you can do any work in this course, so being familiar with working with these projects when links and projects get sent to you by lecturers is extremely important.**
 
 ### Our work today
 
@@ -949,6 +946,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 
 We can regard the last 4 columns as categorical data – that is data with discrete values.  With this data we can plot the relationships between the cars that have engines in the “V” format (“vs”), have automatic gearboxes (“am”), the number of gears (“gear”) and carburettors (“carb”).  Let’s do a basic plot[^4] of our data:
+
 ```R
 > alluvial(mtcars[8:11], freq = mtcars$cyl)
 ```
@@ -1032,7 +1030,7 @@ For those of you on the iMacs, please remember to go to the Apple Menu on your i
 
 To reiterate, for this, the first lab of this course, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for two things:
 
-1. For the mastery test which accounts for 15% of the course.  This will take place between Thursday 23-Mar-2023 and Friday 24-Mar-2023 online.
+1. For the mastery test which accounts for 15% of the course.  This will take place between Thursday 21-Mar-2024 and Friday 22-Mar-2024 online.
 2. For a very large part of this course in which you will use RStudio to explore examples of genomic data.
 
 The mastery test will test both Linux and R, so half of the marks will come from each part.  We have not done much biology today, but as a hint have a think about how we can work with biological data that can come in a variety of formats and what we can potentially do with those given what we have learnt today.  There will be a worksheet with test questions for you to work through as preparation for the test.
