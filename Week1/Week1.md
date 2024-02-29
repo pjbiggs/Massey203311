@@ -1,7 +1,5 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
 # Introduction to R
 
 **Professor Patrick Biggs**
@@ -33,7 +31,7 @@ To learn how to use a new software environment with the aim of understanding som
 
 The biological world has got much more quantitative and analytical as the way biology is now performed has changed.  Data volumes have increased markedly, and so has our requirement and ability to analyse such data.  The first part of “Bootcamp” will introduce you to two tools that will be used throughout the course:  the statistical software package R and the UNIX command line.  This will be followed up with a look into data visualisation in the third week.
 
-Week 1 focusses on the statistical software package, R. It will also introduce you to the main software environment for the course -– RStudio.  We will look at accessing this environment, using it and learning some basic concepts about data handling through the use of R, focussing on data tables.  
+Week 1 focusses on the statistical software package, R. It will also introduce you to the main software environment for the course -- RStudio.  We will look at accessing this environment, using it and learning some basic concepts about data handling through the use of R, focussing on data tables.  
 
 <!---In this lab session, you will experience use of R within the RStudio environment as an introduction to the main analyses we will perform for Modules 2 and 3 in the next part of the course.--->
 
@@ -523,13 +521,13 @@ This is a collection of data elements in a 2D format, also known as a table.  Co
 
 <img src="graphics/matrixA.PNG" width="150"/>
 
-As long as the elements are of the same type, we can use our first multi-line R code to make a matrix.  Remember from the lectures that is no need to type the `+`, this indicates that you input runs over more than one line:
+As long as the elements are of the same type, we can use our first multi-line R code to make a matrix.  Remember from the lectures that is no need to type the `+`, this indicates that you input runs over more than one line.  So in the script window type the line in, and then [Enter] and the finally [Enter] for the last line:
 
 ```R
 > A <- matrix(
 +   c(2, 1, 4, 5, 3, 7),      ### data elements
-+   nrow = 2,		               ### number of rows
-+   ncol = 3,		               ### number of columns
++   nrow = 2,		         ### number of rows
++   ncol = 3,		         ### number of columns
 +   byrow = TRUE)             ### fill by rows
 > A
      [,1] [,2] [,3]
@@ -887,7 +885,7 @@ Update all/some/none? [a/s/n]:
 
 Do not update any packages at this time, so type "n" to answer the question above (this is very important).
 
-Let’s go to https://www.bioconductor.org and find a new package to load.  
+Let’s go to the Bioconductor website [https://www.bioconductor.org](https://www.bioconductor.org) and find a new package to load.  
 
 > **Exercise K:**
 >
@@ -896,7 +894,7 @@ Let’s go to https://www.bioconductor.org and find a new package to load.
 > ____________________
 > </td></tr></table>
 
-We shall choose `ggtree`, so let’s go back to our R console and load it:
+We shall choose `ggtree`, so let’s go back to our R console and install it (this might take a couple of minutes to complete):
 
 ```R
 > BiocManager::install("ggtree")  
@@ -970,7 +968,7 @@ Let’s now do something new – don’t worry we will do this in detail again i
 
 ```R
 ### set up a file for an image, but make it for orange colours on non-automatic cars – so this code is wrong…..
-> png('/cloud/project/testAlluvial.png')
+> png('/203311/Module1/testAlluvial.png')
 > alluvial(mtcars[8:11], freq = mtcars$cyl,
 +          col = ifelse(mtcars$am == "1", "red", "grey"),
 +          border = ifelse(mtcars$am == "1", "black", "grey"))
@@ -979,7 +977,7 @@ RDStudioGD
           1
 ```
 
-If this has worked, you have changed code on your own, and exported your first data out of R. Great. Go to your home directory to see your plot. There’s much more of this to come later in the course.
+If this has worked, you have changed code on your own, and exported your first data out of R. Great. Go to your `Module1` folder inside `203311` to see your plot. There’s much more of this to come later in the course.
 
 
 
@@ -1003,9 +1001,9 @@ One last question: if you take the following numbers from your answers returned 
 >
 > Exercise H:	your numeric answer
 >
-> Exercise K:	character 1 (-1), character 4
+> Exercise K:	character 1 (-1), character 4 (-3)
 >
-> Exercise L: character 2 (-1), character 3 (-1)
+> Exercise L: character 1 (-1), character 3 (-1)
 >
 
 This is the series called:
@@ -1023,7 +1021,7 @@ ____________________
 
 That is today’s practical completed.
 
-For those of you on the iMacs, please remember to log out of the system as described in the [Access_to_RStudio_2024.pdf](https://stream.massey.ac.nz/pluginfile.php/5540234/mod_resource/content/2/Access_to_RStudio_2024.pdf) document.
+For those of you on the iMacs, please remember to log out of the system as described in the [Access_to_RStudio_2024.pdf](https://stream.massey.ac.nz/pluginfile.php/5540234/mod_resource/content/2/Access_to_RStudio_2024.pdf) document.  If you are own your own machine, it's probably a good idea to log out of the session and log in again.
 
 <!---<img src="graphics/logout.png" width="200"/>--->
 
