@@ -1272,11 +1272,13 @@ One last question: if you take the following characters from the first lines of 
 > </td></tr></table>
 
 
+#### Complete, we are!
+
 That is today’s practical completed.
 
-For those of you on the iMacs, please remember to go to the Apple Menu on your iMac and click on “Log Out Student” to log out of the system.
+For those of you on the iMacs, please remember to log out of the system as described in the [Access_to_RStudio_2024.pdf](https://stream.massey.ac.nz/pluginfile.php/5540234/mod_resource/content/2/Access_to_RStudio_2024.pdf) document.
 
-<img src="graphics/image4.png" width="200"/>
+<!---<img src="graphics/logout.png" width="200"/>--->
 
 
 ## Assessment

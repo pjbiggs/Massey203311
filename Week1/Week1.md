@@ -86,7 +86,7 @@ Don\'t forget to press the **\[Enter\]** key: commands are not sent to the R con
 
 #### Important Note
 
-**Please see the separate document -- "Access_to_RStudio_2024.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. You must do this before you can do any work in this course.**
+**Please see the separate document -- "Access_to_RStudio_2024.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. It can also be found directly at: [Access_to_RStudio_2024.pdf](https://stream.massey.ac.nz/pluginfile.php/5540234/mod_resource/content/2/Access_to_RStudio_2024.pdf). You must do this before you can do any work in this course.**
 
 ### Computing
 
@@ -1018,11 +1018,14 @@ Use the internet or your own understanding to find out what the 17th number in t
 ____________________
 </td></tr></table>
 
+
+#### Complete, we are!
+
 That is today’s practical completed.
 
-For those of you on the iMacs, please remember to go to the Apple Menu on your iMac and click on “Log Out Student” to log out of the system.
+For those of you on the iMacs, please remember to log out of the system as described in the [Access_to_RStudio_2024.pdf](https://stream.massey.ac.nz/pluginfile.php/5540234/mod_resource/content/2/Access_to_RStudio_2024.pdf) document.
 
-<img src="graphics/logout.png" width="200"/>
+<!---<img src="graphics/logout.png" width="200"/>--->
 
 
 
