@@ -14,6 +14,7 @@ NB: to be confirmed shortly
 
 | Date 	| Day 	| Activity 	|
 |---	|---	|---	|
-| 15-Apr 	| Monday 	| no lecture - perfect time to tidy up your talk 	|
-| 16-Apr 	| Tuesday 	| all recorded talks to be submitted by 11:59pm 	|
-| 19-Apr	| Friday 	| lab session: remaining talks  	|
+| 15-Apr-2024 	| Monday 	| No lecture - perfect time to tidy up your talk (to be confirmed nearer the time) 	|
+| 16-Apr-2024 	| Tuesday 	| No lecture - perfect time to tidy up your talk (to be confirmed nearer the time) 	|
+| 17-Apr-2024 	| Tuesday 	| all recorded talks to be submitted by 11:59pm 	|
+| 19-Apr-2024	| Friday 	| lab session: remaining talks  	|
