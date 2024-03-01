@@ -968,7 +968,7 @@ Let’s now do something new – don’t worry we will do this in detail again i
 
 ```R
 ### set up a file for an image, but make it for orange colours on non-automatic cars – so this code is wrong…..
-> png('/203311/Module1/testAlluvial.png')
+> png('203311/Module1/testAlluvial.png')
 > alluvial(mtcars[8:11], freq = mtcars$cyl,
 +          col = ifelse(mtcars$am == "1", "red", "grey"),
 +          border = ifelse(mtcars$am == "1", "black", "grey"))

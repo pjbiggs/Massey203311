@@ -84,7 +84,7 @@ In what follows, we shall use the following typographical conventions:
 So, for example,
 
 ```bash
-$ ls <<anydirectory>> [Enter]	- {NOTE: do not do this, it is an example.}
+$ ls  <<anydirectory>> [Enter]	- {NOTE: do not do this, it is an example.}
 ```
 
 means "at the UNIX prompt $, type `ls` followed by the name of some directory, then press the key marked Enter."
@@ -125,7 +125,7 @@ We have organised a student account for you at <https://rstudio.massey.ac.nz/> t
 
 ### Use of Massey RStudio for this Linux practical
 
-To start off with log into your Massey RStudio account, and go to the `week1and2` project in the "Bootcamp_2023" workspace we used last week. In the lower left-hand side -- the area you used the console for last week -- you will see another tab called "Terminal".  This is where we are going to be working today, so click on that, and you should see something like the below.   
+To start off with log into your Massey RStudio account, and in the lower left-hand side -- the area you used the console for last week -- you will see another tab called "Terminal".  This is where we are going to be working today, so click on that, and you should see something like the below.   
 
 <img src="graphics/terminal.PNG" width="600"/>
 
