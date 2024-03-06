@@ -126,7 +126,7 @@ We have organised a student account for you at <https://rstudio.massey.ac.nz/> t
 
 To start off with log into your Massey RStudio account, and in the lower left-hand side -- the area you used the console for last week -- you will see another tab called "Terminal".  This is where we are going to be working today, so click on that, and you should see something like the below.   
 
-<img src="graphics/terminal2024.png" width="600"/>
+<img src="graphics/terminal2024.png" width="350"/>
 
 The line that says `[pbiggs@tur-rstudio2 ~]$ ` is the current line that can accept input for you to do things with.  There are four things of note here:
 
@@ -1162,10 +1162,10 @@ Remember to use the space bar to see the full output as we are using the less co
 
 As mentioned in the lecture, the command line is very powerful and there are programs and utilities like `sed` that can do many things for us.  We are going to explore this in a small exercise [^3].
 
-First of all we will head back to our starting location, and then we need a new text file, so we will use one of the licence agreements that are part of Linux:
+First of all we will head back to our starting location, and then we need a new text file, so we will use one of the licence agreements that are part of Linux.  this is located in a different part of the file system hence the location.  However, it still follows the principle of copying a file from one folder location to another:
 
 ```bash
-$ cd ~/203311/Module1
+$ cd ~/203311/Module1/Lab2UnixAndR/FridayFolder
 $ cp /usr/share/doc/libssh/BSD .
 ```
 
