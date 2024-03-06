@@ -1,6 +1,5 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
 
 # Introduction to UNIX
 **Professor Patrick Biggs**
@@ -127,20 +126,22 @@ We have organised a student account for you at <https://rstudio.massey.ac.nz/> t
 
 To start off with log into your Massey RStudio account, and in the lower left-hand side -- the area you used the console for last week -- you will see another tab called "Terminal".  This is where we are going to be working today, so click on that, and you should see something like the below.   
 
-<img src="graphics/terminal.PNG" width="600"/>
+<img src="graphics/terminal2024.png" width="600"/>
 
-The line that says `:/cloud/project$` is the current line that can accept input for you to do things with.  There are three things of note here:
+The line that says `[pbiggs@tur-rstudio2 ~]$ ` is the current line that can accept input for you to do things with.  There are four things of note here:
 
 | Part of the command  |  The response |
 | ------------- | ------------- |
-| Our location in our environment:  | `/cloud/project`  |
+| Our identity in the system:  | `pbiggs`  |
+| The name of our server:  | `tur-rstudio2`  |
+| Our current folder:  | `~` |
 | The command prompt:               | `$`  |
 
-I have used a testing environment for developing these resources, so my command prompt is different when it is shown in the below.  
+I have used a testing environment for developing these resources with my username  - `pbiggs`- so my full command prompt is different to yours when it is shown below.  Yours will be different, so in the below when you see `pbiggs`, you will see your student ID.
 
 On the right-hand side we have "window #4", which again needs to be switched to be in the "Files" tab, as in the below.  Folders of use for today give us the following view:
 
-<img src="graphics/updatedFileFolder.png" width="600"/>
+<img src="graphics/fileFolder2024.png" width="600"/>
 
 This is the base folder for your work today, and all files for this practical have been loaded into the project for you.
 
@@ -150,9 +151,10 @@ At this point we will start using the University of Surrey Unix notes [^1] to go
 
 ## Exploring our folder
 
-Because of the Massey RStudio setup we are using, we can start exploring the files we have (we will discuss moving around the system a little more shortly), so don't worry about the command yet, type:
+Because of the Massey RStudio setup we are using, we can start exploring the files we have (we will discuss moving around the system a little more shortly), so don't worry about the command yet, type in the following two commands (remember the [Enter] between each line):
 
 ```bash
+$ cd 203311/Module1/
 $ cd Lab2UnixAndR/
 ```
 
@@ -171,18 +173,18 @@ starting.txt
 NB: Because this location name is so long, for the sake of clarity, I will abbreviate the prompt to the end of our name and location only, thus the below is exactly the same: --->
 
 ```bash
-/cloud/project/Lab2UnixAndR$ ls
+[pbiggs@tur-studio2 Lab2UnixAndR]$ ls
 starting.txt
 ```
 
-You see a file called _`starting.txt`_.  Is that all that is there?  To find out type
+You see a file called _`starting.txt`_, and it might be in a different colour, but don't worry about that.  Is that all that is there?  To find out type:
 
 ```bash
 $ ls -a
 ```
 
 ```bash
-/cloud/project/Lab2UnixAndR$ ls -a
+[pbiggs@tur-studio2 Lab2UnixAndR]$ ls -a
 .  ..  .hiddenfile.txt  starting.txt    
 ```
 
@@ -192,7 +194,7 @@ We can now see another file called _`.hiddenfile.txt`_.  What is going on here? 
 
 ## Making and moving around directories
 
-We will now make a subdirectory in your working directory to hold the files you will be creating and using in the course of this tutorial. To make a subdirectory called FridayFolder in your current working directory type
+We will now make a subdirectory in your working directory to hold the files you will be creating and using in the course of this tutorial. To make a subdirectory called _`FridayFolder`_ in your current working directory type:
 
 ```bash
 $ mkdir FridayFolder
@@ -219,7 +221,7 @@ $ ls -a
 To see its full contents.  What else do we see here?  
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ ls -a
+[pbiggs@tur-studio2 FridayFolder]$ ls -a
 .  ..               
 ```
 
@@ -237,9 +239,9 @@ $ cd ..  {NOTE: there is a space between cd and the dots}
 
 will take you one directory up the hierarchy (back to your home directory). Try it now.
 
-> __Note:__ Typing `cd` with no argument always returns you to your home directory (wherever that is set to be). This is very useful if you are lost in the file system.
+> __Note:__ Typing `cd` with no argument always returns you to your home directory (wherever that is set to be). This is very useful if you are lost in the file system.  In my case it is `/home/p/pbiggs` whereas yours will be something like `/home/22/22abcdef` where `22abcdef` is your student ID.  
 
-Pathnames enable you to work out where you are in relation to the whole filesystem. For example, to find out the absolute pathname of your current directory, type `cd` to get back to your home directory and then type
+Pathnames enable you to work out where you are in relation to the whole filesystem. For example, to find out the absolute pathname of your current directory, type `cd ..` to go up a directory and then type
 
 ```bash
 $ pwd
@@ -248,12 +250,12 @@ $ pwd
 With these two commands, the full pathname will look something like this -
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ cd ..
-/cloud/project/Lab2UnixAndR$ pwd
-/cloud/project/Lab2UnixAndR
+[pbiggs@tur-studio2 FridayFolder]$ cd ..
+[pbiggs@tur-studio2 Lab2UnixAndR]$ pwd
+/home/p/pbiggs/203311/Module1/Lab2UnixAndR
 ```
 
-Please bear in mind that this will be subtly different for your computers as compared to mine.
+Please bear in mind that this will be subtly different for your environment when compared to mine, as described above.
 
 
 
@@ -262,10 +264,22 @@ Please bear in mind that this will be subtly different for your computers as com
 We have now gone from our test areas to the home directory for your account.  We are not working there, so to get back to our working area, type the following:
 
 ```bash
-$ cd /cloud/project/Lab2UnixAndR/FridayFolder
+$ cd ~/203311/Module1/Lab2UnixAndR/FridayFolder
 ```
 
-This is very important, as you can see, we can move through multiple levels by typing the path to the folder.  Now type
+> __Important: please read__
+>
+> Home directories can also be referred to by the tilde `~` character, as in the previous line of code. It can be used to specify paths starting at your home directory. So typing:
+>
+> ```bash
+> $ ls ~/203311/Module1/Lab2UnixAndR/FridayFolder
+> ```
+>
+> will list the contents of your _`FridayFolder`_ directory, no matter where you currently are in the file system.  
+>
+
+
+This is very important, as you can see, we can move through multiple levels by typing the path to the folder.  In other words we can move around multiple levels in our system as you have already done!  Now type:
 
 ```bash
 $ ls
@@ -280,7 +294,7 @@ $ ls backups
 You will get a message like this -
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ ls backups
+[pbiggs@tur-rstudio2 FridayFolder]$ ls backups
 ls: cannot access 'backups': No such file or directory
 ```
 
@@ -294,20 +308,6 @@ $ ls FridayFolder/backups
 You still get the same error as the folder does not exist (yet!).
 
 
-> __Important: please read, but do not do this as it will not work in our current Massey RStudio environment__
->
-> Home directories can also be referred to by the tilde `~` character. It can be used to specify paths starting at your home directory. So typing:
->
-> ```bash
-> $ ls ~/Lab2UnixAndR/FridayFolder
-> ```
->
-> will list the contents of your FridayFolder directory, no matter where you currently are in the file system.  
->
-> Our `~` refers to a different part of our current Massey RStudio environment.
->
-> __Note: you will not be tested on this behaviour as it is non-standard.__
-
 
 ## Copying and moving files, and removing files and directories
 
@@ -316,10 +316,10 @@ You still get the same error as the folder does not exist (yet!).
 First, `cd` to your _`Lab2UnixAndR`_ directory, then:
 
 ```bash
-$ cd /cloud/project/Lab2UnixAndR/FridayFolder
+$ cd ~/203311/Module1/Lab2UnixAndR/FridayFolder
 ```
 
-Then at the UNIX prompt, type,
+Then at the prompt, type,
 
 ```bash
 $ cp ../../Lab2Other/science.txt .
@@ -345,7 +345,7 @@ $ mv science.bak backups/
 The last backslash is important.  You get an error, like the below.
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ mv science.bak backups/
+[pbiggs@tur-studio2 FridayFolder]/$ mv science.bak backups/
 mv: failed to access 'backups/': Not a directory
 ```
 
@@ -491,7 +491,7 @@ Some of the other options of grep are:
 - `-v` display those lines that do NOT match
 - `-n` precede each matching line with the line number
 - `-c` print only the total count of matched lines
--
+
 Try some of them and see the different results. Don't forget, you can use more than one option at a time. For example, the number of lines without the words 'science' or 'Science' is
 
 ```bash
@@ -690,7 +690,7 @@ File names conventionally start with a lower-case letter and may end with a dot 
 
 ## Getting help
 
-> __Note: For us in this somewhat restricted environment the way the `man` pages work as described below is unconventional.__ I have edited this section to give you a hint as to what a more usual resonse to these commands would be. Typing the commands in our current environment will result is errors being returned.
+<!--- > __Note: For us in this somewhat restricted environment the way the `man` pages work as described below is unconventional.__ I have edited this section to give you a hint as to what a more usual resonse to these commands would be. Typing the commands in our current environment will result is errors being returned. --->
 
 There are online manuals which gives information about most commands. The manual pages tell you which options a particular command can take, and how each option modifies the behaviour of the command. Type `man <<command>>` to read the manual page for a particular command.  For example, to find out more about the `wc` (word count) command, type
 
@@ -698,7 +698,9 @@ There are online manuals which gives information about most commands. The manual
 $ man wc
 ```
 
-If this was behaving properly, you would then need to type [q] to return to the terminal prompt.  What we see instead is:
+Type [Ctrl] and [q] to return to the command prompt.
+
+<!--- If this was behaving properly, you would then need to type [q] to return to the terminal prompt.  What we see instead is:
 
 ```
 WC(1)                                            User Commands                                       WC(1)
@@ -761,6 +763,7 @@ SEE ALSO
 
 GNU coreutils 8.28                                  January 2018                                    WC(1)
 ```
+--->
 
 In addition, the `whatis` command gives a one-line description of the command, but omits any information about options etc.  So here we see:
 
@@ -803,7 +806,7 @@ xmltransform (1e)    - Convert an XML document to a different format using a sup
 
 ## File security
 
-Head back to the _`FridayFolder`_ folder if you are not already there (Hint: use pwd to check where you are).  Let's look at our files with a long listing
+Head back to the _`FridayFolder`_ folder if you are not already there (Hint: use `pwd` to check where you are).  Let's look at our files with a long listing
 
 ```bash
 $ ls -l
@@ -812,7 +815,7 @@ $ ls -l
 you will something similar to the below:
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ ls -l
+[pbiggs@tur-studio2 FridayFolder]$ ls -l
 total 28
 drwxrwxr-x 2 rstudio-user rstudio-user 4096 Jul 18 03:11 backups
 -rw-rw-r-- 1 rstudio-user rstudio-user   65 Jul 18 05:11 bigList
@@ -822,7 +825,7 @@ drwxrwxr-x 2 rstudio-user rstudio-user 4096 Jul 18 03:11 backups
 -rw-rw-r-- 1 rstudio-user rstudio-user   65 Jul 18 05:17 slist
 ```
 
-Below is the figure from the lecture to remind you of what the columns mean.  Each file (and directory) has associated security access rights, which may be found by typing `ls -l`. In the left-hand column is a 10 symbol string consisting of the symbols d, r, w, x, -, and, occasionally, s or S. If d is present, it will be at the left-hand end of the string, and indicates a directory: otherwise - will be the starting symbol of the string.
+Below is the figure from the lecture to remind you of what the columns mean.  Each file (and directory) has associated security access rights, which may be found by typing `ls -l`. In the left-hand column is a 10 symbol string consisting of the symbols `d`, `r`, `w`, `x`, `-`, and, occasionally, `s` or `S`. If `d` is present, it will be at the left-hand end of the string, and indicates a directory: otherwise - will be the starting symbol of the string.
 
 <img src="graphics/image3.gif" width="600"/>
 
@@ -834,14 +837,14 @@ The 9 remaining symbols indicate the permissions, or access rights, and are take
 - The symbols r, w, etc., have slightly different meanings depending on whether they refer to a simple file or to a directory.
 
 Access rights on files.
-r (or -), indicates read permission (or otherwise), that is, the presence or absence of permission to read and copy the file
-w (or -), indicates write permission (or otherwise), that is, the permission (or otherwise) to change a file
-x (or -), indicates execution permission (or otherwise), that is, the permission to execute a file, where appropriate
+- r (or -), indicates read permission (or otherwise), that is, the presence or absence of permission to read and copy the file
+- w (or -), indicates write permission (or otherwise), that is, the permission (or otherwise) to change a file
+- x (or -), indicates execution permission (or otherwise), that is, the permission to execute a file, where appropriate
 
 Access rights on directories:
-r allows users to list files in the directory;
-w means that users may delete files from the directory or move files into it;
-x means the right to access files in the directory. This implies that you may read files in the directory provided you have read permission on the individual files.
+- r allows users to list files in the directory;
+- w means that users may delete files from the directory or move files into it;
+- x means the right to access files in the directory. This implies that you may read files in the directory provided you have read permission on the individual files.
 
 So, in order to read a file, you must have execute permission on the directory containing that file, and hence on any directory containing that directory as a subdirectory, and so on, up the tree.
 
@@ -891,7 +894,7 @@ $ ps
 you should see something like:
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ ps
+[pbiggs@tur-studio2 FridayFolder]$ ps
   PID TTY          TIME CMD
   518 pts/0    00:00:00 bash
   578 pts/0    00:00:00 ps
@@ -916,7 +919,7 @@ $ sleep 10 &
 you should see something like:
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ sleep 10 &
+[pbiggs@tur-studio2 FridayFolder]$ sleep 10 &
 [1] 588
 ```
 
@@ -943,7 +946,7 @@ $ jobs
 you should see something like:
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ jobs
+[pbiggs@tur-studio2 FridayFolder]$ jobs
 [1]+  Running                 sleep 1000 &
 ```
 
@@ -975,9 +978,9 @@ $ ps
 you should see something like:
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ sleep 1000 &
+[pbiggs@tur-studio2 FridayFolder]$ sleep 1000 &
 [1] 595
-/cloud/project/Lab2UnixAndR/FridayFolder$ ps
+[pbiggs@tur-studio2 FridayFolder]$ ps
   PID TTY          TIME CMD
   518 pts/0    00:00:00 bash
   595 pts/0    00:00:00 sleep
@@ -1066,7 +1069,7 @@ $ file *
 you should see something like:
 
 ```bash
-/cloud/project/Lab2UnixAndR/FridayFolder$ file *
+[pbiggs@tur-studio2 FridayFolder]$ file *
 backups:        directory
 bigList:        ASCII text
 list1:          ASCII text
@@ -1162,8 +1165,8 @@ As mentioned in the lecture, the command line is very powerful and there are pro
 First of all we will head back to our starting location, and then we need a new text file, so we will use one of the licence agreements that are part of Linux:
 
 ```bash
-$ cd /cloud/project
-$ cp /usr/share/common-licenses/BSD .
+$ cd ~/203311/Module1
+$ cp /usr/share/doc/libssh/BSD .
 ```
 
 Let's use `sed` to view the contents of the BSD license file.
