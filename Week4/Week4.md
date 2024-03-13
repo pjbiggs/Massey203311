@@ -36,7 +36,7 @@
 
 The data we will investigate today is from publicly available SARS-Cov-2 genome sequences. Over the next two weeks. you will learn how to use this data to find specific mutations that new SARS-CoV-2 strains have, how to place these strains in an evolutionary context, and how to visualise this context.
 
-A flowchart of the process we will follow is below. It is unlikely that you will understand all of these steps right now, but hopefully after the lecture content and labs in the next three weeks, this will become more clear.<br>
+A flowchart of the process we will follow is below. It is unlikely that you will understand all of these steps right now, but hopefully after the lecture content and labs in the next three weeks (well weeks 4, 5 and 7), this will become more clear.<br>
 
 <img src="graphics/flow-chart.png" title="our plan" width="700"/>
 
@@ -138,16 +138,26 @@ Second, try to follow the instructions exactly today, [and whatever you do don't
 
 Good. Now, we download `conda`.
 
-Navigate to the command line tab on your RStudio window ("Terminal"). This is on the top of the `R` window. **Make sure you are in your `/cloud/project/` directory.**
+Navigate to the command line tab on your RStudio window ("Terminal"). This is on the top of the `R` window.
+
+ **Make sure you are in your `203311/Module2` directory as this is where we will do all our work for this module.**  
+
+ If you are unsure where this is, check with `cd`, `pwd` and `cd 203311/Module2` thus:
 
 
 ```bash
-    # Download the latest conda installer.
-    # We cry because we can't use tab-complete here as
-    # the file does not yet exist on our computers.
-    # you should be able to copy the line below and  
-    # paste it on the command line
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+# Checking where we are at the start of a new module:
+
+$ cd
+$ pwd
+$ cd 203311/Module2
+
+# Download the latest conda installer.
+# We cry because we can't use tab-complete here as
+# the file does not yet exist on our computers.
+# you should be able to copy the line below and  
+# paste it on the command line
+$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
 **Explanation**: `wget` is a program that is used to transfer data to or from a server. Thus, this command is simply using `wget` program to find the file at the location indicated and then download it.
 
@@ -181,35 +191,35 @@ Let's now actually install `conda` (in our case we install a miniature version o
 **Warning**: Be careful when using `rm` in the following command. (Why? What does `rm` do?)
 
 ```bash
-    # Run the conda installer
-    # Note: now you can use tab-complete.
-    # During installation. You will need to
-    # press enter and the spacebar several
-    # times at the --More-- prompt, and
-    # type "yes" each time it prompts you to. It should
-    # be readily apparent where to do this:
-    # "Miniconda3 will now be installed into this location:" yes
-    # "Do you wish the installer to initialize Miniconda3
-    # by running conda init?" yes
-    bash Miniconda3-latest-Linux-x86_64.sh
+# Run the conda installer
+# Note: now you can use tab-complete.
+# During installation. You will need to
+# press enter and the spacebar several
+# times at the --More-- prompt, and
+# type "yes" each time it prompts you to. It should
+# be readily apparent where to do this:
+# "Miniconda3 will now be installed into this location:" yes
+# "Do you wish the installer to initialize Miniconda3
+# by running conda init?" yes
+$ bash Miniconda3-latest-Linux-x86_64.sh
 
-    # delete the installer after successful run
-    rm Miniconda3-latest-Linux-x86_64.sh
+# delete the installer after successful run
+$ rm Miniconda3-latest-Linux-x86_64.sh
 ```
 
 **IMPORTANT**
 `Conda` may not behave *quite* as it should in this cloud-based platform. Try typing `conda --help`. If there is an error, then to use `conda` we will need to addjust our `$PATH` variable.[^1] You do this by typing the following at the terminal (simply copy-paste) the *entire* line below:
 
 ```bash
-# Make sure you type this EXACTLY, including the $ !!!
-export PATH="$HOME/miniconda3/bin:$PATH"
+# Make sure you type this EXACTLY, including the $ before "HOME"!!!
+$ export PATH="$HOME/miniconda3/bin:$PATH"
 ```
 **If you keep your terminal session active (i.e. don't close it) then you should be able to use `conda` for the rest of the Semester in the terminal. If you do close the terminal, repeat the above step**.
 
 Now, you should be able to use the `conda` command. Again, one useful way to check that `conda` (*or most other command line programs*) is working is to ask the program for help. This is **almost always** done by typing `--help` or `-h` after the command. For example try:
 
 ```bash
-conda --help
+$ conda --help
 ```
 
 This should bring up a list of sub-commands that `conda` can do (assuming you have installed it correctly). If this does not work, ask someone for help (lecturer, demonstrator, or classmate). Note that this is different from the `R` help command.
@@ -224,7 +234,7 @@ Over the years, the `conda` ecosystem has gotten so large that it is slow and so
 
 ```bash
 # don't worry about exactly what is happening here
-conda install mamba -n base -c conda-forge
+$ conda install mamba -n base -c conda-forge
 ```
 
 This will likely "redline" your RAM (visible in the top right corner of your screen as a little odometer). However, once installation occurs, the RAM should decrease. If the install fails, let someone know.
@@ -243,8 +253,7 @@ One piece of software we will need allows us to figure out where a certain seque
 # Below we specify which channel we would like mamba
 # to look in to find the minimap2 recipe.
 # This is done using the -c option
-
-mamba install -c bioconda minimap2
+$ mamba install -c bioconda minimap2
 ```
 
 `mamba` will sit around looking for the recipe for a minute, and then it should ask you whether you want to install the software. Simply press `enter` or type `Y` and press `enter`.
@@ -269,13 +278,13 @@ The NGS methods that produced today's data (sequence data from different SARS-Co
 
 The sequence data are available as a [normal tarball here](./data/sequence-files.tar "tarball of all data") as a `tar.gz` file. **Do not download the data yet**.
 
-To download the data, first make sure you are in your `/cloud/project` directory. Second, make a new directory, perhaps `covid/`, and change into that directory. Third, copy the link address (right click on the link and scroll to *Copy Link Address*). Finally, download the files using `wget`:
+To download the data, first make sure you are in your `203311/Module2` directory. Second, make a new directory, perhaps `covid/`, and change into that directory. Third, copy the link address (right click on the link and scroll to *Copy Link Address*). Finally, download the files using `wget`:
 
 ```bash
 # try downloading the tar file first.
 # The link you copied shouldbe something like:
 # "./data"
-wget tarball-link-address-you-just-copied
+$ wget tarball-link-address-you-just-copied
 ```
 You should see a rapid animated arrow tracking the download.
 
@@ -283,16 +292,16 @@ This should result in a ~17Mb `tar` ball in your directory. If it does not, then
 
 ```bash
 # The downloaded file will have an odd extension.
-# you will need to change it using mv.
+# you will need to change it using mv.$
 # TAB-COMPLETE the first filename below to do this
-mv sequence-files.tar?raw=true sequence-files.tar
+$ mv sequence-files.tar?raw=true sequence-files.tar
 ```
 
 Once you have downloaded the data, you will need to unpack it. Use `tar` to do this:
 
 ```bash
 # expand the tar ball
-tar -xvf sequence-files.tar
+$ tar -xvf sequence-files.tar
 ```
 
 This should result in a single directory, `sequence-files`, containing four compressed `fastq` files (`fastq.gz`). Two of these are Illumina files, and two are Oxford Nanopore.
@@ -306,7 +315,7 @@ After downloading all four files, you will have all the DNA sequence data that w
 #### QUESTIONS
 1. Are all four files present?
 2. How big are they?
-3. Are you sure they all sitting in the `/data` directory that is sitting within your `/cloud/project/` directory?
+3. Are you sure they all sitting in the `/data` directory that is sitting within your `203311/Module2/` directory?
 4. What does the `.gz` at the end of the file names indicate about the type of file it is?
 5. How can you view the contents of files that have a `.gz` suffix (for example, what do you need to do first before viewing)?
 
@@ -318,7 +327,7 @@ Things will start to get a little crazy as we get more data - new directories, n
 # i.e. it's no longer bioconda
 # But we still use the -c option to
 # specify another channel
-mamba install -c conda-forge tree
+$ mamba install -c conda-forge tree
 ```
 
 Now we can use our tree command to see what is where and how it's organised:
@@ -328,9 +337,10 @@ Now we can use our tree command to see what is where and how it's organised:
 # First head back up a directory (it does not matter where
 # you are, just that you have at least one directory
 # or file below you)
-cd ..
+$ cd ..
+
 # Then run tree
-tree -L 2 --du -h
+$ tree -L 2 --du -h
 ```
 
 Nice.
@@ -349,7 +359,7 @@ Next, let's next look quickly inside the sequence data files. However, we don't 
 # look at the first few lines of a file - by default, ten lines).
 # You've also encountered the pipe before - it takes the output of one command
 # and feeds it to another.
-zcat choose_one_fastq_file_to_look_at.fastq.gz | head
+$ zcat choose_one_fastq_file_to_look_at.fastq.gz | head
 ```
 **For completeness and carefulness, we do it for all four files**. Delete any suspicious sequence files from your directory and note to yourself the importance of looking critically  at your data.
 
@@ -359,7 +369,7 @@ Once we have the data and have decided that it looks as we expect (*or does it?*
 # Below we use mamba (of course) and
 # tell mamba which *channel* to look in
 # for the recipe using the -c option
-mamba install -c bioconda seqkit
+$ mamba install -c bioconda seqkit
 ```
 
 If your command does not work, let a lecturer, demonstrator, or classmate know.
@@ -374,7 +384,7 @@ Now let's use `seqkit` ("sequence kit") first. Type `seqkit --help` to make sure
 # e.g. total bp, etc.
 # here, stats is a *subcommand* of seqkit
 # this also means it won't tab-complete (as it is a subcommand)
-seqkit stats *fastq.gz
+$ seqkit stats *fastq.gz
 ```
 
 #### QUESTIONS
@@ -388,7 +398,7 @@ seqkit stats *fastq.gz
 # *correct name* of the program and you know that
 # gzipped files don't end in ".gx" so
 # don't copy-paste
-seqklt stats -a *fastq.gx
+$ seqklt stats -a *fastq.gx
 ```
 
 Let's look at whole distributions of read lengths instead of just the *average* read length for all read:
@@ -401,7 +411,7 @@ Let's look at whole distributions of read lengths instead of just the *average* 
 # If you want, you can leave the --bins 15 part of the command out.
 # Note that the fastq.gz file name below is not the same as yours!
 # The subcommand is "watch" not "witch", so copy-paste won't be easy
-seqkit witch --bins 15 choose_one_fastq_file_to_plot.fastq.gz
+$ seqkit witch --bins 15 choose_one_fastq_file_to_plot.fastq.gz
 ```
 Use this `seqkit watch` command for all of your sequencing files. You can also try the `--log` option if you want (what does this option do?). Remember, the up-arrow and tab-complete are your friends. `--help` is your other friend, e.g. `seqkit watch --help`.
 
@@ -416,7 +426,7 @@ It is also possible to make a simple plot of the average *quality* of each read.
 # the default field for watch, MeanLength. Now we can get MeanQual.
 # We leave the --bins option in (you don't have to).
 # When you leave in --bins you need to specify a number (I chose 15)
-seqklt wutch --fielbs MoanQual --bins 15 choose_one_fastq_file_to_plot.fastq.gz
+$ seqklt wutch --fielbs MoanQual --bins 15 choose_one_fastq_file_to_plot.fastq.gz
 ```
 *Any errors?* The program is "seqkit", the subcommand is `watch`, the argument is `fields`, and the read characteristic is `MeanQual`.
 
@@ -448,10 +458,11 @@ In the fastp report we have several useful statistics, such as the mean read qua
 To begin, we make some files with the new data we would like. In this case, we will use `seqkit` again. First, some data on the distribution of lengths and quality *per sequence* (rather than per position). Do this for your untrimmed and trimmed Oxford Nanopore data (Montana):
 
 ```bash
-#let's try seqkit fx2tab ("fastx format to tab format")
+# let's try seqkit fx2tab ("fastx format to tab format")
 # fx2tab is an odd-looking command, but it is the correct command.
 # Again, fx2tab is a *subcommand* of seqkit and will not tab-complete
-seqkit fx2tab --help
+$ seqkit fx2tab --help
+
 # -q and -l options give the length and quality for each sequence.
 # -n supresses the output of the sequences and qualities for *every bp*
 # of each read
@@ -459,7 +470,7 @@ seqkit fx2tab --help
 # than -q -l -n (also possible)
 # so here we will have a file with three columns:
 # the NAME, the LENGTH, and the QUALITY
-seqkit fx2tab -qln myseqs.fastq.gz
+$ seqkit fx2tab -qln myseqs.fastq.gz
 ```
 
 Oops. Did you forget that `seqkit` outputs to standard out? You have to use the redirect `>` to put it into a file.
@@ -467,7 +478,7 @@ Oops. Did you forget that `seqkit` outputs to standard out? You have to use the 
 ```bash
 # Please do not redirect this into mydata.txt
 # Rather, name the file something sensible.
-seqkit fx2tab -qln myseqs.fastq.gz > mydata.txt
+$ seqkit fx2tab -qln myseqs.fastq.gz > mydata.txt
 ```
 
 #### QUESTION
@@ -492,7 +503,7 @@ If you do see it, you should be able to load the file into `R` as a dataframe. P
 # You should be able to tab-complete the name if
 # you are in the correct directory, or tab complete both
 # the directory and the filename
-mydata <- read.table(file="data.i.made.using.seqkit.txt")
+> mydata <- read.table(file="data.i.made.using.seqkit.txt")
 ```
 
 Check that you have correctly loaded the data using `head(mydata)` or `summary(mydata)`.
@@ -518,7 +529,7 @@ Finally, you can plot the data. If you have used `seqkit fx2tab` as suggested ab
 
     This analysis is part of the **Portfolio Assessment**:
 
-    *In the practicals for weeks 4 to 12, you will encounter one question in each practical session that relates to different methods of visualisation. These will be highlighted as a “Portfolio Analysis”. For these, you will need to perform the necessary analyses and accompanying visualisations to communicate the results in a clear and aesthetically pleasing manner. You will also need to write a brief caption for each figure (100 words or less) explaining the visualisation and why you selected that particular one. Finally, you will also submit the code you have used to generate the visualisations. This code needs to be commented (for example, an average of one comment per line of code). Submit these to via Stream as a single .pdf. These should be in the order: code, followed by visualisation, followed by caption. If you have used both `terminal` and `R` code, please submit them together, with comments delimiting each section.*
+    *In the practicals for weeks 4, 5 and 7 to 12, you will encounter one question in each practical session that relates to different methods of visualisation. These will be highlighted as a “Portfolio Analysis”. For these, you will need to perform the necessary analyses and accompanying visualisations to communicate the results in a clear and aesthetically pleasing manner. You will also need to write a brief caption for each figure (100 words or less) explaining the visualisation and why you selected that particular one. Finally, you will also submit the code you have used to generate the visualisations. This code needs to be commented (for example, an average of one comment per line of code). Submit these to via Stream as a single .pdf. These should be in the order: code, followed by visualisation, followed by caption. If you have used both `terminal` and `R` code, please submit them together, with comments delimiting each section.*
 
 
 ### Reminder of the steps you have completed today
@@ -541,7 +552,7 @@ TLDR summary of how to approach to Portfolio Assessment from Week 4.
 
 > You wanted a complete list of every sequencing platform, the read length, and the cost per Gbp?
 
-This is from [Albert Vielella](https://docs.google.com/spreadsheets/d/1GMMfhyLK0-q8XkIo3YxlWaZA5vVMuhU1kg41g4xLkXc/edit#gid=1569422585 "detailed table of seq technologies")
+This is from [Albert Vielella](https://docs.google.com/spreadsheets/d/1GMMfhyLK0-q8XkIo3YxlWaZA5vVMuhU1kg41g4xLkXc/edit#gid=1569422585 "detailed table of seq technologies") and was correct as of 2023.
 
 
 |Platform|Read length max: (paired-end*, Half of data in reads**)|Price per Gbp min: ($)|
