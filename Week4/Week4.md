@@ -1,11 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
-**There is no project to clone for this week; you can do all work in your own project**
-
 # Sequencing and Mapping
-**A/Prof Olin Silander**
+**A/Prof Olin Silander, with Prof P Biggs**
 
 [Purpose](#purpose)<br>
 [Introduction](#introduction)<br>
@@ -31,6 +27,7 @@
 2. To understand the advantages and disadvantages of using two of the three most common types of NGS sequencing data.
 3. To be able to visualise the differences in these NGS data types.
 4. To discuss what the possible applications are for this type of NGS data.
+
 
 ## Introduction
 

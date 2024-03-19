@@ -1,9 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
 # Variants and Phylogenies
-**Dr Olin Silander**
+**A/Prof Olin Silander, with Prof P Biggs**
 
 ## Purpose
 
@@ -20,7 +18,7 @@ After studying this section of the tutorial you should be able to:
 ## Introduction
 
 Now that we we have the reads from the new SARS-CoV-2 strains (from Kwazulu Natal and Montana) and they have been QC'ed (and trimmed when possible), we want to identify the changes that have occurred in these SARS-CoV-2 viruses compared to the ancestral virus. There are at least two ways to do this.
-One option would be to assemble a new genome from our sequence reads and compare this to the ancestral viral genome. However, this would be the wrong approach for two reasons. First, it is more computationally difficult to peform an assembly. Thus, we would be wasting time and effort and computational resources. Second, assemblies are hard. It is difficult to ensure your assebmly is accurate, *especially* when using long, error-prone reads (like Oxford Nanopore).<br><br>
+One option would be to assemble a new genome from our sequence reads and compare this to the ancestral viral genome. However, this would be the wrong approach for two reasons. First, it is more computationally difficult to perform an assembly. Thus, we would be wasting time and effort and computational resources. Second, assemblies are hard. It is difficult to ensure your assembly is accurate, *especially* when using long, error-prone reads (like Oxford Nanopore).<br><br>
 
 
 <img src="graphics/long-read-assembly.jpeg" title="You're always on the wrong side Anakin" width="350"/><br>
@@ -54,7 +52,7 @@ Today's reference genome is the first sequenced SARS-CoV-2 virus, [sequenced usi
 - the reads were de novo-assembled into 384,096 contigs
 - then screened for potential aetiological agents
 
-After this, they identified a single contig that was similar to known Coronaviruses, and which they identified as the the aetiological agent.<br><br>
+After this, they identified a single contig that was similar to known Coronaviruses, and which they identified as the aetiological agent.<br><br>
 
 <img src="graphics/SCV.png" title="Three genomes" width="750"/><br>
 **Three Coronavirus genomes (SARS-CoV-2 on top referred to as WHCV)**<br><br>
@@ -82,7 +80,7 @@ Please install `bwa` now using `conda` or `mamba` (use the `bioconda` channel).
 ```bash
 # a simple install
 # don't copy paste
-conda insta1l -c bioconda bvva
+$ conda insta1l -c bioconda bvva
 ```
 
 #### Important Note
@@ -95,20 +93,20 @@ conda insta1l -c bioconda bvva
 
 ```bash
 # bwa index help
-bwa index
+$ bwa index
 
 ```
 
 ```bash
 # bwa mem help
-bwa mem
+$ bwa mem
 
 # paired-end mapping, general command structure,
 # adjust to your case
 # Name your file SENSIBLY
 # For this you need the reference genome and your reads (Illumina or ONT)
 # for single end, use only one fastq file
-bwa mem reference-genome.fasta read1.fastq read2.fastq > mappedreads.sam
+$ bwa mem reference-genome.fasta read1.fastq read2.fastq > mappedreads.sam
 ```
 Let's first make the index. We can't do that without the reference genome. First make sure you are in your `data/` directory (you want to stay organised).
 
@@ -118,7 +116,7 @@ Now download the reference SARS-CoV-2 genome [here](./data/nCoV-2019.reference.f
 
 ```bash
 # if you don't remember
-wget link.you.just.copied.from.above
+$ wget link.you.just.copied.from.above
 ```
 
 First, check that the file has what you expect. What *format* is the file in? Here, we are encountering a real life example of [fasta](https://en.wikipedia.org/wiki/FASTA_format "Wiki link") format for the first time.  There are two lines for each sequence in a  `fasta` file, the name of the sequence (which is *always* preceeded by a `>` character), and the sequence itself.
@@ -153,7 +151,7 @@ One line of a mapped read can be seen here:
 
 ```code
 
-    M02810:197:000000000-AV55U:1:1101:10000:11540   83      NODE_1_length_1419525_cov_15.3898       607378  60      151M    =       607100  -429    TATGGTATCACTTATGGTATCACTTATGGCTATCACTAATGGCTATCACTTATGGTATCACTTATGACTATCAGACGTTATTACTATCAGACGATAACTATCAGACTTTATTACTATCACTTTCATATTACCCACTATCATCCCTTCTTTA FHGHHHHHGGGHHHHHHHHHHHHHHHHHHGHHHHHHHHHHHGHHHHHGHHHHHHHHGDHHHHHHHHGHHHHGHHHGHHHHHHFHHHHGHHHHIHHHHHHHHHHHHHHHHHHHGHHHHHGHGHHHHHHHHEGGGGGGGGGFBCFFFFCCCCC NM:i:0  MD:Z:151        AS:i:151        XS:i:0
+M02810:197:000000000-AV55U:1:1101:10000:11540   83      NODE_1_length_1419525_cov_15.3898       607378  60      151M    =       607100  -429    TATGGTATCACTTATGGTATCACTTATGGCTATCACTAATGGCTATCACTTATGGTATCACTTATGACTATCAGACGTTATTACTATCAGACGATAACTATCAGACTTTATTACTATCACTTTCATATTACCCACTATCATCCCTTCTTTA FHGHHHHHGGGHHHHHHHHHHHHHHHHHHGHHHHHHHHHHHGHHHHHGHHHHHHHHGDHHHHHHHHGHHHHGHHHGHHHHHHFHHHHGHHHHIHHHHHHHHHHHHHHHHHHHGHHHHHGHGHHHHHHHHEGGGGGGGGGFBCFFFFCCCCC NM:i:0  MD:Z:151        AS:i:151        XS:i:0
 ```
 
 Most importantly, this line defines the read name (`QNAME`), the position in the reference genome where the read maps (`POS`), and the quality of the mapping (`MAPQ`). Note, also, the `83` bitwise flag in the above output.
@@ -187,10 +185,11 @@ But we have to adjust our `conda` configuration so that it *prioritises* certain
 
 ```bash
 ###
-conda config --add channels bioconda
-conda config --add channels conda-forge
+$ conda config --add channels bioconda
+$ conda config --add channels conda-forge
+
 ### type the top two first
-conda install -c conda-forge mamba
+$ conda install -c conda-forge mamba
 ```
 **You must specify the version as 1.14**
 **You must use `mamba`**
@@ -200,7 +199,7 @@ conda install -c conda-forge mamba
 # NOTE THE VERSION
 # SERIOUSLY
 # but now we use MAMBA
-mamba install -c bioconda samtools=1.14
+$ mamba install -c bioconda samtools=1.14
 ```
 
 Now sort:
@@ -208,7 +207,7 @@ Now sort:
 ```bash
 # sort by location
 # note the redirect > arrow
-samtools sort my_mapped_sequences.sam > my_mapped_sorted.bam
+$ samtools sort my_mapped_sequences.sam > my_mapped_sorted.bam
 ```
 
 Please name your files in a reasonable manner.
@@ -222,7 +221,7 @@ Lets get a mapping overview. For this we will use the `samtools flagstat` tool, 
 
 ```bash
 # this outputs to standard out, as we expect for samtools
-samtools flagstat my_mapped_sorted.bam
+$ samtools flagstat my_mapped_sorted.bam
 ```
 
 For the sorted `bam` file we can also get read depth for at all positions of the reference genome, e.g. how many reads are overlapping the genomic position. We can get some very quick statistics on this using `samtools coverage`. Type that command to view the required input, and try using that now.
@@ -236,14 +235,14 @@ We can also get considerably more detailed data using `samtools depth`, used as 
 
 
 ```bash
-samtools depth my_mapped.bam > my_mapping_depth.txt
+$ samtools depth my_mapped.bam > my_mapping_depth.txt
 ```
 
 This will give us a file with three columns: the name of the contig, the position in the contig,  and the depth. This looks something like this:
 
 ```bash
 # let's look at the first ten lines using head
-head my_mapping_depth.txt
+$ head my_mapping_depth.txt
 ```
 
 ```code
@@ -264,10 +263,11 @@ Now we quickly use some `R` to get some stats on this data. You can simply switc
 
 ```R
 # here we read in the data
-my.depth <- read.table('my_mapping_depth.txt', sep='\t', header=FALSE)
+> my.depth <- read.table('my_mapping_depth.txt', sep='\t', header=FALSE)
+
 # perhaps we calculate the mean depth next
 # check out the mean() function
-?mean()
+> ?mean()
 ```
 I leave the rest of the work to you (see **Portfolio Assessment** at the bottom).<br>
 
@@ -291,7 +291,7 @@ Here, we get only the *mapped* reads.
 ```bash
 # note the options and the *case* of each, specifically
 # the F
-samtools view -h -b -F 4 my_mapped.bam > my_actually_mapped.bam
+$ samtools view -h -b -F 4 my_mapped.bam > my_actually_mapped.bam
 ```
 
 - `-h`: Include the sam header
@@ -310,11 +310,11 @@ Sopme of you may have been wondering what those "unmapped" Kwazulu-Natal reads a
 ```bash
 # note the options and the *case* of each, specifically
 # the lower-case f
-samtools view -h -b -f 4 my_mapped.bam > my_unmapped.bam
+$ samtools view -h -b -f 4 my_mapped.bam > my_unmapped.bam
 # now get the reads out
-samtools bam2fq my_unmapped.bam > my_unmapped.fastq
+$ samtools bam2fq my_unmapped.bam > my_unmapped.fastq
 # now we simplify by getting a fastA
-seqkit fq2fa my_unmapped.fastq > my_unmapped.fasta
+$ seqkit fq2fa my_unmapped.fastq > my_unmapped.fasta
 ```
 
 Now highlight and copy several reads from this fasta file (say, 20) and go [here](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome "NCBI Blast"). Paste the reads into the white box at the top, scroll down, and press the blue BLAST button. Wait a couple of minutes and you should be able to see what organism(s) the reads match.
@@ -336,7 +336,7 @@ In fact, once you dig deeper into the mechanics of the `MAPQ` implementation it 
 For the sake of going forward, we will sub-select reads with at least medium quality, which we arbitrarily define as `Q20+`. Again, here  we use the `samtools view` tool, but this time use the `-q` option to select by quality.
 
 ```bash
-samtools view -h -b -q 20 my_mapped.bam > my_mapped.q20.bam
+$ samtools view -h -b -q 20 my_mapped.bam > my_mapped.q20.bam
 ```
 
 - `-h`: Include the sam header
@@ -348,11 +348,11 @@ samtools view -h -b -q 20 my_mapped.bam > my_mapped.q20.bam
 Tools we are going to use in this section and how to intall them if you not have done it yet.
 
 ```bash
-mamba install bamtools
-mamba install bedtools
-mamba install vcflib
-mamba install rtg-tools
-mamba install bcftools
+$ mamba install bamtools
+$ mamba install bedtools
+$ mamba install vcflib
+$ mamba install rtg-tools
+$ mamba install bcftools
 ```
 
 #### Preprocessing
@@ -361,7 +361,7 @@ We first need to make an index of our reference genome as this is required by th
 Given an assembly file in fasta-format, e.g. ``assembly.fasta`` which is located in the directory, use |samtools| to do this:
 
 ```bash
-samtools faidx reference.fasta
+$ samtools faidx reference.fasta
 ```
 In some cases an error might appear where samtools fails to recognize the `faidx` command. If so, please try to re-install `samtools`.
 
@@ -369,7 +369,7 @@ This command will output a new file with the extension `.fai`. Furthermore we ne
 
 ```bash
 # a quick bam file index
-bamtools index -in my_mapped_q20.bam
+$ bamtools index -in my_mapped_q20.bam
 ```
 
 #### bcftools mpileup
@@ -379,7 +379,7 @@ We use the sorted filtered bam-file that we produced in the mapping step before.
 ```bash
 # We first pile up all the reads and then call
 # variants using the pipe | operator
-bcftools mpileup -f reference.fasta my_mapped_q20.bam | bcftools call -v -m -o my_variant_calls_bcftools.vcf
+$ bcftools mpileup -f reference.fasta my_mapped_q20.bam | bcftools call -v -m -o my_variant_calls_bcftools.vcf
 ```
 
 - `-f` input fasta reference
@@ -423,7 +423,7 @@ Lets look at a vcf-file:
 # first 10 lines, which are part of the header
 # you know how to do this but I write
 # it out anyway
-head myvariants.vcf
+$ head myvariants.vcf
 ```
 
 Lets look at the variants using ``less``:
@@ -431,7 +431,7 @@ Lets look at the variants using ``less``:
 ```bash
 # you will need to scroll a little
 # after using less to get to the variant calls
-less myvariants.vcf
+$ less myvariants.vcf
 ```
 ```code
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  montana.hq.bam
@@ -452,7 +452,7 @@ Now we can use it to do some statistics and filter our variant calls.
 For example, we can get some quick stats with `rtg vcfstats` (give it a second):
 
 ```bash
-rtg vcfstats my_variants.vcf
+$ rtg vcfstats my_variants.vcf
 ```
 
 Example output from `rtg vcfstats`:
@@ -500,7 +500,7 @@ Here, we only include variants that have quality > 150.
 # although the one below is *slightly* informative :)
 # note we leave off the extension of the output, this is made automatically
 # it also makes a tab index for us, how nice (.tbi)
-rtg vcffilter -q 150 -i my_variants.vcf -o my_variants.q150
+$ rtg vcffilter -q 150 -i my_variants.vcf -o my_variants.q150
 ```
 
 - ``-i FILE``: input file
@@ -512,7 +512,7 @@ Quick stats for the filtered variants:
 
 ```bash
 # look at stats for filtered
-rtg vcfstats my_variant_calls_bcftools.q150.vcf.gz
+$ rtg vcfstats my_variant_calls_bcftools.q150.vcf.gz
 ```
 
 #### QUESTION
@@ -529,7 +529,7 @@ First we make a *new* genome using our variant calls.
 # Don't call it "consensus"
 # DO include the -p argument, which places a prefix on your new sequence
 # so that it doesn't have the same name as the reference.
-cat nCoV-2019.reference.fasta | bcftools consensus -p montana_ my_variants.q150.vcf.gz > consensus.fasta
+$ cat nCoV-2019.reference.fasta | bcftools consensus -p montana_ my_variants.q150.vcf.gz > consensus.fasta
 ```
 
 For reasons I cannot understand, *some* of you have had issues making this new fasta. If so, download this fasta from [here](data/montana.fasta "new fasta").
@@ -540,17 +540,18 @@ Now a quick alignment. Select *only* your ONT (Montana) genome (made from the va
 3. `cat` the other set of sequences to the _same_ new file and _append_ it.
 
 ```bash
-cat reference.fasta > both_genomes.fasta
-echo >> both_genomes.fasta
-cat consensus.fasta >> both_genomes.fasta
+$ cat reference.fasta > both_genomes.fasta
+$ echo >> both_genomes.fasta
+$ cat consensus.fasta >> both_genomes.fasta
 ```
 
 Two last installs (phew!)
 ```bash
 # a beautiful visualisation program
-mamba install snipit
+$ mamba install snipit
+
 # muscle-y alignment program
-mamba install mafft
+$ mamba install mafft
 ```
 
 
@@ -559,14 +560,14 @@ To do the alignment you will need to simply type `mafft` at the command line. Th
 **Alternatively** you can do this all on the command line (perhaps easier). For this, type:
 
 ```bash
-mafft --auto --reorder both_genomes.fasta > both_genomes.aln
+$ mafft --auto --reorder both_genomes.fasta > both_genomes.aln
 ```
 
 And we're there, one more step!
 
 ```bash
 # Use our amazing Snipit program
-snipit both_genomes.aln
+$ snipit both_genomes.aln
 ```
 
 Check your file list in the `RStudio Cloud` bottom right corner window. There should be a new file there called `snp_plot.png`. Click on it, and it should open a new tab in the browser. Marvel at the beauty (what is this thing plotting?).
@@ -580,11 +581,12 @@ Check your file list in the `RStudio Cloud` bottom right corner window. There sh
 
      ```bash
      # if you read the data in like this
-     my.depth <- read.table(file="my.depth.txt")
+     > my.depth <- read.table(file="my.depth.txt")
      # then you can find column two like this:
-     my.depth[,2]
+     > my.depth[,2]
      ```
 
 ### Reminder of the steps you have completed today
 <img src="graphics/flowchart-by-day.png" title="Makin' progress" width="700"/><br>
+
 **Getting there**.
