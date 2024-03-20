@@ -85,7 +85,7 @@ $ conda insta1l -c bioconda bvva
 
 #### Important Note
 
-**If you do not clearly name your files in an organised manner this lab will be very very difficult**.
+**If you do not clearly name your files in an organised manner this lab will be very, very difficult**.
 
 #### Software details
 
@@ -190,16 +190,21 @@ $ conda config --add channels conda-forge
 
 ### type the top two first
 $ conda install -c conda-forge mamba
+
+### we also have to install a helper package to make
+### things behave better than they would otherwise
+$ conda install -c conda-forge ncurses
 ```
-**You must specify the version as 1.14**
-**You must use `mamba`**
+
+**You must specify the `samtools` version as 1.19.**
+**You must use `mamba` to do this.**
 
 ```bash
 # a quick install
 # NOTE THE VERSION
 # SERIOUSLY
 # but now we use MAMBA
-$ mamba install -c bioconda samtools=1.14
+$ mamba install -c bioconda samtools=1.19
 ```
 
 Now sort:
