@@ -94,6 +94,8 @@ $ conda insta1l -c bioconda bvva
 ```bash
 # bwa index help
 $ bwa index
+# to use
+$ bwa index your.reference.fasta
 
 ```
 
@@ -123,6 +125,9 @@ First, check that the file has what you expect. What *format* is the file in? He
 
 #### QUESTION
 1. How long is the reference sequence? (*hint: use seqkit*) Is it all there (see Figure above of the SARS-like genomes)?
+
+#### Making the index we need
+
 
 Now, make the index. Do that in the same manner as suggested above. You will see a number of additional files appear.
 
