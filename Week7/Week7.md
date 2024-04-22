@@ -1,9 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
 # Phylogenetics and Evolutionary Visualization
-**Dr Olin Silander**
+**A/Prof Olin Silander, with Prof P Biggs**
 
 ## Purpose
 
@@ -47,8 +45,8 @@ To reconstruct new genomes, we will simply use of old reference, and input our c
 # This time, DO NOT include the -p argument, which places a prefix
 # on your new sequence
 # Note that below "bcftools consensus" is the command
-cat nCoV-2019.reference.fasta | bcftools consensus my_variants.q150.vcf.gz > kwazulu-natal.fasta
-# or montana.fasta
+$ cat nCoV-2019.reference.fasta | bcftools consensus my_variants.q150.vcf.gz > kwazulu-natal.fasta
+# or alternatively montana.fasta
 ```
 
 Do this for both of your variant call files to create two new genomes.
@@ -70,12 +68,12 @@ If you have not already, please install `bedtools` using `mamba` (or `conda`) an
 We will next make a `.bed format file` that we will use to *mask* the new fasta files that we have made from the variant calls. Please see the `.bed` format [here](https://bedtools.readthedocs.io/en/latest/index.html "Nice logo, bedtools")
 
 ```bash
-# here we mask all regions with coverage less than 12 - we assume that
+# here we mask all regions with depth coverage less than 12 - we assume that
 # regions with coverage more than 12 have successully called variants
 # we make a new .bed format file
 # "genomecov" is part of the bedtools command
 # try bedtools genomecov -h to see how it works
-bedtools genomecov -ibam kwazulu-natal-mapped.bam -bg | awk '$4 < 12' > low_cov.bed
+$ bedtools genomecov -ibam kwazulu-natal-mapped.bam -bg | awk '$4 < 12' > low_cov.bed
 ```
 
 - ``-ibam FILE``: input file
@@ -89,7 +87,7 @@ Now we can mask the low coverage regions using this `.bed` format file. Here, `-
 
 ```bash
 # the fasta below is the one you made using bcftools and consensus above
-bedtools maskfasta -fi kwazulu-natal.fasta -bed low_cov.bed -fo kwazulu-natal-mask.fasta
+$ bedtools maskfasta -fi kwazulu-natal.fasta -bed low_cov.bed -fo kwazulu-natal-mask.fasta
 ```
 - ``-fi FILE``: input file
 - ``-bed``: bed file to mask with
@@ -107,11 +105,13 @@ The steps below should be done in the `R` console.
 
 ```R
 # Put in some fancy bioinformatics software
-install.packages("ape")
+> install.packages("ape")
+
 # Ooh don't forget to load the library
-library("ape")
+> library("ape")
+
 # an example of what it can do for us.
-getAnnotationsGenBank(c("MN908947.3"))
+> getAnnotationsGenBank(c("MN908947.3"))
 ```
 
 The output of the above command is a list of the annotations of the ancestral SARS-CoV-2 genome. Most often, annotated genomes are given in Genbank format, usually suffixed with `.gbk` file, which is in *genbank* format. This file lists all the annotated reading frames (as well as tRNA, rRNA, exons, introns, etc. if this were a more complicated genome). Click on this link [here](https://www.ncbi.nlm.nih.gov/nuccore/MN908947.3 "Ancestral Genbank") to see what this format looks like. Note that it is considerably more complicated than any other format we have seen so far (`.sam`, `.fastq`, `.fasta`, `.vcf`, `.sh`, and the associated `.fai`, `.bam`, `.bai`, `.bcf`)
@@ -127,7 +127,7 @@ Now we can use this to align all nucleotide sequences from the other SARS-CoV-2 
 # We need to put our sequences at the bottom of the list.
 # note the first fasta below is not the original reference, but the
 # (now unzipped) file you downloded above
-cat hcov-19_2022_04_07_22.fasta montana-mask.fasta kwazulu-mask.fasta > all_your_sequences_belong_to_us.fasta
+> cat hcov-19_2022_04_07_22.fasta montana-mask.fasta kwazulu-mask.fasta > all_your_sequences_belong_to_us.fasta
 ```
 
 Now we can do an alignment. To do this we will use `mafft` [see here](https://mafft.cbrc.jp/alignment/software/ "mafft homepage"). It is installable using `mamba`.
@@ -142,7 +142,7 @@ We will use `mafft` to perform our alignment on all the sequences in the downloa
 This syntax is very simple (change the filenames accordingly):
 
 ```bash
-mafft --auto --reorder all_genomes.fasta > all_genomes.aln
+$ mafft --auto --reorder all_genomes.fasta > all_genomes.aln
 ```
 
 The suffix here is `.aln` ("alignment"). Some people may have different opinions on the proper name for an alignment file.
@@ -161,7 +161,7 @@ The arguments are (for now):
 
 ```bash
 # note that there is no need to pipe this into a file.
-iqtree -s my_genomes.aln -m MF
+$ iqtree -s my_genomes.aln -m MF
 ```
 - `-m MF` use modelfinder to find the "best model" of evolution
 
@@ -170,7 +170,7 @@ iqtree -s my_genomes.aln -m MF
 
 ```bash
 # grep these words, change the my.log so it's correct
-grep "Best-fit model" my.log
+$ grep "Best-fit model" my.log
 ```
 
 You should see a single line stating the best model. What is it? Go [here](http://www.iqtree.org/doc/Substitution-Models "yikes so many models") to see what model this is. Make sure you investigate *all* the parameter specifications (the +I, etc.)
@@ -185,7 +185,7 @@ We will use `R` to visualise our tree. Return to the `R` console and make sure y
 
 ```R
 # simple tree time
-my.tree <- read.tree(text='(A,B,(C,D)E)F;')
+> my.tree <- read.tree(text='(A,B,(C,D)E)F;')
 ```
 
 Extra taxa can be added simply by using more commas or parentheses, for example:
@@ -196,9 +196,10 @@ Or perhaps you've recently sequenced a tiny dragon that you found in your back g
 
 ```R
 # new tree
-my.tree <- read.tree(text='(tiny.dragon,A,((X,B),Y),(C,D)E)F;')
+> my.tree <- read.tree(text='(tiny.dragon,A,((X,B),Y),(C,D)E)F;')
+
 # plot differently
-plot.phylo(my.tree, type="radial")
+> plot.phylo(my.tree, type="radial")
 ```
 
 Next, load your tree using the `read.tree` command. Again, the tree is in the `treefile`.
