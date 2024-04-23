@@ -355,7 +355,7 @@ $ samtools view -h -b -q 20 my_mapped.bam > my_mapped.q20.bam
 
 ### Calling variants
 
-Tools we are going to use in this section and how to intall them if you not have done it yet.
+Tools we are going to use in this section and how to install them if you not have done it yet.
 
 ```bash
 $ mamba install bamtools
@@ -368,7 +368,7 @@ $ mamba install bcftools
 #### Preprocessing
 
 We first need to make an index of our reference genome as this is required by the SNP caller.
-Given an assembly file in fasta-format, e.g. ``assembly.fasta`` which is located in the directory, use |samtools| to do this:
+Given an assembly file in fasta-format, e.g. ``assembly.fasta`` which is located in the directory, use `samtools` to do this:
 
 ```bash
 $ samtools faidx reference.fasta
@@ -506,7 +506,7 @@ Here, we only include variants that have quality > 150.
 
 ```bash
 # use rtg vcffilter
-# Change yoiur file name accordingly
+# Change your file name accordingly
 # although the one below is *slightly* informative :)
 # note we leave off the extension of the output, this is made automatically
 # it also makes a tab index for us, how nice (.tbi)

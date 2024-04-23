@@ -205,13 +205,17 @@ Or perhaps you've recently sequenced a tiny dragon that you found in your back g
 Next, load your tree using the `read.tree` command. Again, the tree is in the `treefile`.
 
 ```R
-library(ape)
+# load the library
+> library(ape)
+
 # get the tree
-my.tree <- read.tree(file="tree.i.made.with.iqtree.treefile")
+> my.tree <- read.tree(file="tree.i.made.with.iqtree.treefile")
+
 # do we have it?
-summary(my.tree)
+> summary(my.tree)
+
 # let's take a look
-plot.phylo(my.tree)
+> plot.phylo(my.tree)
 ```
 
 Finally, take a look at the `ape` `plot.phylo` function. How can you change the appearance of the tree? Can you make a prettier tree?
