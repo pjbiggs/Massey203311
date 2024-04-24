@@ -14,7 +14,7 @@ After studying this section of the tutorial you should be able to:
 
 ### Reminder of the steps you have completed
 <img src="graphics/flowchart-by-day.png" title="Makin' progress" width="700"/><br>
-**Today is the last day of this section**.
+**Today is the last day of this second Module for the course**.
 
 ### Introduction
 
@@ -99,7 +99,7 @@ Now we can begin our phylogenetic analysis. We will perform for the whole genome
 
 ### Finding annotations
 
-If we wanted to find a specific gene (or region), we must first figure out where in the genome that gene is. While there are several ways to do this (e.g. you could freshly annotate your new genome), we will rely on the data that already exists in [Genbank](https://www.ncbi.nlm.nih.gov/genbank/ "The real deal"), which has been carefully vetted.
+If we wanted to find a specific gene (or region), we must first figure out where in the genome that gene is. While there are several ways to do this (e.g. you could freshly annotate your new genome), we will rely on the data that already exists in [GenBank](https://www.ncbi.nlm.nih.gov/genbank/ "The real deal"), which has been carefully vetted.
 
 The steps below should be done in the `R` console.
 
@@ -114,9 +114,9 @@ The steps below should be done in the `R` console.
 > getAnnotationsGenBank(c("MN908947.3"))
 ```
 
-The output of the above command is a list of the annotations of the ancestral SARS-CoV-2 genome. Most often, annotated genomes are given in Genbank format, usually suffixed with `.gbk` file, which is in *genbank* format. This file lists all the annotated reading frames (as well as tRNA, rRNA, exons, introns, etc. if this were a more complicated genome). Click on this link [here](https://www.ncbi.nlm.nih.gov/nuccore/MN908947.3 "Ancestral Genbank") to see what this format looks like. Note that it is considerably more complicated than any other format we have seen so far (`.sam`, `.fastq`, `.fasta`, `.vcf`, `.sh`, and the associated `.fai`, `.bam`, `.bai`, `.bcf`)
+The output of the above command is a list of the annotations of the ancestral SARS-CoV-2 genome. Most often, annotated genomes are given in Genbank format, usually suffixed with `.gbk` as a file extension, which is in *genbank* format. This file lists all the annotated reading frames (as well as tRNA, rRNA, exons, introns, etc. if this were a more complicated genome). Click on this link [here](https://www.ncbi.nlm.nih.gov/nuccore/MN908947.3 "Ancestral Genbank") to see what this format looks like. Note that it is considerably more complicated than any other format we have seen so far (`.sam`, `.fastq`, `.fasta`, `.vcf`, `.sh`, and the associated `.fai`, `.bam`, `.bai`, `.bcf`)
 
-While we would usually use `blast` to find matches to your sequence in the NCBI database by requesting a `remote` search, the remote `blast` service is not currently available. I have instead downloaded a number of genomes for you to use. Note that the primary sequence repository for SARS-CoV-2 sequences, [GISAID](https://www.gisaid.org/ "GISAID homepage"). Please download them from [here](data/hcov-19_2022_04_07_22.fasta.gz) (right click, `wget` copied link, and `gunzip`). This file is a *multi-fasta* (i.e. it has multiple fasta sequences in it).<br><br>
+While we would usually use `blast` to find matches to your sequence in the NCBI database by requesting a `remote` search, the remote `blast` service is not currently available. I have instead downloaded a number of genomes for you to use. Note that the primary sequence repository for SARS-CoV-2 sequences is called [GISAID](https://www.gisaid.org/ "GISAID homepage"). Please download them from [here](data/hcov-19_2022_04_07_22.fasta.gz) (right click, `wget` copied link, and `gunzip`). This file is a *multi-fasta* (i.e. it has multiple fasta sequences in it).<br><br>
 
 <img src="graphics/gisaid.png" title="Where all data goes" width="300"/><br>
 **More than 10 million sequences.**<br><br>
@@ -126,7 +126,7 @@ Now we can use this to align all nucleotide sequences from the other SARS-CoV-2 
 ```bash
 # We need to put our sequences at the bottom of the list.
 # note the first fasta below is not the original reference, but the
-# (now unzipped) file you downloded above
+# (now unzipped) file you downloaded above
 > cat hcov-19_2022_04_07_22.fasta montana-mask.fasta kwazulu-mask.fasta > all_your_sequences_belong_to_us.fasta
 ```
 
