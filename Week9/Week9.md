@@ -610,7 +610,7 @@ i) There is not much to say here.  Plotting the data as it is is completely fine
 
 ## Assessment
 
-To reiterate, there is no direct assessment today. What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course. This will take place between Thursday 25-May-2023 and Friday 26-May-2023 online.
+To reiterate, there is no direct assessment today. What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course. This will take place between Thursday 23-May-2024 and Friday 24-May-2024 online.
 
 The mastery test will test the contents of weeks 8 to 10, more information will follow next week.
 
@@ -619,7 +619,7 @@ The mastery test will test the contents of weeks 8 to 10, more information will 
 
 ## Contact
 
-I have two offices on the Manawatu campus (as I work for both SNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
+I have two offices on the Manawatu campus (as I work for both SFTNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
 
 Prof Patrick Biggs,
 

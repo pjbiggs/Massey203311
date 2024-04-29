@@ -638,42 +638,49 @@ To illustrate the path from fasta sequence file to aligned sequence to a sequenc
 ### import the sequences to work with them
 > seqs16S <- readDNAStringSet("sub100_nochimSeqs.fa")
 
+### make a random subsmaple of say 100 sequences
+> fasta.sample(infile = "nochimSeqs232.fa", nseq = 100, file.out = "sub100_nochimSeqs.fa")
+> seqs16S <- readDNAStringSet("sub100_nochimSeqs.fa")
+
 ### run the sequence alignment and view in the console
-> my16SAlignment <- msa(seqs16S)
-use default substitution matrix
+> my16SAlignment <- msa(seqs16S, "ClustalOmega")
+using Gonnet
 
 > my16SAlignment
-CLUSTAL 2.1  
+ClustalOmega 1.2.0
 
 Call:
-   msa(seqs16S)
+   msa(seqs16S, "ClustalOmega")
 
-MsaDNAMultipleAlignment with 100 rows and 258 columns
-      aln                                                                                          names
-  [1] GACAGAGGATGCAAGCGTTATCCGGAATGATTGGGCGTAAAGCGT...CGAC-ACTGACACTGAG-AGACGAAAGCTAGGGGAGCGAATGGG sq222;size=5;
-  [2] GACAGAGGATGCAAGCGTTATCCGGAATGATTGGGCGTAAAGCGT...CGAC-ACTGACACTGAG-AGACGAAAGCTAGGGGAGCGAATGGG sq189;size=18;
+MsaDNAMultipleAlignment with 100 rows and 255 columns
+      aln                                                                                              names
+  [1] TACGGAGGATCCGAGCGTTATCCGGATTTATTGGGTTTAAAGGGAGC...GACTGCAA-CTGACACTGATGCTCGAAAGTGTGGGTATCAAACAGG sq5;size=5880;
+  [2] TACGGAGGATCCGAGCGTTATCCGGATTTATTGGGTTTAAAGGGAGC...AGCTGCAA-CTGACATTGAGGCTCGAAAGTGTGGGTATCAAACAGG sq80;size=216;
 ....
 
-[100] GACGGGGGGGGCAAGTGTTCTTCGGAATGACTGGGCGTAAAGGGC...CCCT-ACCGACGCTGGG-GTGCGAAAGCATGGGGAGCGAACAGG sq107;size=117;
-  Con TACGTAGGGGGCAAGCGTTATCCGGATTTACTGGGTGTAAAGGGA...?GTA-ACTGACGCTGAG-GCTCGAAAGCGTGGGGAGCAAACAGG Consensus
+ [99] TACGTAGGTGGCAAGCGTTGTCCGGATTTATTGGGCGTAAAGCGCGC...GTCTGTAA-CTGACGCTGAGGCGCGAAAGCGTGGGGAGCAAACAGG sq99;size=150;
+[100] TACGTAGGTGGCAAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGC...GTCTGTAA-CTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG sq89;size=181;
+  Con TACGTAGGGGGCAAGCGTTATCCGGATTTACTGGGTGTAAAGGGAGC...GAC?GTAA-CTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG Consensus
 
 > print(my16SAlignment, show="complete") # view the results
 
-MsaDNAMultipleAlignment with 100 rows and 258 columns
-      aln (1..92)                                                                                  names
-  [1] GACAGAGGATGCAAGCGTTATCCGGAATGATTGGGCGTAAAGCGT-CTGTAGGTGGCTTTTTAAGTCCGCCGTCAAAT-CCCAGGGCTCAAC sq222;size=5;
-  [2] GACAGAGGATGCAAGCGTTATCCGGAATGATTGGGCGTAAAGCGT-CTGTAGGTGGCTTTTTAAGTTCGCCGTCAAAT-CCCAGGGCTCAAC sq189;size=18;
+MsaDNAMultipleAlignment with 100 rows and 255 columns
+      aln (1..96)                                                                                      names
+  [1] TACGGAGGATCCGAGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGTGGATT-GTTAAGTCAGTTGTGAAAGTTTGCGGCTCAACCGTAA sq5;size=5880;
+  [2] TACGGAGGATCCGAGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGATGGATG-TTTAAGTCAGTTGTGAAAGTTTGCGGCTCAACCGTAA sq80;size=216;
 
 .....
 
- [99] AACACCGGTGGCGAAGGCGGGTCTCTGGGCCGTT-ACTGACGCTGAG-GAGCGAAAGCGTGGGGAGCGAACAGG sq58;size=325;
-[100] AACGCCAAAAGCGAAGGCAGCTCTCTGGGTCCCT-ACCGACGCTGGG-GTGCGAAAGCATGGGGAGCGAACAGG sq107;size=117;
-  Con AACACCAGTGGCGAAGGCGGCTT?CTGGAC?GTA-ACTGACGCTGAG-GCTCGAAAGCGTGGGGAGCAAACAGG Consensus
+[99] GCGAAGGCGACTCTCTGGTCTGTAA-CTGACGCTGAGGCGCGAAAGCGTGGGGAGCAAACAGG sq99;size=150;
+[100] GCGAAGGCGGCTCTCTGGTCTGTAA-CTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG sq89;size=181;
+ Con GCGAAGGCGGCTT?CTGGAC?GTAA-CTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG Consensus
 
 ### print out the alignment
 > msaPrettyPrint(my16SAlignment, output="pdf", showNames="left", file = "ourSet.pdf",
                 showLogo="top", askForOverwrite=FALSE, verbose=FALSE)
 ```
+
+The `msa` command can call one of three sequence alignment methods to do its work.  For some reason, the default method -- called _`Clustalw`_ -- is not working for us, so we can use one of the two alternatives.  These are called  _`ClustalOmega`_ and _`Muscle`_, and we are using _`ClustalOmega`_.
 
 The `msaPrettyPrint()` command has lots of options including showing the sequence names and printing out certain regions only.  I would **strongly suggest giving `?msaPrettyPrint` a look and to understand what is going on**.
 
@@ -697,7 +704,7 @@ We can also use the `seqLogo` package to generate a sequence logo only.  This pa
 > p <- makePWM(posWeightMat2)
 
 ## print out the logo with a smaller font size than usual
-> seqLogo(p, xfontsize = 10)
+> seqLogo(p, xfontsize = 8)
 ```
 
 You could then export this image to save it through the Export command in the Plots view in the bottom right window.
@@ -781,7 +788,7 @@ iii) Choosing the ~100 - 150bp region is up to you.  Once you have a region, I w
 
 ## Assessment
 
-To reiterate, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course.  This will take place between Thursday 25-May-2023 and Friday 26-May-2023 online.
+To reiterate, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course.  This will take place between Thursday 23-May-2024 and Friday 24-May-2024 online.
 
 The mastery test will test the contents of weeks 8 to 10, more information will follow soon.
 
@@ -789,7 +796,7 @@ The mastery test will test the contents of weeks 8 to 10, more information will 
 
 ## Contact
 
-I have two offices on the Manawatu campus (as I work for both SNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
+I have two offices on the Manawatu campus (as I work for both SFTNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
 
 Prof Patrick Biggs,
 

@@ -1,7 +1,5 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
 # Introduction to Visualization
 **Professor Patrick Biggs**
 

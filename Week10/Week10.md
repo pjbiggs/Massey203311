@@ -777,13 +777,13 @@ i) There is no option to print to a filename from within the `plot_bar()` comman
 
 ## Assessment
 
-To reiterate this week's lab is only assessed via the Portfolio analysis as described above.  **Any code shown here that has not been at least briefly described in the Week 10 lecture will not the subject of assessment in the Mastery test for this Module that is taking place between Thursday 25-May-2023 and Friday 26-May-2023 online.**
+To reiterate this week's lab is only assessed via the Portfolio analysis as described above.  **Any code shown here that has not been at least briefly described in the Week 10 lecture will not the subject of assessment in the Mastery test for this Module that is taking place between Thursday 23-May-2024 and Friday 24-May-2024 online..**
 
 
 
 ## Contact
 
-I have two offices on the Manawatu campus (as I work for both SNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
+I have two offices on the Manawatu campus (as I work for both SFTNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
 
 Prof Patrick Biggs,
 
