@@ -1,7 +1,5 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
 # Barcodes and diversity - Fastq read analysis for 16S rRNA metabarcoding using the R package DADA2
 
 **Professor Patrick Biggs**
@@ -87,30 +85,26 @@ Don\'t forget to press the **\[Enter\]** key: commands are not sent to the `R` c
 
 #### General
 
-We will be working within web browsers, and Firefox and Chrome are installed on the machines, or Safari if you are an Apple user. We will then login to RStudio Cloud using your personalised account. If you would like to use your own laptop in the labs on either campus, please feel free to do so.
+We will be working within web browsers, and Firefox and Chrome are installed on the machines, or Safari if you are an Apple user. We will then login to Massey RStudio using your personalised account.  If you would like to use your own laptop in the labs please feel free to do so.
 
-#### Manawatu (iMacs)
+#### Manawatu ScC5.10 (iMacs)
 
-The machines we are using for the course are Apple iMacs. Please use your normal Massey username and password to login to these machines. Please remember to ignore (i.e. cancel) the dialogue box about the network when you log in.
-
-#### Albany (PCs)
-
-The machines are Windows PC's so logging into them should be the same as any other Massey Windows PC.
+The machines we can use for the course are Apple iMacs. Please follow the information in "Access_to_RStudio_2024.pdf" to log into these machines through the use of the VMware Horizon application.  Please use your normal Massey username and password to login to the Windows 10 machines.
 
 #### outside Massey
 
-Most likely this is your own machine, so this should not be an issue.
+Most likely this is your own machine, so this should not be an issue, but please follow the general instructions in "Access_to_RStudio_2024.pdf" about the use of your own machine and these resources.
 
 
 ### Our work today
 
-Just as we did for the Bootcamp module, you have been provided with a link to create a new RStudio workspace in your account.  Please go ahead and do this if you have not already done so.  We are using different packages in `R` for this Module - some of which have large numbers of dependencies (I have loaded them for you already) - so I strongly suggest starting this new Module with this new workspace.  Also, the resources for this Module will only be available via this project (I will be posting the files on Stream as well as a backup).
+We will perform our work inside the _`Module3`_ folder in your Massey RStudio account.  We are using different packages in `R` for this Module, some of which have large numbers of dependencies (I - well my ITS colleagues Patrick Rynhart & Tim O'Dea) have loaded them for you already).  The resources for this Module will only be available via this Module 3 folder (I will be posting the files on Stream as well as a backup).
 
 
 
 ## Theoretical overview
 
-The DADA2 paper[^1] by Callahan et al. has an associated GitHub page[^2]  and a great tutorial page.  We are going to use a set of 20 samples that are used in the tutorial, and are provided for you within the _`MiSeq_SOP`_ folder.  There are other files in there, but more on those later.  So, most of the below comes from the tutorial and the DADA2 vignette inside `R` and is acknowledged as such.
+The DADA2 paper[^1] by Callahan et al. has an associated GitHub page[^2]  and a great tutorial page.  We are going to use a set of 20 samples that are used in the tutorial, and are provided for you within the _`MiSeq_SOP`_ folder with the _`Module3/Metagenomics`_ folder.  There are other files in there, but more on those later.  So, most of the below comes from the tutorial and the DADA2 vignette inside `R` and is acknowledged as such.
 
 The investigation of environmental microbial communities and microbiomes has been driven in significant part by the recent widespread adoption of amplicon sequencing. In amplicon sequencing a particular genetic locus is amplified from DNA extracted from the community of interest, and then sequenced on a next-generation sequencing platform. This technique removes the need to culture microbes in order to detect their presence, and cost-effectively provides a deep census of a microbial community.
 
@@ -127,7 +121,7 @@ The starting point for the DADA2 pipeline is a set of demultiplexed Fastq files 
 - Remove chimeras: `isBimeraDenovo()` or `removeBimeraDenovo()`
 - Assign taxonomy: `assignTaxonomy()`
 
-The output of the DADA2 pipeline is a sample-by-sequence matrix – a so-called **sequence table** – with each entry corresponding to the number of times that inferred sample sequence was observed in that sample.  This table is analogous to a common OTU table, except at higher resolution (exact sample sequences rather than 97% OTUs).  We also assign taxonomies to the output sequences using a small reference database.  In this practical we are working with a small set of Fastq reads from the 16S rRNA gene – one of the main taxonomic identifiers in prokaryotes.
+The output of the DADA2 pipeline is a sample-by-sequence matrix – a so-called **sequence table** – with each entry corresponding to the number of times that inferred sample sequence was observed in that sample.  This table is analogous to a common OTU table, except at a much higher resolution (exact sample sequences rather than 97% OTUs).  We also assign taxonomies to the output sequences using a small reference database.  In this practical we are working with a small set of Fastq reads from the 16S rRNA gene – one of the main taxonomic identifiers in prokaryotes.
 
 
 ### What we are going to do today?
@@ -140,9 +134,9 @@ The output of the DADA2 pipeline is a sample-by-sequence matrix – a so-called 
 
 We will check we have all we need to do the analysis first.  The commands below have been checked and should work fine.  The below screenshot shows the folder structure within `/cloud/project/` for the new Module.
 
-1. Go to the _`MiSeq_SOP`_ folder in the `/cloud/project/` project within the "weeks8to10" project within the "MicrobialDiversity_2023" workspace and check that there are files there.
+1. Go to the _`MiSeq_SOP`_ folder in the _`203311/Module3/Metagenomics/`_ folder and check that there are files there.
 
-<img src="graphics/window4_2023.PNG" width="600"/>
+<img src="graphics/window4_2024.PNG" width="600"/>
 
 2. Check we have all our packages we need for the work, so typing into the console as you have done before:
 
@@ -150,24 +144,24 @@ We will check we have all we need to do the analysis first.  The commands below 
 ### check on packages being there and their versions ###
 > library(dada2)
 > packageVersion("dada2")
-[1] ‘1.28.0’
+[1] ‘1.26.0’
 
 > library(ShortRead)
 > packageVersion("ShortRead")
-[1] ‘1.58.0’
+[1] ‘1.56.0’
 
 > library(ggplot2)
 > packageVersion("ggplot2")
-[1] ‘3.4.2’
+[1] ‘3.4.4’
 ```
 
 The next thing we want to do is to set a working path and then define a path variable to check it is all OK for the work we are going to do today.
 
 ```R
 ### is our path OK?
-> path <- ("/cloud/project/MiSeq_SOP/")
+> path <- ("~/203311/Module3/Metagenomics/MiSeq_SOP/")
 > path
-[1] "/cloud/project/MiSeq_SOP/"
+[1] "~/203311/Module3/Metagenomics/MiSeq_SOP/"
 
 > fns <- list.files(path)
 > fns
@@ -210,13 +204,18 @@ First we read in the names of the Fastq files, and perform some string manipulat
 > fnFs <- file.path(path, fnFs)
 > fnRs <- file.path(path, fnRs)
 > fnFs
- [1] "/cloud/project/MiSeq_SOP//F3D0_S188_L001_R1_001.fastq"  
- [2] "/cloud/project/MiSeq_SOP//F3D1_S189_L001_R1_001.fastq"  
- [3] "/cloud/project/MiSeq_SOP//F3D141_S207_L001_R1_001.fastq"
+[1] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D0_S188_L001_R1_001.fastq"  
+[2] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D1_S189_L001_R1_001.fastq"  
+[3] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D141_S207_L001_R1_001.fastq"
+
+...
+
 > fnRs
- [1] "/cloud/project/MiSeq_SOP//F3D0_S188_L001_R2_001.fastq"  
- [2] "/cloud/project/MiSeq_SOP//F3D1_S189_L001_R2_001.fastq"  
- [3] "/cloud/project/MiSeq_SOP//F3D141_S207_L001_R2_001.fastq"
+[1] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D0_S188_L001_R2_001.fastq"  
+[2] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D1_S189_L001_R2_001.fastq"  
+[3] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D141_S207_L001_R2_001.fastq"
+
+...
 ```
 
 >**Question 2:**
@@ -237,6 +236,11 @@ It is important to look at your data. We start by visualizing the quality profil
 > plotQualityProfile(fnFs[[12]])
 > plotQualityProfile(fnRs[[1]])
 > plotQualityProfile(fnRs[[12]])
+
+# Note: You might see a warning the first time you
+#       run this code.  it indicates that there is a Warning
+#       but it's not worth worrying about right now.
+
 ```
 
 Here we have randomly picked sample 1 and sample 12.  We are plotting the Phred quality scores for the Fastq reads for this sample (y-axis) against the sequencing cycle (x-axis).  Clearly, we want our data to be as high quality as possible.  The green line shows the median quality score at each position, and the orange lines shows the quartiles of the quality score distribution. The red line shows the scaled proportion of reads that extend to at least that position (this is more useful for other sequencing technologies, as Illumina reads are typically all the same length, hence the flat red line).  Typical example plots look like the overleaf for the forward and reverse reads respectively for one of the samples:
@@ -266,7 +270,7 @@ As in the DADA2 tutorial, we will use standard filtering parameters: _`maxN=0`_ 
 > filt_path <- file.path(path, "filtered")
 > if(!file_test("-d", filt_path)) dir.create(filt_path)
 > filt_path
-[1] "/cloud/project/MiSeq_SOP//filtered"
+[1] "~/203311/Module3/Metagenomics/MiSeq_SOP//filtered"
 
 ### make list of filtered names for later
 > filtFs <- file.path(filt_path, paste0(sample.names, "_F_filt.fastq.gz"))
@@ -279,56 +283,29 @@ As in the DADA2 tutorial, we will use standard filtering parameters: _`maxN=0`_ 
 > ____________________
 > </td></tr></table>
 
-Now to perform the actual filtering and trimming on our samples and place the results in an object called **`trim_data`**.  Due to our RStudio Cloud setup this year, we have to run the code in a slightly different way.  This is due to resources we are allowed in the cloud environment.  These lines of code might take a couple of minutes or so to run.
+Now to perform the actual filtering and trimming on our samples and place the results in an object called **`out`**.  These lines of code might take a couple of minutes or so to run.
 
 ```R
 ### Perform the trimming and filtering
-### Adapted for 2022
-### You will not be tested on the adapted code in this code box to make the process work
 
 ### collect the names
 > names(filtFs) <- sample.names
 > names(filtRs) <- sample.names
 
-### make a list of the arguments
-> trim_arguments <- list(truncLen=c(240,160),
-                    maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
-                    compress=TRUE)
-
-### run the filterAndTrim function on each set of files, returning a list
-> out <- mapply(filterAndTrim, fnFs, filtFs, fnRs, filtRs,
-         MoreArgs = trim_arguments, SIMPLIFY = FALSE)
-
-### work on our object out to tidy it up for later analyses
-> trim_data <- do.call(rbind.data.frame, out)
-> rownames(trim_data) <- sample.names
-> head(trim_data)
-       reads.in reads.out
+### Perform the trimming and filtering
+> out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(240,160),
+         maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
+         compress=TRUE, multithread=TRUE)
+> head(out)
 F3D0       7793      7113
 F3D1       5869      5299
 F3D141     5958      5463
 F3D142     3183      2914
 F3D143     3178      2941
 F3D144     4827      4312
-
-### You would then see the 6 lines like those in red, indicating
-### what is happening to each sample under this process as it is running
 ```
 
-Ideally the code to run this same command would be the following, but please **do not run this as it will not work**.  In fact, it will crash your RStudio Cloud session.  I have included it as it is important that you see the code as it should be run.
-
-```R
-### Perform the trimming and filtering
-> out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(240,160),
-         maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
-         compress=TRUE, multithread=TRUE)
-> head(out)
-
-### Please do not run this code, it is for completeness and so you can see the code as it should be run
-### You could be tested on the code in this box
-```
-
-> If you are interested (**which I very strongly suggest you are by the way for the future**), have a look at the arguments for the `filterAndTrim()` function as it is doing a huge amount of work for you, including compressing the resulting reads, i.e. please do not ignore the contents of the code box directly above.
+> If you are interested (**which I very strongly suggest you are by the way for the future**), have a look at the arguments for the `filterAndTrim()` function as it is doing a huge amount of work for you, including compressing the resulting reads.
 
 
 
@@ -556,7 +533,7 @@ We can do a quick check of how our samples have performed over the process to ge
 ```R
 ### Remove chimeric sequences with some complicated code
 > getN <- function(x) sum(getUniques(x)) # our first function
-> track <- cbind(trim_data, sapply(dadaFs, getN), sapply(dadaRs, getN),
+> track <- cbind(out, sapply(dadaFs, getN), sapply(dadaRs, getN),
            sapply(mergers, getN), rowSums(seqtab.nochim))
 
 > colnames(track) <- c("input", "filtered", "denoisedF", "denoisedR", "merged",
@@ -584,9 +561,10 @@ The DADA2 package provides a native implementation of the RDP’s naive Bayesian
 
 ```R
 ### use a reference data set to assign taxonomy to the reads
-> training <- ("/cloud/project/silva_nr_v132_train_set.fa.gz")
+> setwd("~/203311/Module3/Metagenomics/")
+> training <- ("silva_nr_v132_train_set.fa.gz")
 > training
-[1] "/cloud/project/silva_nr_v132_train_set.fa.gz"
+[1] "silva_nr_v132_train_set.fa.gz"
 
 > taxa <- assignTaxonomy(seqtab.nochim, training, multithread=TRUE)
 
