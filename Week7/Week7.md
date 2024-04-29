@@ -116,10 +116,22 @@ The steps below should be done in the `R` console.
 
 The output of the above command is a list of the annotations of the ancestral SARS-CoV-2 genome. Most often, annotated genomes are given in Genbank format, usually suffixed with `.gbk` as a file extension, which is in *genbank* format. This file lists all the annotated reading frames (as well as tRNA, rRNA, exons, introns, etc. if this were a more complicated genome). Click on this link [here](https://www.ncbi.nlm.nih.gov/nuccore/MN908947.3 "Ancestral Genbank") to see what this format looks like. Note that it is considerably more complicated than any other format we have seen so far (`.sam`, `.fastq`, `.fasta`, `.vcf`, `.sh`, and the associated `.fai`, `.bam`, `.bai`, `.bcf`)
 
-While we would usually use `blast` to find matches to your sequence in the NCBI database by requesting a `remote` search, the remote `blast` service is not currently available. I have instead downloaded a number of genomes for you to use. Note that the primary sequence repository for SARS-CoV-2 sequences is called [GISAID](https://www.gisaid.org/ "GISAID homepage"). Please download them from [here](data/hcov-19_2022_04_07_22.fasta.gz) (right click, `wget` copied link, and `gunzip`). This file is a *multi-fasta* (i.e. it has multiple fasta sequences in it).<br><br>
+While we would usually use `blast` to find matches to your sequence in the NCBI database by requesting a `remote` search, the remote `blast` service is not currently available. I have instead downloaded a number of genomes for you to use. Note that the primary sequence repository for SARS-CoV-2 sequences is called [GISAID](https://www.gisaid.org/ "GISAID homepage").  
 
 <img src="graphics/gisaid.png" title="Where all data goes" width="300"/><br>
 **More than 10 million sequences.**<br><br>
+
+Please download them from [here](data/hcov-19_2022_04_07_22.fasta.gz) (right click, `wget` copied link, and `gunzip`). This file is a *multi-fasta* (i.e. it has multiple fasta sequences in it).<br><br>
+
+Let's have a quck look with `seqkit stats` on our new file.
+
+```bash
+$ seqkits stats hcov-19_2022_04_07_22.fasta
+```
+
+#### QUESTION
+
+How many sequences are in this new file, and are they all the same length?
 
 Now we can use this to align all nucleotide sequences from the other SARS-CoV-2 viruses. First, we must add our own sequences to this file. We will use `cat` to do this.
 
@@ -130,11 +142,21 @@ Now we can use this to align all nucleotide sequences from the other SARS-CoV-2 
 > cat hcov-19_2022_04_07_22.fasta montana-mask.fasta kwazulu-mask.fasta > all_your_sequences_belong_to_us.fasta
 ```
 
+it might not be a bad idea to check that we have the numbe of sequences we expect now, use `seqkit stats` to check that the number of sequences has increased in your new file.
+
 Now we can do an alignment. To do this we will use `mafft` [see here](https://mafft.cbrc.jp/alignment/software/ "mafft homepage"). It is installable using `mamba`.
+
+```bash
+# if you have not done this previously from lab 5
+$ mamba install mafft
+```
 
 Let's also install `iqtree`, a phylogenetic tree inference tool, that uses
 maximum-likelihood (ML) optimality criterion. This program can also be installed using`mamba`.
 
+```bash
+$ mamba install -c bioconda iqtree
+```
 
 ### Performing an alignment
 
@@ -190,7 +212,7 @@ We will use `R` to visualise our tree. Return to the `R` console and make sure y
 
 Extra taxa can be added simply by using more commas or parentheses, for example:
 
-`my.tree <- read.tree(text='(A,((X,B),Y),(C,D)E)F;')`
+`> my.tree <- read.tree(text='(A,((X,B),Y),(C,D)E)F;')`
 
 Or perhaps you've recently sequenced a tiny dragon that you found in your back garden. Let's add that:
 
