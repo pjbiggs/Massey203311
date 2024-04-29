@@ -680,7 +680,7 @@ MsaDNAMultipleAlignment with 100 rows and 255 columns
                 showLogo="top", askForOverwrite=FALSE, verbose=FALSE)
 ```
 
-The `msa` command can call one of three sequence alignment methods to do its work.  For some reason, the default method -- called _`Clustalw`_ -- is not working for us, so we can use one of the two alternatives.  These are called  _`ClustalOmega`_ and _`Muscle`_, and we are using _`ClustalOmega`_.
+The `msa` command can call one of three sequence alignment methods to do its work.  For some reason, the default method -- called _`ClustalW`_ -- is not working for us, so we can use one of the two alternatives.  These are called  _`ClustalOmega`_ and _`Muscle`_, and we are using _`ClustalOmega`_.
 
 The `msaPrettyPrint()` command has lots of options including showing the sequence names and printing out certain regions only.  I would **strongly suggest giving `?msaPrettyPrint` a look and to understand what is going on**.
 
