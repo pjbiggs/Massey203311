@@ -1,7 +1,5 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
 # Introduction to Metagenomic analysis
 
 **Professor Patrick Biggs**
@@ -93,25 +91,40 @@ Most likely this is your own machine, so this should not be an issue.
 
 ### Our work today
 
-We will continue to use our RStudio cloud environment as a source and location for the data we are working with, but we will also be using webtools, and the Microsoft product Excel, as well as `R`.
+We will continue to use our Massey RStudio  environment as a source and location for the data we are working with, but we will also be using command line tools, and the Microsoft product Excel, as well as `R`.
 
 
 ### What we are going to do today?
 
+The approach we are taking this year to cover this material is slightly different to what has been done in previous years.  There are two reasons for this:
+1. For the first time in 2024, we are using local Massey computing servers for running this course.  This is the server called `tur-rstudio2` that you have been using for the course so far.  We have also set up a computing server called `tur-kaiju1` for metagenomic analysis that you will have access to.
+2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and it takes a very long time (days or weeks) to run jobs against the supplied databases.  We cannot use this in the lab practicals anymore.
+
+This means we will be adapting the process so the same procedure can be done, just on a smaller scale.
+
+To set the scene, let's go through how things were in 2023 and before:
+
+#### In previous years
+
 We are primarily going to be using webtools, and the Microsoft product Excel to explore some reads from an experiment, but under different analysis conditions, varying both the analysis methods and the database we are comparing our reads to.
 - We will upload a pair of reads to the Kaiju website for analysis against a variety of databases.
 - We will download these data, and open them in Excel to explore them in a comparative way.  
-- We will then look at the results in a completely different way using Krona
+- We will then look at the results in a completely different way using Krona.
 - Finally, we will be returning to `R` for the work that will lead to the Portfolio analysis of today's work.
+
+#### In 2024
+
+The process is the nearly the same, except that we will use a new Massey server (`tur-kaiju1`) set up to run the software behind the Kaiju webserver, rather than the actual webserver.  After that, we copy the data back to our usual environment, and continue as described above.
+
 
 The commands below have been checked and should work fine.
 
 
 ---
 
-## Taxonomic classification with the Kaiju webserver
+## Taxonomic classification with the Kaiju suite of tools
 
-In this, the second practical session of this Microbial Diversity Module, we will be working with the Kaiju webserver to classify a small set of reads (500,000) under a couple of different algorithm conditions, and against three different reference databases supplied by the website to get an understanding of the fact that the way you perform these analyses has an impact on the results you get out.  In other words, writing down the results, and information about what you have done precisely to get them is important.  We are going to upload the reads to the server, download the results, and analyse them.  We are also going to use the Krona interactive viewer to explore our data in a little more depth.
+In this, the second practical session of this Microbial Diversity Module, we will be working with the Kaiju suite of tools to classify a small set of reads (500,000) under a couple of different algorithm conditions, and against three different reference databases supplied by the website to get an understanding of the fact that the way you perform these analyses has an impact on the results you get out.  In other words, writing down the results, and information about what you have done precisely to get them is important.  We are going to upload the reads to the server, download the results, and analyse them.  We are also going to use the Krona interactive viewer to explore our data in a little more depth.
 
 
 ### Exercise 1: Data uploading and generation
