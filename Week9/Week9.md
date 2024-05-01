@@ -98,27 +98,25 @@ We will continue to use our Massey RStudio  environment as a source and location
 
 The approach we are taking this year to cover this material is slightly different to what has been done in previous years.  There are two reasons for this:
 1. For the first time in 2024, we are using local Massey computing servers for running this course.  This is the server called `tur-rstudio2` that you have been using for the course so far.  We have also set up a computing server called `tur-kaiju1` for metagenomic analysis that you will have access to.
-2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and it takes a very long time (days or weeks) to run jobs against the supplied databases.  We cannot use this in the lab practicals anymore.
+2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and it takes a very long time (days or weeks) to run jobs against the supplied databases.  Therefore, we cannot use this in the lab practicals anymore.
 
-This means we will be adapting the process so the same procedure can be done, just on a smaller scale.
+This means we will be adapting the process so the same procedure can be done, just on a smaller scale, and locally using the terminal in our Massey RStudio environment.
 
 To set the scene, let's go through how things were in 2023 and before:
 
 #### In previous years
 
 We are primarily going to be using webtools, and the Microsoft product Excel to explore some reads from an experiment, but under different analysis conditions, varying both the analysis methods and the database we are comparing our reads to.
-- We will upload a pair of reads to the Kaiju website for analysis against a variety of databases.
-- We will download these data, and open them in Excel to explore them in a comparative way.  
-- We will then look at the results in a completely different way using Krona.
-- Finally, we will be returning to `R` for the work that will lead to the Portfolio analysis of today's work.
+1. We will upload a pair of reads to the Kaiju website for analysis against a variety of databases.
+2. We will download these data, and open them in Excel to explore them in a comparative way.  
+3. We will then look at the results in a completely different way using Krona.
+4. Finally, we will be returning to `R` for the work that will lead to the Portfolio analysis of today's work.
 
 #### In 2024
 
-The process is the nearly the same, except that we will use a new Massey server (`tur-kaiju1`) set up to run the software behind the Kaiju webserver, rather than the actual webserver.  After that, we copy the data back to our usual environment, and continue as described above.
-
+The process is the nearly the same, except that for point 1. above, we will use a new Massey server (`tur-kaiju1`) to run the software behind the Kaiju webserver, rather than on the actual webserver in Denmark.  Then for point 2. we will copy the data back to our usual environment (on `tur-rstudio2`), and continue as described above for points 3. and 4.
 
 The commands below have been checked and should work fine.
-
 
 ---
 
