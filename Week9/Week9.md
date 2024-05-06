@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+## _06-May-2024: PLEASE DO NOT ATTEMPT THIS PRACTICAL UNTIL THIS NOTE DISAPPEARS LATER THIS WEEK_ ##
+
 # Introduction to Metagenomic analysis
 
 **Professor Patrick Biggs**
