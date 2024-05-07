@@ -72,19 +72,15 @@ Don\'t forget to press the **\[Enter\]** key: commands are not sent to the `R` c
 
 #### General
 
-We will be working within web browsers, and Firefox and Chrome are installed on the machines, or Safari if you are an Apple user. We will then login to RStudio Cloud using your personalised account. If you would like to use your own laptop in the labs on either campus, please feel free to do so.
+We will be working within web browsers, and Firefox and Chrome are installed on the machines, or Safari if you are an Apple user. We will then login to Massey RStudio using your personalised account.  If you would like to use your own laptop in the labs please feel free to do so.
 
-#### Manawatu (iMacs)
+#### Manawatu ScC5.10 (iMacs)
 
-The machines we are using for the course are Apple iMacs. Please use your normal Massey username and password to login to these machines. Please remember to ignore (i.e. cancel) the dialogue box about the network when you log in.
+The machines we can use for the course are Apple iMacs. Please follow the information in "Access_to_RStudio_2024.pdf" to log into these machines through the use of the VMware Horizon application.  Please use your normal Massey username and password to login to the Windows 10 machines.
 
-#### Albany (PCs)
+#### outside Massey
 
-The machines are Windows PC's so logging into them should be the same as any other Massey Windows PC.
-
-#### Outside Massey
-
-Most likely this is your own machine, so this should not be an issue.
+Most likely this is your own machine, so this should not be an issue, but please follow the general instructions in "Access_to_RStudio_2024.pdf" about the use of your own machine and these resources.
 
 
 ### Our work today
