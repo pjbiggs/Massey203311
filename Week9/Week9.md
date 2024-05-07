@@ -133,13 +133,11 @@ The below screenshot shows the folder structure within the `Metagenomics` folder
 
 To illustrate how the process works on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms, and we shall use these later in Exercise 2.
 
-|:warning: WARNING|
-|-----------------|
-|Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1. Please make sure you can also answer question 0 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.|
+|:memo: |Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1. Please make sure you can also answer question 0 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.|
+|-------|:-----|
 
-
-> [!IMPORTANT]
-> **Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1.  Please make sure you can also answer question 0 in this section, as it is key to the practical.  Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
+>  [!IMPORTANT]
+>  **Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1.  Please make sure you can also answer question 0 in this section, as it is key to the practical.  Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
 
 So, we would use a pair of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – and upload these to the Kaiju webserver and perform a taxonomic analysis on the reads.  These reads are found in the `kaiju` folder.  There are other files in there too, but more on those later.
 
