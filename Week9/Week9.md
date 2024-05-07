@@ -374,6 +374,8 @@ As stated above, there are 6 sets of analyses that have been performed.  The inf
 
 `-------------------------------------`
 
+# sort out file paths and folders #
+
 The output folder for these files is called _`XXXXX`_ and can be found within the _`~/203311/Module3/Metagenomics/`_ folder for Module3. There are 3 files per condition, and these files are:
 1. those ending in _`.txt`_
 2. those ending in _`.krona`_
@@ -503,6 +505,8 @@ For this last part of this metagenomics portion, we will head back to our Kaiju 
 
 We can do this inside the RStudio environment.  To do this, go to the _`kaiju`_ folder, and left click once the file _`pjb_Gr500k_nr.html`_. Then click on the “View in Web Browser” line.  This should open up a new webpage showing our results.  You should see something like the following:
 
+# update all images #
+
 <img src="graphics/image10.png" width="500"/><br>
 
 We are going to explore the data as this is a fully interactive plot.  Let’s get rid of our unclassified data, as that is of no interest to us right now.  To do that, click on the area that says “root” so the segment goes grey, and then click again to get arrows, like in the picture below.
@@ -561,6 +565,18 @@ Within the Gammaproteobacteria is the order Legionellales (one member of which i
 >
 > <table><tbody><tr><td>Legionellaceae:</td><td></td></tr><tr><td>Coxillaceae:</td><td></td></tr></tbody></table>
 
+Finally, a quick check with our fungal data.  Let's open up _`fungi_50k_mem.txt.html`_ to see how different this looks.  It is the same process as before, clicking on the “View in Web Browser” line after having left-clicked on the file name.
+
+Wow, different, huh?  There's so much unclassified data.
+
+# add in a new image #
+
+>**Question 15:**
+>
+>Using the chart, what proportion of the data is classified?  Remember, for this we have only 50,0000 reads.  Finally, what are the read numbers for the Eurotiomycetes?
+>
+> <table><tbody><tr><td>proportion:</td><td></td></tr><tr><td>Eurotiomycetes:</td><td></td></tr></tbody></table>
+
 ---
 
 ## Further analysis of Kaiju output in R
@@ -581,7 +597,7 @@ We will then repeat the process that was introduced in Week 4.  To download the 
 $ wget the_link_address_you_just_copied
 ```
 
->**Question 15:**
+>**Question 16:**
 >
 > What command line would you use to check the number of lines in your downloaded files using a wildcard character?
 > how many lines are there in each of the 5 files?
@@ -643,7 +659,7 @@ The next thing is to make a subset based on a certain taxonomic classification. 
 
 This is why we are making a copy of the object here, so that you can look at _`cutDataFileRemovedCols_noUC2`_ to get the part of the name to remove.
 
->**Question 16:**
+>**Question 17:**
 >
 > How many rows does _`onlyTaxaOfInterest`_ have compared to  _`cutDataFileRemovedCols_noUC2`_? (Use one of the many methods you now are aware of, e.g. `grep` in the terminal, or by a manual inspection to find the numbers.)
 >
