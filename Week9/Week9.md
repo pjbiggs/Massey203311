@@ -21,20 +21,21 @@
 
 ## Purpose
 
-To use a mixture of tools (online) to explore a small set of metagenomic reads from uploading reads to a server through interactive visualisation and then work in R to look at the data in other ways.
+To use a mixture of tools (online and command line) to explore a small set of metagenomic reads from uploading reads to a server through interactive visualisation and then work in R to look at the data in other ways.
 
 
 ## Introduction
 
 Microbial diversity has been revolutionised by the rapid advances in sequencing technology, given us new insights into the role of the microbial world in all environments on Earth. Sequencing of metagenomes (all the DNA in a given sample etc.) or of specific markers (metabarcodes e.g. 16S rRNA amplicons) have been crucial in this regard. Knowing what is there, and what it is potentially doing are two of the main research areas of interest.  How we then analyse the data, visualise and interpret the results is thus of importance.
 
-Week 9 focusses on using tools outside of `R` for most of today's practical to use online classfiers and visualisation methodologies to explore the complexitites of metagenomic data.
+Week 9 focusses on using tools outside of `R` for most of today's practical to use taxonomic classfiers and visualisation methodologies to explore the complexitites of metagenomic data.
 
 An outline of the lab today is below.<br>
 
 <img src="graphics/flow-chart-w9.png" width="500"/><br>
 Brief outline of the steps we will be following in Week 9.<br><br>
 
+---
 
 ## Lecture Overview
 
@@ -45,7 +46,6 @@ The next focus was on a metagenomics workflow, to show how complex this is, and 
 So, now on to the practical...
 
 First thing, you have an electronic copy of this practical -- which you will see via the Stream and this site -- **please don't copy and paste in the practical today!** Why? Typing these commands is part of the hard wiring required to make them stick! By typing commands it gives you another opportunity to think about the command before you execute it and typing is more likely to trigger a big red flag in dangerous situations! So, think twice, type once.
-
 
 ---
 
@@ -98,17 +98,17 @@ The approach we are taking this year to cover this material is slightly differen
 1. For the first time in 2024, we are using local Massey computing servers for running this course.  This is the server called `tur-rstudio2` that you have been using for the course so far.  We have also set up a computing server called `tur-kaiju1` for metagenomic analysis that you will have access to for this module.
 2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and it takes a very long time (days or even weeks) to run jobs against the supplied databases.  Therefore, we cannot use this in the lab practical anymore.
 
-This means we will be adapting the process so the same procedure can be preformed, just on a smaller scale, and locally using the terminal in our Massey RStudio environment.
+This means we will be adapting the process so the same procedure can be performed, just on a smaller scale, and locally using the terminal in our Massey RStudio environment.
 
 To set the scene, let's go through how things were in 2023 and before:
 
 #### In previous years
 
-We are primarily going to be using webtools, and the Microsoft product Excel to explore some reads from an experiment, but under different analysis conditions, varying both the analysis methods and the database we are comparing our reads to.
-1. We will upload a pair of reads to the Kaiju webserver for analysis against a variety of databases.
-2. We will download these data, and open them in Excel to explore them in a comparative way.  
-3. We will then look at the results in a completely different way using Krona.
-4. Finally, we will be returning to `R` for the work that will lead to the Portfolio analysis of today's work.
+We are primarily used webtools, and the Microsoft product Excel to explore some reads from an experiment, but under different analysis conditions, varying both the analysis methods and the database we are comparing our reads to.
+1. We uploaded a pair of reads to the Kaiju webserver for analysis against a variety of databases.
+2. We downloaded these data, and open them in Excel to explore them in a comparative way.  
+3. We lookes at the results in a completely different way using Krona.
+4. Finally, we returned to `R` for the work that will led to the Portfolio analysis.
 
 #### In 2024
 
@@ -129,9 +129,14 @@ The below screenshot shows the folder structure within the `Metagenomics` folder
 <img src="graphics/window4_2024.png" width="600"/>
 
 
-### Exercise 0: Observing the process of read analysis on the Kaiju webserver -- a.k.a. how it used to be
+### Exercise 1: Observing the process of read analysis on the Kaiju webserver -- a.k.a. how it used to be
 
 To illustrate how the process works on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms, and we shall use these later in Exercise 2.
+
+|:warning: WARNING|
+|-----------------|
+|Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1. Please make sure you can also answer question 0 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.|
+
 
 > [!IMPORTANT]
 > **Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1.  Please make sure you can also answer question 0 in this section, as it is key to the practical.  Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
@@ -172,7 +177,6 @@ Now let’s go to the website, and start the uploading process:
 
     <img src="graphics/image6.png" width="400"/>
 
-    _NB: This is a little weird in its behaviour, but you need to keep an eye on the upload, as I have had experience where the upload times out, and then you have to do it again.  Given that for me it took me up to 7 minutes to upload, and there are 3 to do, you have to keep an eye on things, and also I appreciate it will take a little while.  This also depends a little on the Massey network._
 
 7.  Now you would choose the database for the job name, as in the table below, and you are ready to click on “Submit” at the bottom of the page.
 
@@ -204,10 +208,18 @@ Once you have done this, type the following:
 ```bash
 ### let's use a command called "ssh" to log on to another server
 
+## this has a number "1" at the end of the server nazme, it is not the letter "l".
 $ ssh tur-kaiju1
 
 ## log in with your normal Windows password to gain access to "tur-kaiju1"
+## you will see a request to trust the authenticity of the new server.  Type "yes" to accept.
 ```
+
+It will look something like:
+
+
+XXXXXXX
+
 
 You should now see the following:
 
@@ -296,7 +308,7 @@ Now to copy and exit the terminal:
 ```bash
 ### copy over:
 ### remember to change "pbiggs" to your studentID
-$ scp fungi* pbiggs@tur-rstudio2:~/203311/Module/Metagenomics/kaiju
+$ scp fungi* pbiggs@tur-rstudio2:~/203311/Module3/Metagenomics/kaiju
 
 ### exit "tur-kaiju1", amd it's back to "tur-studio2"
 $ exit
@@ -312,7 +324,7 @@ What's next after doing that?
 
 ### Exercise 2: Data downloading
 
-As stated above, there are 6 sets of analyses that have been performed.  THe information about these is provided in the table below:
+As stated above, there are 6 sets of analyses that have been performed.  The information about these is provided in the table below:
 
 <table>
 <thead>
@@ -354,6 +366,42 @@ As stated above, there are 6 sets of analyses that have been performed.  THe inf
 
 `-------------------------------------`
 
+The output folder for these files is called _`XXXXX`_ and can be found within the _`~/203311/Module3/`_ folder for Module3. There are 3 files per condition, and these files are:
+1. those ending in _`.txt`_
+2. those ending in _`.krona`_
+3. those ending in _`.html`_
+
+Let's start off with the `.txt.krona` files for an overview, and let's find out how many unclassified reads there are for our 6 datasets.  Remember, there are 500,000 paired Illumina reads that are bein mapped against 3 databases with two algorithms.
+
+```bash
+$ pwd
+$ mv XXXXX XXXXXX
+$ grep "Unclassified" *.krona
+```
+
+>**Question 1:**
+>
+>Fill in the following table for your results to record the parameter values for the 3 results you have generated (any order of results is fine):
+>
+> <table><thead><tr><th>Job</th><th>A</th><th>B<br></th><th>C</th><th>D</th><th>E</th><th>F</th></tr></thead><tbody><tr><td>Job name</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Reference database</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Run mode</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Number of classified reads</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>% classified</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+
+Wow, different combinations give different numbers of unmapped reads.  Hence, what is happening to our mapped reads?
+
+We are going to have a look at one of the  _`.txt`_ files quickly just to get a hint of what the data looks like.  These are big files, so you will have to download them onto your local machine to do this (do you remember how to do this with the file manager window from within RStudio).
+
+Let's choose _`pjb_Gr500k_nr.txt`_ as an example.  
+
+
+Open this file up in a spreadsheet program such as Excel.  Double click on the application to start it.  You will see the 7 columns as listed in the screenshot above.  
+
+>**Question 2:**
+>
+>What is the name of the accession number for the sequence in column B called `M00933:6:000000000-A1D0H:1:1101:12995:9348`?
+>
+> <table><tr><td>
+> ____________________
+> </td></tr></table>
+
 **07-May-2024: EVERYTHING FROM HERE ONWARDS IS A WORK IN PROGRESS AND SHOULD BE CONSIDERED NOT YET TESTED**
 
 
@@ -364,17 +412,10 @@ As stated above, there are 6 sets of analyses that have been performed.  THe inf
 
 
 
-After a little while, you should have been emailed three times from the Kaiju webserver with your results.  We now have to download these to analyse them.  Using your email link, click on the link to open up the results page.  It lists 4 things:
-1.  A summary of the results, and the parameters used for the run
-2.  A metagenomics overview with an interactive bubble plot.
-3.  Two output files to potentially download
-4.  Krona output
 
->**Question 1:**
->
->Fill in the following table for your results to record the parameter values for the 3 results you have generated (any order of results is fine):
->
-> <table><thead><tr><th>Job</th><th>1</th><th>2</th><th>3</th></tr></thead><tbody><tr><td>Job name</td><td></td><td></td><td></td></tr><tr><td>Reference database</td><td></td><td></td><td></td></tr><tr><td>Database date</td><td></td><td></td><td></td></tr><tr><td>Run mode</td><td></td><td></td><td></td></tr><tr><td>Number of classified reads</td><td></td><td></td><td></td></tr><tr><td>% classified</td><td></td><td></td><td></td></tr></tbody></table>
+
+
+
 
 The next thing we are going to do is download the results from the 3 runs.  We are going to download the compressed output file for the RefSeq Genomes run (your ID for this will be different, but we are all using the same data) as well.  
 
@@ -398,15 +439,7 @@ gunzip kaiju.out.gz
 > **If you have downloaded via the `wget` method above, you will have to download the  _`kaiju.out`_ file from RStudio to your local machine.**
 
 
-We are going to have a look at the now uncompressed  _`kaiju.out`_ file quickly just to get a hint of what the data looks like.  Open this file up in a spreadsheet program such as Excel.  Double click on the application to start it.  You will see the 7 columns as listed in the screenshot above.  
 
->**Question 2:**
->
->What is the name of the accession number for the sequence in column B called `M00933:6:000000000-A1D0H:1:1101:12995:9348`?
->
-> <table><tr><td>
-> ____________________
-> </td></tr></table>
 
 
 ### Exercise 3: Data analysis
