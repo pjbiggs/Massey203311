@@ -21,7 +21,7 @@
 
 ## Purpose
 
-To use a mixture of tools (online and command line) to explore a small set of metagenomic reads from uploading reads to a server through interactive visualisation and then work in R to look at the data in other ways.
+To use a mixture of tools (both online and command line) to explore a small set of metagenomic reads from uploading reads to a server through interactive visualisation and then further work in R to look at the data in other ways.
 
 
 ## Introduction
@@ -30,10 +30,10 @@ Microbial diversity has been revolutionised by the rapid advances in sequencing 
 
 Week 9 focusses on using tools outside of `R` for most of today's practical to use taxonomic classfiers and visualisation methodologies to explore the complexitites of metagenomic data.
 
-An outline of the lab today is below.<br>
+An outline of the lab today is sghown below.<br>
 
 <img src="graphics/flow-chart-w9.png" width="500"/><br>
-Brief outline of the steps we will be following in Week 9.<br><br>
+Brief outline of the steps we will be following in Week 9.<br>
 
 ---
 
@@ -41,7 +41,7 @@ Brief outline of the steps we will be following in Week 9.<br><br>
 
 As a brief summary of the lectures from this week, we discussed the motivation for doing metagenomics analysis given how ubiquitous and important bacteria are to us, the environment and the planet as a whole.  We looked at the history of metagenomics, and then had a quick tour of 4 notable projects – focussing in a little more detail on the Human Microbiome Project – which illustrated how technology has driven the scale of potential projects.  We also touched on the potential controversial issue of personal genomics by looking at the now bankrupt uBiome company, and their products.  There was a quick mention of metabarcoding – a subfield of metagenomics – and how that is different to metagenomics, but yet at the same time, how these areas are also related to each other.
 
-The next focus was on a metagenomics workflow, to show how complex this is, and also where there are potential biases to consider in experimental design, and sample generation.  We then started looking at some of the issues there are in terms of the measures of say taxonomic diversity in analysing results.  We also considered data quality control, and that there are many software packages out there to analyse metagenomics data.  Finally, we considered the concept of comparative metagenomics, and ways to analyse and visualise the data using a tool like MEGAN.  Our last software tool was the one we start off with today, the online taxonomic classifier Kaiju.
+The next focus was on a metagenomics workflow, to show how complex this is, and also where there are potential biases to consider in experimental design, and sample generation.  We then started looking at some of the issues there are in terms of the measures of say taxonomic diversity in analysing results.  We also considered data quality control, and that there are many software packages out there to analyse metagenomics data.  Finally, we considered the concept of comparative metagenomics, and ways to analyse and visualise the data using a tool like MEGAN.  Our last software tool was the one we start off with today, the (online) taxonomic classifier Kaiju.
 
 So, now on to the practical...
 
@@ -56,7 +56,7 @@ As a reminder, in what follows, we shall use the following typographical convent
 -   Characters written in `this programming style` are commands to be typed into the computer as they stand.
 -   Characters written in _`this programming style`_ are objects and file names.
 -   Characters written after something like `###` indicate comments within the code that will help you.  They do not run code.
--   Characters written in without `>` at the start of the line **(e.g. lines starting with "\[1\]")** indicate responses back from the R console inside RStudio that will help you too.
+-   Characters written in without the character `>` at the start of the line **(e.g. lines starting with "\[1\]")** indicate responses back from the R console inside RStudio that will help you too.
 -   Words inserted within square brackets **\[Enter\]** indicate keys to be pressed.
 
 So, for example,
@@ -96,23 +96,23 @@ We will continue to use our Massey RStudio  environment as a source and location
 
 The approach we are taking this year to cover this material is slightly different to what has been done in previous years.  There are two reasons for this:
 1. For the first time in 2024, we are using local Massey computing servers for running this course.  This is the server called `tur-rstudio2` that you have been using for the course so far.  We have also set up a computing server called `tur-kaiju1` for metagenomic analysis that you will have access to for this module.
-2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and it takes a very long time (days or even weeks) to run jobs against the supplied databases.  Therefore, we cannot use this in the lab practical anymore.
+2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and it takes a very long time (days or even weeks) to run sequence analysis against the supplied databases.  Therefore, we cannot use this approach in the lab practical anymore.
 
 This means we will be adapting the process so the same procedure can be performed, just on a smaller scale, and locally using the terminal in our Massey RStudio environment.
 
-To set the scene, let's go through how things were in 2023 and before:
+To set the scene, let's go through how things were in 2023 and before that:
 
 #### In previous years
 
-We are primarily used webtools, and the Microsoft product Excel to explore some reads from an experiment, but under different analysis conditions, varying both the analysis methods and the database we are comparing our reads to.
+We primarily used webtools, and the Microsoft product Excel to explore some reads from an experiment, but under different analysis conditions, varying both the analysis methods and the database we are comparing our reads to.
 1. We uploaded a pair of reads to the Kaiju webserver for analysis against a variety of databases.
-2. We downloaded these data, and open them in Excel to explore them in a comparative way.  
-3. We lookes at the results in a completely different way using Krona.
+2. We downloaded these data, and opened them in Excel to explore them in a comparative way.  
+3. We looked at the results in a completely different way using Krona.
 4. Finally, we returned to `R` for the work that will led to the Portfolio analysis.
 
 #### In 2024
 
-The process is the nearly the same, except that for point 1) above, we will use a new Massey server (`tur-kaiju1`) to run the software behind the Kaiju webserver, rather than uploading reads to the actual webserver in Denmark.  Then for point 2) we will copy the data back to our usual environment (on `tur-rstudio2`), and continue as described above for points 3) and 4).
+The process is the nearly the same, except that for point 1) above, we will use a new Massey server (`tur-kaiju1`) to use the software behind the Kaiju webserver, rather than uploading reads to the actual webserver in Denmark.  Then for point 2) we will copy the data back to our usual environment (on `tur-rstudio2`), and continue as described above for points 3) and 4).
 
 The commands below have been checked and should work fine.
 
@@ -126,24 +126,27 @@ We are going to upload the reads to the server, download the results, and analys
 
 The below screenshot shows the folder structure within the `Metagenomics` folder within the `~/203311/Module3/` folder for Module3.
 
-<img src="graphics/window4_2024.png" width="600"/>
+<img src="graphics/window4_2024.png" width="600"/><br>
+Our reads to use.<br>
 
 
 ### Exercise 1: Observing the process of read analysis on the Kaiju webserver -- a.k.a. how it used to be
 
-To illustrate how the process works on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms, and we shall use these later in Exercise 2.
+To illustrate how the process works on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms for you, and we shall use these later in Exercise 2.
 
-|:memo: |Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1. Please make sure you can also answer question 0 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.|
-|-------|:-----|
+|:memo: | Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 2. Please make sure you can also answer Question 1 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.|
+|-------|:----------|
 
 >  [!IMPORTANT]
->  **Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1.  Please make sure you can also answer question 0 in this section, as it is key to the practical.  Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
+>  **Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1.  
+Please make sure you can also answer Question 1 in this section, as it is key to the practical.  
+Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
 
 So, we would use a pair of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – and upload these to the Kaiju webserver and perform a taxonomic analysis on the reads.  These reads are found in the `kaiju` folder.  There are other files in there too, but more on those later.
 
 These reads are environmental samples taken as part of a Massey University research project I was involved with a few years ago.  
 
-Now let’s go to the website, and start the uploading process:
+Now let’s go to the website, and start the uploading process (**theoretically**):
 
 1.  Go to <https://kaiju.binf.ku.dk/>
 
@@ -178,63 +181,58 @@ Now let’s go to the website, and start the uploading process:
 
 7.  Now you would choose the database for the job name, as in the table below, and you are ready to click on “Submit” at the bottom of the page.
 
-NB2: There would be a bit of waiting for this first part of the process, so I suggest whilst you are waiting, you read the “Behind the Paper” feature on the Nature Microbiology website for the Kaiju publication.  The link is below:
+**NB:** There would be a bit of waiting for this first part of the process, so I suggest whilst you are waiting, you read the “Behind the Paper” feature on the _Nature Microbiology_ website for the Kaiju publication.  The link is below:
 
 <https://naturemicrobiologycommunity.nature.com/users/10226-peter-menzel/posts/6200-from-metagenomics-of-hot-springs-to-bioinformatics-software-development>
 
-This is not super-long but gives you a chance to see the motivation for the paper from the authors.  It is also important to note that we are relying on the Internet here, so this is a little risky.  If the worst happens, and things do not go to plan, please let a demonstrator know, and magically a set of results can be made to appear for you.
+This is not super-long but gives you a chance to see the motivation for the paper from the authors, and is well worth a read.  
 
->**Question 0:**
+>**Question 1:**
 >
 > On looking at Kaiju webserver, on the left are listed the reference databases.  Have a look at the quick database descriptions and write down in the box below what you think might happen in terms of the potential results we might get back when our results are notified to us.
 >
 > <table><tr><th> </th></tr><tbody><tr><td> </td></tr><tr><td> </td></tr><tr><td> </td></tr></tbody></table>
 
 
-### Exercise 1: Data uploading and generation -- the 2024 method
+### Exercise 2: Data uploading and generation -- the 2024 method
 
 We are going to replicate this process on the command line, with two variations: the number of reads, and the database we are going to use.  so that this can be run within the time of lab practical we will use the "fungi" database and 50,000 reads.
 
 We will go to the terminal, starting in our usual place - `tur-rstudio2`.
 
-  <img src="graphics/2024_terminal1.png" width="350"/>
-
-&nbsp;
+  <img src="graphics/2024_terminal1.png" width="400"/><br>
 
 Once you have done this, type the following:
 
 ```bash
-### let's use a command called "ssh" to log on to another server
+## let's use a command called "ssh" to log on to another server
 
-## this has a number "1" at the end of the server nazme, it is not the letter "l".
+# This has a number "1" at the end of the server nazme, it is not the letter "l".
 $ ssh tur-kaiju1
 
-## log in with your normal Windows password to gain access to "tur-kaiju1"
-## you will see a request to trust the authenticity of the new server.  Type "yes" to accept.
+# Log in with your normal Windows password to gain access to "tur-kaiju1"
+
+# You will see a request to trust the authenticity of the new server.
 ```
 
 It will look something like:
 
+<img src="graphics/RSA1.png" width="600"/><br>
 
-XXXXXXX
 
 
-You should now see the following:
+Type **\[Yes\]** to accept.  You should now see the following:
 
-  <img src="graphics/2024_terminal3.png" width="600"/>
+  <img src="graphics/2024_terminal3.png" width="600"/><br>
 
-&nbsp;
+Fantastic, we have moved ourselves to a new server!!  Now we can type `helpme` to see a nice introductory message.  Don't worry, we will go through this in detail shortly:
 
-Great, we have moved ourselves to a new server!!  Now we can type `helpme` to see a nice introductory message.  Don't worry, we will go through this in detail shortly:
-
-  <img src="graphics/2024_terminal4.png" width="700"/>
-
-&nbsp;
+  <img src="graphics/2024_terminal4.png" width="700"/><br>
 
 Let's see the basic command for `kaiju`, and what it returns.  We will get an error initially as we have not declared any files, but that is OK for now.
 
 ```bash
-### type "kaiju" in the "tur-kaiju1" terminal window
+## type "kaiju" in the "tur-kaiju1" terminal window, and we will see what is returned
 
 $ kaiju
 # Error: Please specify the location of the nodes.dmp file, using the -t option.
@@ -252,7 +250,9 @@ $ kaiju
 #      -i FILENAME   Name of input file containing reads in FASTA or FASTQ format   
 ```
 
-We need a minimum of 3 files to make this run: two files for taxonomy which are the `-t` and `-f` options.  We then need either a single read file by using the `-i` option, or as in our case the `-j` option for a second read file.
+We need a minimum of 3 files to make this run:
+- Two files for taxonomy which are the `-t` and `-f` options.
+- We then need either a single read file by using the `-i` option, or as in our case the `-j` option for a second read file.
 
 Things have been set up so that running this code requires relatively short path names - I have copied the reads over for you, and they are in the _`/samples/`_ folder, and all our taxonomy database files are in the _`/db/`_ folder.  For simplicity, we will run this in our home directory on `tur-kaiju1`.
 
@@ -262,22 +262,27 @@ We will generate a set of data each with the default _`greedy`_ algorithm, and t
 > This code is quite complex, please make sure it is correct, otherwise it will fail.
 
 ```bash
-### we also declare the `-a` option for the algorithm,
-### and `-o` for the name of the output file.
+# We also declare the `-a` option for the algorithm,
+# and the `-o` option for the name of the output file.
 
-## first default greedy
-$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi -i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a greedy -o ~/fungi_50k_greedy.txt
+## first default greedy (this is one line of code)
+$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi
+-i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a greedy
+-o ~/fungi_50k_greedy.txt
 
-## then mem
-$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi -i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a mem -o ~/fungi_50k_mem.txt
+## then mem (this is one line of code)
+$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi
+-i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a mem
+-o ~/fungi_50k_mem.txt
 ```
 
-These commands will take about 1.5 minutes each, and if the commands are queued, it might take a little longer.  However, it should complete just fine.  we will run a couple of extra lines of code to help us visualise what we have generated.  
+These commands will take about 1.5 minutes each, and if the commands are queued, it might take a little longer.  However, it should complete just fine.  We will also execute a couple of extra lines of code to help us visualise what we have generated.  
 
 ```bash
 ## two extra commands to help us visualise our output
+## I show the screen output as well.
 
-### first default greedy
+## first default greedy
 $ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp -i ~/fungi_50k_greedy.txt -u -v -o ~/fungi_50k_greedy.txt.krona
 # Reading taxonomic tree from file /db/nr_euk/nodes.dmp
 # Reading taxon names from file /db/nr_euk/names.dmp
@@ -287,7 +292,7 @@ $ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp -i ~/fungi_50k_gre
 $ ktImportText -o ~/fungi_50k_greedy.txt.html ~/fungi_50k_greedy.txt.krona
 # Writing /home/p/pbiggs/fungi_50k_greedy.txt.html...
 
-### then mem
+## then mem
 $ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp -i ~/fungi_50k_mem.txt -u -v -o ~/fungi_50k_mem.txt.krona
 # Reading taxonomic tree from file /db/nr_euk/nodes.dmp
 # Reading taxon names from file /db/nr_euk/names.dmp
@@ -298,29 +303,34 @@ $ ktImportText -o ~/fungi_50k_mem.txt.html ~/fungi_50k_mem.txt.krona
 # Writing /home/p/pbiggs/fungi_50k_mem.txt.html...
 ```
 
-What exactly this code is doing will become apparent in Exercise 2, but we will leave exact details for today.
+What exactly this code is doing will become apparent in Exercise 3, but we will leave exact details for today.
 
 Our final piece of work is to copy our results back to `tur-rstudio2` and close our terminal for `tur-kaiju1`.  Let's check we have 6 output files by running `ls -l *fungi*`.  If you do not see 6 files, please let a demonstrator know.
 
-Now to copy and exit the terminal:
+Now to copy and exit the terminal.  We will also have to authenticate between servers when we do the `scp`:
+
 ```bash
-### copy over:
-### remember to change "pbiggs" to your studentID
+## copy over:
+# remember to change "pbiggs" in the below line to your studentID
 $ scp fungi* pbiggs@tur-rstudio2:~/203311/Module3/Metagenomics/kaiju
 
-### exit "tur-kaiju1", amd it's back to "tur-studio2"
+# exit "tur-kaiju1", and it's back to "tur-studio2"
 $ exit
 # logout
 # Connection to tur-kaiju1 closed.
 # (base) [pbiggs@tur-rstudio2 ~]$
 ```
 
+Again you will see the following in this process:
+
+<img src="graphics/RSA2.png" width="600"/><br>
+
 So that's it, we are back to our usual `tur-rstudio2` server and you have run an example of _`kaiju`_ code on a different server, and copied the resulting data back.  Well done, that is no mean feat.
 
 What's next after doing that?
 
 
-### Exercise 2: Data downloading
+### Exercise 3: Working with our data
 
 As stated above, there are 6 sets of analyses that have been performed.  The information about these is provided in the table below:
 
@@ -364,7 +374,7 @@ As stated above, there are 6 sets of analyses that have been performed.  The inf
 
 `-------------------------------------`
 
-The output folder for these files is called _`XXXXX`_ and can be found within the _`~/203311/Module3/`_ folder for Module3. There are 3 files per condition, and these files are:
+The output folder for these files is called _`XXXXX`_ and can be found within the _`~/203311/Module3/Metagenomics/`_ folder for Module3. There are 3 files per condition, and these files are:
 1. those ending in _`.txt`_
 2. those ending in _`.krona`_
 3. those ending in _`.html`_
@@ -373,105 +383,70 @@ Let's start off with the `.txt.krona` files for an overview, and let's find out 
 
 ```bash
 $ pwd
-$ mv XXXXX XXXXXX
+$ cd XXXXXXXXXXXXXXXXXX
 $ grep "Unclassified" *.krona
 ```
 
->**Question 1:**
+>**Question 2:**
 >
 >Fill in the following table for your results to record the parameter values for the 3 results you have generated (any order of results is fine):
 >
 > <table><thead><tr><th>Job</th><th>A</th><th>B<br></th><th>C</th><th>D</th><th>E</th><th>F</th></tr></thead><tbody><tr><td>Job name</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Reference database</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Run mode</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Number of classified reads</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>% classified</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
 
-Wow, different combinations give different numbers of unmapped reads.  Hence, what is happening to our mapped reads?
+Wow, different combinations give different numbers of unmapped reads.  So we think, what is happening to our mapped reads?
 
-We are going to have a look at one of the  _`.txt`_ files quickly just to get a hint of what the data looks like.  These are big files, so you will have to download them onto your local machine to do this (do you remember how to do this with the file manager window from within RStudio).
+We are going to have a look at one of the  _`.txt`_ files quickly as an example just to get a hint of what the output data looks like.  These are big files, so you will have to download them onto your local machine to do this (do you remember how to do this with the file manager window from within RStudio?).
 
 Let's choose _`pjb_Gr500k_nr.txt`_ as an example.  
 
+Open this file up in a spreadsheet program such as Excel.  Double click on the application to start it.  You will see the 7 columns as listed below:
 
-Open this file up in a spreadsheet program such as Excel.  Double click on the application to start it.  You will see the 7 columns as listed in the screenshot above.  
+1. either C or U, indicating whether the read is classified or unclassified.
+2. name of the read
+3. NCBI taxon identifier of the assigned taxon
+4. the length or score of the best match used for classification
+5. the taxon identifiers of all database sequences with the best match
+6. the accession numbers of all database sequences with the best match
+7. matching fragment sequence(s)
 
->**Question 2:**
+
+>**Question 3:**
 >
->What is the name of the accession number for the sequence in column B called `M00933:6:000000000-A1D0H:1:1101:12995:9348`?
+>What is the name of the accession number for the sequence in column B called `M00933:6:000000000-A1D0H:1:1101:12995:3904`?
 >
 > <table><tr><td>
 > ____________________
 > </td></tr></table>
 
-**07-May-2024: EVERYTHING FROM HERE ONWARDS IS A WORK IN PROGRESS AND SHOULD BE CONSIDERED NOT YET TESTED**
 
+### Exercise 4: Data analysis
 
+We are interested in the file for the taxon path counts.  In a similar way, let’s open up the matching file to  _`pjb_Gr500k_nr.txt`_ which is called  _`pjb_Gr500k_nr.txt.krona`_ in a spreadsheet program like Excel to have a look at the contents.  This has far fewer rows of data as the hits to the same taxon have been merged.  You will have to sort the data on column A from largest to smallest for the next question.
 
-
-
-
-
-
-
-
-
-
-
-
-The next thing we are going to do is download the results from the 3 runs.  We are going to download the compressed output file for the RefSeq Genomes run (your ID for this will be different, but we are all using the same data) as well.  
-
-<img src="graphics/image7.png" width="600"/>
-
-1.  Right click on the “download taxon path counts” and save the file with a new name – your jobname would be a good choice – including the database you ran the reads against.  
-2.  Repeat this procedure for the other two files.  
-3.  In addition, for one of the jobs, in a similar manner, download the compressed output file for the run against the RefSeq Genomes.  
-4.  The file is always called _`kaiju.out.gz`_.  
-5.  Go to your downloads folder and uncompress this file (double click on it) to make a file called _`kaiju.out`_.
-
-> **Please remember that uncompressing a _`.gz`_ file will be a different process depending on your machine and whatever compression software you use, e.g. 7Zip on Windows PCs.**
+>**Question 4:**
 >
-> **If there is an issue with downloading from the web you can run the following code to retrieve the file, as per the below from the terminal in RStudio.**
-
-```bash
-wget https://raw.githubusercontent.com/osilander/203.311/main/Week9/files/kaiju.out.gz
-gunzip kaiju.out.gz
-```
-
-> **If you have downloaded via the `wget` method above, you will have to download the  _`kaiju.out`_ file from RStudio to your local machine.**
-
-
-
-
-
-### Exercise 3: Data analysis
-
-**11-May-2023 - Please note: There is a major issue with the Kaiju webserver that cannot be solved quickly, so we will return to this exercise next week (week 10).**
-
-**15-May-2023 - Update: As the results are still not back from the server, this exercise will be ignored for 2023.  I leave it in for completeness though.**
-
-We are interested in the file for the taxon path counts.  In a similar way, let’s open up this file in a spreadsheet program like Excel to have a look at the contents.  This has far fewer rows of data as the hits to the same taxon have been merged.  
-
->**Question 3:**
->
->Using your spreadsheet for the file of the results against the RefSeq Genomes, how many taxa are present at over 1000 counts?  
+>Using your spreadsheet for the _`pjb_Gr500k_nr.txt.krona`_ file (the results against the nr database), how many taxa are present at over 1000 counts?  
 >What is the number of counts we would use as a cutoff for 0.1%?  
 >How many taxa are there above this threshold?  
->Finally, what is the species of bacteria with a count of 916?
+>Finally, what is the species of bacteria with a count of 792?
 >
-> <table><tbody><tr><td>Over 1000 counts:</td><td></td></tr><tr><td>Counts for 0.1% cutoff:</td><td></td></tr><tr><td>Taxa present at more than 0.1%:</td><td></td></tr><tr><td>Taxon at count of 916:</td><td></td></tr></tbody></table>
+> <table><tbody><tr><td>Over 1000 counts:</td><td></td></tr><tr><td>Counts for 0.1% cutoff:</td><td></td></tr><tr><td>Taxa present at more than 0.1%:</td><td></td></tr><tr><td>Taxon at count of 792:</td><td></td></tr></tbody></table>
 
-### Exercise 4: Data comparisons
+### Exercise 5: Data comparisons
 
 Part of the practical today is to look at similarities and differences between the databases, and what effect that can have on the results.  To do that, we need to have a file where all this data is listed together.  We will look at a file I have made to do this.  
 
-I have performed the same 3 analyses (against the same 3 databases), but with the “MEM” algorithm specified rather than the default “Greedy” that you have used.  I have then used a scripting language – Perl – and a database – MySQL – to process this data into a format where everything is all together based on the taxonomic classification.  You will find this file – _`500k_cutoffs.xlsx`_ – in the _`kaiju`_ folder for today’s practical.
+As stated above, I have performed the same 3 analyses (against the same 3 databases), but with the "mem" algorithm specified rather than the default "greedy” algorithm.  I have then used a scripting language – Perl – and a database – MySQL – to process this data into a format where everything is all together based on the taxonomic classification.  You will find this file – _`500k_cutoffs.xlsx`_ – in the _`kaiju`_ folder for today’s practical.  Again, you will have to download the file again.
 
 Open this file in Excel.  Immediately you will notice that there are actually 5 tabs here, where the data has been trimmed to remove any taxa that are present at fewer than 1, 10, 100, 1000 or 10000 counts.  These are unsurprisingly called _`Cutoff1, Cutoff10, Cutoff10, Cutoff1000`_ and _`Cutoff10000`_ respectively.
 
->**Question 4:**
+>**Question 5:**
 >
 >The original file - _`500k_cutoffs.xlsx`_ - has the taxon count numbers from 500,000 sequences that were classified by Kaiju.  We might be interested in focusing our analysis only on taxa that are present above a certain count, or above a certain percentage.  If we use count as a cutoff for including a taxon in the analysis, what percentage of total reads would the following specific counts correspond to?
 >
 > <table><thead><tr><th>cutoff</th><th>percentage</th><th>cutoff</th><th>percentage</th></tr></thead><tbody><tr><td>1</td><td></td><td>1000</td><td></td></tr><tr><td>10</td><td></td><td>10000</td><td></td></tr><tr><td>100</td><td></td><td></td><td></td></tr></tbody></table>
 
->**Question 5:**
+>**Question 6:**
 >
 >Now we turn to the Excel file, and its contents. How many taxa are represented for each of the 5 cutoff levels?
 >
@@ -479,7 +454,7 @@ Open this file in Excel.  Immediately you will notice that there are actually 5 
 
 Let’s investigate the data a little further.  Looking at the first tab - _`Cutoff10000`_ – does not show much, so we move on to the next one - _`Cutoff1000`_ – where we can start to see some differences in the counts.  Remember, this is the same underlying sequence dataset analysed in 6 different ways.  
 
->**Question 6:**
+>**Question 7:**
 >
 >How many taxa in the _`Cutoff1000`_ are eukaryotes (Hint: sort the data, or use find)?
 >
@@ -493,7 +468,7 @@ We have to go to the next two tabs - _`Cutoff100`_ and _`Cutoff10`_ – to reall
 
 The data are sorted by the descending average value (column G).  If we sort on the coefficient of variation (COV; column H), we are looking at the most equal counts.
 
->**Question 7:**
+>**Question 8:**
 >
 >What do you notice about the location of the “Unclassfied” taxa?
 >
@@ -503,7 +478,7 @@ The data are sorted by the descending average value (column G).  If we sort on t
 
 Now sort _`Cutoff100`_ on column A.  Remember what databases you have been working with, and their constituents (from the Kaiju webpage).
 
->**Question 8:**
+>**Question 9:**
 >
 >When you compare columns A and D with columns B, C, E and F, what do you notice in the first 300 or so rows?  Why do you think this is?
 >
@@ -511,7 +486,7 @@ Now sort _`Cutoff100`_ on column A.  Remember what databases you have been worki
 
 For our final look at the data, we will move to the _`Cutoff10`_ tab.  Sort this sheet on Taxonomy (column I) in the Z to A direction, i.e., making sure that "Unclassified" is at the top of the sheet.  Scroll down until you get to the Eukaryotes section of the taxonomy.  There are \~500 entries for the eukaryotes.
 
->**Question 9:**
+>**Question 10:**
 >
 >In column C, what is the eukaryote with the highest count?
 > Why do you think there is a difference between columns C and F in terms of counts for a given taxon?
@@ -524,68 +499,63 @@ Ok, so now we can look at visualising these data with Krona.
 
 ## Data visualisation with Krona
 
-**11-May-2023 - Please note: There is a major issue with the Kaiju webserver that cannot be solved quickly, so we will return to this exercise next week (week 10).**
+For this last part of this metagenomics portion, we will head back to our Kaiju data, and look at the Krona chart. Krona - <https://github.com/marbl/Krona/wiki> - is a way to explore hierarchical data with multi-layered pie charts in an interactive manner.  
 
-**15-May-2023 - Update: As the results are still not back from the server, this exercise will be ignored for 2023.  I leave it in for completeness though.**
+We can do this inside the RStudio environment.  To do this, go to the _`kaiju`_ folder, and left click once the file _`pjb_Gr500k_nr.html`_. Then click on the “View in Web Browser” line.  This should open up a new webpage showing our results.  You should see something like the following:
 
-For this last part of this metagenomics portion, we will head back to our Kaiju results page, and look at the Krona chart. Krona - <https://github.com/marbl/Krona/wiki> - is a way to explore hierarchical data with multi-layered pie charts in an interactive manner.  
-
-<img src="graphics/image9.png" width="400"/>
-
-To do this, click on the “view classification as Krona chart” towards the bottom of the results page.  This should open up a new webpage showing our results.  You should see something like the following:
-
-<img src="graphics/image10.png" width="500"/>
+<img src="graphics/image10.png" width="500"/><br>
 
 We are going to explore the data as this is a fully interactive plot.  Let’s get rid of our unclassified data, as that is of no interest to us right now.  To do that, click on the area that says “root” so the segment goes grey, and then click again to get arrows, like in the picture below.
 
-<img src="graphics/image11.png" width="500"/>
+<img src="graphics/image11.png" width="500"/><br>
 
 If you now double click, the ‘unclassified’s disappear, and we now see our classified data.  The plot should have dramatically changed, and look something like the below:
 
-<img src="graphics/image12.png" width="500"/>
+<img src="graphics/image12.png" width="500"/><br>
 
-We shall explore the viral world first.  Viruses make up 0.7% of this dataset.  Click on the blue section at the bottom to expand this section out.  When your arrow looks like the below, double click on it to generate the new view, as per the images below.
+We shall explore the viral world first.  Viruses make up 0.8% of this dataset.  Click on the blue section at the bottom to expand this section out.  When your arrow looks like the below, double click on it to generate the new view, as per the images below.
 
-<img src="graphics/image13.png" width="500"/>
-<img src="graphics/image14.png" width="500"/>
+<img src="graphics/image13.png" width="500"/><br>
 
->**Question 10:**
+<img src="graphics/image14.png" width="500"/><br>
+
+>**Question 11:**
 >
 >How many viral sequences are there in this dataset (Hint: top right of the page)?  
->Given this value, approximately how many reads were assigned to Gokushovirinae GAIR4?
+>Given this value, approximately how many reads were assigned to Gokushovirinae Fen672_31?
 >
-> <table><tbody><tr><td>Number of viral reads:</td><td></td></tr><tr><td>Number of reads assigned to Gokushovirinae GAIR4:</td><td></td></tr></tbody></table>
+> <table><tbody><tr><td>Number of viral reads:</td><td></td></tr><tr><td>Number of reads assigned to Gokushovirinae Fen672_31:</td><td></td></tr></tbody></table>
 
 Have a click and explore the data for a couple of minutes.  Use the back arrow (top left of webpage) next to the word ‘Krona’ to go back out.  
 
-<img src="graphics/image15.png" width="100"/>
+<img src="graphics/image15.png" width="100"/><br>
 
 Right, on to the microbial world.  
 
-We can also search for taxonomic classifications across the bacterial tree of life.  Searching on a name shows where they are located in the plot.  For example, let’s find where “_Paracoccus_” is on the plot.  We can then double click to zoom in to the _Paracoccus_ genus.  This is probably too close in, so if you click on say Rhodobacteraceae we can see what proportion of the Rhodobacteraceae are members of the _Paracoccus_ genus.
+We can also search for taxonomic classifications across the bacterial tree of life.  Searching on a name shows where they are located in the plot.  For example, let’s find where _Rhodobacter_ is on the plot.  We can then double click to zoom in to the _Rhodobacter_ genus.  This is probably too close in, so if you click on say Paracoccaceae we can see what proportion of the Paracoccaceae are members of the _Rhodobacter_ genus.
 
 <img src="graphics/image16.png" width="400"/>
 
 
->**Question 11:**
+>**Question 12:**
 >
->What approximate proportion of the Rhodobacteraceae family are members of the _Paracoccus_ genus (Hint: adding up the percentages is fine for today)?
+>What approximate proportion of the Paracoccaceae family are members of the _Rhodobacter_ genus (Hint: adding up the percentages is fine for today)?
 >
 > <table><tr><td>
 > ____________________
 > </td></tr></table>
 
-A group of bacteria of interest – to me anyway! – are the Proteobacteria, so as we did before, let’s click on that ring (found at about 9:30pm on the clock face) to show all the members of this taxonomic class.  Within the Proteobacteria is the genus _Klebsiella_ (a human pathogen).
+A group of bacteria of interest – to me anyway! – are the Pseudomonadota, so as we did before, let’s click on that ring (found on the right side of the clock face) to show all the members of this taxonomic class.  Within the Pseudomonadota is the genus _Klebsiella_ (a human pathogen).  It's found within the Gammaproteobacteria.
 
->**Question 12:**
+>**Question 13:**
 >
->Use the search function to find members of the _Klebsiella_ genus.  Can you use the rings of the plot to work out the full taxonomic path for the _Klebsiella_ genus?  Use a format like “Bacteria – Proteobacteria - XXXXX”.  The full taxonomic path is quite long.
+>Use the search function to find members of the _Klebsiella_ genus.  Can you use the rings of the plot to work out the full taxonomic path for the _Klebsiella_ genus?  Use a format like “Bacteria – Pseudomonadota - Gammaproteobacteria - XXXXX”.  The full taxonomic path is quite long.
 >
 > <table><tr><th> </th></tr><tbody><tr><td> </td></tr><tr><td> </td></tr><tr><td> </td></tr></tbody></table>
 
-Within the Gammaproteobacteria is the order Legionellales (one member of which is responsible for Legionnaire’s disease).  This order is made up of two families – Legionellaceae and Coxillaceae – at different proportions.
+Within the Gammaproteobacteria is the order Legionellales (one member of which is responsible for Legionnaire’s disease).  This order is made up of two families – Legionellaceae and Coxillaceae – at different proportions, as well as a smaller proportion of unclassified Legionellales, but let's not worry about that.
 
->**Question 13:**
+>**Question 14:**
 >
 >Using the chart, and by clicking in various parts of the Krona image, what are the proportions of each of the two families?
 >
@@ -599,19 +569,19 @@ Within the Gammaproteobacteria is the order Legionellales (one member of which i
 
 We will now return to using `R` to look at our data, and head back to our RStudio Cloud environment.  The first thing we will need to do is to download our _`CutoffXXXX`_ files, i.e., our 5 different levels of counts from an external source this time.  These are now the file names, but with hyperlinks:  
 
-- [500k_Cutoff1.txt](https://raw.githubusercontent.com/osilander/203.311/main/Week9/files/500k_Cutoff1.txt "500k_Cutoff1.txt")
-- [500k_Cutoff10.txt](https://raw.githubusercontent.com/osilander/203.311/main/Week9/files/500k_Cutoff10.txt "500k_Cutoff10.txt")
-- [500k_Cutoff100.txt](https://raw.githubusercontent.com/osilander/203.311/main/Week9/files/500k_Cutoff100.txt "500k_Cutoff100.txt")
-- [500k_Cutoff1000.txt](https://raw.githubusercontent.com/osilander/203.311/main/Week9/files/500k_Cutoff1000.txt "500k_Cutoff1000.txt")
-- [500k_Cutoff10000.txt](https://raw.githubusercontent.com/osilander/203.311/main/Week9/files/500k_Cutoff10000.txt "500k_Cutoff10000.txt")
+- [500k_Cutoff1.txt](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week9/files/500k_Cutoff1.txt "500k_Cutoff1.txt")
+- [500k_Cutoff10.txt](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week9/files/500k_Cutoff10.txt "500k_Cutoff10.txt")
+- [500k_Cutoff100.txt](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week9/files/500k_Cutoff100.txt "500k_Cutoff100.txt")
+- [500k_Cutoff1000.txt](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week9/files/500k_Cutoff1000.txt "500k_Cutoff1000.txt")
+- [500k_Cutoff10000.txt](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week9/files/500k_Cutoff10000.txt "500k_Cutoff10000.txt")
 
-We will then repeat the process Olin introduced in Week 4.  To download the data, first make sure you are in your _`/cloud/project/`_ directory, and that you are using the Terminal tab in RStudio. Second, make a new directory called _`week9data`_, and change (`cd`) into that directory. Third, copy the link address (right click on the link and scroll to Copy Link Address). Finally, download the files using `wget`:
+We will then repeat the process that was introduced in Week 4.  To download the data, first make sure you are in your _`~/203311/Module3/Metagenomics/`_ directory, and that you are using the Terminal tab in RStudio. Second, make a new directory called _`week9data`_, and change (`cd`) into that directory. Third, copy the link address (right click on the link and scroll to Copy Link Address). Finally, download the files using `wget`:
 
 ```bash
-wget the_link_address_you_just_copied
+$ wget the_link_address_you_just_copied
 ```
 
->**Question 14:**
+>**Question 15:**
 >
 > What command line would you use to check the number of lines in your downloaded files using a wildcard character?
 > how many lines are there in each of the 5 files?
@@ -642,7 +612,7 @@ Please install the following packages, and then load them - and another one - fo
 
 #### Loading data and subsetting on taxonomy
 
-Let's load in some data now.  This presumes that you are at _`/cloud/project/`_ and that you have made the  _`week9data`_ directory as stated above.  We will load in the _`500k_Cutoff1000.txt`_ file as an example, and perform some manipulation on it to allow us to work with the file in the rest of this section.
+Let's load in some data now.  This presumes that you are at _`~/203311/Module3/Metagenomics/`_ and that you have made the  _`week9data`_ directory as stated above.  We will load in the _`500k_Cutoff1000.txt`_ file as an example, and perform some manipulation on it to allow us to work with the file in the rest of this section.
 
 ```R
 ### load in data
@@ -673,7 +643,7 @@ The next thing is to make a subset based on a certain taxonomic classification. 
 
 This is why we are making a copy of the object here, so that you can look at _`cutDataFileRemovedCols_noUC2`_ to get the part of the name to remove.
 
->**Question 15:**
+>**Question 16:**
 >
 > How many rows does _`onlyTaxaOfInterest`_ have compared to  _`cutDataFileRemovedCols_noUC2`_? (Use one of the many methods you now are aware of, e.g. `grep` in the terminal, or by a manual inspection to find the numbers.)
 >
@@ -688,7 +658,7 @@ We are going to look at our data as heatmaps, and something called an UpSet plot
 
 #### Heatmaps
 
-I talked about abundance of reads in the Week 9 lectures.  A convenient way to view the abundance of the different taxa is with a heatmap (such as at <https://r-graph-gallery.com/heatmap>).  Hopefully you are slightly familiar with these from the other Portfolio analyses.
+I talked about abundance of reads in the Week 9 lectures.  A convenient way to view the abundance of the different taxa is with a heatmap (such as at <https://r-graph-gallery.com/heatmap>).  Hopefully you are slightly familiar with these from the other Portfolio analyses that you have performed by now.
 
 To draw a very basic heatmap, we use the `pheatmap()` command from the `pheatmap` package.  
 
@@ -698,18 +668,18 @@ To draw a very basic heatmap, we use the `pheatmap()` command from the `pheatmap
 ```
 This command can be modified very extensively - have a look at `?pheatmap()` in the `R` console to get the help pages.  Try out a few things out if you like.
 
-In window #4, this will look at little weird due to the long taxa names (which is why we have shortened them).  Click in the "Zoom" for the image to go to a new window.  This window is stretchable, so you can make it look how you want, right click it and save it as an image.
+In window #4, this will look at little weird due to the long taxa names (which is why we have shortened them).  Click in the "Zoom" for the image to go to a new window.  As i have shown before, this window is stretchable, so you can make it look how you want, right click it and save it as an image.
 
 
 #### UpSet plots
 
 Now we are going to look at the data in a very different way.  This method is all to do with Venn diagrams, and thinking about the taxa results as members of sets.  In other words, overall if we get a taxon returned from a specific database, what other databases can we find that taxon in as well?  As we have 6 sets of data, we want to look at the insection of those 6.  How do we do that?  Here is an example of a Venn diagram with 6 intersecting sets:
 
-<img src="graphics/Venn6.jpg" width="400"/>
+<img src="graphics/Venn6.jpg" width="400"/><br>
 
 What is going on here?  How intuitive is this?  The answer is **not very intuitive at all**.   Above 7 sets it is almost impossible to work out what is going on (it might be at 6 too!) with all the combination of relationships, and ever smaller parts of the figure where the intersections are found.  Therefore we are going to look at our data in a different way, using an UpSet plot.  You might have seen these on the R graph gallery (<https://r-graph-gallery.com/>) at <https://r-graph-gallery.com/upset-plot.html>.  Have a read of <https://upset.app/> for a brief introduction, an example plot and an explanation of what is going on here.  We are going to create a similar plot with our data.
 
-To make the plot, we have to apply a transformation to our data to make it an absence/presence dataset and therefore lose our quantitative data.  So, in this case, any non-zero value in our dataset becomes 1, and 0 stays as 0.  Hence, if a taxon has 3 or 2048 counts associated with it, it gets transformed to 1.  This shows us relationships of the detected taxa, rather than the abundance.  This is still a useful way to look at the data to understand the relationship between the 6 datasets we have from our sample.  
+To make the plot, we have to apply a transformation to our data to make it an absence/presence dataset and therefore lose our quantitative data.  So, in this case, any non-zero value in our dataset becomes 1, and 0 stays as 0.  Hence, if a taxon has 3 or 2048 counts associated with it, it gets transformed to 1.  This shows us relationships of the detected taxa, rather than the abundance.  This is still a useful way to look at the data to understand the relationship between the 6 datasets we have from our sample, rather than the abundance.  
 
 ```R
 ### remove unwanted columns
