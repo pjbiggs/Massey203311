@@ -1,7 +1,5 @@
 **[Return to the Course Home Page](../index.html)**
 
-## _06-May-2024: PLEASE DO NOT ATTEMPT THIS PRACTICAL UNTIL THIS NOTE DISAPPEARS LATER THIS WEEK_ ##
-
 # Introduction to Metagenomic analysis
 
 **Professor Patrick Biggs**
@@ -118,6 +116,11 @@ The commands below have been checked and should work fine.
 
 ---
 
+| WARNING!! | In order to complete this practical you MUST restart your session completely to receive the new data required for this practical. |
+|-------|:----------|
+
+---
+
 ## Taxonomic classification with the Kaiju suite of tools
 
 In this, the second practical session of this Microbial Diversity Module, we will be working with the Kaiju suite of tools to classify a small set of reads (500,000) under a couple of different algorithm conditions, and against three different reference databases supplied by the website to get an understanding of the fact that the way you perform these analyses has an impact on the results you get out.  In other words, writing down the results, and information about what you have done precisely to get them is important.  
@@ -146,8 +149,6 @@ Now let’s go to the website, and start the uploading process (**theoretically*
 1.  Go to <https://kaiju.binf.ku.dk/>
 
   <img src="graphics/kaijuLogo.png" width="400"/>
-
-
 
 2.  Click on the webserver icon at the top of the page.
 
