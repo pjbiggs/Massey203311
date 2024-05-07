@@ -76,19 +76,15 @@ Don\'t forget to press the **\[Enter\]** key: commands are not sent to the `R` c
 
 #### General
 
-We will be working within web browsers, and Firefox and Chrome are installed on the machines, or Safari if you are an Apple user. We will then login to RStudio Cloud using your personalised account. If you would like to use your own laptop in the labs on either campus, please feel free to do so.
+We will be working within web browsers, and Firefox and Chrome are installed on the machines, or Safari if you are an Apple user. We will then login to Massey RStudio using your personalised account.  If you would like to use your own laptop in the labs please feel free to do so.
 
-#### Manawatu (iMacs)
+#### Manawatu ScC5.10 (iMacs)
 
-The machines we are using for the course are Apple iMacs. Please use your normal Massey username and password to login to these machines. Please remember to ignore (i.e. cancel) the dialogue box about the network when you log in.
+The machines we can use for the course are Apple iMacs. Please follow the information in "Access_to_RStudio_2024.pdf" to log into these machines through the use of the VMware Horizon application.  Please use your normal Massey username and password to login to the Windows 10 machines.
 
-#### Albany (PCs)
+#### outside Massey
 
-The machines are Windows PC's so logging into them should be the same as any other Massey Windows PC.
-
-#### Outside Massey
-
-Most likely this is your own machine, so this should not be an issue.
+Most likely this is your own machine, so this should not be an issue, but please follow the general instructions in "Access_to_RStudio_2024.pdf" about the use of your own machine and these resources.
 
 
 ### Our work today
@@ -99,24 +95,24 @@ We will continue to use our Massey RStudio  environment as a source and location
 ### What we are going to do today?
 
 The approach we are taking this year to cover this material is slightly different to what has been done in previous years.  There are two reasons for this:
-1. For the first time in 2024, we are using local Massey computing servers for running this course.  This is the server called `tur-rstudio2` that you have been using for the course so far.  We have also set up a computing server called `tur-kaiju1` for metagenomic analysis that you will have access to.
-2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and it takes a very long time (days or weeks) to run jobs against the supplied databases.  Therefore, we cannot use this in the lab practicals anymore.
+1. For the first time in 2024, we are using local Massey computing servers for running this course.  This is the server called `tur-rstudio2` that you have been using for the course so far.  We have also set up a computing server called `tur-kaiju1` for metagenomic analysis that you will have access to for this module.
+2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and it takes a very long time (days or even weeks) to run jobs against the supplied databases.  Therefore, we cannot use this in the lab practical anymore.
 
-This means we will be adapting the process so the same procedure can be done, just on a smaller scale, and locally using the terminal in our Massey RStudio environment.
+This means we will be adapting the process so the same procedure can be preformed, just on a smaller scale, and locally using the terminal in our Massey RStudio environment.
 
 To set the scene, let's go through how things were in 2023 and before:
 
 #### In previous years
 
 We are primarily going to be using webtools, and the Microsoft product Excel to explore some reads from an experiment, but under different analysis conditions, varying both the analysis methods and the database we are comparing our reads to.
-1. We will upload a pair of reads to the Kaiju website for analysis against a variety of databases.
+1. We will upload a pair of reads to the Kaiju webserver for analysis against a variety of databases.
 2. We will download these data, and open them in Excel to explore them in a comparative way.  
 3. We will then look at the results in a completely different way using Krona.
 4. Finally, we will be returning to `R` for the work that will lead to the Portfolio analysis of today's work.
 
 #### In 2024
 
-The process is the nearly the same, except that for point 1. above, we will use a new Massey server (`tur-kaiju1`) to run the software behind the Kaiju webserver, rather than on the actual webserver in Denmark.  Then for point 2. we will copy the data back to our usual environment (on `tur-rstudio2`), and continue as described above for points 3. and 4.
+The process is the nearly the same, except that for point 1) above, we will use a new Massey server (`tur-kaiju1`) to run the software behind the Kaiju webserver, rather than uploading reads to the actual webserver in Denmark.  Then for point 2) we will copy the data back to our usual environment (on `tur-rstudio2`), and continue as described above for points 3) and 4).
 
 The commands below have been checked and should work fine.
 
@@ -124,82 +120,53 @@ The commands below have been checked and should work fine.
 
 ## Taxonomic classification with the Kaiju suite of tools
 
-In this, the second practical session of this Microbial Diversity Module, we will be working with the Kaiju suite of tools to classify a small set of reads (500,000) under a couple of different algorithm conditions, and against three different reference databases supplied by the website to get an understanding of the fact that the way you perform these analyses has an impact on the results you get out.  In other words, writing down the results, and information about what you have done precisely to get them is important.  We are going to upload the reads to the server, download the results, and analyse them.  We are also going to use the Krona interactive viewer to explore our data in a little more depth.
+In this, the second practical session of this Microbial Diversity Module, we will be working with the Kaiju suite of tools to classify a small set of reads (500,000) under a couple of different algorithm conditions, and against three different reference databases supplied by the website to get an understanding of the fact that the way you perform these analyses has an impact on the results you get out.  In other words, writing down the results, and information about what you have done precisely to get them is important.  
+
+We are going to upload the reads to the server, download the results, and analyse them.  We are also going to use the Krona interactive viewer to explore our data in a little more depth.
+
+The below screenshot shows the folder structure within the `Metagenomics` folder within the `~/203311/Module3/` folder for Module3.
+
+<img src="graphics/window4_2024.png" width="600"/>
 
 
-### Exercise 1: Data uploading and generation
+### Exercise 0: Observing the process of read analysis on the Kaiju webserver -- a.k.a. how it used to be
 
-The below screenshot shows the folder structure within `/cloud/project/` for the new Module.
+To illustrate how the process works on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms, and we shall use these later in Exercise 2.
 
-<img src="graphics/window4_2023.png" width="600"/>
+> [!IMPORTANT]
+> **Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1.  Please make sure you can also answer question 0 in this section, as it is key to the practical.  Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
 
-The first thing we are going to do is upload a set of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – to the Kaiju webserver and perform a taxonomic analysis on the reads.
+So, we would use a pair of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – and upload these to the Kaiju webserver and perform a taxonomic analysis on the reads.  These reads are found in the `kaiju` folder.  There are other files in there too, but more on those later.
 
-<img src="graphics/kaijuLogo.png" width="400"/>
-
-These are environmental samples taken as part of a Massey University research project I was involved with a few years ago.  So, to do that, we need to use the reads from the _`kaiju`_ folder in the `/cloud/project/` project within the "weeks8to10" project within the "MicrobialDiversity_2023" workspace.  There are other files in there too, but more on those later.
-
-We have 3 set of analyses to perform so, your job name for each analysis will vary according to what we are going to run.  Replace `XXX` with your initials.  The combinations of names for the jobs is shown in the table below:
-
-<table>
-<thead>
-  <tr>
-    <th>Database to use:</th>
-    <th>Run mode (no need to change):</th>
-    <th>Job name:</th>
-    <th>Performed by:</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>RefSeq Genomes</td>
-    <td rowspan="3">Default (greedy)</td>
-    <td>XXX_Gr500k_ref</td>
-    <td rowspan="3">student</td>
-  </tr>
-  <tr>
-    <td>NCBI BLAST nr</td>
-    <td>XXX_Gr500k_nr</td>
-  </tr>
-  <tr>
-    <td>NCBI BLAST nr + euk</td>
-    <td>XXX_Gr500k_nreuk</td>
-  </tr>
-  <tr>
-    <td>RefSeq Genomes</td>
-    <td rowspan="3">MEM</td>
-    <td>XXX_MEM500k_ref</td>
-    <td rowspan="3">P. Biggs (for you to work with)</td>
-  </tr>
-  <tr>
-    <td>NCBI BLAST nr</td>
-    <td>XXX_MEM500k_nr</td>
-  </tr>
-  <tr>
-    <td>NCBI BLAST nr + euk</td>
-    <td>XXX_MEM500k_nreuk</td>
-  </tr>
-</tbody>
-</table>
-
+These reads are environmental samples taken as part of a Massey University research project I was involved with a few years ago.  
 
 Now let’s go to the website, and start the uploading process:
 
 1.  Go to <https://kaiju.binf.ku.dk/>
 
+  <img src="graphics/kaijuLogo.png" width="400"/>
+
+
+
 2.  Click on the webserver icon at the top of the page.
 
-3.  Enter your name for the job, and then your email address, so you will know when the job is complete by getting an email.
+3.  You would enter your name for the job, and then your email address, so you will know when the job is complete by getting an email.
 
     <img src="graphics/image3.png" width="400"/>
+
+
 
 4.  Now we can upload the reads, one at a time. Select the “Select file” box, and it will open up a window for the first read.  Select _`sampleA_500k_R1.fq.gz`_ from the dialogue box and click on “Start upload”.  As soon as you have done this, click on “Upload a second file for paired end sequencing”.
 
     <img src="graphics/image4.png" width="400"/>
 
+
+
 5.  In the same way, you can upload _`sampleA_500k_R2.fq.gz`_ as well.   Click on “Start upload” again.
 
     <img src="graphics/image5.png" width="400"/>
+
+
 
 6.  When both reads are completely uploaded, you see the following.
 
@@ -207,9 +174,9 @@ Now let’s go to the website, and start the uploading process:
 
     _NB: This is a little weird in its behaviour, but you need to keep an eye on the upload, as I have had experience where the upload times out, and then you have to do it again.  Given that for me it took me up to 7 minutes to upload, and there are 3 to do, you have to keep an eye on things, and also I appreciate it will take a little while.  This also depends a little on the Massey network._
 
-7.  Now you can choose the database for the job name, as in the table above, and you are ready to click on “Submit” at the bottom of the page.
+7.  Now you would choose the database for the job name, as in the table below, and you are ready to click on “Submit” at the bottom of the page.
 
-NB2: There is a bit of waiting for this first part of the process, so I suggest whilst you are waiting, you read the “Behind the Paper” feature on the Nature Microbiology website for the Kaiju publication.  The link is below:
+NB2: There would be a bit of waiting for this first part of the process, so I suggest whilst you are waiting, you read the “Behind the Paper” feature on the Nature Microbiology website for the Kaiju publication.  The link is below:
 
 <https://naturemicrobiologycommunity.nature.com/users/10226-peter-menzel/posts/6200-from-metagenomics-of-hot-springs-to-bioinformatics-software-development>
 
@@ -222,11 +189,180 @@ This is not super-long but gives you a chance to see the motivation for the pape
 > <table><tr><th> </th></tr><tbody><tr><td> </td></tr><tr><td> </td></tr><tr><td> </td></tr></tbody></table>
 
 
+### Exercise 1: Data uploading and generation -- the 2024 method
+
+We are going to replicate this process on the command line, with two variations: the number of reads, and the database we are going to use.  so that this can be run within the time of lab practical we will use the "fungi" database and 50,000 reads.
+
+We will go to the terminal, starting in our usual place - `tur-rstudio2`.
+
+  <img src="graphics/2024_terminal1.png" width="350"/>
+
+&nbsp;
+
+Once you have done this, type the following:
+
+```bash
+### let's use a command called "ssh" to log on to another server
+
+$ ssh tur-kaiju1
+
+## log in with your normal Windows password to gain access to "tur-kaiju1"
+```
+
+You should now see the following:
+
+  <img src="graphics/2024_terminal3.png" width="600"/>
+
+&nbsp;
+
+Great, we have moved ourselves to a new server!!  Now we can type `helpme` to see a nice introductory message.  Don't worry, we will go through this in detail shortly:
+
+  <img src="graphics/2024_terminal4.png" width="700"/>
+
+&nbsp;
+
+Let's see the basic command for `kaiju`, and what it returns.  We will get an error initially as we have not declared any files, but that is OK for now.
+
+```bash
+### type "kaiju" in the "tur-kaiju1" terminal window
+
+$ kaiju
+# Error: Please specify the location of the nodes.dmp file, using the -t option.
+
+# Kaiju 1.9.2
+# Copyright 2015-2022 Peter Menzel, Anders Krogh
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+
+# Usage:
+#   kaiju -t nodes.dmp -f kaiju_db.fmi -i reads.fastq [-j reads2.fastq]
+
+#   Mandatory arguments:
+#      -t FILENAME   Name of nodes.dmp file
+#      -f FILENAME   Name of database (.fmi) file
+#      -i FILENAME   Name of input file containing reads in FASTA or FASTQ format   
+```
+
+We need a minimum of 3 files to make this run: two files for taxonomy which are the `-t` and `-f` options.  We then need either a single read file by using the `-i` option, or as in our case the `-j` option for a second read file.
+
+Things have been set up so that running this code requires relatively short path names - I have copied the reads over for you, and they are in the _`/samples/`_ folder, and all our taxonomy database files are in the _`/db/`_ folder.  For simplicity, we will run this in our home directory on `tur-kaiju1`.
+
+We will generate a set of data each with the default _`greedy`_ algorithm, and then a second set with the  _`mem`_ algorithm.  Here is the code to type:
+
+> [!WARNING]
+> This code is quite complex, please make sure it is correct, otherwise it will fail.
+
+```bash
+### we also declare the `-a` option for the algorithm,
+### and `-o` for the name of the output file.
+
+## first default greedy
+$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi -i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a greedy -o ~/fungi_50k_greedy.txt
+
+## then mem
+$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi -i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a mem -o ~/fungi_50k_mem.txt
+```
+
+These commands will take about 1.5 minutes each, and if the commands are queued, it might take a little longer.  However, it should complete just fine.  we will run a couple of extra lines of code to help us visualise what we have generated.  
+
+```bash
+## two extra commands to help us visualise our output
+
+### first default greedy
+$ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp -i ~/fungi_50k_greedy.txt -u -v -o ~/fungi_50k_greedy.txt.krona
+# Reading taxonomic tree from file /db/nr_euk/nodes.dmp
+# Reading taxon names from file /db/nr_euk/names.dmp
+# Processing /home/p/pbiggs/fungi_50k_greedy.txt...
+# Writing to file /home/p/pbiggs/fungi_50k_greedy.txt.krona
+
+$ ktImportText -o ~/fungi_50k_greedy.txt.html ~/fungi_50k_greedy.txt.krona
+# Writing /home/p/pbiggs/fungi_50k_greedy.txt.html...
+
+### then mem
+$ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp -i ~/fungi_50k_mem.txt -u -v -o ~/fungi_50k_mem.txt.krona
+# Reading taxonomic tree from file /db/nr_euk/nodes.dmp
+# Reading taxon names from file /db/nr_euk/names.dmp
+# Processing /home/p/pbiggs/fungi_50k_mem.txt...
+# Writing to file /home/p/pbiggs/fungi_50k_mem.txt.krona
+
+$ ktImportText -o ~/fungi_50k_mem.txt.html ~/fungi_50k_mem.txt.krona
+# Writing /home/p/pbiggs/fungi_50k_mem.txt.html...
+```
+
+What exactly this code is doing will become apparent in Exercise 2, but we will leave exact details for today.
+
+Our final piece of work is to copy our results back to `tur-rstudio2` and close our terminal for `tur-kaiju1`.  Let's check we have 6 output files by running `ls -l *fungi*`.  If you do not see 6 files, please let a demonstrator know.
+
+Now to copy and exit the terminal:
+```bash
+### copy over:
+### remember to change "pbiggs" to your studentID
+$ scp fungi* pbiggs@tur-rstudio2:~/203311/Module/Metagenomics/kaiju
+
+### exit "tur-kaiju1", amd it's back to "tur-studio2"
+$ exit
+# logout
+# Connection to tur-kaiju1 closed.
+# (base) [pbiggs@tur-rstudio2 ~]$
+```
+
+So that's it, we are back to our usual `tur-rstudio2` server and you have run an example of _`kaiju`_ code on a different server, and copied the resulting data back.  Well done, that is no mean feat.
+
+What's next after doing that?
+
+
 ### Exercise 2: Data downloading
 
-**11-May-2023 - Please note: There is a major issue with the Kaiju webserver that cannot be solved quickly, so we will return to this exercise next week (week 10).**
+As stated above, there are 6 sets of analyses that have been performed.  THe information about these is provided in the table below:
 
-**15-May-2023 - Update: As the results are still not back from the server, this exercise will be ignored for 2023.  I leave it in for completeness though.**
+<table>
+<thead>
+  <tr>
+    <th>Database used:</th>
+    <th>Run mode:</th>
+    <th>Job name:</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>RefSeq Genomes</td>
+    <td rowspan="3">Default (greedy)</td>
+    <td>pjb_Gr500k_ref</td>
+  </tr>
+  <tr>
+    <td>NCBI BLAST nr</td>
+    <td>pjb_Gr500k_nr</td>
+  </tr>
+  <tr>
+    <td>NCBI BLAST nr + euk</td>
+    <td>pjb_Gr500k_nreuk</td>
+  </tr>
+  <tr>
+    <td>RefSeq Genomes</td>
+    <td rowspan="3">MEM</td>
+    <td>pjb_MEM500k_ref</td>
+  </tr>
+  <tr>
+    <td>NCBI BLAST nr</td>
+    <td>pjb_MEM500k_nr</td>
+  </tr>
+  <tr>
+    <td>NCBI BLAST nr + euk</td>
+    <td>pjb_MEM500k_nreuk</td>
+  </tr>
+</tbody>
+</table>
+
+`-------------------------------------`
+
+**07-May-2024: EVERYTHING FROM HERE ONWARDS IS A WORK IN PROGRESS AND SHOULD BE CONSIDERED NOT YET TESTED**
+
+
+
+
+
+
+
+
 
 After a little while, you should have been emailed three times from the Kaiju webserver with your results.  We now have to download these to analyse them.  Using your email link, click on the link to open up the results page.  It lists 4 things:
 1.  A summary of the results, and the parameters used for the run
