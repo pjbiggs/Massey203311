@@ -134,13 +134,8 @@ Our reads to use.<br>
 
 To illustrate how the process works on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms for you, and we shall use these later in Exercise 2.
 
-|:memo: | Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 2. Please make sure you can also answer Question 1 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.|
+| WARNING!! | Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 2. Please make sure you can also answer Question 1 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.|
 |-------|:----------|
-
->  [!IMPORTANT]
->  **Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 1.  
-Please make sure you can also answer Question 1 in this section, as it is key to the practical.  
-Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
 
 So, we would use a pair of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – and upload these to the Kaiju webserver and perform a taxonomic analysis on the reads.  These reads are found in the `kaiju` folder.  There are other files in there too, but more on those later.
 
@@ -258,8 +253,9 @@ Things have been set up so that running this code requires relatively short path
 
 We will generate a set of data each with the default _`greedy`_ algorithm, and then a second set with the  _`mem`_ algorithm.  Here is the code to type:
 
-> [!WARNING]
-> This code is quite complex, please make sure it is correct, otherwise it will fail.
+| WARNING!! | This code is quite complex, please make sure it is correct, otherwise it will fail. |
+|-------|:----------|
+
 
 ```bash
 # We also declare the `-a` option for the algorithm,
@@ -372,20 +368,19 @@ As stated above, there are 6 sets of analyses that have been performed.  The inf
 </tbody>
 </table>
 
-`-------------------------------------`
-
-# sort out file paths and folders #
-
-The output folder for these files is called _`XXXXX`_ and can be found within the _`~/203311/Module3/Metagenomics/`_ folder for Module3. There are 3 files per condition, and these files are:
+The output folder for these files is called _`resultsKaiju`_ and can be found within the _`~/203311/Module3/Metagenomics/`_ folder for Module3. There are 3 files per condition, and these files are:
 1. those ending in _`.txt`_
 2. those ending in _`.krona`_
 3. those ending in _`.html`_
 
-Let's start off with the `.txt.krona` files for an overview, and let's find out how many unclassified reads there are for our 6 datasets.  Remember, there are 500,000 paired Illumina reads that are bein mapped against 3 databases with two algorithms.
+Let's start off with the `.txt.krona` files for an overview, and let's find out how many unclassified reads there are for our 6 datasets.  Remember, there are 500,000 paired Illumina reads that are being mapped against 3 databases with two algorithms.
 
 ```bash
+# let's check where we are
 $ pwd
-$ cd XXXXXXXXXXXXXXXXXX
+
+# and move to the folder we need, presuming we are in 203311/Module3/Metagenomics/
+$ cd resultsKaiju
 $ grep "Unclassified" *.krona
 ```
 
@@ -399,7 +394,7 @@ Wow, different combinations give different numbers of unmapped reads.  So we thi
 
 We are going to have a look at one of the  _`.txt`_ files quickly as an example just to get a hint of what the output data looks like.  These are big files, so you will have to download them onto your local machine to do this (do you remember how to do this with the file manager window from within RStudio?).
 
-Let's choose _`pjb_Gr500k_nr.txt`_ as an example.  
+Let's choose _`pjb_Gr500k_nreuk.txt`_ as an example.  
 
 Open this file up in a spreadsheet program such as Excel.  Double click on the application to start it.  You will see the 7 columns as listed below:
 
@@ -423,16 +418,16 @@ Open this file up in a spreadsheet program such as Excel.  Double click on the a
 
 ### Exercise 4: Data analysis
 
-We are interested in the file for the taxon path counts.  In a similar way, let’s open up the matching file to  _`pjb_Gr500k_nr.txt`_ which is called  _`pjb_Gr500k_nr.txt.krona`_ in a spreadsheet program like Excel to have a look at the contents.  This has far fewer rows of data as the hits to the same taxon have been merged.  You will have to sort the data on column A from largest to smallest for the next question.
+We are interested in the file for the taxon path counts.  In a similar way, let’s open up the matching file to  _`pjb_Gr500k_nreuk.txt`_ which is called  _`pjb_Gr500k_nreuk.txt.krona`_ in a spreadsheet program like Excel to have a look at the contents.  This has far fewer rows of data as the hits to the same taxon have been merged.  You will have to sort the data on column A from largest to smallest for the next question.
 
 >**Question 4:**
 >
->Using your spreadsheet for the _`pjb_Gr500k_nr.txt.krona`_ file (the results against the nr database), how many taxa are present at over 1000 counts?  
->What is the number of counts we would use as a cutoff for 0.1%?  
->How many taxa are there above this threshold?  
->Finally, what is the species of bacteria with a count of 792?
+> - Using your spreadsheet for the _`pjb_Gr500k_nreuk.txt.krona`_ file (the results against the nreuk database), how many taxa are present at over 1000 counts?  
+> - What is the number of counts we would use as a cutoff for 0.1%?  
+> - How many taxa are there above this threshold?  
+> - Finally, what is the species of bacteria with a count of 737?
 >
-> <table><tbody><tr><td>Over 1000 counts:</td><td></td></tr><tr><td>Counts for 0.1% cutoff:</td><td></td></tr><tr><td>Taxa present at more than 0.1%:</td><td></td></tr><tr><td>Taxon at count of 792:</td><td></td></tr></tbody></table>
+> <table><tbody><tr><td>Over 1000 counts:</td><td></td></tr><tr><td>Counts for 0.1% cutoff:</td><td></td></tr><tr><td>Taxa present at more than 0.1%:</td><td></td></tr><tr><td>Taxon at count of 737:</td><td></td></tr></tbody></table>
 
 ### Exercise 5: Data comparisons
 
@@ -466,7 +461,8 @@ Let’s investigate the data a little further.  Looking at the first tab - _`Cut
 
 We have to go to the next two tabs - _`Cutoff100`_ and _`Cutoff10`_ – to really explore the data.  We will leave the last tab - _`Cutoff1`_ – for today, as there are too many taxa to deal with.  We shall look at _`Cutoff100`_ first.  Go to that tab now if you are not there.  
 
-**NB: Any sorting you are going to do shortly on the sheets needs to be across the columns A to I, otherwise things will go badly awry, and you will make incorrect inferences.  If that happens, download the file again, and start sorting again.**
+| WARNING!! | Any sorting you are going to do shortly on the sheets needs to be across the columns A to I, otherwise things will go badly awry, and you will make incorrect inferences.  If that happens, download the file again, and start sorting again. |
+|-------|:----------|
 
 The data are sorted by the descending average value (column G).  If we sort on the coefficient of variation (COV; column H), we are looking at the most equal counts.
 
@@ -484,7 +480,9 @@ Now sort _`Cutoff100`_ on column A.  Remember what databases you have been worki
 >
 >When you compare columns A and D with columns B, C, E and F, what do you notice in the first 300 or so rows?  Why do you think this is?
 >
-> <table><tr><th> </th></tr><tbody><tr><td> </td></tr><tr><td> </td></tr><tr><td> </td></tr></tbody></table>
+> <table><tr><td>
+> ____________________
+> </td></tr></table>
 
 For our final look at the data, we will move to the _`Cutoff10`_ tab.  Sort this sheet on Taxonomy (column I) in the Z to A direction, i.e., making sure that "Unclassified" is at the top of the sheet.  Scroll down until you get to the Eukaryotes section of the taxonomy.  There are \~500 entries for the eukaryotes.
 
@@ -503,25 +501,23 @@ Ok, so now we can look at visualising these data with Krona.
 
 For this last part of this metagenomics portion, we will head back to our Kaiju data, and look at the Krona chart. Krona - <https://github.com/marbl/Krona/wiki> - is a way to explore hierarchical data with multi-layered pie charts in an interactive manner.  
 
-We can do this inside the RStudio environment.  To do this, go to the _`kaiju`_ folder, and left click once the file _`pjb_Gr500k_nr.html`_. Then click on the “View in Web Browser” line.  This should open up a new webpage showing our results.  You should see something like the following:
+We can do this inside the RStudio environment.  To do this, go to the _`kaiju`_ folder, and left click once the file _`pjb_Gr500k_nreuk.html`_. Then click on the “View in Web Browser” line.  This should open up a new webpage showing our results.  You should see something like the following:
 
-# update all images #
-
-<img src="graphics/image10.png" width="500"/><br>
+<img src="graphics/2024_krona1.png" width="500"/><br>
 
 We are going to explore the data as this is a fully interactive plot.  Let’s get rid of our unclassified data, as that is of no interest to us right now.  To do that, click on the area that says “root” so the segment goes grey, and then click again to get arrows, like in the picture below.
 
-<img src="graphics/image11.png" width="500"/><br>
+<img src="graphics/2024_krona2.png" width="500"/><br>
 
 If you now double click, the ‘unclassified’s disappear, and we now see our classified data.  The plot should have dramatically changed, and look something like the below:
 
-<img src="graphics/image12.png" width="500"/><br>
+<img src="graphics/2024_krona3.png" width="500"/><br>
 
 We shall explore the viral world first.  Viruses make up 0.8% of this dataset.  Click on the blue section at the bottom to expand this section out.  When your arrow looks like the below, double click on it to generate the new view, as per the images below.
 
-<img src="graphics/image13.png" width="500"/><br>
+<img src="graphics/2024_krona4.png" width="500"/><br>
 
-<img src="graphics/image14.png" width="500"/><br>
+<img src="graphics/2024_krona5.png" width="500"/><br>
 
 >**Question 11:**
 >
@@ -536,14 +532,14 @@ Have a click and explore the data for a couple of minutes.  Use the back arrow (
 
 Right, on to the microbial world.  
 
-We can also search for taxonomic classifications across the bacterial tree of life.  Searching on a name shows where they are located in the plot.  For example, let’s find where _Rhodobacter_ is on the plot.  We can then double click to zoom in to the _Rhodobacter_ genus.  This is probably too close in, so if you click on say Paracoccaceae we can see what proportion of the Paracoccaceae are members of the _Rhodobacter_ genus.
+We can also search for taxonomic classifications across the bacterial tree of life.  Searching on a name shows where they are located in the plot.  For example, let’s find where _Gemmobacter_ is on the plot.  We can then double click to zoom in to the _Gemmobacter_ genus.  This is probably too close in, so if you click on say Paracoccaceae we can see what proportion of the Paracoccaceae are members of the _Gemmobacter_ genus.
 
-<img src="graphics/image16.png" width="400"/>
+<img src="graphics/2024_krona6.png" width="400"/>
 
 
 >**Question 12:**
 >
->What approximate proportion of the Paracoccaceae family are members of the _Rhodobacter_ genus (Hint: adding up the percentages is fine for today)?
+>What approximate proportion of the Paracoccaceae family are members of the _Gemmobacter_ genus (Hint: adding up the percentages is fine for today)?
 >
 > <table><tr><td>
 > ____________________
@@ -567,19 +563,21 @@ Within the Gammaproteobacteria is the order Legionellales (one member of which i
 
 Finally, a quick check with our fungal data.  Let's open up _`fungi_50k_mem.txt.html`_ to see how different this looks.  It is the same process as before, clicking on the “View in Web Browser” line after having left-clicked on the file name.
 
-Wow, different, huh?  There's so much unclassified data.
+<img src="graphics/2024_krona7.png" width="500"/><br>
 
-# add in a new image #
+Wow, different, huh?  There's so much unclassified data.  let's expand out the classified data as you have done previously
+
+<img src="graphics/2024_krona8.png" width="500"/><br>
 
 >**Question 15:**
 >
->Using the chart, what proportion of the data is classified?  Remember, for this we have only 50,0000 reads.  Finally, what are the read numbers for the Eurotiomycetes?
+>Using the chart, what proportion of the data is classified?  Remember, for this we have only 50,0000 reads.  Finally, what are the read numbers for the Onygenales?
 >
-> <table><tbody><tr><td>proportion:</td><td></td></tr><tr><td>Eurotiomycetes:</td><td></td></tr></tbody></table>
+> <table><tbody><tr><td>proportion:</td><td></td></tr><tr><td>Onygenales:</td><td></td></tr></tbody></table>
 
 ---
 
-## Further analysis of Kaiju output in R
+## Further analysis of Kaiju output in R ##
 
 ### Locating data
 
