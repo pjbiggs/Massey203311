@@ -116,7 +116,7 @@ The commands below have been checked and should work fine.
 
 ---
 
-> **!!WARNING!!
+> **!! WARNING &#x26A0; !!
 > In order to complete this practical you MUST restart your session completely  - by signing out - to receive the new data required for this practical.**
 
 ---
@@ -137,7 +137,7 @@ Our reads to use.<br>
 
 To illustrate how the process works on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms for you, and we shall use these later in Exercise 2.
 
-> **!!WARNING!!
+> **!! WARNING &#x26A0; !!
 > Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 2. Please make sure you can also answer Question 1 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
 
 So, we would use a pair of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – and upload these to the Kaiju webserver and perform a taxonomic analysis on the reads.  These reads are found in the `kaiju` folder.  There are other files in there too, but more on those later.
@@ -254,7 +254,7 @@ Things have been set up so that running this code requires relatively short path
 
 We will generate a set of data each with the default _`greedy`_ algorithm, and then a second set with the  _`mem`_ algorithm.  Here is the code to type:
 
-> **!!WARNING!!
+> **!! WARNING &#x26A0; !!
 > This code is quite complex, please make sure it is correct, otherwise it will fail.**
 
 
@@ -462,7 +462,7 @@ Let’s investigate the data a little further.  Looking at the first tab - _`Cut
 
 We have to go to the next two tabs - _`Cutoff100`_ and _`Cutoff10`_ – to really explore the data.  We will leave the last tab - _`Cutoff1`_ – for today, as there are too many taxa to deal with.  We shall look at _`Cutoff100`_ first.  Go to that tab now if you are not there.  
 
-> **!!WARNING!!
+> **!! WARNING &#x26A0; !!
 > Any sorting you are going to do shortly on the sheets needs to be across the columns A to I, otherwise things will go badly awry, and you will make incorrect inferences.  If that happens, download the file again, and start sorting again.**
 
 The data are sorted by the descending average value (column G).  If we sort on the coefficient of variation (COV; column H), we are looking at the most equal counts.
