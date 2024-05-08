@@ -3,7 +3,7 @@
 #### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
 
 # Transcriptomics
-**Dr Olin Silander**
+**A/Prof Olin Silander, with Prof P Biggs**
 
 ## Learning Objectives
 
@@ -31,7 +31,7 @@ A flowchart of today's lab is below.
 
 As we have learned throughout the Semester, a key aspect of data analysis is data visualisation. However, working in genomics, we often have extremely complicated data, and coming up with ways to visualise it in an intuitive yet objective manner is hard.
 
-For example, last week you visualised differences in microbiome content based on hundreds of bacteria across tens of microbiome communites. How should we do this if we have tens of thousands of genes (i.e. variables) and tens of thousands of samples? We need to have an effective manner of *reducing* the number of variables so that we can visualise only one or two. How should we reduce the number of variables?
+For example, last week you visualised differences in microbiome content based on hundreds of bacteria across tens of microbiome communities. How should we do this if we have tens of thousands of genes (i.e. variables) and tens of thousands of samples? We need to have an effective manner of *reducing* the number of variables so that we can visualise only one or two. How should we reduce the number of variables?
 
 We will use **dimensional reduction** techniques. In this way we can objectively reduce tens of thousands of variables into *combinations of variables* so we can focus only on the one or two (or three) *most important (combinations) of variables* and determine which of our samples are most similar or different on the basis of these combinations.
 
@@ -41,15 +41,15 @@ Dimensional reduction is an important technique. In fact when you have any biolo
 - gene expression data from cancer samples for hundreds of different genes
 - [genotypic data from hundreds of dogs](https://www.biorxiv.org/content/10.1101/2022.04.13.488108v2.full "so many dogs") to predict breed, height, and weight.
 
-**I would argue that after dimensional reduction is the single most important technique you can apply for visulisation of data with many variables (i.e. matrix columns in the cases you have encountered previosuly).** Here, we will focus on two main methods: Principal Component Analysis (PCA) and UMAP.
+**I would argue that after dimensional reduction is the single most important technique you can apply for visualisation of data with many variables (i.e. matrix columns in the cases you have encountered previously).** Here, we will focus on two main methods: Principal Component Analysis (PCA) and UMAP.
 
 Before reading further, please take five minutes and read [this quick intro to PCA](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues "eigen-who?") before continuing.
 
-Becuase this is such an important concept, we are going to spend some time on this.
+Because this is such an important concept, we are going to spend some time on this.
 First some examples that have *nothing* to do with RNA or cells or sequencing.
 But hopefully they give us some insight into how dimensional reduction works and why it's important.
 
-**Important Note**: I have put some extremely informative (imho) youtube videos up on Stream that explain PCA, UMAP, RNA-seq normalisation, and from there you can find explanations on other RNA-seq related topics. Also linked here:<br>
+**Important Note**: I have put some extremely informative (IMHO) YouTube videos up on Stream that explain PCA, UMAP, RNA-seq normalisation, and from there you can find explanations on other RNA-seq related topics. Also linked here:<br>
 [Explain PCA](https://www.youtube.com/watch?v=HMOI_lkzW08 "6 minutes")<br>
 [Explain PCoA and MDS](https://www.youtube.com/watch?v=GEn-_dAyYME "8 minutes")<br>
 [Explain UMAP](https://www.youtube.com/watch?v=eN0wFzBA4Sc "18 minutes")<br>
@@ -97,7 +97,7 @@ We will move on to a cocktail dataset and a tutorial derived from [here](https:/
 
 **At this point, open your `terminal`**.
 
-Next, download the data from [here](data/all_cocktails.tab). The address should be: `https://osilander.github.io/203.311/Week11/data/all_cocktails.tab`. If you have forgotten how to do that, ask your neighbour.
+Next, download the data from [here](data/all_cocktails.tab). The address should be: `https://pjbiggs.github.io/Massey203311/Week11/data/all_cocktails.tab`. If you have forgotten how to do that, ask your neighbour.
 
 Navigate to your `RStudio` tab and read this file into `R`. Use the `read.table()` function to do this. Ensure that you use the `header=T` argument and assign it to a reasonably named variable (you can choose, but note that this is a dataset on cocktails. Or, for simplicity you can name it `cocktails_df` (as that will match the code below).
 
@@ -107,24 +107,24 @@ Next we need to load a few libraries before we do our first analysis. This will 
 
 ```R
 # it's the tidyverse!
-install.packages("tidymodels")
-library(tidymodels)
+> install.packages("tidymodels")
+> library(tidymodels)
 
 # it's for cats!
-install.packages("forcats")
-library(forcats)
+> install.packages("forcats")
+> library(forcats)
 
 # it's an obscure stats package!
-install.packages("embed")
-library(embed)
+> install.packages("embed")
+> library(embed)
 
 # it's a famous plotting package!
-install.packages("ggplot2")
-library(ggplot2)
+> install.packages("ggplot2")
+> library(ggplot2)
 
 # for pipes
-install.packages("magrittr")
-library(magrittr)
+> install.packages("magrittr")
+> library(magrittr)
 
 ```
 
@@ -138,7 +138,7 @@ Now we start on the path toward cocktail PCA.
 # But I put comments in if you're curious
 
 # Tell the recipe what's happening but have no model ( ~. )
-pca_rec <- recipe(~., data = cocktails_df) %>%
+> pca_rec <- recipe(~., data = cocktails_df) %>%
   # Note that the name and category of cocktail
   # are just labels not predictors
   update_role(name, category, new_role = "id") %>%
@@ -148,32 +148,29 @@ pca_rec <- recipe(~., data = cocktails_df) %>%
   # operator and performs similarly to the
   # pipe | in the terminal
   step_normalize(all_predictors()) %>%
-  step_pca(all_predictors())
+  step_pca(all_predictors()
+  )
 ```
 
 ```R
 # Actually do the PCA by "preparing"
+
 # the "recipe"
-pca_prep <- prep(pca_rec)
+> pca_prep <- prep(pca_rec)
+
 # and a smidge of tidying
-tidied_pca <- tidy(pca_prep, 2)
+> tidied_pca <- tidy(pca_prep, 2)
 ```
 Phew.
 
-Now we can visualise the results. First, let's take a look at
-the first two principal components. Remember, these are the
-*combinations* of ingredients that contain the most variance
-(in other words, what combinations of ingredients differ
-the most between cocktail drinks).
+Now we can visualise the results. First, let's take a look at the first two principal components. Remember, these are the *combinations* of ingredients that contain the most variance (in other words, what combinations of ingredients differ the most between cocktail drinks).
 
-Below we use the [ggplot](https://ggplot2.tidyverse.org/index.html "Thanks, Hadley!") plotting package.
-This uses the idea of a *grammar* of graphics
-and is among the most popular plotting methods in R. Some of you have already encountered it.
+Below we use the [ggplot](https://ggplot2.tidyverse.org/index.html "Thanks, Hadley!") plotting package.  This uses the idea of a *grammar* of graphics and is among the most popular plotting methods in `R`. Some of you have already encountered it.
 
 ```R
 # juice gets the results of the recipe
 # and feeds it using %>% to the plotting function
-juice(pca_prep) %>%
+> juice(pca_prep) %>%
 # the plotting, include the cocktail name
   ggplot(aes(PC1, PC2, label = name)) +
   # make the points colored by category
@@ -183,14 +180,14 @@ juice(pca_prep) %>%
   # and don't add more colour anywhere
   labs(color = NULL)
 ```
-Note that you can change the `PC1` and `PC2` in the `ggplot` function to
-plot the next principal components. Feel free to try this (e.g. to plot `PC2` and `PC3`).
+Note that you can change the `PC1` and `PC2` in the `ggplot` function to plot the next principal components. Feel free to try this (e.g. to plot `PC2` and `PC3`).
 
 Wow, a few cocktails are very different from others. What's in an Applejack punch?
 
 ```R
 # we have a cocktail of interest
-my.cocktail <- "Applejack Punch"
+> my.cocktail <- "Applejack Punch"
+
 # Let's find the ingredients and assign it to a variable, "ingredients"
 # You should be able to see what the code below is doing
 # If not, it is getting the *rows* from the matrix
@@ -199,35 +196,34 @@ my.cocktail <- "Applejack Punch"
 # cocktails_df$name==my.cocktail.
 # We want the rows and *all* the columns in those rows, so use
 # cocktails_df[row.of.interest, ]
+> ingredients <- cocktails_df[cocktails_df$name==my.cocktail,]
 
-ingredients <- cocktails_df[cocktails_df$name==my.cocktail,]
 # Now we can see the ingredients
 # What is this code doing? It has a new method, which()
 # that we use to only report the ingredients that are
 # greater than 0 (i.e. they're in the cocktail)
-cocktails_df[cocktails_df$name==my.cocktail,which(ingredients>0)]
+> cocktails_df[cocktails_df$name==my.cocktail,which(ingredients>0)]
 
 # repeat the above steps but with a
 # cocktail of your choice, or, for example, this one:
-my.cocktail <- "Sphinx Cocktail"
+> my.cocktail <- "Sphinx Cocktail"
 ```
 
-Not only can we say which cocktails are most different, we can see which are most similar.
-This would help us suggest new but similar drinks to customers, for example
-if you were bartending.
+Not only can we say which cocktails are most different, we can see which are most similar. This would help us suggest new but similar drinks to customers, for example if you were bartending.
 
 ```R
 # Here, we choose a couple of cocktails to look at
 # You can choose these or different ones
 # We select these as they're similar
-my.cocktails <- c("Silver Fizz", "Peach Blow Fizz")
+> my.cocktails <- c("Silver Fizz", "Peach Blow Fizz")
+
 # Another new method, the *for* loop
 # we repeat the same as above, but
 # "loop" over all values of the my.cocktails vector above
 # of course here, coi means "cocktail of interest"
 # for each coi, we get the ingredients and print them
 # to the screen
-for(coi in my.cocktails) {
+> for(coi in my.cocktails) {
   ingredients <- cocktails_df[cocktails_df$name==coi,]
   print(cocktails_df[cocktails_df$name==coi,which(ingredients>0)])
 }
@@ -239,7 +235,7 @@ Finally, we can discover which _variables_ are contributing the most to each com
 ```R
 # No issue here with breaking the rules
 # and copy-pasta
-tidied_pca %>%
+> tidied_pca %>%
   filter(component %in% paste0("PC", 1:5)) %>%
   mutate(component = fct_inorder(component)) %>%
   ggplot(aes(value, terms, fill = terms)) +
@@ -248,10 +244,9 @@ tidied_pca %>%
   labs(y = NULL)
 ```
 
-
 So what have we discovered? We have hopefully found that dimensional reduction is a powerful method to let us determine what variables (or, *combinations* of variables, e.g. diet items or cocktail ingredients) differentiate samples (e.g. countries or cocktails). We can use this to objectively determine which samples are the most similar, and which are the most different. We can also determine which (combinations of) variables are most responsible for *making* these samples different.
 
-But enough of that, onwards and upwards (hopefully). <br><br>
+But enough of that, onwards and upwards (hopefully). <br>
 
 <img src="graphics/studying-pca.jpeg" width="500"/><br>
 **Even so, we will go upwards.**<br><br>
@@ -265,22 +260,22 @@ Okay, let's go through this quickly just so we can compare to our previous resul
 
 ```R
 # feel free to cut and paste, this is all correct
-umap_rec <- recipe(~., data = cocktails_df) %>%
+> umap_rec <- recipe(~., data = cocktails_df) %>%
   update_role(name, category, new_role = "id") %>%
   step_normalize(all_predictors()) %>%
   # this is the different step, where we use the step_umap function
   step_umap(all_predictors())
 
-umap_prep <- prep(umap_rec)
+> umap_prep <- prep(umap_rec)
 
-umap_prep
+> umap_prep
 ```
 
 And juice our results to plot it.
 
 ```R
 # copy pasta, no typos here
-juice(umap_prep) %>%
+> juice(umap_prep) %>%
   ggplot(aes(UMAP1, UMAP2, label = name)) +
   geom_point(aes(color = category), alpha = 0.7, size = 2) +
   geom_text(check_overlap = TRUE, hjust = "inward", size = 2) +
@@ -289,24 +284,24 @@ juice(umap_prep) %>%
 
 Woah. Compare this to the previous PCA result. What is different? Although *both of these methods have the same goal - dimensional reduction - you can see that there are very different results.* Here we can see that UMAP does not aim to find which variables differentiate samples the most (which PCA does by *stretching* some dimensions considerably and *shrinking* others).
 
-Rather, UMAP aims to find ways to reduce dimensions while maintaining groupings. If we consider the Woolly Mammoth example from the link above, PCA would find that the variable with the most variation is (largely speaking) length and width. It would then project onto these, leaving differences between the left and right side nearly non-existent. You canimagine, for example, that the two tusks would thus become indistinguishable. However, this is not at all true for UMAP. It would group each tusk (as they are near to themselves) but keeps them separate. Similar for the left and right legs.
+Rather, UMAP aims to find ways to reduce dimensions while maintaining groupings. If we consider the Woolly Mammoth example from the link above, PCA would find that the variable with the most variation is (largely speaking) length and width. It would then project onto these, leaving differences between the left and right side nearly non-existent. You can imagine, for example, that the two tusks would thus become indistinguishable. However, this is not at all true for UMAP. It would group each tusk (as they are near to themselves) but keeps them separate. Similar for the left and right legs.
 
-A second difference between the two methods is that PCA is better suited for datasets in which there are a small number of variable-combinations that differentiate samples (e.g. when the first three principal components accounts for 90% of the variation of the data). In contrast, UMAP is better suited for datasets in which there are many many variable combinations that differentiate samples.
+A second difference between the two methods is that PCA is better suited for datasets in which there are a small number of variable-combinations that differentiate samples (e.g. when the first three principal components accounts for 90% of the variation of the data). In contrast, UMAP is better suited for datasets in which there are many, many variable combinations that differentiate samples.
 
 ## RNA-seq
 
 ### The Data
 
-Now we can begin our RNA-seq journey. To do this, we will begin at the beginning, with some RNA-seq reads from human samples. These are from [here](data/fastq.data.tar "THE TAR FILE"). This address should be: `https://osilander.github.io/203.311/Week11/data/fastq.data.tar` Let's make a fresh directory for this analysis, perhaps `rnaseq`. Do that, change into that directory, and please download the RNA-seq reads now (`wget`). Note that this is a subset of the data from the tutorial [here](https://github.com/griffithlab/rnaseq_tutorial/wiki/RNAseq-Data "Awesome tutorial").
+Now we can begin our RNA-seq journey. To do this, we will begin at the beginning, with some RNA-seq reads from human samples. These are from [here](data/fastq.data.tar "THE TAR FILE"). This address should be: `https://pjbiggs.github.io/Massey203311/Week11/data/fastq.data.tar` Let's make a fresh directory for this analysis, perhaps `rnaseq`. Do that, change into that directory, and please download the RNA-seq reads now (`wget`). Note that this is a subset of the data from the tutorial [here](https://github.com/griffithlab/rnaseq_tutorial/wiki/RNAseq-Data "Awesome tutorial").
 
  Let's first untar the [tarball](https://en.wikipedia.org/wiki/Tar_(computing "Sticky!") so that we see the files inside.
 
  ```bash
 # -x extracts -v is verbose -f is the file
-tar -xvf fastq.data.tar
+$ tar -xvf fastq.data.tar
 
 # upon successful untarring, remove the tarball!
-rm fastq.data.tar
+$ rm fastq.data.tar
 ```
 
 <img src="graphics/tar_2x.png" width="700"/><br>
@@ -324,16 +319,16 @@ We can do a quick install:
 ```bash
 # all at once
 # might briefly redline your RAM
-mamba install -c bioconda fastqc multiqc
+$ mamba install -c bioconda fastqc multiqc
 ```
 Now we run the QC steps
 
 ```bash
-fastqc *fastq
+$ fastqc *fastq
 
 # it can't be this easy, can it?
 # you wouldn't cut and paste this, would you?
-mu1tiqc .
+$ mu1tiqc .
 
 ```
 
@@ -350,20 +345,20 @@ You can also see several other "tracks" toward the lower part of the page. The f
 
 After that are several other tracks, for example one labeled IGLV2-14. Click on this. You will see it leads to a data page containing information on where this gene tends to be expressed.
 
-The `.fasta` file of the extracted region from Chromosome 22 is [here](data/human-GRCh38-22sub.fasta). Go ahead and download it now (yes, `wget`). That address should be `https://osilander.github.io/203.311/Week11/data/human-GRCh38-22sub.fasta`
+The `.fasta` file of the extracted region from Chromosome 22 is [here](data/human-GRCh38-22sub.fasta). Go ahead and download it now (yes, `wget`). That address should be `https://pjbiggs.github.io/Massey203311/Week11/data/human-GRCh38-22sub.fasta`
 
 We now need to map our reads. What should we use? Well, you have mapped reads before in the lab in which we reconstructed SARS-CoV-2 genomes. We can repeat that here.
 
 ```bash
 # it's our trusty friend bwa mem
 # let's index first
-bwa index human-GRCh38-22sub.fasta
+$ bwa index human-GRCh38-22sub.fasta
 
 # now map the first UHR read set
 # the first argument is the reference to map against
 # the second two arguments anre the read files
 # and output is to a .sam
-bwa mem human-GRCh38-22sub.fasta UHR_Rep1.R1.fastq UHR_Rep1.R2.fastq > UHR_Rep1.bwa.sam
+$ bwa mem human-GRCh38-22sub.fasta UHR_Rep1.R1.fastq UHR_Rep1.R2.fastq > UHR_Rep1.bwa.sam
 
 ```
 
@@ -371,7 +366,7 @@ Great. Let's take a quick look at our results.
 
 ```bash
 # samtools is so versatile
-samtools flagstat UHR_Rep1.bwa.sam
+$ samtools flagstat UHR_Rep1.bwa.sam
 ```
 
 Look specifically at the "Supplementary reads." What are these? [Click here to find out](https://www.biostars.org/p/181901/ "Hint: they're not good"): *split read is a conceptual name for the situation, that your read is broken in 2 parts. And to say it is a split read you have a bit wise flag of 0x800 marking supplementary alignment*
@@ -385,32 +380,31 @@ Why do we have these Supplementary reads? Did you forget something? We are looki
 
 ```bash
 # here's a splice-aware aligner
-mamba install -c bioconda hisat2
+$ mamba install -c bioconda hisat2
 ```
 
 ```bash
-
 # first we make the index. The second argument here is the base-name of our index
-hisat2-build human-GRCh38-22sub.fasta human-GRCh38-22sub
+$ hisat2-build human-GRCh38-22sub.fasta human-GRCh38-22sub
 
 # then we map. These arguments should be relatively self-explanatory
 # -x the reference; -1 the first read; -2 the second read; -S the Sam file
-hisat2 -x human-GRCh38-22sub -1 UHR_Rep1.R1.fastq -2 UHR_Rep1.R2.fastq -S UHR_Rep1.hisat2.sam
+$ hisat2 -x human-GRCh38-22sub -1 UHR_Rep1.R1.fastq -2 UHR_Rep1.R2.fastq -S UHR_Rep1.hisat2.sam
 ```
 
 ```bash
 # samtools is so versatile
-samtools flagstat UHR_Rep1.bwa.sam
+$ samtools flagstat UHR_Rep1.bwa.sam
 # then the hisat version to compare
-samtools flagstat UHR_Rep1.hisat2.sam
+$ samtools flagstat UHR_Rep1.hisat2.sam
 ```
 Note the differences between the two `.sam` files.
 
 ```bash
 # let's remove this pesky bwa alignment
-rm *bwa.sam
+$ rm *bwa.sam
 # and the hisat2 alignment (trust me)
-rm *hisat2.sam
+$ rm *hisat2.sam
 ```
 
 We have just seen that there are no Supplementary reads in the `hisat2` `.sam` file, and thus we have successfully mapped across the exon junctions. However, we have six different read sets here and would like to map them all. We could go and map each one of them by hand. But we are operating on the command line and would like to do things a little more quickly. In this case we will use a `bash` loop, a slightly complicated format but one which can help tremendously when you have hundreds of files. I have written it out below. If you *have not* used the same file names as the ones listed above, then the loop won't work. Let someone know if this is the case.
@@ -424,7 +418,8 @@ This is a difficult bit of code to understand. I have put plenty of comments in.
 # be able to understand what is happening here
 # first line uses the for loop, recognises all R1 fastq
 # using the wildcard * symbol, and then says "do this"
-for F in *R1.fastq; do
+
+$ for F in *R1.fastq; do
 # second line maps with hisat2 on the fastq file
 # we're currently looping over ($F) while simultaneously
 # substituting the suffix .fastq with .sam
@@ -440,7 +435,7 @@ You should now be able to see six new `.bam` files in your directory. You can ea
 
 ```bash
 # This should work, an example is below if it doesn't
-samtools coverage -m bam.file.of.your.choice.bam
+$ samtools coverage -m bam.file.of.your.choice.bam
 ```
 <br>
 <img src="graphics/samtools-cov.png" width="400"/><br>
