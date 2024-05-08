@@ -1,7 +1,5 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
 # Metagenomic and metabarcoding visualisation
 
 **Professor Patrick Biggs**
@@ -108,13 +106,13 @@ We wil use information described on the phyloseq pages <https://joey711.github.i
 
 The DADA2 pipeline from week 8 produced a sequence table and a taxonomy table which is appropriate for further analysis in phyloseq. There might ba an issue with the data from week 8, so a file within R called a workspace file can be uploaded into your RStudio project to have the parts you need.  
 
-- [week8_dataForR](https://raw.githubusercontent.com/osilander/203.311/main/Week10/files/week8_all.zip "week8_all.zip")
+- [week8_dataForR](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week10/files/week8_all.zip "week8_all.zip")
 
-To download the data, first make sure you are in your _`/cloud/project/`_ directory, and that you are using the Terminal tab in RStudio. Second, copy the link address (right click on the link and scroll to Copy Link Address). Third, download the files using `wget`, as below.  Next, unzip the file, and finally double click on it to load the contents into your R session (so click "Yes" when asked to "confirm Load RData").
+To download the data, first make sure you are in your _`~/203311/Module3/Metagenomics/`_ directory, and that you are using the Terminal tab in RStudio. Second, copy the link address (right click on the link and scroll to Copy Link Address). Third, download the files using `wget`, as below.  Next, unzip the file, and finally double click on it to load the contents into your R session (so click "Yes" when asked to "confirm Load RData").
 
 ```bash
-wget link_address_you_just_copied
-unzip week8_all.zip
+$ wget link_address_you_just_copied
+$ unzip week8_all.zip
 ```
 
 We should now have the source data to work with.
@@ -125,7 +123,7 @@ We'll also include the small amount of metadata we have – the samples are name
 ### load our required packages
 > library(phyloseq)
 > packageVersion("phyloseq")
-[1] ‘1.30.0’
+[1] ‘1.42.0’
 
 ### modifying our seqtab.nochim object to remove the mock community
 > seqtab <- makeSequenceTable(mergers[names(mergers) != "Mock"])
@@ -295,10 +293,10 @@ OK, on to the data analysis, so, let’s check that everything is there.
 ### set up packages ###
 > library(phyloseq)
 > packageVersion("phyloseq")
-[1] ‘1.44.0’
+[1] ‘1.42.0’
 > library(ggplot2)
 > packageVersion("ggplot2")
-[1] ‘3.4.2’
+[1] ‘3.4.4’
 
 ### load the base data
 > data(GlobalPatterns)
@@ -686,11 +684,11 @@ So we have gone from a range of 1 to 182,085 redas per sample from _`all90`_ to 
 
 I have made the three data types that are needed to make a phyloseq object.  The first thing we will need to do is to download our three files that form the core of a phyloseq object.  These are the file names, but with hyperlinks:  
 
-- [Portfolio_OTUtable.txt](https://raw.githubusercontent.com/osilander/203.311/main/Week10/files/Portfolio_OTUtable.txt "Portfolio_OTUtable.txt")
-- [Portfolio_sampleData60.txt](https://raw.githubusercontent.com/osilander/203.311/main/Week10/files/Portfolio_sampleData60.txt "Portfolio_sampleData60.txt")
-- [Portfolio_taxa.txt](https://raw.githubusercontent.com/osilander/203.311/main/Week10/files/Portfolio_taxa.txt "Portfolio_taxa.txt")
+- [Portfolio_OTUtable.txt](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week10/files/Portfolio_OTUtable.txt "Portfolio_OTUtable.txt")
+- [Portfolio_sampleData60.txt](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week10/files/Portfolio_sampleData60.txt "Portfolio_sampleData60.txt")
+- [Portfolio_taxa.txt](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week10/files/Portfolio_taxa.txt "Portfolio_taxa.txt")
 
-We will then repeat the process Olin introduced in Week 4.  To download the data, first make sure you are in your _`/cloud/project/`_ directory, and that you are using the Terminal tab in RStudio. Second, make a new directory called _`week10data`_, and change (`cd`) into that directory. Third, copy the link address (right click on the link and scroll to Copy Link Address). Finally, download the files using `wget`:
+We will then repeat the process Olin introduced in Week 4.  To download the data, first make sure you are in your _`~/203311/Module3/Metagenomics/`_ directory, and that you are using the Terminal tab in RStudio. Second, make a new directory called _`week10data`_, and change (`cd`) into that directory. Third, copy the link address (right click on the link and scroll to Copy Link Address). Finally, download the files using `wget`:
 
 ```bash
 wget link_address_you_just_copied
@@ -702,7 +700,7 @@ So now we can import our tables to make a new phyloseq object.  **Please be awar
 
 ```R
 ### set the working directory
-> setwd("/cloud/project/week10data/")
+> setwd("~/203311/Module3/Metagenomics/week10data/")
 
 ### sample table
 > portfolio_samp <- read.table(file = "Portfolio_sampleData60.txt", sep = "\t", header = TRUE)

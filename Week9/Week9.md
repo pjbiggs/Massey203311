@@ -116,8 +116,8 @@ The commands below have been checked and should work fine.
 
 ---
 
-| WARNING!! | In order to complete this practical you MUST restart your session completely to receive the new data required for this practical. |
-|-------|:----------|
+> **!!WARNING!!
+> In order to complete this practical you MUST restart your session completely  - by signing out - to receive the new data required for this practical.**
 
 ---
 
@@ -137,8 +137,8 @@ Our reads to use.<br>
 
 To illustrate how the process works on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms for you, and we shall use these later in Exercise 2.
 
-| WARNING!! | Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 2. Please make sure you can also answer Question 1 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.|
-|-------|:----------|
+> **!!WARNING!!
+> Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 2. Please make sure you can also answer Question 1 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
 
 So, we would use a pair of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – and upload these to the Kaiju webserver and perform a taxonomic analysis on the reads.  These reads are found in the `kaiju` folder.  There are other files in there too, but more on those later.
 
@@ -254,8 +254,8 @@ Things have been set up so that running this code requires relatively short path
 
 We will generate a set of data each with the default _`greedy`_ algorithm, and then a second set with the  _`mem`_ algorithm.  Here is the code to type:
 
-| WARNING!! | This code is quite complex, please make sure it is correct, otherwise it will fail. |
-|-------|:----------|
+> **!!WARNING!!
+> This code is quite complex, please make sure it is correct, otherwise it will fail.**
 
 
 ```bash
@@ -413,7 +413,7 @@ Open this file up in a spreadsheet program such as Excel.  Double click on the a
 >What is the name of the accession number for the sequence in column B called `M00933:6:000000000-A1D0H:1:1101:12995:3904`?
 >
 > <table><tr><td>
-> ____________________
+> ______________________________________________
 > </td></tr></table>
 
 
@@ -457,13 +457,13 @@ Let’s investigate the data a little further.  Looking at the first tab - _`Cut
 >How many taxa in the _`Cutoff1000`_ are eukaryotes (Hint: sort the data, or use find)?
 >
 > <table><tr><td>
-> ____________________
+> ______________________________________________
 > </td></tr></table>
 
 We have to go to the next two tabs - _`Cutoff100`_ and _`Cutoff10`_ – to really explore the data.  We will leave the last tab - _`Cutoff1`_ – for today, as there are too many taxa to deal with.  We shall look at _`Cutoff100`_ first.  Go to that tab now if you are not there.  
 
-| WARNING!! | Any sorting you are going to do shortly on the sheets needs to be across the columns A to I, otherwise things will go badly awry, and you will make incorrect inferences.  If that happens, download the file again, and start sorting again. |
-|-------|:----------|
+> **!!WARNING!!
+> Any sorting you are going to do shortly on the sheets needs to be across the columns A to I, otherwise things will go badly awry, and you will make incorrect inferences.  If that happens, download the file again, and start sorting again.**
 
 The data are sorted by the descending average value (column G).  If we sort on the coefficient of variation (COV; column H), we are looking at the most equal counts.
 
@@ -472,7 +472,7 @@ The data are sorted by the descending average value (column G).  If we sort on t
 >What do you notice about the location of the “Unclassfied” taxa?
 >
 > <table><tr><td>
-> ____________________
+> ______________________________________________
 > </td></tr></table>
 
 Now sort _`Cutoff100`_ on column A.  Remember what databases you have been working with, and their constituents (from the Kaiju webpage).
@@ -482,7 +482,7 @@ Now sort _`Cutoff100`_ on column A.  Remember what databases you have been worki
 >When you compare columns A and D with columns B, C, E and F, what do you notice in the first 300 or so rows?  Why do you think this is?
 >
 > <table><tr><td>
-> ____________________
+> ______________________________________________
 > </td></tr></table>
 
 For our final look at the data, we will move to the _`Cutoff10`_ tab.  Sort this sheet on Taxonomy (column I) in the Z to A direction, i.e., making sure that "Unclassified" is at the top of the sheet.  Scroll down until you get to the Eukaryotes section of the taxonomy.  There are \~500 entries for the eukaryotes.
@@ -543,7 +543,7 @@ We can also search for taxonomic classifications across the bacterial tree of li
 >What approximate proportion of the Paracoccaceae family are members of the _Gemmobacter_ genus (Hint: adding up the percentages is fine for today)?
 >
 > <table><tr><td>
-> ____________________
+> ______________________________________________
 > </td></tr></table>
 
 A group of bacteria of interest – to me anyway! – are the Pseudomonadota, so as we did before, let’s click on that ring (found on the right side of the clock face) to show all the members of this taxonomic class.  Within the Pseudomonadota is the genus _Klebsiella_ (a human pathogen).  It's found within the Gammaproteobacteria.
@@ -552,7 +552,9 @@ A group of bacteria of interest – to me anyway! – are the Pseudomonadota, so
 >
 >Use the search function to find members of the _Klebsiella_ genus.  Can you use the rings of the plot to work out the full taxonomic path for the _Klebsiella_ genus?  Use a format like “Bacteria – Pseudomonadota - Gammaproteobacteria - XXXXX”.  The full taxonomic path is quite long.
 >
-> <table><tr><th> </th></tr><tbody><tr><td> </td></tr><tr><td> </td></tr><tr><td> </td></tr></tbody></table>
+> <table><tr><td>
+> ______________________________________________
+> </td></tr></table>
 
 Within the Gammaproteobacteria is the order Legionellales (one member of which is responsible for Legionnaire’s disease).  This order is made up of two families – Legionellaceae and Coxillaceae – at different proportions, as well as a smaller proportion of unclassified Legionellales, but let's not worry about that.
 
