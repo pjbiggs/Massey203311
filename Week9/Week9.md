@@ -179,7 +179,7 @@ Now let’s go to the website, and start the uploading process (**theoretically*
 
 **NB:** There would be a bit of waiting for this first part of the process, so I suggest whilst you are waiting, you read the “Behind the Paper” feature on the _Nature Microbiology_ website for the Kaiju publication.  The link is below:
 
-<https://naturemicrobiologycommunity.nature.com/users/10226-peter-menzel/posts/6200-from-metagenomics-of-hot-springs-to-bioinformatics-software-development>
+<https://communities.springernature.com/posts/from-metagenomics-of-hot-springs-to-bioinformatics-software-development>
 
 This is not super-long but gives you a chance to see the motivation for the paper from the authors, and is well worth a read.  
 
