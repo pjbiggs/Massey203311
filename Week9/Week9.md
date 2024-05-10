@@ -28,7 +28,7 @@ Microbial diversity has been revolutionised by the rapid advances in sequencing 
 
 Week 9 focusses on using tools outside of `R` for most of today's practical to use taxonomic classfiers and visualisation methodologies to explore the complexitites of metagenomic data.
 
-An outline of the lab today is sghown below.<br>
+An outline of the lab today is shown below.<br>
 
 <img src="graphics/flow-chart-w9.png" width="500"/><br>
 Brief outline of the steps we will be following in Week 9.<br>
@@ -263,13 +263,13 @@ We will generate a set of data each with the default _`greedy`_ algorithm, and t
 # and the `-o` option for the name of the output file.
 
 ## first default greedy (this is one line of code)
-$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi
--i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a greedy
+$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi \
+-i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a greedy \
 -o ~/fungi_50k_greedy.txt
 
 ## then mem (this is one line of code)
-$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi
--i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a mem
+$ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi \
+-i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a mem \
 -o ~/fungi_50k_mem.txt
 ```
 
@@ -280,7 +280,8 @@ These commands will take about 1.5 minutes each, and if the commands are queued,
 ## I show the screen output as well.
 
 ## first default greedy
-$ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp -i ~/fungi_50k_greedy.txt -u -v -o ~/fungi_50k_greedy.txt.krona
+$ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp \
+-i ~/fungi_50k_greedy.txt -u -v -o ~/fungi_50k_greedy.txt.krona
 # Reading taxonomic tree from file /db/nr_euk/nodes.dmp
 # Reading taxon names from file /db/nr_euk/names.dmp
 # Processing /home/p/pbiggs/fungi_50k_greedy.txt...
@@ -290,7 +291,8 @@ $ ktImportText -o ~/fungi_50k_greedy.txt.html ~/fungi_50k_greedy.txt.krona
 # Writing /home/p/pbiggs/fungi_50k_greedy.txt.html...
 
 ## then mem
-$ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp -i ~/fungi_50k_mem.txt -u -v -o ~/fungi_50k_mem.txt.krona
+$ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp \
+-i ~/fungi_50k_mem.txt -u -v -o ~/fungi_50k_mem.txt.krona
 # Reading taxonomic tree from file /db/nr_euk/nodes.dmp
 # Reading taxon names from file /db/nr_euk/names.dmp
 # Processing /home/p/pbiggs/fungi_50k_mem.txt...
@@ -792,7 +794,7 @@ Prof Patrick Biggs,
 
 Molecular Biosciences Group,
 
-School of Natural Sciences
+School of Food Technology and Natural Sciences
 
 ```
 -. .-.   .-. .-.   .-. .-.   .

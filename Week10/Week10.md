@@ -783,7 +783,7 @@ Prof Patrick Biggs,
 
 Molecular Biosciences Group,
 
-School of Natural Sciences
+School of Food Technology and Natural Sciences
 
 ```
 -. .-.   .-. .-.   .-. .-.   .
