@@ -761,9 +761,11 @@ These and many more options are available via:
 > ?pheatmap
 ```
 
-ii) In regards to the taxanomic classification, you are required to trim out the constant part of the taxonomic name to reduce the length of classification name for the purposes of plotting.  This requires a manual hunt in the text file you are working with to find the common parts of the taxonomy up to the names above, and then you can remove those also as above.  
+ii) In regards to the taxonomic classification, you are required to trim out the constant part of the taxonomic name to reduce the length of classification name for the purposes of plotting.  This requires a manual hunt in the text file you are working with to find the common parts of the taxonomy up to the names above, and then you can remove those also as above.  
 
-iii) A random thought - if you have issues with viewing plots and you are writing output to files as well, please remember to run `dev.off()` potentially a number of times to reset plotting until you see:
+iii) If plots are looking a little odd, remember to export them, as you then have control over their height and width before you save them.  Also, remember it's probably best to save them in a PNG or JPG format for ease of use.
+
+iv) A random thought - if you have issues with viewing plots and you are writing output to files as well, please remember to run `dev.off()` potentially a number of times to reset plotting until you see:
 
 ```R
 > dev.off()

@@ -429,8 +429,31 @@ dada-class: object describing DADA2 denoising results
 Key parameters: OMEGA_A = 1e-40, OMEGA_C = 1e-40, BAND_SIZE = 16
 ```
 
+**Note: 14-May-2024: It seems as though this output has changed in its formatting -- for the worse, and I am not sure why -- to make it harder to read.**  Hence if you adapt the above code to only see the the tenth entry of the information you see the options and parameters used, but not the sequence numbers.  This new code is thus:
+
+```R
+### let's look at the 10th entry by adding "[10]" to the end so we can see our parameters
+> dadaFs[[1]][10]
+$opts
+$opts$BAND_SIZE
+[1] 16
+
+$opts$DETECT_SINGLETONS
+[1] FALSE
+
+.....
+
+$opts$USE_QUALS
+[1] TRUE
+
+$opts$VECTORIZED_ALIGNMENT
+[1] TRUE
+```
+
+So we cannot get the numbers of inferred sequences by this method, we have to go back to the previous code for generating (_`dadaFs`_ and _`dadaRs`_).
+
 >**Question 7:**
-> Using the last line of code above, adapt it to find out how many sample sequences were inferred for sample 15?
+> Using the code above (_`dadaFs`_ and _`dadaRs`_), find out how many sample sequences were inferred for sample 15?
 > <table><tr><td>
 > ____________________
 > </td></tr></table>

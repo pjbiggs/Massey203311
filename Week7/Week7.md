@@ -248,6 +248,8 @@ Above, you have inferred a phylogeny, but have not calculated any level of *cert
 
 [^1]: In order to calculate bootstrap values and to change to plotting appearance, you will need to look carefully at the `iqtree` program options and `plot.phylo` function in `R`.
 
+**Note:** If plots are looking a little odd, remember to export them, as you then have control over their height and width before you save them.  Also, remember it's probably best to save them in a PNG or JPG format for ease of use.
+
 
 ### Reminder of the steps you have completed today
 <img src="graphics/flowchart-by-day.png" title="TMakin' progress" width="700"/><br>
