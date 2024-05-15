@@ -108,14 +108,20 @@ The DADA2 pipeline from week 8 produced a sequence table and a taxonomy table wh
 
 - [week8_dataForR](https://raw.githubusercontent.com/pjbiggs/Massey203311/main/Week10/files/week8_all.zip "week8_all.zip")
 
-To download the data, first make sure you are in your _`~/203311/Module3/Metagenomics/`_ directory, and that you are using the Terminal tab in RStudio. Second, copy the link address (right click on the link and scroll to Copy Link Address). Third, download the files using `wget`, as below.  Next, unzip the file, and finally double click on it to load the contents into your R session (so click "Yes" when asked to "confirm Load RData").
+**To download and then use the data, you need to do the following:**
+1. Make sure you are in your _`~/203311/Module3/Metagenomics/`_ directory, and that you are using the Terminal tab in RStudio.
+2. Copy the link address (right click on the link and scroll to Copy Link Address).
+3. Download the files using `wget`, as below.
+4. Unzip the file, and finally double click on it to load the contents into your R session (so click "Yes" when asked to "confirm Load RData").
 
 ```bash
 $ wget link_address_you_just_copied
 $ unzip week8_all.zip
+
+## follow step 4 above to load into your session
 ```
 
-We should now have the source data to work with.
+We should now have the source data to work with.  **Please let a demonstrator know if this does not work for you.**
 
 We'll also include the small amount of metadata we have – the samples are named by the gender (G), mouse subject number (X) and the day post-weaning (Y) it was sampled (e.g. GXDY is the format of the sample names).  So, now we shall build up this metadata file, but we shall do it inside of `R` using source files available to us:
 
@@ -187,10 +193,8 @@ F3D144       3      F 144  Late
 Now we construct our initial phyloseq object as a combination to bring all these things together:
 
 ```R
-### this is all one line of code
-> ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows=FALSE),
-+                sample_data(samdf),
-+                tax_table(taxa))
+### let's build a phyloseq object
+> ps <- phyloseq(otu_table(seqtab.nochim, taxa_are_rows=FALSE), sample_data(samdf), tax_table(taxa))
 > ps
 phyloseq-class experiment-level object
 otu_table()   OTU Table:         [ 218 taxa and 19 samples ]
@@ -246,11 +250,11 @@ Now, let’s have a look at the number of counts for the top 20 sequences by fre
 
 ```R
 ### what about the top 20 taxa?
-top20 <- names(sort(taxa_sums(ps), decreasing=TRUE))[1:20]
-head(top20)
-ps.top20 <- transform_sample_counts(ps, function(OTU) OTU/sum(OTU))
-ps.top20 <- prune_taxa(top20, ps.top20)
-plot_bar(ps.top20, x="Day", fill="Family") + facet_wrap(~When, scales="free_x")
+> top20 <- names(sort(taxa_sums(ps), decreasing=TRUE))[1:20]
+> head(top20)
+> ps.top20 <- transform_sample_counts(ps, function(OTU) OTU/sum(OTU))
+> ps.top20 <- prune_taxa(top20, ps.top20)
+> plot_bar(ps.top20, x="Day", fill="Family") + facet_wrap(~When, scales="free_x")
 ```
 
 You should see something like the following:
@@ -545,13 +549,11 @@ We can now choose axes to investigate the data.  We can plot data for axes 1 and
 
 ```R
 ### CA plot for axes 1 and 2
-> p12 <- plot_ordination(GP, gpca, "samples", color="SampleType") +
-+     geom_line() + geom_point(size=4)
+> p12 <- plot_ordination(GP, gpca, "samples", color="SampleType") + geom_line() + geom_point(size=4)
 > p12
 
 ### CA plot for axes 3 and 4
-> p34 <- plot_ordination(GP, gpca, "samples", color="SampleType",
-+     axes=c(3, 4)) + geom_line() + geom_point(size=4)
+> p34 <- plot_ordination(GP, gpca, "samples", color="SampleType", axes=c(3, 4)) + geom_line() + geom_point(size=4)
 > p34
 ```
 
