@@ -635,7 +635,10 @@ Let's load in some data now.  This presumes that you are at _`~/203311/Module3/M
 
 ```R
 ### load in data
-> cutDataFile <- read.table("week9data/500k_Cutoff1000.txt", header = TRUE, sep = "\t")
+# important note: this line of code is now changed and you should
+# use `read.delim` instead
+
+> cutDataFile <- read.delim("week9data/500k_Cutoff1000.txt", header = TRUE, sep = "\t")
 
 ### remove unwanted columns
 > cutDataFileRemovedCols <- subset(cutDataFile, select=-c(averVal, COV))
