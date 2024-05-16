@@ -654,7 +654,7 @@ The next thing is to make a subset based on a certain taxonomic classification. 
 > cutDataFileRemovedCols_noUC2 <- cutDataFileRemovedCols_noUC[,-7]
 
 ## extract out the rows of interest
-> onlyTaxaOfInterest <- subset(cutDataFileRemovedCols_noUC2, rownames(cutDataFileRemovedCols_noUC2) %like% "Proteobacteria")
+> onlyTaxaOfInterest <- subset(cutDataFileRemovedCols_noUC2, rownames(cutDataFileRemovedCols_noUC2) %like% "__Proteobacteria__")
 
 ## tidy up the names
 > rownames(onlyTaxaOfInterest) <- gsub("root__cellular__organisms__Bacteria__Proteobacteria__", "", rownames(onlyTaxaOfInterest))
