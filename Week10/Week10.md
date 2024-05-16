@@ -496,14 +496,14 @@ We can see that ~43% of the variation in the data comes from the first 3 axes.  
 ```R
 ### plot axes 1 and 2 (left hand side):
 > p12 <- plot_ordination(GlobalPatterns, GloPa.pcoa, "samples",
-+                color="SampleType") + geom_point(size=4) +
-+                geom_path() + scale_colour_hue(guide = FALSE)
+                color="SampleType") + geom_point(size=4) +
+                geom_path() + scale_colour_hue(guide = FALSE)
 > p12
 
 ### plot axes 1 and 3, but with a legend (right hand side):
 > p13 <- plot_ordination(GlobalPatterns, GloPa.pcoa, "samples",
-+                color="SampleType", axes=c(1, 3)) +
-+                geom_point(size=4) + geom_line()
+                color="SampleType", axes=c(1, 3)) +
+                geom_point(size=4) + geom_line()
 > p13
 ```
 
@@ -581,7 +581,7 @@ However, again because of the power of our analysis system we can easily plot in
 ```R
 ### facet plot of the top 9 phyla
 > p1 <- ggplot(p1$data, p1$mapping) + geom_point(size=4, alpha=0.5) +
-+     facet_wrap(~Phylum) + scale_colour_hue(guide = FALSE)
+     facet_wrap(~Phylum) + scale_colour_hue(guide = FALSE)
 > p1
 ```
 
