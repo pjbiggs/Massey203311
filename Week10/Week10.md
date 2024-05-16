@@ -127,6 +127,11 @@ We'll also include the small amount of metadata we have – the samples are name
 
 ```R
 ### load our required packages
+# make sure our required packages are there
+> library(dada2)
+> packageVersion("dada2")
+[1] ‘1.26.0’
+
 > library(phyloseq)
 > packageVersion("phyloseq")
 [1] ‘1.42.0’
