@@ -425,7 +425,7 @@ We are interested in the file for the taxon path counts.  In a similar way, letâ
 
 >**Question 4:**
 >
-> - Using your spreadsheet for the _`pjb_Gr500k_nreuk.txt.krona`_ file (the results against the nreuk database), how many taxa are present at over 1000 counts?  
+> - Using your spreadsheet for the _`pjb_Gr500k_nreuk.txt.krona`_ file (the results against the nreuk database), how many taxa are present at over 1000 counts (column A)?  
 > - What is the number of counts we would use as a cutoff for 0.1%?  
 > - How many taxa are there above this threshold?  
 > - Finally, what is the species of bacteria with a count of 737?
@@ -576,7 +576,7 @@ Wow, different, huh?  There's so much unclassified data.  let's expand out the c
 
 >**Question 15:**
 >
->Using the chart, what proportion of the data is classified?  Remember, for this we have only 50,0000 reads.  Finally, what are the read numbers for the Onygenales?
+>Using the chart, what proportion of the data is classified?  Remember, for this we have only 50,000 reads.  Finally, what are the read numbers for the Onygenales?
 >
 > <table><tbody><tr><td>proportion:</td><td></td></tr><tr><td>Onygenales:</td><td></td></tr></tbody></table>
 
