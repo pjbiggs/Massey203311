@@ -1,7 +1,5 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
 # Transcriptomics
 **A/Prof Olin Silander, with Prof P Biggs**
 
@@ -27,7 +25,7 @@ A flowchart of today's lab is below.
 <img src="graphics/w11-flowchart.png" width="700" title="so happy I'm here!"/><br>
 **Two different activities today**<br><br>
 
-### Dimensional Reduction
+## Dimensional Reduction
 
 As we have learned throughout the Semester, a key aspect of data analysis is data visualisation. However, working in genomics, we often have extremely complicated data, and coming up with ways to visualise it in an intuitive yet objective manner is hard.
 
@@ -41,20 +39,20 @@ Dimensional reduction is an important technique. In fact when you have any biolo
 - gene expression data from cancer samples for hundreds of different genes
 - [genotypic data from hundreds of dogs](https://www.biorxiv.org/content/10.1101/2022.04.13.488108v2.full "so many dogs") to predict breed, height, and weight.
 
-**I would argue that after dimensional reduction is the single most important technique you can apply for visualisation of data with many variables (i.e. matrix columns in the cases you have encountered previously).** Here, we will focus on two main methods: Principal Component Analysis (PCA) and UMAP.
+**I would argue that after dimensional reduction is the single most important technique you can apply for visualisation of data with many variables (i.e. matrix columns in the cases you have encountered previously).** Here, we will focus on two main methods: *Principal Component Analysis (PCA)* and *UMAP*.
 
-Before reading further, please take five minutes and read [this quick intro to PCA](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues "eigen-who?") before continuing.
+Before reading further, please take five minutes and read [this quick introduction to PCA](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues "eigen-who?") before continuing.
 
 Because this is such an important concept, we are going to spend some time on this.
 First some examples that have *nothing* to do with RNA or cells or sequencing.
 But hopefully they give us some insight into how dimensional reduction works and why it's important.
 
 **Important Note**: I have put some extremely informative (IMHO) YouTube videos up on Stream that explain PCA, UMAP, RNA-seq normalisation, and from there you can find explanations on other RNA-seq related topics. Also linked here:<br>
-[Explain PCA](https://www.youtube.com/watch?v=HMOI_lkzW08 "6 minutes")<br>
-[Explain PCoA and MDS](https://www.youtube.com/watch?v=GEn-_dAyYME "8 minutes")<br>
-[Explain UMAP](https://www.youtube.com/watch?v=eN0wFzBA4Sc "18 minutes")<br>
-[Explain RNA-seq](https://www.youtube.com/watch?v=tlf6wYJrwKY&list=PLblh5JKOoLUJo2Q6xK4tZElbIvAACEykp "18 minutes")<br>
-[Explain FPKM and TPM](https://www.youtube.com/watch?v=TTUrtCY2k-w&list=PLblh5JKOoLUJo2Q6xK4tZElbIvAACEykp&index=6 "10 minutes")<br>
+- [Explain PCA](https://www.youtube.com/watch?v=HMOI_lkzW08 "6 minutes")<br>
+- [Explain PCoA and MDS](https://www.youtube.com/watch?v=GEn-_dAyYME "8 minutes")<br>
+- [Explain UMAP](https://www.youtube.com/watch?v=eN0wFzBA4Sc "18 minutes")<br>
+- [Explain RNA-seq](https://www.youtube.com/watch?v=tlf6wYJrwKY&list=PLblh5JKOoLUJo2Q6xK4tZElbIvAACEykp "18 minutes")<br>
+- [Explain FPKM and TPM](https://www.youtube.com/watch?v=TTUrtCY2k-w&list=PLblh5JKOoLUJo2Q6xK4tZElbIvAACEykp&index=6 "10 minutes")<br>
 
 ### The Meat and Potatoes
 
@@ -97,35 +95,45 @@ We will move on to a cocktail dataset and a tutorial derived from [here](https:/
 
 **At this point, open your `terminal`**.
 
-Next, download the data from [here](data/all_cocktails.tab). The address should be: `https://pjbiggs.github.io/Massey203311/Week11/data/all_cocktails.tab`. If you have forgotten how to do that, ask your neighbour.
+Let's make a folder for this module, so:
 
-Navigate to your `RStudio` tab and read this file into `R`. Use the `read.table()` function to do this. Ensure that you use the `header=T` argument and assign it to a reasonably named variable (you can choose, but note that this is a dataset on cocktails. Or, for simplicity you can name it `cocktails_df` (as that will match the code below).
+```bash
+$ mkdir ~/203311/Module4
+$ cd ~/203311/Module4
+```
+
+Next, download the data from [here](data/all_cocktails.tab). The address should be: `https://pjbiggs.github.io/Massey203311/Week11/data/all_cocktails.tab`. If you have forgotten how to do that, ask your neighbour.  And if they have forgotten, ask a demonstrator!
+
+Navigate to your `RStudio` Console tab and read this file into `R`. Use the `read.table()` function to do this. Ensure that you use the `header=T` argument and assign it to a reasonably named variable (you can choose, but note that this is a dataset on cocktails. Or, for simplicity you can name it `cocktails_df` (as that will match the code below). So:
+
+```R
+### let's set or working directory
+> setwd("~/203311/Module4")
+> cocktails_df <- read.table("all_cocktails.tab", header = T)
+```
 
 We now have a dataset of cocktails and their ingredients. Take a look at the dataset, for example with `head` or `summary`.
 
-Next we need to load a few libraries before we do our first analysis. This will take about three minutes, so sit back for a second.
+Next we need to load a few libraries before we do our first analysis. Our friendly local ITS support team have installed these already as `tidymodels` and `embed` took quite a while to install during testing.
 
 ```R
+
+### packages to load
+
 # it's the tidyverse!
-> install.packages("tidymodels")
 > library(tidymodels)
 
-# it's for cats!
-> install.packages("forcats")
-> library(forcats)
-
 # it's an obscure stats package!
-> install.packages("embed")
 > library(embed)
 
 # it's a famous plotting package!
-> install.packages("ggplot2")
 > library(ggplot2)
 
-# for pipes
-> install.packages("magrittr")
-> library(magrittr)
+# it's for cats!
+> library(forcats)
 
+# for pipes
+> library(magrittr)
 ```
 
 Now we start on the path toward cocktail PCA.
@@ -133,9 +141,9 @@ Now we start on the path toward cocktail PCA.
 ```R
 # This is a recipe
 # We don't really sweat the details
-# WIn a rare breach of rules,
+# With a rare breach of the rules,
 # we just paste the code (*all* of it)
-# But I put comments in if you're curious
+# But I have put comments in if you're curious
 
 # Tell the recipe what's happening but have no model ( ~. )
 > pca_rec <- recipe(~., data = cocktails_df) %>%
@@ -192,8 +200,8 @@ Wow, a few cocktails are very different from others. What's in an Applejack punc
 # You should be able to see what the code below is doing
 # If not, it is getting the *rows* from the matrix
 # cocktails_df in which the variable in the column $name
-# matches == your cocktail of interest. So it total:
-# cocktails_df$name==my.cocktail.
+# matches == your cocktail of interest. So in total:
+# cocktails_df$name==my.cocktail
 # We want the rows and *all* the columns in those rows, so use
 # cocktails_df[row.of.interest, ]
 > ingredients <- cocktails_df[cocktails_df$name==my.cocktail,]
@@ -249,7 +257,7 @@ So what have we discovered? We have hopefully found that dimensional reduction i
 But enough of that, onwards and upwards (hopefully). <br>
 
 <img src="graphics/studying-pca.jpeg" width="500"/><br>
-**Even so, we will go upwards.**<br><br>
+**So true.  Even so, we will go upwards.**<br><br>
 
 ### Who map? UMAP
 A second commonly used method for dimensional reduction is UMAP (Uniform Manifold Approximation). UMAP is not as easy as PCA to understand from an algorithmic point of view. It is, however, an extremely powerful method for reducing dimensions while preserving the original structure of the data (i.e. the relative relationships and distances between samples). However, there are [some people that have recently](https://twitter.com/lpachter/status/1431325969411821572?s=20 "is this site still operational?") argued against the utility of UMAP. I personally think there is still great insights to be had, but they are very much qualitative and not quantitative insights.
@@ -297,6 +305,11 @@ Now we can begin our RNA-seq journey. To do this, we will begin at the beginning
  Let's first untar the [tarball](https://en.wikipedia.org/wiki/Tar_(computing "Sticky!") so that we see the files inside.
 
  ```bash
+# go to where we need to and download
+$ mkdir rnaseq
+$ cd rnaseq/
+$ wget https://pjbiggs.github.io/Massey203311/Week11/data/fastq.data.tar
+
 # -x extracts -v is verbose -f is the file
 $ tar -xvf fastq.data.tar
 
@@ -310,7 +323,7 @@ $ rm fastq.data.tar
 
 If you look at the names of the `.fastq` files, you will see that some are called "HBR" and some "UHR". The HBR reads are from RNA isolated from the **brains** of 23 Caucasians, male and female, of varying age but mostly 60-80 years old. The UHR are from RNA isolated from a diverse set of 10 **cancer cell lines**.
 
-Let's next check the that `.fastq` files look as we expect. Use your trusty friend, `seqkit`.
+Let's next check the that `.fastq` files look as we expect. Use your trusty friend, `seqkit` to do this.  Remember the command to get that overview?
 
 Next, let's do a quick QC step. Before, we used the comprehensive QC tool `fastp`. This is an excellent tool as an all-in-one QC and trimmer. Now we will use `fastqc` and look at a report generated by `multiqc` for rapid QC assessment
 
@@ -324,15 +337,19 @@ $ mamba install -c bioconda fastqc multiqc
 Now we run the QC steps
 
 ```bash
+# a single command to run a QC process on all our reads
 $ fastqc *fastq
 
 # it can't be this easy, can it?
 # you wouldn't cut and paste this, would you?
 $ mu1tiqc .
 
+# let's make a folder for our QC results to tidy up a liitle
+$ mkdir ourQC
+$ mv *fastqc* ourQC/
 ```
 
-This will make a lot of files. Scroll and find the multiqc report `.html`. Go ahead and click on the multiqc report file. (Open in your browser.) For each of the `.fastq` files we can see a summary of its statistics. Note that there is a clickable menu on the left, and a toolbox available on the right (click the "toolbox" tab). The toolbox allows you to do things like colour samples by group or hide specific samples. We will not worry about that. However, one important statistic we can see is that there a lot of sequence duplicates. &#129300; Why would this be? What kind of data is this? Would you expect duplicates? Why or why not? Should we consider removing these duplicates?
+This will make a lot of files. Scroll and find the multiqc report `.html`. Go ahead and click on the multiqc report file. (Open in your browser as we did previously for the Krona outputs.) For each of the `.fastq` files we can see a summary of its statistics. Note that there is a clickable menu on the left, and a toolbox available on the right (click the "toolbox" tab). The toolbox allows you to do things like colour samples by group or hide specific samples. We will not worry about that. However, one important statistic we can see is that there a lot of sequence duplicates. &#129300; Why would this be? What kind of data is this? Would you expect duplicates? Why or why not? Should we consider removing these duplicates?
 
 We are not going to worry about the adaptor trimming step of QC, as *I have already done this for you*. However, under normal circumstances not doing this could be fatal for your pipeline.
 
@@ -392,6 +409,10 @@ $ hisat2-build human-GRCh38-22sub.fasta human-GRCh38-22sub
 $ hisat2 -x human-GRCh38-22sub -1 UHR_Rep1.R1.fastq -2 UHR_Rep1.R2.fastq -S UHR_Rep1.hisat2.sam
 ```
 
+We are going to generate a lot of files here.  Maybe it's worth thinking about a folder structure that works for you so you can manage your data once you have made it, and it is fresh in your mind.  You never know, it might help for the portfolio (below).
+
+let's compare the differences in our results from the different mappers.
+
 ```bash
 # samtools is so versatile
 $ samtools flagstat UHR_Rep1.bwa.sam
@@ -407,7 +428,7 @@ $ rm *bwa.sam
 $ rm *hisat2.sam
 ```
 
-We have just seen that there are no Supplementary reads in the `hisat2` `.sam` file, and thus we have successfully mapped across the exon junctions. However, we have six different read sets here and would like to map them all. We could go and map each one of them by hand. But we are operating on the command line and would like to do things a little more quickly. In this case we will use a `bash` loop, a slightly complicated format but one which can help tremendously when you have hundreds of files. I have written it out below. If you *have not* used the same file names as the ones listed above, then the loop won't work. Let someone know if this is the case.
+We have just seen that there are no Supplementary reads in the `hisat2` `.sam` file, and thus we have successfully mapped across the exon junctions. However, we have six different read sets here and would like to map them all. We could go and map each one of them by hand. But we are operating on the command line and would like to do things a little more quickly. In this case we will use a `bash` loop, a slightly complicated format but one which can help tremendously when you have hundreds of files. I have written it out below. If you *have not* used the same file names as the ones listed above, then the loop won't work. Let a demonstrator know if this is the case.
 
 This is a difficult bit of code to understand. I have put plenty of comments in. However, to execute this you need to type all the *code* part at once. You can copy paste this.
 
@@ -441,7 +462,7 @@ $ samtools coverage -m bam.file.of.your.choice.bam
 <img src="graphics/samtools-cov.png" width="400"/><br>
 **Example.**<br><br>
 
-Take a look at all the replicates for each sample. Do they look the same? You can return to the UCSC browser page to see how the plots here relate to the gene locations on the chromosome. Remember that the region you have mappoed to is a small part of chromosome 22. Specifically, it's from 22.5 Mbp to 23 Mbp. Thus, on your `samtools coverage` plot, position 150 Kbp will be 22.5 Mbp + 150 Kbp = 22,650,000 bp.
+Take a look at all the replicates for each sample. Do they look the same? You can return to the UCSC browser page to see how the plots here relate to the gene locations on the chromosome. Remember that the region you have mappoed to is a small part of chromosome 22. Specifically, it's from 22.5 Mbp to 23 Mbp. Thus, on your `samtools coverage` plot, position 150 Kb will be 22.5 Mb + 150 Kb = 22,650,000 bp.
 
 There are clearly specific genes that are almost completely turned off in the brain. Which are those?
 
@@ -456,7 +477,7 @@ Remember that there are more decisions to make than just "plot a histogram(s)". 
 
 ## Next Time
 
-Next time: What about volcanoes? And heatmaps? And the Poisson?
+Next time: What about volcanoes from the lectures? And those heatmaps? And the Poisson?
 
 <img src="graphics/single-cell.jpeg" width="500"/><br>
 **Unfortunately we won't be able to look at scRNA-seq data. We'll save that for your writing assignment.**<br><br>
