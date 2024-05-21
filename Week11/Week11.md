@@ -95,10 +95,10 @@ We will move on to a cocktail dataset and a tutorial derived from [here](https:/
 
 **At this point, open your `terminal`**.
 
-Let's make a folder for this module, so:
+Let's move to our folder for this module, so:
 
 ```bash
-$ mkdir ~/203311/Module4
+$ pwd
 $ cd ~/203311/Module4
 ```
 
@@ -305,7 +305,10 @@ Now we can begin our RNA-seq journey. To do this, we will begin at the beginning
  Let's first untar the [tarball](https://en.wikipedia.org/wiki/Tar_(computing "Sticky!") so that we see the files inside.
 
  ```bash
-# go to where we need to and download
+# go to where we need to and download (it should be Module 4)
+# if it's not it's best to move here for the rest of today's practical
+
+$ pwd
 $ mkdir rnaseq
 $ cd rnaseq/
 $ wget https://pjbiggs.github.io/Massey203311/Week11/data/fastq.data.tar
