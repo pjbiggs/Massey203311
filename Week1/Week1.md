@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Introduction to R
+# Week 01 - Introduction to R
 
 **Professor Patrick Biggs**
 

@@ -1,6 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Variants and Phylogenies
+# Week 05 - Variants and Phylogenies
+
 **A/Prof Olin Silander, with Prof P Biggs**
 
 ## Purpose

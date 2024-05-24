@@ -2,7 +2,8 @@
 
 #### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
 
-# Transcriptomic Analysis and Visualization
+# Week 12 - Transcriptomic Analysis and Visualization
+
 **A/Prof Olin Silander, with Prof P Biggs**
 
 ## Learning Objectives

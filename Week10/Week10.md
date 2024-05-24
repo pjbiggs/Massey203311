@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Metagenomic and metabarcoding visualisation
+# Week 10 - Metagenomic and metabarcoding visualisation
 
 **Professor Patrick Biggs**
 

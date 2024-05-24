@@ -1,6 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Transcriptomics
+# Week 11 - Transcriptomics
+
 **A/Prof Olin Silander, with Prof P Biggs**
 
 ## Learning Objectives

@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Introduction to Metagenomic analysis
+# Week 09 - Introduction to Metagenomic analysis
 
 **Professor Patrick Biggs**
 

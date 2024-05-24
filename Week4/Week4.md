@@ -1,6 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Sequencing and Mapping
+# Week 04 - Sequencing and Mapping
+
 **A/Prof Olin Silander, with Prof P Biggs**
 
 [Purpose](#purpose)<br>

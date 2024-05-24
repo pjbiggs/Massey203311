@@ -1,7 +1,8 @@
 **[Return to the Course Home Page](../index.html)**
 
 
-# Introduction to UNIX
+# Week 02 - Introduction to UNIX
+
 **Professor Patrick Biggs**
 
 [Purpose](#purpose)<br>

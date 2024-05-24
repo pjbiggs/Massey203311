@@ -1,6 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Introduction to Visualization
+# Week 03 - Introduction to Visualization
+
 **Professor Patrick Biggs**
 
 [Purpose](#purpose)<br>

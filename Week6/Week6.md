@@ -1,6 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Science and the Public
+# Week 06 - Science and the Public
+
 **Professor Patrick Biggs**
 
 ## Note
