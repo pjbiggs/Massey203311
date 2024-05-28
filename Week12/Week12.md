@@ -1,7 +1,5 @@
 **[Return to the Course Home Page](../index.html)**
 
-#### **26-Feb-2024 -- Instructions for logging on is being worked on currently and will be updated on 01-Mar-2024.**
-
 # Transcriptomic Analysis and Visualization
 **A/Prof Olin Silander, with Prof P Biggs**
 
@@ -28,7 +26,7 @@ I have discussed in class that when only a small number of RNA-seq reads map to 
 
 Many of you have probably heard of different probability distributions, for example the [Normal distribution](https://en.wikipedia.org/wiki/Normal_distribution "Pi, why are you in this formula?") (or Gaussian distribution), the [exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution "It's got no memory!"), the [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution "Will I succeed or not??"). Each of these is associated with different types of processes or samples, for example, [human height](https://tasks.illustrativemathematics.org/content-standards/HSS/ID/A/4/tasks/1020#:~:text=The%20heights%20of%20adult%20men,standard%20deviation%20of%202.5%20inches. "how tall are you?"), the [lifetime of a car battery](https://opentextbc.ca/introstatopenstax/chapter/the-exponential-distribution/ "I'm not talking about Tesla here"), or the [number of heads you'll get in ten coin flips](https://onlinestatbook.com/2/probability/binomial.html "Heads I win, tails you lose!"), respectively.
 
-Closely related to the binomial distribution is The Poisson Distribution, which is the distribution one would expect in almost any case we are sampling a countable number of things. For example, after a very light rain, we could count the number of raindrops on different sidewalk squares. [These would be Poisson distributed](https://en.wikipedia.org/wiki/Poisson_scatter_theorem#:~:text=The%20expected%20number%20of%20raindrops,with%20intensity%20parameter%202%2F5. "But they would be hard to count"). Maybe we are interested in [how many Prussian cavalry](http://rstudio-pubs-static.s3.amazonaws.com/567089_c15d14f3d35b4edcbf13f33bbe775d4c.html "Not interested, thanks") are likely to be [killed by horse kicks in any given year](https://www.randomservices.org/random/data/HorseKicks.html "Where is Prussia anyway?"). Or maybe we're interested in the [number of calls we can expect at a call centre per hour](https://www.statology.org/poisson-distribution-real-life-examples/ "Not answering my phone"). All of these are Poisson distributed.<br>
+Closely related to the binomial distribution is the Poisson Distribution, which is the distribution one would expect in almost any case we are sampling a countable number of things. For example, after a very light rain, we could count the number of raindrops on different sidewalk squares. [These would be Poisson distributed](https://en.wikipedia.org/wiki/Poisson_scatter_theorem#:~:text=The%20expected%20number%20of%20raindrops,with%20intensity%20parameter%202%2F5. "But they would be hard to count"). Maybe we are interested in [how many Prussian cavalry](http://rstudio-pubs-static.s3.amazonaws.com/567089_c15d14f3d35b4edcbf13f33bbe775d4c.html "Not interested, thanks") are likely to be [killed by horse kicks in any given year](https://www.randomservices.org/random/data/HorseKicks.html "Where is Prussia anyway?"). Or maybe we're interested in the [number of calls we can expect at a call centre per hour](https://www.statology.org/poisson-distribution-real-life-examples/ "Not answering my phone"). All of these are Poisson distributed.<br>
 
 <img src="graphics/prob-dists.jpeg" width="1400" title="C'mon this looks too complicated"/><br>
 **There are lots of distributions and they're all related**<br><br>
@@ -193,20 +191,20 @@ Note that these are the small read numbers we started with.
 > head(cpm(dge.low.counts))
 ```
 
-Note that these numbers are much much larger. This is becuase `edgeR` has *normalised* our numbers so that they are per million. However, because our total "read numbers" were much much less than one million, it ended up *multiplying* them for the normalisation.
+Note that these numbers are much much larger. This is because `edgeR` has *normalised* our numbers so that they are per million. However, because our total "read numbers" were much, much less than one million, it ended up *multiplying* them for the normalisation.
 
 We can filter our results so that we only include genes that have mapped read **counts per million mapped reads** of *at least 100* in *at least two* samples.
 
 
 ```R
 # find out which rows to keep
-# here cpm(dge.low.counts)>100 gives a TRUE or FALSE -
+# here cpm(dge.low.counts) > 100 gives a TRUE or FALSE -
 # TRUE when the counts are above 100 and FALSE when not.
 # TRUE is also interpreted as "1" by R, and FALSE as "0".
 # Thus the sum function below "sums" up the TRUE rows
 # to test if the sum is greater than 2
 # In this way we get genes with counts > 100 in at least two samples.
-> keep <- rowSums(cpm(dge.low.counts)>100) >= 2
+> keep <- rowSums(cpm(dge.low.counts) > 100) >= 2
 
 # keep only those rows
 > dge.low.counts <- dge.low.counts[keep,]
@@ -219,7 +217,7 @@ We've kept all (or almost all) our genes (rows)! Even though they have low count
 
 We can think whether this is a good thing or not (in fact, it's likely to not be a problem).
 
-Interestingly, we can also calculate the exact probability that five of our samples in one row have fewer than two reads, such that we would get rid of that row. That is just the probability that at least five samples in a row have one or zero reads. The probability that any one gene in one sample has 0 or 1 read is 0.091. The chance that five do is 0.091^5*0.909, or about one in six million. Thus, one in six million rows should have fewer than two reads in at least five samples.
+Interestingly, we can also calculate the exact probability that five of our samples in one row have fewer than two reads, such that we would get rid of that row. That is just the probability that at least five samples in a row have one or zero reads. The probability that any one gene in one sample has 0 or 1 read is 0.091. The chance that five do is (0.091^5) * (1 - 0.091), or about one in six million. Thus, one in six million rows should have fewer than two reads in at least five samples.
 
 We could change our cutoff to **three** samples having at least 100 mapped reads. Then we see that we (probably) lose a few genes. This is unsurprising, as the probablility of this happening is close to 1 in 1,000.
 
@@ -417,7 +415,7 @@ We first take a quick peak at how Poisson this is.
 
 ```
 
-Poisson? It looks Normal! *The Poisson converges to the normal for large numbers*. Note that **none** of the read counts vary by more than 50% (presuming youu set your read count per gene high enough). This contrasts with our low read count sample, in which many gene read counts varied by 2- or 3-fold.
+Poisson? It looks Normal! *The Poisson converges to the normal for large numbers*. Note that **none** of the read counts vary by more than 50% (presuming you set your read count per gene high enough). This contrasts with our low read count sample, in which many gene read counts varied by 2- or 3-fold.
 
 
 <img src="graphics/normals.png" width="600" title="It's not Ohio"/><br>
