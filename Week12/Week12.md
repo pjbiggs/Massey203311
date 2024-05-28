@@ -1,6 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Transcriptomic Analysis and Visualization
+# Week 12 - Transcriptomic Analysis and Visualization
+
 **A/Prof Olin Silander, with Prof P Biggs**
 
 ## Learning Objectives

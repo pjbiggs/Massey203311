@@ -1,6 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
-# Phylogenetics and Evolutionary Visualization
+# Week 07 - Phylogenetics and Evolutionary Visualization
+
 **A/Prof Olin Silander, with Prof P Biggs**
 
 ## Purpose
