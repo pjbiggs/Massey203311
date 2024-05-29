@@ -127,7 +127,7 @@ Let's next look at our dataset more holistically. Here, we will use a heatmap, w
 ```R
 # We don't care if it's pretty
 # But let's output to a pdf so we can look at it later
-> pdf(file="low.read.count.pdf", width=2,height=8)
+> pdf(file="low.read.count.pdf", width=6,height=18)
 > heatmap(low.read.counts)
 > dev.off()
 ```
@@ -174,7 +174,7 @@ Next we can have `edgeR` do the analysis for us. Various parts of the tutorial b
 
 # We make a cheeky backup copy because we're prone
 # to deleting important things
-dge.low.counts.backup <- dge.low.counts
+> dge.low.counts.backup <- dge.low.counts
 ```
 
 ### Stepping through counts-per-million Normalisation and filtering with edgeR
@@ -265,6 +265,8 @@ Finally, we can begin to *look* at our data. First, a multidimensional scaling (
 ```R
 # in this case we won't worry about the specific method
 > plotMDS(dge.low.counts, method="bcv", col=as.numeric(dge.low.counts$samples$group))
+
+### you will see a warning message here, but that can be ignored. 
 ```
 
 Your plot - for the most part - should indicate that none of the samples cluster by type. This is not surprising, as we made these samples with random data.
