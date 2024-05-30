@@ -179,7 +179,6 @@ Next we can have `edgeR` do the analysis for us. Various parts of the tutorial b
 
 ### Stepping through counts-per-million Normalisation and filtering with edgeR
 
-
 ```R
 # remind ourselves what the read counts look like
 > head(dge.low.counts)
@@ -249,13 +248,19 @@ Looks good.
 
 ### Letting edgeR use a negative binomial
 
-I claimed that this data is Poisson distributed (in fact, it is). However, `edgeR` is loathe to admit it is (because in fact, most RNA-seq data is *not*). Therefore, we are going to calculate the [dispersion](https://en.wikipedia.org/wiki/Statistical_dispersion "more stats") (how squished or flattened a distribution is) and fit a [negative binomial](https://en.wikipedia.org/wiki/Negative_binomial_distribution "let's not be negative") to model the data (rather than a Poisson). This is simply because RNA-seq data almost always has *more* variance than a Poisson (i.e. it's flattened relative to our expectations), and the negative binomial let's us fit our data to match that extra variance.
+I claimed that this data is Poisson distributed (in fact, it is). However, `edgeR` is loathe to admit it is (because in fact, most RNA-seq data is *not*). Therefore, we are going to calculate the [dispersion](https://en.wikipedia.org/wiki/Statistical_dispersion "more stats") (how squished or flattened a distribution is) and fit a [negative binomial](https://en.wikipedia.org/wiki/Negative_binomial_distribution "let's not be negative") to model the data (rather than a Poisson) using the  `estimateCommonDisp` and `estimateTagwiseDisp1` commands respectively. This is simply because RNA-seq data almost always has *more* variance than a Poisson (i.e. it's flattened relative to our expectations), and the negative binomial let's us fit our data to match that extra variance.
 
 ```R
 # we estimate "dispersion" across genes and across samples
 > dge.low.counts <- estimateCommonDisp(dge.low.counts)
 > dge.low.counts <- estimateTagwiseDisp(dge.low.counts)
+
+# check what we did, which in this case is add more information
+# to our dge.low.counts object
+> dge.low.counts
 ```
+
+Can you see we have added further information about our dataset?  Because of the underlying data, we can do this with relative ease and see the output, in this case, the addition of `estimateCommonDisp` and `estimateTagwiseDisp1`.
 
 ### MDS and Volcano plots
 
@@ -266,7 +271,7 @@ Finally, we can begin to *look* at our data. First, a multidimensional scaling (
 # in this case we won't worry about the specific method
 > plotMDS(dge.low.counts, method="bcv", col=as.numeric(dge.low.counts$samples$group))
 
-### you will see a warning message here, but that can be ignored. 
+### you will see a warning message here, but that can be ignored.
 ```
 
 Your plot - for the most part - should indicate that none of the samples cluster by type. This is not surprising, as we made these samples with random data.
@@ -333,9 +338,18 @@ We can now make our toy data set a bit more interesting. For example, we can cha
 
 # now we redo the edgeR analysis
 > dge.low.counts <- DGEList(counts=low.read.counts,group=factor(sample.data))
+
+# what does our new object look like?  probably can't tell
+# but let's have alook anyway
+> dge.low.counts
+
+# we'll add in our other information:
 > dge.low.counts <- calcNormFactors(dge.low.counts)
 > dge.low.counts <- estimateCommonDisp(dge.low.counts)
 > dge.low.counts <- estimateTagwiseDisp(dge.low.counts)
+
+# again, we can see th enew information:
+> dge.low.counts
 ```
 
 Now we have a new dataset. Here, a number of genes have higher expression in cancer. Specifically, we changed the expression 3-fold. We need to check whether this had the expected effect - are these genes actually inferred as being "differentially" expressed?
@@ -357,7 +371,7 @@ Let's get the test stats on our differentially expressed genes?
 # here, n is the number of genes to return, we just make it all genes
 > sort.dge <- topTags(dge.test, n=nrow(dge.test$table))
 
-# We'll look at a few extra lines
+# We'll look at a few lines, well 22 to be precise
 > head(sort.dge, n=22L)
 ```
 
@@ -407,6 +421,9 @@ Finally, to get a better handle on this whole process, let's change some more pa
 > summary(read.counts)
 > dge.counts <- DGEList(counts=read.counts,group=factor(sample.data))
 > dge.counts <- calcNormFactors(dge.counts)
+
+# let's check our output again, to be safe
+> dge.counts
 ```
 
 We first take a quick peak at how Poisson this is.
@@ -430,8 +447,12 @@ Poisson? It looks Normal! *The Poisson converges to the normal for large numbers
 Now, the `edgeR` bit.
 
 ```R
+# add in our factors of interest
 > dge.counts <- estimateCommonDisp(dge.counts)
 > dge.counts <- estimateTagwiseDisp(dge.counts)
+
+# let's check our output again, to be safe
+> dge.counts
 
 # look at this plot, don't ignore it
 # do any of the samples differ now?
@@ -439,6 +460,9 @@ Now, the `edgeR` bit.
 
 # do the stats
 > dge.test <- exactTest(dge.counts)
+
+# and a brief look at the stats:
+> dge.test
 ```
 
 ### Our FOURTH volcano plot - with more reads
