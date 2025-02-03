@@ -1,6 +1,6 @@
 # Massey 203311: Genome Science
 
-## 2024
+## 2025 instance
 
 This practice-oriented course differs from many of the other courses you may have taken. We will focus heavily on the hands-on computational skills you need to extract biological information from large 'omics datasets, including genomes, transcriptomes, metagenomes and more. Delivered through a range of practical activities, this course is assessed solely through assignments, and spans topics from the dynamic nature of the genome, through to sequence analysis, data visualization and data interpretation. This introduction to computational analysis is geared towards biologists and assumes no previous knowledge or familiarity with computational methods.
 
@@ -21,4 +21,4 @@ This practice-oriented course differs from many of the other courses you may hav
 | 11 | Human Genomics                  | [Transcriptomics](Week11/Week11.html) |
 | 12 | Human Genomics               | [Transcriptomic Visualization](Week12/Week12.html) |
 
-NB: Week 5 is the week before Easter, and the lab should take place on Good Friday (29-Mar-2024).  We will look at options etc. for this soon.
+NB: This year, the mid-semester break is between Weeks 7 and 8.
