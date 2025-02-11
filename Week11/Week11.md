@@ -487,3 +487,21 @@ Next time: What about volcanoes from the lectures? And those heatmaps? And the P
 
 <img src="graphics/single-cell.jpeg" width="500"/><br>
 **Unfortunately we won't be able to look at scRNA-seq data. We'll save that for your writing assignment.**<br><br>
+
+
+## Contact
+
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
+
+Prof Patrick Biggs,
+
+Molecular Biosciences Group,
+
+School of Food Technology and Natural Sciences
+
+```
+-. .-.   .-. .-.   .-. .-.   .
+||\|||\ /|||\|||\ /|||\|||\ /|
+|/ \|||\|||/ \|||\|||/ \|||\||
+~   `-~ `-`   `-~ `-`   `-~ `-
+```

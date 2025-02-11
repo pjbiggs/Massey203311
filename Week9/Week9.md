@@ -795,7 +795,7 @@ The mastery test will test the contents of weeks 8 to 10, more information will 
 
 ## Contact
 
-I have two offices on the Manawatu campus (as I work for both SFTNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
 
 Prof Patrick Biggs,
 

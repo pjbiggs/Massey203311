@@ -603,3 +603,21 @@ Check your file list in the `RStudio Cloud` bottom right corner window. There sh
 <img src="graphics/flowchart-by-day.png" title="Makin' progress" width="700"/><br>
 
 **Getting there**.
+
+
+## Contact
+
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
+
+Prof Patrick Biggs,
+
+Molecular Biosciences Group,
+
+School of Food Technology and Natural Sciences
+
+```
+-. .-.   .-. .-.   .-. .-.   .
+||\|||\ /|||\|||\ /|||\|||\ /|
+|/ \|||\|||/ \|||\|||/ \|||\||
+~   `-~ `-`   `-~ `-`   `-~ `-
+```

@@ -313,3 +313,21 @@ If you are interested in this subject and want to learn more about good visualiz
 Kieran Healy. 2019. [Data Visualization: A Practical Introduction](https://socviz.co/index.html). Princeton University Press: Princeton.
 
 Claus Wilke. 2019. [Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures](https://clauswilke.com/dataviz/). O'Reilly: New York.
+
+
+## Contact
+
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
+
+Prof Patrick Biggs,
+
+Molecular Biosciences Group,
+
+School of Food Technology and Natural Sciences
+
+```
+-. .-.   .-. .-.   .-. .-.   .
+||\|||\ /|||\|||\ /|||\|||\ /|
+|/ \|||\|||/ \|||\|||/ \|||\||
+~   `-~ `-`   `-~ `-`   `-~ `-
+```

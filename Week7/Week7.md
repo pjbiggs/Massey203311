@@ -19,5 +19,23 @@ NB: to be confirmed shortly
 |---	|---	|---	|
 | 07-Apr-2025 	| Monday 	| No lecture - perfect time to tidy up your talk (to be confirmed nearer the time) 	|
 | 08-Apr-2025 	| Tuesday 	| No lecture - perfect time to tidy up your talk (to be confirmed nearer the time) 	|
-| 08-Apr-2025 	| Tuesday 	| all recorded talks to be submitted by 11:59pm 	|
+| 09-Apr-2025 	| Wednesday 	| all recorded talks to be submitted by 11:59pm 	|
 | 11-Apr-2025	| Friday 	| lab session: talks being presented and marked  	|
+
+
+## Contact
+
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
+
+Prof Patrick Biggs,
+
+Molecular Biosciences Group,
+
+School of Food Technology and Natural Sciences
+
+```
+-. .-.   .-. .-.   .-. .-.   .
+||\|||\ /|||\|||\ /|||\|||\ /|
+|/ \|||\|||/ \|||\|||/ \|||\||
+~   `-~ `-`   `-~ `-`   `-~ `-
+```

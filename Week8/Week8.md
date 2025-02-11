@@ -146,15 +146,15 @@ We will check we have all we need to do the analysis first.  The commands below 
 ### check on packages being there and their versions ###
 > library(dada2)
 > packageVersion("dada2")
-[1] ‘1.26.0’
+[1] ‘1.34.0’
 
 > library(ShortRead)
 > packageVersion("ShortRead")
-[1] ‘1.56.0’
+[1] ‘1.64.0’
 
 > library(ggplot2)
 > packageVersion("ggplot2")
-[1] ‘3.4.4’
+[1] ‘3.5.1’
 ```
 
 The next thing we want to do is to set a working path and then define a path variable to check it is all OK for the work we are going to do today.
@@ -821,13 +821,13 @@ The mastery test will test the contents of weeks 8 to 10, more information will 
 
 ## Contact
 
-I have two offices on the Manawatu campus (as I work for both SFTNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
 
 Prof Patrick Biggs,
 
 Molecular Biosciences Group,
 
-School of Natural Sciences
+School of Food Technology and Natural Sciences
 
 ```
 -. .-.   .-. .-.   .-. .-.   .

@@ -527,7 +527,7 @@ What is different here versus the dataset with few reads? We can easily see that
 
 
 <img src="graphics/finally.png" width="700" title="Well, on Sunday night"/><br>
-**Well, on Sunday it is.**<br><br>
+**Well, next Friday it is.**<br><br>
 
 
 ```R
@@ -541,4 +541,22 @@ What is different here versus the dataset with few reads? We can easily see that
 > plot(volcanoData, pch=19)
 # can now call the points based on their name rather than position in the data
 > points(volcanoData[rand.names,], pch=19,col="orange")
+```
+
+
+## Contact
+
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
+
+Prof Patrick Biggs,
+
+Molecular Biosciences Group,
+
+School of Food Technology and Natural Sciences
+
+```
+-. .-.   .-. .-.   .-. .-.   .
+||\|||\ /|||\|||\ /|||\|||\ /|
+|/ \|||\|||/ \|||\|||/ \|||\||
+~   `-~ `-`   `-~ `-`   `-~ `-
 ```

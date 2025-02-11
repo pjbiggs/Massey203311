@@ -1042,13 +1042,13 @@ The mastery test will test both Linux and R, so half of the marks will come from
 
 ## Contact
 
-I have two offices on the Manawatu campus (as I work for both SNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
 
 Prof Patrick Biggs,
 
 Molecular Biosciences Group,
 
-School of Natural Sciences
+School of Food Technology and Natural Sciences
 
 ```
 -. .-.   .-. .-.   .-. .-.   .
