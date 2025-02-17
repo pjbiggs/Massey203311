@@ -132,15 +132,20 @@ We'll also include the small amount of metadata we have – the samples are name
 # make sure our required packages are there
 > library(dada2)
 > packageVersion("dada2")
-[1] ‘1.26.0’
+[1] ‘1.34.0’
 
 > library(phyloseq)
 > packageVersion("phyloseq")
-[1] ‘1.42.0’
+[1] ‘1.50.0’
+
+> library(ggplot2)
+packageVersion("ggplot2")
+[1] ‘3.5.1’
 
 ### modifying our seqtab.nochim object to remove the mock community
 > seqtab <- makeSequenceTable(mergers[names(mergers) != "Mock"])
 > seqtab.nochim <- removeBimeraDenovo(seqtab, verbose=TRUE)
+Identified 61 bimeras out of 279 input sequences.
 
 ### starting to make a dataframe for the samples by getting their names
 > samples.out <- rownames(seqtab.nochim)
