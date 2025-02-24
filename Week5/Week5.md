@@ -275,6 +275,11 @@ MN908947.3      57      3
 Now we quickly use some `R` to get some stats on this data. You can simply switch to your R console and load the file using the command of your choice; here I use `read.table`.
 
 ```R
+# let's set our working directory so we can use the
+# file more easily.  this works on the basis that you have been
+# working in the folder structure as used above.
+> setwd("~/203311/Module2/covid/sequence-files/")
+
 # here we read in the data
 > my.depth <- read.table('my_mapping_depth.txt', sep='\t', header=FALSE)
 
@@ -607,7 +612,7 @@ Check your file list in the `RStudio Cloud` bottom right corner window. There sh
 
 ## Contact
 
-My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any aspects of the course work, _**please email me beforehand so we can arrange to meet**_.
 
 Prof Patrick Biggs,
 

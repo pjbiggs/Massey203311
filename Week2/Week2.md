@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!--- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. --->
 
 # Week 02 - Introduction to UNIX
 
@@ -98,7 +98,7 @@ Don't forget to press the [Enter] key: commands are not sent to the computer unt
 
 #### Important Note
 
-**Please see the separate document -- "Access_to_RStudio_2024.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. You must do this before you can do any work in this course.**
+**Please see the separate document -- "Access_to_RStudio_2025.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. You must do this before you can do any work in this course.**
 
 ### Computing
 
@@ -772,8 +772,8 @@ In addition, the `whatis` command gives a one-line description of the command, b
 ```bash
 $ whatis wc
 wc (1)               - print newline, word, and byte counts for each file
-
 ```
+
 
 When you are not sure of the exact name of a command, you can use the command `apropos`:
 
@@ -1099,16 +1099,17 @@ This searches through the directories for files and directories with a given nam
 The C shell keeps an ordered list of all the commands that you have entered. Each command is given a number according to the order it was entered.
 
 ```bash
-$ history (show command history list)
+# you can also comment out statements in the terminal with "#"
+$ history 	# this shows the command history list
 ```
 
 If you are using the C shell, you can use the exclamation character (!) to recall commands easily.
 
 ```bash
-$ !! (recall last command)
-$ !-3 (recall third most recent command)
-$ !5 (recall 5th command in list)
-$ !grep (recall last command starting with grep)
+$ !! 		# this recalls the last command
+$ !-3 		# this recalls third most recent command
+$ !5 		# this recalls 5th command in list
+$ !grep 	# this recalls last command starting with grep
 ```
 
 You can increase the size of the history buffer by typing
@@ -1290,7 +1291,7 @@ For those of you on the iMacs, please remember to log out of the system as descr
 
 To reiterate, for this, the second lab of this course, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for two things:
 
-1. For the mastery test which accounts for 15% of the course.  This will take place between Thursday 21-Mar-2024 and Friday 22-Mar-2024 online.
+1. For the mastery test which accounts for 15% of the course.  This will take place on Friday 21-Mar-2025 at the start of practical 4.
 2. For a part of this course in which you will use RStudio to explore examples of genomic data.
 
 The mastery test will test both Linux and R, so half of the marks will come from each part.  We have not done much biology today, but as a hint have a think about how we can work with biological data that can come in a variety of formats (e.g. sequences files in say fasta format) and what we can potentially do with those given what we have learnt today.  There will be a worksheet with test questions for you to work through as preparation for the test.
@@ -1299,7 +1300,7 @@ The mastery test will test both Linux and R, so half of the marks will come from
 
 ## Contact
 
-My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.  
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any aspects of the course work, _**please email me beforehand so we can arrange to meet**_.  
 
 Prof Patrick Biggs,
 

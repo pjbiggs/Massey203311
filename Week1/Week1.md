@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!--- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. --->
 
 # Week 01 - Introduction to R
 
@@ -86,7 +86,7 @@ Don\'t forget to press the **\[Enter\]** key: commands are not sent to the R con
 
 #### Important Note
 
-**Please see the separate document -- "Access_to_RStudio_2024.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. It can also be found directly at: [Access_to_RStudio_2024.pdf](https://stream.massey.ac.nz/pluginfile.php/5540234/mod_resource/content/2/Access_to_RStudio_2024.pdf). You must do this before you can do any work in this course.**
+**Please see the separate document -- "Access_to_RStudio_2025.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. It can also be found directly at: [Access_to_RStudio_2025.pdf](https://stream.massey.ac.nz/pluginfile.php/5540234/mod_resource/content/2/Access_to_RStudio_2024.pdf). You must do this before you can do any work in this course.**
 
 ### Computing
 
@@ -470,7 +470,7 @@ b <- c(1, 2, 3, 8)
 Then, if we multiply a by 5, we would get a vector with each of its members multiplied by 5.
 
 ```R
-5 * a
+> 5 * a
 [1] 25 40 60 75
 ```
 
@@ -527,10 +527,10 @@ As long as the elements are of the same type, we can use our first multi-line R 
 
 ```R
 > A <- matrix(
-+   c(2, 1, 4, 5, 3, 7),      ### data elements
-+   nrow = 2,		         ### number of rows
-+   ncol = 3,		         ### number of columns
-+   byrow = TRUE)             ### fill by rows
+   c(2, 1, 4, 5, 3, 7),      ### data elements
+   nrow = 2,		         ### number of rows
+   ncol = 3,		         ### number of columns
+   byrow = TRUE)             ### fill by rows
 > A
      [,1] [,2] [,3]
 [1,]    2    1    4
@@ -1003,9 +1003,9 @@ One last question: if you take the following numbers from your answers returned 
 >
 > Exercise H:	your numeric answer
 >
-> Exercise K:	character 1 (-1), character 4 (-3)
+> Exercise K:	character 1 (-1), character 4 (-6)
 >
-> Exercise L: character 1 (-1), character 3 (-1)
+> Exercise L: character 1 (-1), character 3 (-3)
 >
 
 This is the series called:
@@ -1033,7 +1033,7 @@ For those of you on the iMacs, please remember to log out of the system as descr
 
 To reiterate, for this, the first lab of this course, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for two things:
 
-1. For the mastery test which accounts for 15% of the course.  This will take place between Thursday 21-Mar-2024 and Friday 22-Mar-2024 online.
+1. For the mastery test which accounts for 15% of the course.  This will take place on Friday 21-Mar-2025 at the start of practical 4.
 2. For a very large part of this course in which you will use RStudio to explore examples of genomic data.
 
 The mastery test will test both Linux and R, so half of the marks will come from each part.  We have not done much biology today, but as a hint have a think about how we can work with biological data that can come in a variety of formats and what we can potentially do with those given what we have learnt today.  There will be a worksheet with test questions for you to work through as preparation for the test.
@@ -1042,7 +1042,7 @@ The mastery test will test both Linux and R, so half of the marks will come from
 
 ## Contact
 
-My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any of the course work, _**please email me beforehand so we can arrange to meet**_.
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any aspects of the course work, _**please email me beforehand so we can arrange to meet**_.
 
 Prof Patrick Biggs,
 
