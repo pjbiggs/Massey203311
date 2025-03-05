@@ -86,7 +86,7 @@ Don\'t forget to press the **\[Enter\]** key: commands are not sent to the R con
 
 #### Important Note
 
-**Please see the separate document -- "Access_to_RStudio_2025.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. It can also be found directly at: [Access_to_RStudio_2025.pdf](https://stream.massey.ac.nz/pluginfile.php/5540234/mod_resource/content/2/Access_to_RStudio_2024.pdf). You must do this before you can do any work in this course.**
+**Please see the separate document -- "Access_to_RStudio_2025.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. It can also be found directly at: [Access_to_RStudio_2025.pdf](https://stream.massey.ac.nz/pluginfile.php/6099654/mod_resource/content/3/Access_to_RStudio_2025.pdf). You must do this before you can do any work in this course.**
 
 ### Computing
 
@@ -554,8 +554,8 @@ In the next 6 lines of entered code (those with a `>`), we will look at extracti
 > A[ ,3]                         ### the 3rd column
 [1] 4 7
 > dimnames(A) = list(
-+    c("row1", "row2"),          ### row names
-+    c("col1", "col2", "col3"))  ### column names
+    c("row1", "row2"),          ### row names
+    c("col1", "col2", "col3"))  ### column names
 > A
      col1 col2 col3
 row1    2    1    4
@@ -573,9 +573,9 @@ Other ways exist to make matrices.  Let’s make another matrix called B of a di
 
 ```R
 > B <- matrix(
-+   c(8, 4, 7, 1, 3, 5),
-+   nrow = 3,
-+   ncol = 2)
+   c(8, 4, 7, 1, 3, 5),
+   nrow = 3,
+   ncol = 2)
 > B
      [,1] [,2]
 [1,]    8    1
@@ -598,9 +598,9 @@ The columns of two matrices having the same number of rows can be combined into 
 
 ```R
 > C <- matrix(
-+   c(7, 4, 2),
-+   nrow = 3,
-+   ncol = 1)
+   c(7, 4, 2),
+   nrow = 3,
+   ncol = 1)
 > C                ### C has 3 rows
      [,1]
 [1,]    7
@@ -972,8 +972,8 @@ Let’s now do something new – don’t worry we will do this in detail again i
 ### set up a file for an image, but make it for orange colours on non-automatic cars – so this code is wrong…..
 > png('203311/Module1/testAlluvial.png')
 > alluvial(mtcars[8:11], freq = mtcars$cyl,
-+          col = ifelse(mtcars$am == "1", "red", "grey"),
-+          border = ifelse(mtcars$am == "1", "black", "grey"))
+          col = ifelse(mtcars$am == "1", "red", "grey"),
+          border = ifelse(mtcars$am == "1", "black", "grey"))
 > dev.off()
 RDStudioGD
           1
