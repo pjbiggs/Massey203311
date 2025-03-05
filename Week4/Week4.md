@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 04 - Sequencing and Mapping
 
@@ -288,14 +288,11 @@ $ wget tarball-link-address-you-just-copied
 ```
 You should see a rapid animated arrow tracking the download.
 
-This should result in a ~17Mb `tar` ball in your directory. If it does not, then try using [this link](https://github.com/osilander/203.311/blob/main/Week4/data/sequence-files.tar?raw=true "raw data link"). **If you use this link you will have to do the following**:
+This should result in a ~17Mb `tar` ball in your directory. If it does not, then try using [this link](https://github.com/osilander/203.311/blob/main/Week4/data/sequence-files.tar?raw=true "raw data link") instead. **If you use this link you will have to do the following**:
 
-```bash
-# The downloaded file will have an odd extension.
-# you will need to change it using mv.$
-# TAB-COMPLETE the first filename below to do this
-$ mv sequence-files.tar?raw=true sequence-files.tar
-```
+> The downloaded file will have an odd extension.  You will need to change it using `mv`.
+> TAB-COMPLETE the first filename below to do this:
+> `mv sequence-files.tar?raw=true sequence-files.tar`
 
 Once you have downloaded the data, you will need to unpack it. Use `tar` to do this:
 
@@ -306,7 +303,7 @@ $ tar -xvf sequence-files.tar
 
 This should result in a single directory, `sequence-files`, containing four compressed `fastq` files (`fastq.gz`). Two of these are Illumina files, and two are Oxford Nanopore.
 
-Nopte that the Illumina data are [paired end](https://www.illumina.com/science/technology/next-generation-sequencing/plan-experiments/paired-end-vs-single-read.html "Illumina info page"), so there are two files)[^2], but these are from the same SARS-CoV-2 viral isolate.
+Note that the Illumina data are [paired end](https://www.illumina.com/science/technology/next-generation-sequencing/plan-experiments/paired-end-vs-single-read.html "Illumina info page"), so there are two files)[^2], but these are from the same SARS-CoV-2 viral isolate.
 
 Quick note: here and throughout the lab sessions I will often refer to certain files or directories as `myfile.txt` or `mydir/`. This does not mean that you should use this name, or that this file or directory exists for you. Rather, you should replace this name with a filename that *does* exist or which you *do* want to analyse or which is nicely descriptive. For example, intead of a `covid/data/` directory above, you could make a directory called `scv/sequence_data/`. Feel free to change the name now if you like (hint: use `mv`).
 
@@ -510,7 +507,7 @@ Check that you have correctly loaded the data using `head(mydata)` or `summary(m
 
 Finally, you can plot the data. If you have used `seqkit fx2tab` as suggested above, your data will have four columns; the third and fourth of these are the length of the read and the quality of the read. Go ahead and plot the data in a manner you might think is informative (e.g. `hist()`, `plot()`, `boxplot()`, `barplot()`, etc.). **Please think about what and how you would like to plot the data and what type of plot would be needed.** Not all of the previous plotting commands are useful for this data. You can browse plotting options and methods [here](https://r-graph-gallery.com/ "R graph gallery").
 
-> The Illumina data will have four columns. This is because of the naming scheme. Make sure you use only the relevant columnbs for plotting. The nanopore data has the expected three columns.
+> The Illumina data will have four columns. This is because of the naming scheme. Make sure you use only the relevant columns for plotting. The nanopore data has the expected three columns.
 
 ## Portfolio Analysis {#Portfolio-Analysis}
 
