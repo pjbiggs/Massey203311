@@ -291,7 +291,9 @@ You should see a rapid animated arrow tracking the download.
 This should result in a ~17Mb `tar` ball in your directory. If it does not, then try using [this link](https://github.com/osilander/203.311/blob/main/Week4/data/sequence-files.tar?raw=true "raw data link") instead. **If you use this link you will have to do the following**:
 
 > The downloaded file will have an odd extension.  You will need to change it using `mv`.
+>
 > TAB-COMPLETE the first filename below to do this:
+>
 > `mv sequence-files.tar?raw=true sequence-files.tar`
 
 Once you have downloaded the data, you will need to unpack it. Use `tar` to do this:
