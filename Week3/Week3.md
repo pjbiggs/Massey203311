@@ -288,7 +288,7 @@ By now, you should have a growing understanding of how important it is to check 
 In this final exercise, we will look at the issue of *p hacking*.  P hacking is the name given to the very tempting process of looking through your data until you find a significant result.  When datasets were small, researchers could really only ask one or two questions.  Those questions were either supported by the statistics or they weren't.  However, now that many studies are collecting huge amounts of data, if your first question doesn't hold up, it is tempting to keep looking through the dataset until you find an interesting result.
 
 > **EXERCISE 15**<br>
-> Take a look at [this website](https://projects.fivethirtyeight.com/p-hacking/). Select various parameters to test.  Can you find a statistically significant result that you like?  Can you disprove a result that you don't like, just by tweaking the analysis.  How much do you believe either outcome?
+> Take a look at [this website](https://web.archive.org/web/20241127014953/https://projects.fivethirtyeight.com/p-hacking/). Select various parameters to test.  Can you find a statistically significant result that you like?  Can you disprove a result that you don't like, just by tweaking the analysis.  How much do you believe either outcome?
 
 
 ## Take Home Messages
