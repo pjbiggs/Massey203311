@@ -278,7 +278,7 @@ For time series data, it can often be helpful to add lines linking points on a p
 ```
 
 > **EXERCISE 14**<br>
-> This dataset was obtained from an [online data repository](http://www.tylervigen.com/spurious-correlations). Quickly look up the website and just check that the dataset was downloaded correctly.
+> This dataset was obtained from an [online data repository](https://web.archive.org/web/20220315002259/http://www.tylervigen.com/spurious-correlations). Quickly look up the website and just check that the dataset was downloaded correctly.
 
 
 ## P Hacking
