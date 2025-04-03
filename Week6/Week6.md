@@ -145,7 +145,7 @@ Please download them from [here](data/hcov-19_2022_04_07_22.fasta.gz) (right cli
 Let's have a quck look with `seqkit stats` on our new file.
 
 ```bash
-$ seqkits stats hcov-19_2022_04_07_22.fasta
+$ seqkit stats hcov-19_2022_04_07_22.fasta
 ```
 
 #### QUESTION
