@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 06 - Phylogenetics and Evolutionary Visualization
 
@@ -98,7 +98,23 @@ $ bedtools maskfasta -fi kwazulu-natal.fasta -bed low_cov.bed -fo kwazulu-natal-
 
 Do this for both of your new genomes. Last, we **must rename our sequences so that they are unique**. To do this, simply click on your masked file and edit the name of the sequence in the top left window of the RStudio browser window. I recommend simply renaming the fasta sequence as the name of the location, so for example replace `MN908947.3` with `montana`. **Make sure to also save it** (ctrl-s).
 
-Now we can begin our phylogenetic analysis. We will perform for the whole genome. First, however, let's take a look at what is in our genome.
+Alternatively, we can do the same thing with a couple of lines of code, using our stream editor friend `sed` and `mv`, both from Week 1.  Can you remember using `sed` from all those weeks ago?  
+
+```bash
+# only do this once, so perform this on the 2 files manually as described above,
+# or with the following code where we rename the header line thus:
+sed 's/>MN908947.3/>kwazulu/' kwazulu-natal-mask.fasta > kwazulu_temp.fasta
+mv kwazulu_temp.fasta kwazulu-natal-mask.fasta
+
+sed 's/>MN908947.3/>montana/' montana-mask.fasta > montana_temp.fasta
+mv montana_temp.fasta montana-mask.fasta
+
+# so here we first rename the fasta header line in the file,
+# and then use the command mv to rename that file
+# the second line of code keeps the file names consistent for the rest of the practical.
+```
+
+Now we can begin our phylogenetic analysis that we will perform for the whole genome. First, however, let's take a look at what is in our genome.
 
 ### Finding annotations
 
@@ -139,13 +155,13 @@ How many sequences are in this new file, and are they all the same length?
 Now we can use this to align all nucleotide sequences from the other SARS-CoV-2 viruses. First, we must add our own sequences to this file. We will use `cat` to do this.
 
 ```bash
-# We need to put our sequences at the bottom of the list.
+# We need to put our two sequences at the bottom of the list.
 # note the first fasta below is not the original reference, but the
 # (now unzipped) file you downloaded above
-> cat hcov-19_2022_04_07_22.fasta montana-mask.fasta kwazulu-mask.fasta > all_your_sequences_belong_to_us.fasta
+$ cat hcov-19_2022_04_07_22.fasta montana-mask.fasta kwazulu-mask.fasta > all_your_sequences_belong_to_us.fasta
 ```
 
-it might not be a bad idea to check that we have the numbe of sequences we expect now, use `seqkit stats` to check that the number of sequences has increased in your new file.
+It might not be a bad idea to check that we have the number of sequences we expect now, use `seqkit stats` to check that the number of sequences has increased in your new file.
 
 Now we can do an alignment. To do this we will use `mafft` [see here](https://mafft.cbrc.jp/alignment/software/ "mafft homepage"). It is installable using `mamba`.
 
@@ -215,7 +231,9 @@ We will use `R` to visualise our tree. Return to the `R` console and make sure y
 
 Extra taxa can be added simply by using more commas or parentheses, for example:
 
-`> my.tree <- read.tree(text='(A,((X,B),Y),(C,D)E)F;')`
+```R
+> my.tree <- read.tree(text='(A,((X,B),Y),(C,D)E)F;')
+```
 
 Or perhaps you've recently sequenced a tiny dragon that you found in your back garden. Let's add that:
 
@@ -232,6 +250,11 @@ Next, load your tree using the `read.tree` command. Again, the tree is in the `t
 ```R
 # load the library
 > library(ape)
+
+# remember to set your working directory either with the blue cog, or with code:
+# so for example if your folder inside Module2 where you have worked previously
+# is called `covid`, then it would be:
+> setwd("~/203311/Module2/covid/")
 
 # get the tree
 > my.tree <- read.tree(file="tree.i.made.with.iqtree.treefile")

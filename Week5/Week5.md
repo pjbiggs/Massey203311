@@ -1,5 +1,7 @@
 **[Return to the Course Home Page](../index.html)**
 
+<!-- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. -->
+
 # Week 05 - Variants and Phylogenies
 
 **A/Prof Olin Silander, with Prof P Biggs**
