@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 08 - Barcodes and diversity - Fastq read analysis for 16S rRNA metabarcoding using the R package DADA2
 
@@ -52,7 +52,7 @@ Brief outline of the steps we will be following in Week 8 (today) and Week 10.<b
 
 The lecture introduced the motivation for doing these kinds of studies, and described the **very important conceptual difference between metabarcoding and metagenomics**.  Next an overview of metabarcoding was discussed as was the 16S rRNA amplicon, and some initial ideas about how we work with sequence diversity to make OTUs (operational taxonomic units).
 
-We then swtiched tack to looking at software - from a historical point of view - with QIIME, mothur and Usearch being mentioned before turning or focus to DADA2 within the `R` environment.  Finally some challenges were mentioned, which is a theme further developed in the tutorial.
+We then switched tack to looking at software - from a historical point of view - with QIIME, mothur and Usearch being mentioned before turning or focus to DADA2 within the `R` environment.  Finally some challenges were mentioned, which is a theme further developed in the tutorial.
 
 So, now on to the practical...
 
@@ -91,7 +91,7 @@ We will be working within web browsers, and Firefox and Chrome are installed on 
 
 #### Manawatu ScC5.10 (iMacs)
 
-The machines we can use for the course are Apple iMacs. Please follow the information in "Access_to_RStudio_2024.pdf" to log into these machines through the use of the VMware Horizon application.  Please use your normal Massey username and password to login to the Windows 10 machines.
+The machines we can use for the course are Apple iMacs. Please follow the information in "Access_to_RStudio_2024.pdf" to log into these machines through the use of the VMware Horizon application.  Please use your normal Massey username and password to login to the Windows 11 machines.
 
 #### outside Massey
 
@@ -320,15 +320,17 @@ As implemented in the DADA2 pipeline dereplication has one crucial addition from
 ```R
 ### dereplicate the forward and reverse reads separately
 > derepFs <- derepFastq(filtFs, verbose=TRUE)
-Dereplicating sequence entries in fastq file: /cloud/project/MiSeq_SOP//filtered/F3D0_F_filt.fastq.gz
+Dereplicating sequence entries in fastq file: ~/203311/Module3/Metagenomics/MiSeq_SOP//filtered/F3D0_F_filt.fastq.gz
 Encountered 1979 unique sequences from 7113 total sequences read.
-Dereplicating sequence entries in fastq file: /cloud/project/MiSeq_SOP//filtered/F3D1_F_filt.fastq.gz
+Dereplicating sequence entries in fastq file: ~/203311/Module3/Metagenomics/MiSeq_SOP//filtered/F3D1_F_filt.fastq.gz
+Encountered 1639 unique sequences from 5299 total sequences read.
 ......
 
 > derepRs <- derepFastq(filtRs, verbose=TRUE)
-Dereplicating sequence entries in fastq file: /cloud/project/MiSeq_SOP//filtered/F3D0_R_filt.fastq.gz
+Dereplicating sequence entries in fastq file:~/203311/Module3/Metagenomics/MiSeq_SOP//filtered/F3D0_R_filt.fastq.gz
 Encountered 1660 unique sequences from 7113 total sequences read.
-Dereplicating sequence entries in fastq file: /cloud/project/MiSeq_SOP//filtered/F3D1_R_filt.fastq.gz
+Dereplicating sequence entries in fastq file: ~/203311/Module3/Metagenomics/MiSeq_SOP//filtered/F3D1_R_filt.fastq.gz
+Encountered 1349 unique sequences from 5299 total sequences read.
 ......
 
 ### rename the derep-class objects by the sample names
@@ -431,7 +433,7 @@ dada-class: object describing DADA2 denoising results
 Key parameters: OMEGA_A = 1e-40, OMEGA_C = 1e-40, BAND_SIZE = 16
 ```
 
-**Note: 14-May-2024: It seems as though this output has changed in its formatting -- for the worse, and I am not sure why -- to make it harder to read.**  Hence if you adapt the above code to only see the the tenth entry of the information you see the options and parameters used, but not the sequence numbers.  This new code is thus:
+**Note: 14-May-2024: It seems as though this output has changed in its formatting -- for the worse, and I am not sure why -- to make it harder to read.**  Hence if you adapt the above code to only see the tenth entry of the information you see the options and parameters used, but not the sequence numbers.  This new code is thus:
 
 ```R
 ### let's look at the 10th entry by adding "[10]" to the end so we can see our parameters
@@ -478,7 +480,7 @@ Now we can actually go ahead and merge our forward and reverse reads into a sing
 The resulting dataframe – called _`mergers`_ – is large, so we will just look at the start of sample 1:
 
 ```R
-### Inspect the merger data.frame from the first sample
+### Inspect the merger dataframe from the first sample
 > head(mergers[[1]])
 sequence
 1 TACGGAGGATGCGAGCGTTATCCGGATTTATTGGGTTTAAAGGGTGCGCAGGCGGAAGATCAAGTCAGCGGTAAAATTGAGAGGCTCAACCTCTTCGAGCCGTTGAAACTGGTTTTCTTGAGTGAGCGAGAAGTATGCGGAATGCGTGGTGTAGCGGTGAAATGCATAGATATCACGCAGAACTCCGATTGCGAAGGCAGCATACCGGCGCTCAACTGACGCTCATGCACGAAAGTGTGGGTATCGAACAGG
@@ -606,13 +608,13 @@ The DADA2 package provides a native implementation of the RDP’s naive Bayesian
 [6,] "Bacteria" "Bacteroidetes" "Bacteroidia" "Bacteroidales" "Muribaculaceae" NA   
 ```
 
-So, at this point we could stop, as we have a taxonomy, ready for phyloseq in Practical 9 in two week's time for further analysis and visualisation.  However, we can do one more thing today.
+So, at this point we could stop, as we have a taxonomy, ready for using the `R` package `phyloseq` in Practical 10 in two week's time for further analysis and visualisation.  However, we can do, and will do, one more thing today.
 
 
 
 ## Exercise 12: Evaluating the accuracy
 
-Our last thing to do with this dataset from a DADA2 point of view is to evaluate the accuracy in terms of how well the process has gone with these sequence data, and we can use a “mock community” for this purpose.  This is a mixture of 20 known strains (this mock community is supposed to be 21 strains, but the bacterium P. acnes was absent). Reference sequences corresponding to these strains were provided in the downloaded zip archive. Previously, the Mock sample was removed when we made the sequence table, but we return to that sample now and compare the sequence variants inferred by DADA2 to the expected composition of the community.
+Our last thing to do with this dataset from a DADA2 point of view is to evaluate the accuracy in terms of how well the process has gone with these sequence data, and we can use a “mock community” for this purpose.  This is a mixture of 20 known strains (this mock community is supposed to be 21 strains, but the bacterium _P. acnes_ was absent). Reference sequences corresponding to these strains were provided in the downloaded zip archive. Previously, the Mock sample was removed when we made the sequence table, but we return to that sample now and compare the sequence variants inferred by DADA2 to the expected composition of the community.
 
 ```R
 ### Evaluating DADA2’s accuracy on the mock community
@@ -663,7 +665,7 @@ To illustrate the path from fasta sequence file to aligned sequence to a sequenc
 ### import the sequences to work with them
 > seqs16S <- readDNAStringSet("sub100_nochimSeqs.fa")
 
-### make a random subsmaple of say 100 sequences
+### make a random subsample of say 100 sequences
 > fasta.sample(infile = "nochimSeqs232.fa", nseq = 100, file.out = "sub100_nochimSeqs.fa")
 > seqs16S <- readDNAStringSet("sub100_nochimSeqs.fa")
 
@@ -748,7 +750,7 @@ Your task is to plot this dataframe in a way that shows whether the multiple ste
 
 ### Part B
 
-From Exercise 13, you worked with a method to generate a sequence logo from the sequences from the DADA2 tutorial.  Unfortunately, due to its scale, this is not a dataset with a lot of sequence variation within it. To get to looking at a truer represenation of the 9 hypervariable regions within 16S rRNA, we need to use a reference fasta file such as _`rdp_train_set_14.fa`_.  
+From Exercise 13, you worked with a method to generate a sequence logo from the sequences from the DADA2 tutorial.  Unfortunately, due to its scale, this is not a dataset with a lot of sequence variation within it. To get to looking at a truer representation of the 9 hypervariable regions within 16S rRNA, we need to use a reference fasta file such as _`rdp_train_set_14.fa`_.  
 
 Your task is to generate a new fasta file of 50 sequences chosen at random, and search with the `msa` and `seqLogo` packages to find a region of ~100 - 150 bp in length that shows a high degree of sequence similarity and then variability.  You should then also plot the same region with the `msa` package showing the alignment and the sequence logo, describing what you observe in the figure legend.  
 
@@ -805,7 +807,7 @@ file                 format  type  num_seqs     sum_len  min_len  avg_len  max_l
 rdp_train_set_14.fa  FASTA   DNA     10,678  15,409,307      320  1,443.1    2,210
 ```
 
-so as you can see, a wide range.  This will result in a large alignment visualised with `msaPrettyPrint()`.  In orer to find an area of interest as above with the way the printing works, look at the options with `msaPrettyPrint()` to find a way to remove the names temporaily as this will maximise the alignment in the PDF, and there are less pages to visually inspect.
+so as you can see, a wide range.  This will result in a large alignment visualised with `msaPrettyPrint()`.  In orer to find an area of interest as above with the way the printing works, look at the options with `msaPrettyPrint()` to find a way to remove the names temporarily as this will maximise the alignment in the PDF, and there are less pages to visually inspect.
 
 iii) Choosing the ~100 - 150bp region is up to you.  Once you have a region, I would suggest getting that smaller region clarified with `msa` (as a new object maybe), and then using the same region coordinates (i.e., `start` and `end`) for visualising the alignment with  `seqLogo`.
 
@@ -813,7 +815,7 @@ iii) Choosing the ~100 - 150bp region is up to you.  Once you have a region, I w
 
 ## Assessment
 
-To reiterate, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course.  This will take place between Thursday 23-May-2024 and Friday 24-May-2024 online.
+To reiterate, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course.  This will take place on Friday 23-May-2025 at 0900 in ScC5.10.
 
 The mastery test will test the contents of weeks 8 to 10, more information will follow soon.
 

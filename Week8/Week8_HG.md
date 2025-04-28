@@ -106,7 +106,7 @@ We will perform our work inside the _`Module3`_ folder in your Massey RStudio ac
 
 ## Theoretical overview
 
-The DADA2 paper[^1] by Callahan et al. has an associated GitHub page[^2]  and a great tutorial page.  We are going to use a set of 20 samples that are used in the tutorial, and are provided for you within the _`MiSeq_SOP`_ folder with the _`Module3/Metagenomics`_ folder.  There are other files in there, but more on those later.  So, most of the below comes from the tutorial and the DADA2 vignette inside `R` and is acknowledged as such.
+The DADA2 paper[^1] by Callahan et al. has an associated GitHub page[^2]  and a great tutorial page.  We are going to use a set of 20 samples that are used in the tutorial, and are provided for you within the _`MiSeq_SOP`_ folder with the _`Module3/`_ folder.  There are other files in there, but more on those later.  So, most of the below comes from the tutorial and the DADA2 vignette inside `R` and is acknowledged as such.
 
 The investigation of environmental microbial communities and microbiomes has been driven in significant part by the recent widespread adoption of amplicon sequencing. In amplicon sequencing a particular genetic locus is amplified from DNA extracted from the community of interest, and then sequenced on a next-generation sequencing platform. This technique removes the need to culture microbes in order to detect their presence, and cost-effectively provides a deep census of a microbial community.
 
@@ -136,7 +136,7 @@ The output of the DADA2 pipeline is a sample-by-sequence matrix – a so-called 
 
 We will check we have all we need to do the analysis first.  The commands below have been checked and should work fine.  The below screenshot shows the folder structure within `/cloud/project/` for the new Module.
 
-1. Go to the _`MiSeq_SOP`_ folder in the _`203311/Module3/Metagenomics/`_ folder and check that there are files there.
+1. Go to the _`MiSeq_SOP`_ folder in the _`203311/Module3/`_ folder and check that there are files there.
 
 <img src="graphics/window4_2024.PNG" width="600"/>
 
@@ -146,24 +146,24 @@ We will check we have all we need to do the analysis first.  The commands below 
 ### check on packages being there and their versions ###
 > library(dada2)
 > packageVersion("dada2")
-[1] ‘1.26.0’
+[1] ‘1.34.0’
 
 > library(ShortRead)
 > packageVersion("ShortRead")
-[1] ‘1.56.0’
+[1] ‘1.64.0’
 
 > library(ggplot2)
 > packageVersion("ggplot2")
-[1] ‘3.4.4’
+[1] ‘3.5.1’
 ```
 
 The next thing we want to do is to set a working path and then define a path variable to check it is all OK for the work we are going to do today.
 
 ```R
 ### is our path OK?
-> path <- ("~/203311/Module3/Metagenomics/MiSeq_SOP/")
+> path <- ("~/203311/Module3/MiSeq_SOP/")
 > path
-[1] "~/203311/Module3/Metagenomics/MiSeq_SOP/"
+[1] "~/203311/Module3/MiSeq_SOP/"
 
 > fns <- list.files(path)
 > fns
@@ -206,16 +206,16 @@ First we read in the names of the Fastq files, and perform some string manipulat
 > fnFs <- file.path(path, fnFs)
 > fnRs <- file.path(path, fnRs)
 > fnFs
-[1] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D0_S188_L001_R1_001.fastq"  
-[2] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D1_S189_L001_R1_001.fastq"  
-[3] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D141_S207_L001_R1_001.fastq"
+ [1] "~/203311/Module3/MiSeq_SOP//F3D0_S188_L001_R1_001.fastq"   
+ [2] "~/203311/Module3/MiSeq_SOP//F3D1_S189_L001_R1_001.fastq"   
+ [3] "~/203311/Module3/MiSeq_SOP//F3D141_S207_L001_R1_001.fastq"
 
 ...
 
 > fnRs
-[1] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D0_S188_L001_R2_001.fastq"  
-[2] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D1_S189_L001_R2_001.fastq"  
-[3] "~/203311/Module3/Metagenomics/MiSeq_SOP//F3D141_S207_L001_R2_001.fastq"
+ [1] "~/203311/Module3/MiSeq_SOP//F3D0_S188_L001_R2_001.fastq"   
+ [2] "~/203311/Module3/MiSeq_SOP//F3D1_S189_L001_R2_001.fastq"   
+ [3] "~/203311/Module3/MiSeq_SOP//F3D141_S207_L001_R2_001.fastq"
 
 ...
 ```
@@ -272,7 +272,7 @@ As in the DADA2 tutorial, we will use standard filtering parameters: _`maxN=0`_ 
 > filt_path <- file.path(path, "filtered")
 > if(!file_test("-d", filt_path)) dir.create(filt_path)
 > filt_path
-[1] "~/203311/Module3/Metagenomics/MiSeq_SOP//filtered"
+[1] "~/203311/Module3/MiSeq_SOP//filtered"
 
 ### make list of filtered names for later
 > filtFs <- file.path(filt_path, paste0(sample.names, "_F_filt.fastq.gz"))
@@ -299,12 +299,13 @@ Now to perform the actual filtering and trimming on our samples and place the re
          maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
          compress=TRUE, multithread=TRUE)
 > head(out)
-F3D0       7793      7113
-F3D1       5869      5299
-F3D141     5958      5463
-F3D142     3183      2914
-F3D143     3178      2941
-F3D144     4827      4312
+                                reads.in reads.out
+F3D0_S188_L001_R1_001.fastq       7793      7113
+F3D1_S189_L001_R1_001.fastq       5869      5299
+F3D141_S207_L001_R1_001.fastq     5958      5463
+F3D142_S208_L001_R1_001.fastq     3183      2914
+F3D143_S209_L001_R1_001.fastq     3178      2941
+F3D144_S210_L001_R1_001.fastq     4827      4312
 ```
 
 > If you are interested (**which I very strongly suggest you are by the way for the future**), have a look at the arguments for the `filterAndTrim()` function as it is doing a huge amount of work for you, including compressing the resulting reads.
@@ -320,15 +321,17 @@ As implemented in the DADA2 pipeline dereplication has one crucial addition from
 ```R
 ### dereplicate the forward and reverse reads separately
 > derepFs <- derepFastq(filtFs, verbose=TRUE)
-Dereplicating sequence entries in fastq file: /cloud/project/MiSeq_SOP//filtered/F3D0_F_filt.fastq.gz
+Dereplicating sequence entries in Fastq file: ~/203311/Module3/MiSeq_SOP//filtered/F3D0_F_filt.fastq.gz
 Encountered 1979 unique sequences from 7113 total sequences read.
-Dereplicating sequence entries in fastq file: /cloud/project/MiSeq_SOP//filtered/F3D1_F_filt.fastq.gz
+Dereplicating sequence entries in Fastq file: ~/203311/Module3/MiSeq_SOP//filtered/F3D1_F_filt.fastq.gz
+Encountered 1639 unique sequences from 5299 total sequences read.
 ......
 
 > derepRs <- derepFastq(filtRs, verbose=TRUE)
-Dereplicating sequence entries in fastq file: /cloud/project/MiSeq_SOP//filtered/F3D0_R_filt.fastq.gz
+Dereplicating sequence entries in Fastq file: ~/203311/Module3/MiSeq_SOP//filtered/F3D0_R_filt.fastq.gz
 Encountered 1660 unique sequences from 7113 total sequences read.
-Dereplicating sequence entries in fastq file: /cloud/project/MiSeq_SOP//filtered/F3D1_R_filt.fastq.gz
+Dereplicating sequence entries in Fastq file: ~/203311/Module3/MiSeq_SOP//filtered/F3D1_R_filt.fastq.gz
+Encountered 1349 unique sequences from 5299 total sequences read.
 ......
 
 ### rename the derep-class objects by the sample names
@@ -586,7 +589,7 @@ The DADA2 package provides a native implementation of the RDP’s naive Bayesian
 
 ```R
 ### use a reference data set to assign taxonomy to the reads
-> setwd("~/203311/Module3/Metagenomics/")
+> setwd("~/203311/Module3/")
 > training <- ("silva_nr_v132_train_set.fa.gz")
 > training
 [1] "silva_nr_v132_train_set.fa.gz"
@@ -607,7 +610,6 @@ The DADA2 package provides a native implementation of the RDP’s naive Bayesian
 ```
 
 So, at this point we could stop, as we have a taxonomy, ready for phyloseq in Practical 9 in two week's time for further analysis and visualisation.  However, we can do one more thing today.
-So, at this point we could stop, as we have a taxonomy, ready for using the `R` package `phyloseq` in Practical 10 in two week's time for further analysis and visualisation.  However, we can do, and will do, one more thing today.
 
 
 
@@ -822,13 +824,13 @@ The mastery test will test the contents of weeks 8 to 10, more information will 
 
 ## Contact
 
-I have two offices on the Manawatu campus (as I work for both SFTNS and SoVS), so I am not always in my Science Tower office D5-30. If you want to discuss anything, it's best to email me beforehand.
+My office is located in the Hopkirk Research Institute on the Manawatu campus.  This is a _**restricted access building**_, and so visiting my office will have to be by prior arrangement.  I am happy to discuss any aspects of the course work, _**please email me beforehand so we can arrange to meet**_.
 
 Prof Patrick Biggs,
 
 Molecular Biosciences Group,
 
-School of Natural Sciences
+School of Food Technology and Natural Sciences
 
 ```
 -. .-.   .-. .-.   .-. .-.   .

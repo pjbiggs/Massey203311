@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 07 - Science and the Public
 
