@@ -134,7 +134,7 @@ The output of the DADA2 pipeline is a sample-by-sequence matrix – a so-called 
 
 ## Exercise 1: Getting everything ready
 
-We will check we have all we need to do the analysis first.  The commands below have been checked and should work fine.  The below screenshot shows the folder structure within `/cloud/project/` for the new Module.
+We will check we have all we need to do the analysis first.  The commands below have been checked and should work fine.  The below screenshot shows the folder structure within `~/203311/Module3/Metagenomics/` for the new Module.
 
 1. Go to the _`MiSeq_SOP`_ folder in the _`203311/Module3/Metagenomics/`_ folder and check that there are files there.
 
@@ -802,7 +802,9 @@ i) First of all, there is no perfect region here, there are many regions to choo
 ii) The reference fasta file we are using --  _`rdp_train_set_14.fa`_ -- has a great range of sequence length within it.  For your information (i.e. there is no need to do this):
 
 ```bash
-/cloud/project$ seqkit stats rdp_train_set_14.fa
+$ cd ~/203311/Module3/Metagenomics
+$ pwd
+$ seqkit stats rdp_train_set_14.fa
 file                 format  type  num_seqs     sum_len  min_len  avg_len  max_len
 rdp_train_set_14.fa  FASTA   DNA     10,678  15,409,307      320  1,443.1    2,210
 ```
