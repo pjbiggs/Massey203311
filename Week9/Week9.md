@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 09 - Introduction to Metagenomic analysis
 
@@ -108,9 +108,9 @@ We primarily used webtools, and the Microsoft product Excel to explore some read
 1. We uploaded a pair of reads to the Kaiju webserver for analysis against a variety of databases.
 2. We downloaded these data, and opened them in Excel to explore them in a comparative way.  
 3. We looked at the results in a completely different way using Krona.
-4. Finally, we returned to `R` for the work that will led to the Portfolio analysis.
+4. Finally, we returned to `R` for the work that will lead to the Portfolio analysis.
 
-#### In 2024
+#### In 2024 and now 2025
 
 The process is the nearly the same, except that for point 1) above, we will use a new Massey server (`tur-kaiju1`) to use the software behind the Kaiju webserver, rather than uploading reads to the actual webserver in Denmark.  Then for point 2) we will copy the data back to our usual environment (on `tur-rstudio2`), and continue as described above for points 3) and 4).
 
@@ -264,6 +264,11 @@ We will generate a set of data each with the default _`greedy`_ algorithm, and t
 # We also declare the `-a` option for the algorithm,
 # and the `-o` option for the name of the output file.
 
+# note the `\` in the code below.  This is a way of showing a long line of code
+# across multiple lines on a screen.  The below is thus one long line of code.
+# You can enter it line by line and hit [Enter] where the `\` is.  This results
+# in 3 lines on your screen, but it should run as one line of code.
+
 ## first default greedy (this is one line of code)
 $ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi \
 -i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a greedy \
@@ -275,7 +280,7 @@ $ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi \
 -o ~/fungi_50k_mem.txt
 ```
 
-These commands will take about 1.5 minutes each, and if the commands are queued, it might take a little longer.  However, it should complete just fine.  We will also execute a couple of extra lines of code to help us visualise what we have generated.  
+These commands will take about 1.5 minutes each, and if the commands are queued by others in the class, it might take a little longer.  However, it should complete just fine.  We will also execute a couple of extra lines of code on `tur-kaiju1` to help us visualise what we have generated.  
 
 ```bash
 ## two extra commands to help us visualise our output
@@ -306,9 +311,9 @@ $ ktImportText -o ~/fungi_50k_mem.txt.html ~/fungi_50k_mem.txt.krona
 
 What exactly this code is doing will become apparent in Exercise 3, but we will leave exact details for today.
 
-Our final piece of work is to copy our results back to `tur-rstudio2` and close our terminal for `tur-kaiju1`.  Let's check we have 6 output files by running `ls -l *fungi*`.  If you do not see 6 files, please let a demonstrator know.
+Our final piece of work is to copy our results back to `tur-rstudio2` and close our terminal for `tur-kaiju1`.  Remember that we only have command line access to `tur-kaiju1`, we cannot use any file explorer.  Let's check we have 6 output files by running `ls -l *fungi*`.  If you do not see 6 files, please let a demonstrator know.
 
-Now to copy and exit the terminal.  We will also have to authenticate between servers when we do the `scp`:
+Now to copy and exit the terminal.  We will also have to authenticate between servers when we perform a secure copy with the command  `scp`:
 
 ```bash
 ## copy over:
@@ -328,7 +333,7 @@ Again you will see the following in this process:
 
 So that's it, we are back to our usual `tur-rstudio2` server and you have run an example of _`kaiju`_ code on a different server, and copied the resulting data back.  Well done, that is no mean feat.
 
-What's next after doing that?
+What's next after doing that?  On we go.
 
 
 ### Exercise 3: Working with our data
@@ -436,9 +441,9 @@ We are interested in the file for the taxon path counts.  In a similar way, let�
 
 ### Exercise 5: Data comparisons
 
-Part of the practical today is to look at similarities and differences between the databases, and what effect that can have on the results.  To do that, we need to have a file where all this data is listed together.  We will look at a file I have made to do this.  
+Part of the practical today is to look at similarities and differences between the databases, and what effect that can have on the results.  To do that, we need to have a file where all this data is found together.  We will look at a file I have made to do this.  
 
-As stated above, I have performed the same 3 analyses (against the same 3 databases), but with the "mem" algorithm specified rather than the default "greedy” algorithm.  I have then used a scripting language – Perl – and a database – MySQL – to process this data into a format where everything is all together based on the taxonomic classification.  You will find this file – _`500k_cutoffs.xlsx`_ – in the _`kaiju`_ folder for today’s practical.  Again, you will have to download the file again.
+As stated above, I have performed the same 3 analyses (against the same 3 databases), but with the "mem" algorithm specified rather than the default "greedy” algorithm.  I have then used a scripting language – Perl – and a database – MySQL – to process this data into a format where everything is all together based on the taxonomic classification.  You will find this file – _`500k_cutoffs.xlsx`_ – in the _`kaiju`_ folder for today’s practical.  Again, you will have to download the file again to your local machine.
 
 Open this file in Excel.  Immediately you will notice that there are actually 5 tabs here, where the data has been trimmed to remove any taxa that are present at fewer than 1, 10, 100, 1000 or 10000 counts.  These are unsurprisingly called _`Cutoff1, Cutoff10, Cutoff10, Cutoff1000`_ and _`Cutoff10000`_ respectively.
 
@@ -454,7 +459,9 @@ Open this file in Excel.  Immediately you will notice that there are actually 5 
 >
 > <table><thead><tr><th>cutoff</th><th>number</th><th>cutoff</th><th>number</th></tr></thead><tbody><tr><td>1</td><td></td><td>1000</td><td></td></tr><tr><td>10</td><td></td><td>10000</td><td></td></tr><tr><td>100</td><td></td><td></td><td></td></tr></tbody></table>
 
-Let’s investigate the data a little further.  Looking at the first tab - _`Cutoff10000`_ – does not show much, so we move on to the next one - _`Cutoff1000`_ – where we can start to see some differences in the counts.  Remember, this is the same underlying sequence dataset analysed in 6 different ways.  
+Let’s investigate the data a little further.  Looking at the first tab - _`Cutoff10000`_ – does not show much, so we move on to the next one - _`Cutoff1000`_ – where we can start to see some differences in the counts.  
+
+**Remember, this is the same underlying sequence dataset analysed in 6 different ways.**  
 
 >**Question 7:**
 >
@@ -469,7 +476,7 @@ We have to go to the next two tabs - _`Cutoff100`_ and _`Cutoff10`_ – to reall
 > **!! WARNING &#x26A0; !!
 > Any sorting you are going to do shortly on the sheets needs to be across the columns A to I, otherwise things will go badly awry, and you will make incorrect inferences.  If that happens, download the file again, and start sorting again.**
 
-The data are sorted by the descending average value (column G).  If we sort on the coefficient of variation (COV; column H), we are looking at the most equal counts.
+The data are sorted by the descending average value (column G).  If we sort on the coefficient of variation (COV; column H), we are looking at the most equal counts across the 6 data columns.
 
 >**Question 8:**
 >
@@ -479,7 +486,7 @@ The data are sorted by the descending average value (column G).  If we sort on t
 > ______________________________________________
 > </td></tr></table>
 
-Now sort _`Cutoff100`_ on column A.  Remember what databases you have been working with, and their constituents (from the Kaiju webpage).
+Now sort _`Cutoff100`_ on column A.  Remember what databases you have been working with, and their constituents (as stated on the Kaiju webpage).
 
 >**Question 9:**
 >
@@ -514,7 +521,7 @@ We are going to explore the data as this is a fully interactive plot.  Let’s g
 
 <img src="graphics/2024_krona2.png" width="500"/><br>
 
-If you now double click, the ‘unclassified’s disappear, and we now see our classified data.  The plot should have dramatically changed, and look something like the below:
+If you now double click, the ‘unclassified’s disappear, and we now see our classified data only.  The plot should have dramatically changed, and look something like the below:
 
 <img src="graphics/2024_krona3.png" width="500"/><br>
 
@@ -572,7 +579,7 @@ Finally, a quick check with our fungal data.  Let's open up _`fungi_50k_mem.txt.
 
 <img src="graphics/2024_krona7.png" width="500"/><br>
 
-Wow, different, huh?  There's so much unclassified data.  let's expand out the classified data as you have done previously
+Wow, different, huh?  There's so much unclassified data.  Let's expand out the classified data as you have done previously.
 
 <img src="graphics/2024_krona8.png" width="500"/><br>
 
@@ -605,7 +612,7 @@ $ wget the_link_address_you_just_copied
 >**Question 16:**
 >
 > What command line would you use to check the number of lines in your downloaded files using a wildcard character?
-> how many lines are there in each of the 5 files?
+> How many lines are there in each of the 5 files?
 >
 > <table><thead><tr><th>code to run the command</th><th></th></tr></thead><tbody><tr><td>Cutoff1</td><td></td></tr><tr><td>Cutoff10</td><td></td></tr><tr><td>Cutoff100</td><td></td></tr><tr><td>Cutoff1000</td><td></td></tr><tr><td>Cutoff10000</td><td></td></tr></tbody></table>
 
@@ -621,6 +628,8 @@ We have seen that the both the search algorithm (`MEM` or `Greedy`), as well as 
 Please install the following packages, and then load them - and another one - for use.
 
 ```R
+## it's back to the console and using R
+
 ### install packages
 > install.packages("UpSetR")
 > install.packages("pheatmap")
@@ -642,19 +651,19 @@ Let's load in some data now.  This presumes that you are at _`~/203311/Module3/M
 
 > cutDataFile <- read.delim("week9data/500k_Cutoff1000.txt", header = TRUE, sep = "\t")
 
-### remove unwanted columns
+### remove unwanted columns ("averVal" and "COV")
 > cutDataFileRemovedCols <- subset(cutDataFile, select=-c(averVal, COV))
 
 ### remove the first row of unclassified data
 > cutDataFileRemovedCols_noUC <- cutDataFileRemovedCols[-c(1), ]
 ```
 
-The next thing is to make a subset based on a certain taxonomic classification.  Let's take "Proteobacteria" as a group.  You need to know the point in the taxonomy to get to "Proteobacteria", as this is therefore common also all taxonomic hits, and we can remove it to make the very long taxonomic names shorter.  So for "Proteobacteria", it is "root__cellular__organisms__Bacteria__Proteobacteria__", and this is want we want to remove, which we shall do thus:
+The next thing is to make a subset based on a certain taxonomic classification.  Let's take "Proteobacteria" as a group for example.  You need to know the point in the taxonomy to get to "Proteobacteria", as this is therefore common also all taxonomic hits, and we can remove it to make the very long taxonomic names shorter.  So for "Proteobacteria", it is "root__cellular__organisms__Bacteria__Proteobacteria__", and this is want we want to remove, which we shall do thus:
 
 ```R
 ### make a new object on a certain taxonomic classification and below
 
-## perform some column manipuluation to fix the taxonomy as our rowname
+## perform a column manipulation to fix the taxonomy as our rowname
 > rownames(cutDataFileRemovedCols_noUC) <- cutDataFileRemovedCols_noUC[,7]
 > cutDataFileRemovedCols_noUC2 <- cutDataFileRemovedCols_noUC[,-7]
 
@@ -669,7 +678,7 @@ This is why we are making a copy of the object here, so that you can look at _`c
 
 >**Question 17:**
 >
-> How many rows does _`onlyTaxaOfInterest`_ have compared to  _`cutDataFileRemovedCols_noUC2`_? (Use one of the many methods you now are aware of, e.g. `grep` in the terminal, or by a manual inspection to find the numbers.)
+> How many rows does _`onlyTaxaOfInterest`_ have compared to  _`cutDataFileRemovedCols_noUC2`_? (Use one of the many methods you now are aware of, e.g. `grep` in the terminal, or by a manual inspection to find the numbers in this case.)
 >
 > <table><tr><td>
 > ____________________
@@ -682,7 +691,7 @@ We are going to look at our data as heatmaps, and something called an UpSet plot
 
 #### Heatmaps
 
-I talked about abundance of reads in the Week 9 lectures.  A convenient way to view the abundance of the different taxa is with a heatmap (such as at <https://r-graph-gallery.com/heatmap>).  Hopefully you are slightly familiar with these from the other Portfolio analyses that you have performed by now.
+I talked about abundance of reads in the Week 9 lectures.  A convenient way to view the abundance of the different taxa is with a heatmap (such as at <https://r-graph-gallery.com/heatmap>).  Hopefully you are familiar with these from the other Portfolio analyses that you have performed by now.
 
 To draw a very basic heatmap, we use the `pheatmap()` command from the `pheatmap` package.  
 
@@ -692,7 +701,7 @@ To draw a very basic heatmap, we use the `pheatmap()` command from the `pheatmap
 ```
 This command can be modified very extensively - have a look at `?pheatmap()` in the `R` console to get the help pages.  Try out a few things out if you like.
 
-In window #4, this will look at little weird due to the long taxa names (which is why we have shortened them).  Click in the "Zoom" for the image to go to a new window.  As i have shown before, this window is stretchable, so you can make it look how you want, right click it and save it as an image.
+In window #4, this will look at little weird due to the long taxa names (which is why we have shortened them).  Click on the "Zoom" button for the image to go to a new window.  As I have shown before, this window is stretchable, so you can make it look how you want, right click it and save it as an image.
 
 
 #### UpSet plots
@@ -723,7 +732,7 @@ To make the plot, we have to apply a transformation to our data to make it an ab
 +       sets = setOrder, keep.order = TRUE)
 ```
 
-We have fixed the order of the sets here with the _`setOrder`_ object, have a go at changing the order of _`setOrder`_ if you want to change how the ouptut looks.
+We have fixed the order of the sets here with the _`setOrder`_ vector, have a go at changing the order of _`setOrder`_ if you want to change how the output looks.
 
 ---
 
@@ -740,7 +749,7 @@ In the "Visualising data in different ways" section above, for the "Heatmaps", w
 - combination 2: file _`500k_Cutoff1.txt`_ and taxonomic classification _`__Rhodobacter__`_
 - combination 3: file _`500k_Cutoff1.txt`_ and taxonomic classification _`__Methanomicrobiales__`_
 
-As with the code above, you are required to trim out the constant part of the taxonomic name to reduce the length of classification name.  Please use the exact search term above, otherwise you will get far longer taxomony names and your plot will look very complex.
+As with the code above, you are required to trim out the constant part of the taxonomic name to reduce the length of classification name.  Please use the exact search term above including the double underscores, otherwise you will get far longer taxomony names and your plot will look very complex, and be harder to interpret.
 
 #### Part B
 
@@ -786,7 +795,7 @@ i) There is not much to say here.  Plotting the data as it is is completely fine
 
 ## Assessment
 
-To reiterate, there is no direct assessment today. What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course. This will take place between Thursday 23-May-2024 and Friday 24-May-2024 online.
+To reiterate, there is no direct assessment today. What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course. This will take place on Friday 23-May-2025 online.
 
 The mastery test will test the contents of weeks 8 to 10, more information will follow next week.
 
