@@ -123,6 +123,29 @@ The commands below have been checked and should work fine.
 
 ---
 
+## Before we do anything else today...
+
+Let's save our current workspace and not lose all the work we have previously done in Week 8.  We will come back to this work for Week 10.  Hence, saving your work environment and all the objects you have created will make Week 10 go much smoother.
+
+### Saving our Workspace
+
+This is not a big deal, but it might take a minute or so to say the image so you can use it later.  First of all, go to the "Session" tab, and select "Save Workspace As ...", as shown in the image below.
+
+<img src="graphics/menuWorkspace.png" width="200"/><br>
+
+Then you can save the file say as _`Week8.RData`_ wherever you want, though inside the `Metagenomics` folder within the `~/203311/Module3/` folder is a logical place.
+
+<img src="graphics/saveWorkspace.png" width="400"/><br>
+
+### Restoring our Workspace
+
+To restore it, it is simply a matter of double clicking on the file and then clicking "yes" in the dialogue box.  That's it.
+
+<img src="graphics/restoreWorkspace.png" width="300"/><br>
+
+OK, back on track to this week's work.
+
+
 ## Taxonomic classification with the Kaiju suite of tools
 
 In this, the second practical session of this Microbial Diversity Module, we will be working with the Kaiju suite of tools to classify a small set of reads (500,000) under a couple of different algorithm conditions, and against three different reference databases supplied by the website to get an understanding of the fact that the way you perform these analyses has an impact on the results you get out.  In other words, writing down the results, and information about what you have done precisely to get them is important.  
@@ -132,23 +155,25 @@ We are going to upload the reads to the server, download the results, and analys
 The below screenshot shows the folder structure within the `Metagenomics` folder within the `~/203311/Module3/` folder for Module3.
 
 <img src="graphics/window4_2024.png" width="600"/><br>
+
+
 Our reads to use.<br>
 
 
 ### Exercise 1: Observing the process of read analysis on the Kaiju webserver -- a.k.a. how it used to be
 
-To illustrate how the process works on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms for you, and we shall use these later in Exercise 2.
+To illustrate how the process used to work on the webserver, the following is how you would upload a set of reads, and set up an analysis, **theoretically**.  I have performed all the potential combinations of databases and search algorithms for you, and we shall use these later in Exercise 2.
 
 > **!! WARNING &#x26A0; !!
-> Please read through this section carefully, go to the webserver, but do not upload any reads, we will do that ourselves in Exercise 2. Please make sure you can also answer Question 1 in this section, as it is key to the practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
+> Please read through this section carefully. The webserver has now shut down, and so the below now serves as a description of how it used to be :-( Please make sure you can also answer Question 1 in this section, as it is key to the whole of today's practical. Finally, please read the "Behind the Paper" feature, as you never know when you will need to be very familiar with its contents.**
 
-So, we would use a pair of 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – and upload these to the Kaiju webserver and perform a taxonomic analysis on the reads.  These reads are found in the `kaiju` folder.  There are other files in there too, but more on those later.
+So, we would use a pair of say 500,000 paired Fastq sequences in two files – called _`sampleA_500k_R1.fq.gz`_ and _`sampleA_500k_R2.fq.gz`_ – and upload these to the Kaiju webserver and perform a taxonomic analysis on the reads.  These reads are found in the `kaiju` folder.  There are other files in there too, but more on those later.
 
 These reads are environmental samples taken as part of a Massey University research project I was involved with a few years ago.  
 
-Now let’s go to the website, and start the uploading process (**theoretically**):
+Now we would go to the website, and start the uploading process (**theoretically**):
 
-1.  Go to <https://kaiju.binf.ku.dk/>
+1.  Go to <https://kaiju.binf.ku.dk/> (the site no longer exists).
 
   <img src="graphics/kaijuLogo.png" width="400"/>
 
@@ -187,12 +212,12 @@ This is not super-long but gives you a chance to see the motivation for the pape
 
 >**Question 1:**
 >
-> On looking at Kaiju webserver, on the left are listed the reference databases.  Have a look at the quick database descriptions and write down in the box below what you think might happen in terms of the potential results we might get back when our results are notified to us.
+> On looking at one of the Kaiju GitHub pages (<https://github.com/bioinformatics-centre/kaiju>), in a section called "Creating the Kaiju index" are listed the reference databases.  Have a look at the quick database descriptions and write down in the box below what you think might happen in terms of the potential results we might get back when our results are notified to us.
 >
 > <table><tr><th> </th></tr><tbody><tr><td> </td></tr><tr><td> </td></tr><tr><td> </td></tr></tbody></table>
 
 
-### Exercise 2: Data uploading and generation -- the 2024 method
+### Exercise 2: Data uploading and generation -- the current method
 
 We are going to replicate this process on the command line, with two variations: the number of reads, and the database we are going to use.  so that this can be run within the time of lab practical we will use the "fungi" database and 50,000 reads.
 
@@ -272,12 +297,12 @@ We will generate a set of data each with the default _`greedy`_ algorithm, and t
 ## first default greedy (this is one line of code)
 $ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi \
 -i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a greedy \
--o ~/fungi_50k_greedy.txt
+-o ~/2025_fungi_50k_greedy.txt
 
 ## then mem (this is one line of code)
 $ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi \
 -i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a mem \
--o ~/fungi_50k_mem.txt
+-o ~/2025_fungi_50k_mem.txt
 ```
 
 These commands will take about 1.5 minutes each, and if the commands are queued by others in the class, it might take a little longer.  However, it should complete just fine.  We will also execute a couple of extra lines of code on `tur-kaiju1` to help us visualise what we have generated.  
@@ -288,24 +313,24 @@ These commands will take about 1.5 minutes each, and if the commands are queued 
 
 ## first default greedy
 $ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp \
--i ~/fungi_50k_greedy.txt -u -v -o ~/fungi_50k_greedy.txt.krona
+-i ~/2025_fungi_50k_greedy.txt -u -v -o ~/2025_fungi_50k_greedy.txt.krona
 # Reading taxonomic tree from file /db/nr_euk/nodes.dmp
 # Reading taxon names from file /db/nr_euk/names.dmp
 # Processing /home/p/pbiggs/fungi_50k_greedy.txt...
 # Writing to file /home/p/pbiggs/fungi_50k_greedy.txt.krona
 
-$ ktImportText -o ~/fungi_50k_greedy.txt.html ~/fungi_50k_greedy.txt.krona
+$ ktImportText -o ~/2025_fungi_50k_greedy.txt.html ~/2025_fungi_50k_greedy.txt.krona
 # Writing /home/p/pbiggs/fungi_50k_greedy.txt.html...
 
 ## then mem
 $ kaiju2krona -t /db/nr_euk/nodes.dmp -n /db/nr_euk/names.dmp \
--i ~/fungi_50k_mem.txt -u -v -o ~/fungi_50k_mem.txt.krona
+-i ~/2025_fungi_50k_mem.txt -u -v -o ~/2025_fungi_50k_mem.txt.krona
 # Reading taxonomic tree from file /db/nr_euk/nodes.dmp
 # Reading taxon names from file /db/nr_euk/names.dmp
 # Processing /home/p/pbiggs/fungi_50k_mem.txt...
 # Writing to file /home/p/pbiggs/fungi_50k_mem.txt.krona
 
-$ ktImportText -o ~/fungi_50k_mem.txt.html ~/fungi_50k_mem.txt.krona
+$ ktImportText -o ~/2025_fungi_50k_mem.txt.html ~/2025_fungi_50k_mem.txt.krona
 # Writing /home/p/pbiggs/fungi_50k_mem.txt.html...
 ```
 
@@ -449,17 +474,17 @@ Open this file in Excel.  Immediately you will notice that there are actually 5 
 
 >**Question 5:**
 >
->The original file - _`500k_cutoffs.xlsx`_ - has the taxon count numbers from 500,000 sequences that were classified by Kaiju.  We might be interested in focusing our analysis only on taxa that are present above a certain count, or above a certain percentage.  If we use count as a cutoff for including a taxon in the analysis, what percentage of total reads would the following specific counts correspond to?
+>The original file - _`500k_cutoffs.xlsx`_ - has the taxon count numbers from 500,000 sequences that were classified by Kaiju.  We might be interested in focusing our analysis only on taxa that are present above a certain count, or above a certain percentage.  If we look at the taxa which only have a count as in the first column below, what percentage of total reads (for which we have 500,000) would the counts correspond to?
 >
-> <table><thead><tr><th>cutoff</th><th>percentage</th><th>cutoff</th><th>percentage</th></tr></thead><tbody><tr><td>1</td><td></td><td>1000</td><td></td></tr><tr><td>10</td><td></td><td>10000</td><td></td></tr><tr><td>100</td><td></td><td></td><td></td></tr></tbody></table>
+> <table><thead><tr><th>count</th><th>percentage</th><th>count</th><th>percentage</th></tr></thead><tbody><tr><td>1</td><td></td><td>1000</td><td></td></tr><tr><td>10</td><td></td><td>10000</td><td></td></tr><tr><td>100</td><td></td><td></td><td></td></tr></tbody></table>
 
 >**Question 6:**
 >
->Now we turn to the Excel file, and its contents. How many taxa are represented for each of the 5 cutoff levels?
+>Now we turn to the Excel file, and its contents. How many taxa are represented for each of the 5 count levels?
 >
-> <table><thead><tr><th>cutoff</th><th>number</th><th>cutoff</th><th>number</th></tr></thead><tbody><tr><td>1</td><td></td><td>1000</td><td></td></tr><tr><td>10</td><td></td><td>10000</td><td></td></tr><tr><td>100</td><td></td><td></td><td></td></tr></tbody></table>
+> <table><thead><tr><th>count</th><th>number</th><th>count</th><th>number</th></tr></thead><tbody><tr><td>1</td><td></td><td>1000</td><td></td></tr><tr><td>10</td><td></td><td>10000</td><td></td></tr><tr><td>100</td><td></td><td></td><td></td></tr></tbody></table>
 
-Let’s investigate the data a little further.  Looking at the first tab - _`Cutoff10000`_ – does not show much, so we move on to the next one - _`Cutoff1000`_ – where we can start to see some differences in the counts.  
+Let’s investigate the data a little further.  In the supplied Excel file, the counts are referred to as 'cutoff'.  Looking at the first tab - _`Cutoff10000`_ – does not show much, so we move on to the next one - _`Cutoff1000`_ – where we can start to see some differences in the counts.  
 
 **Remember, this is the same underlying sequence dataset analysed in 6 different ways.**  
 
