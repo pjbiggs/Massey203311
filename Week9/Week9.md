@@ -343,7 +343,7 @@ Now to copy and exit the terminal.  We will also have to authenticate between se
 ```bash
 ## copy over:
 # remember to change "pbiggs" in the below line to your studentID
-$ scp fungi* pbiggs@tur-rstudio2:~/203311/Module3/Metagenomics/kaiju
+$ scp **fungi* pbiggs@tur-rstudio2:~/203311/Module3/Metagenomics/kaiju
 
 # exit "tur-kaiju1", and it's back to "tur-studio2"
 $ exit
@@ -820,7 +820,7 @@ i) There is not much to say here.  Plotting the data as it is is completely fine
 
 ## Assessment
 
-To reiterate, there is no direct assessment today. What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course. This will take place on Friday 23-May-2025 online.
+To reiterate, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course.  This will take place on Friday 23-May-2025 at 0900 in ScC5.10.
 
 The mastery test will test the contents of weeks 8 to 10, more information will follow next week.
 
