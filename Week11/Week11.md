@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 11 - Transcriptomics
 
@@ -42,7 +42,7 @@ Dimensional reduction is an important technique. In fact when you have any biolo
 - gene expression data from cancer samples for hundreds of different genes
 - [genotypic data from hundreds of dogs](https://www.biorxiv.org/content/10.1101/2022.04.13.488108v2.full "so many dogs") to predict breed, height, and weight.
 
-**I would argue that after dimensional reduction is the single most important technique you can apply for visualisation of data with many variables (i.e. matrix columns in the cases you have encountered previously).** Here, we will focus on two main methods: *Principal Component Analysis (PCA)* and *UMAP*.
+**I would argue that dimensional reduction is the single most important technique you can apply for visualisation of data with many variables (i.e. matrix columns in the cases you have encountered previously).** Here, we will focus on two main methods: *Principal Component Analysis (PCA)* and *UMAP*.
 
 Before reading further, please take five minutes and read [this quick introduction to PCA](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues "eigen-who?") before continuing.
 
@@ -107,7 +107,7 @@ $ cd ~/203311/Module4
 
 Next, download the data from [here](data/all_cocktails.tab). The address should be: `https://pjbiggs.github.io/Massey203311/Week11/data/all_cocktails.tab`. If you have forgotten how to do that, ask your neighbour.  And if they have forgotten, ask a demonstrator!
 
-Navigate to your `RStudio` Console tab and read this file into `R`. Use the `read.table()` function to do this. Ensure that you use the `header=T` argument and assign it to a reasonably named variable (you can choose, but note that this is a dataset on cocktails. Or, for simplicity you can name it `cocktails_df` (as that will match the code below). So:
+Navigate to your `RStudio` Console tab and read this file into `R`. Use the `read.table()` function to do this. Ensure that you use the `header = T` argument and assign it to a reasonably named variable (you can choose, but note that this is a dataset on cocktails. Or, for simplicity you can name it `cocktails_df` (as that will match the code below). So:
 
 ```R
 ### let's set or working directory
@@ -165,7 +165,6 @@ Now we start on the path toward cocktail PCA.
 
 ```R
 # Actually do the PCA by "preparing"
-
 # the "recipe"
 > pca_prep <- prep(pca_rec)
 
@@ -303,7 +302,7 @@ A second difference between the two methods is that PCA is better suited for dat
 
 ### The Data
 
-Now we can begin our RNA-seq journey. To do this, we will begin at the beginning, with some RNA-seq reads from human samples. These are from [here](data/fastq.data.tar "THE TAR FILE"). This address should be: `https://pjbiggs.github.io/Massey203311/Week11/data/fastq.data.tar` Let's make a fresh directory for this analysis, perhaps `rnaseq`. Do that, change into that directory, and please download the RNA-seq reads now (`wget`). Note that this is a subset of the data from the tutorial [here](https://github.com/griffithlab/rnaseq_tutorial/wiki/RNAseq-Data "Awesome tutorial").
+Now we can begin our RNA-seq journey. To do this, we will begin at the beginning, with some RNA-seq reads from human samples. These are from [here](data/fastq.data.tar "THE TAR FILE"). This address should be: `https://pjbiggs.github.io/Massey203311/Week11/data/fastq.data.tar` Let's make a fresh directory for this analysis, perhaps called `rnaseq`. Do that, change into that directory, and please download the RNA-seq reads now (using `wget`). Note that this is a subset of the data from the tutorial [here](https://github.com/griffithlab/rnaseq_tutorial/wiki/RNAseq-Data "Awesome tutorial").
 
  Let's first untar the [tarball](https://en.wikipedia.org/wiki/Tar_(computing "Sticky!") so that we see the files inside.
 
@@ -417,7 +416,7 @@ $ hisat2 -x human-GRCh38-22sub -1 UHR_Rep1.R1.fastq -2 UHR_Rep1.R2.fastq -S UHR_
 
 We are going to generate a lot of files here.  Maybe it's worth thinking about a folder structure that works for you so you can manage your data once you have made it, and it is fresh in your mind.  You never know, it might help for the portfolio (below).
 
-let's compare the differences in our results from the different mappers.
+Let's compare the differences in our results from the different mappers.
 
 ```bash
 # samtools is so versatile
@@ -436,7 +435,7 @@ $ rm *hisat2.sam
 
 We have just seen that there are no Supplementary reads in the `hisat2` `.sam` file, and thus we have successfully mapped across the exon junctions. However, we have six different read sets here and would like to map them all. We could go and map each one of them by hand. But we are operating on the command line and would like to do things a little more quickly. In this case we will use a `bash` loop, a slightly complicated format but one which can help tremendously when you have hundreds of files. I have written it out below. If you *have not* used the same file names as the ones listed above, then the loop won't work. Let a demonstrator know if this is the case.
 
-This is a difficult bit of code to understand. I have put plenty of comments in. However, to execute this you need to type all the *code* part at once. You can copy paste this.
+This is a difficult bit of code to understand. I have put plenty of comments in. However, to execute this you need to type all the *code* part at once. You can copy and paste this.
 
 ```bash
 # the F here is a variable that we loop over
@@ -468,7 +467,7 @@ $ samtools coverage -m bam.file.of.your.choice.bam
 <img src="graphics/samtools-cov.png" width="400"/><br>
 **Example.**<br><br>
 
-Take a look at all the replicates for each sample. Do they look the same? You can return to the UCSC browser page to see how the plots here relate to the gene locations on the chromosome. Remember that the region you have mappoed to is a small part of chromosome 22. Specifically, it's from 22.5 Mbp to 23 Mbp. Thus, on your `samtools coverage` plot, position 150 Kb will be 22.5 Mb + 150 Kb = 22,650,000 bp.
+Take a look at all the replicates for each sample. Do they look the same? You can return to the UCSC browser page to see how the plots here relate to the gene locations on the chromosome. Remember that the region you have mapped to is a small part of chromosome 22. Specifically, it's from 22.5 Mbp to 23 Mbp. Thus, on your `samtools coverage` plot, position 150 Kb will be 22.5 Mb + 150 Kb = 22,650,000 bp.
 
 There are clearly specific genes that are almost completely turned off in the brain. Which are those?
 
@@ -479,7 +478,7 @@ Look also at *UHR_Rep2.sort.bam*. There is something slightly funny going on wit
 ### Portfolio Analysis
 Often we are interested in the distribution of coverage (i.e. depth) values for an RNA-seq dataset so that we can look for specific artefacts or problems with our data (see [Figure 5 here](https://f1000research.com/articles/5-2122 "Figure 5!") for an example of such a plot). In this case, "distribution" simply means a histogram or density plot. For this portfolio analysis, you will need to calculate and plot such *distributions* (histograms or density plots or even violin plots) of coverage (i.e. depth) for all six samples for which you now have `.bam` files. Plot these in such a way that these distributions are easy to compare, and thus easy to check for problematic samples. This could involve any of a number of manipulations or plotting methods, and I leave this to you. Carefully consider *what* sort of pattern could indicate a problem, and *why* that problem could occur. This may help in deciding how to visualise or compare your data.
 
-Remember that there are more decisions to make than just "plot a histogram(s)". You need to decide on the x-axis limits, the number of breaks (i.e. thin bars or thick bars), the type of x-axis, the y-axis limits, the type of y-axis, whether you want bars or lines for the histogram, if a density plot is better, or maybe even a [violin plot](https://en.wikipedia.org/wiki/Violin_plot "Elegant!"), whether it should be shaded or couloured, etc.
+Remember that there are more decisions to make than just "plot a histogram(s)". You need to decide on the x-axis limits, the number of breaks (i.e. thin bars or thick bars), the type of x-axis, the y-axis limits, the type of y-axis, whether you want bars or lines for the histogram, if a density plot is better, or maybe even a [violin plot](https://en.wikipedia.org/wiki/Violin_plot "Elegant!"), whether it should be shaded or coloured, etc.
 
 ## Next Time
 
