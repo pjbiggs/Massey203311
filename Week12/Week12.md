@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2025: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 12 - Transcriptomic Analysis and Visualization
 
@@ -32,11 +32,11 @@ Many of you have probably heard of different probability distributions, for exam
 Closely related to the binomial distribution is the Poisson Distribution, which is the distribution one would expect in almost any case we are sampling a countable number of things. For example, after a very light rain, we could count the number of raindrops on different sidewalk squares. [These would be Poisson distributed](https://en.wikipedia.org/wiki/Poisson_scatter_theorem#:~:text=The%20expected%20number%20of%20raindrops,with%20intensity%20parameter%202%2F5. "But they would be hard to count"). Maybe we are interested in [how many Prussian cavalry](http://rstudio-pubs-static.s3.amazonaws.com/567089_c15d14f3d35b4edcbf13f33bbe775d4c.html "Not interested, thanks") are likely to be [killed by horse kicks in any given year](https://www.randomservices.org/random/data/HorseKicks.html "Where is Prussia anyway?"). Or maybe we're interested in the [number of calls we can expect at a call centre per hour](https://www.statology.org/poisson-distribution-real-life-examples/ "Not answering my phone"). All of these are Poisson distributed.<br>
 
 <img src="graphics/prob-dists.jpeg" width="1400" title="C'mon this looks too complicated"/><br>
-**There are lots of distributions and they're all related**<br><br>
+**There are lots of distributions and they're all related. Yikes!**<br><br>
 
 ### RNA-seq reads are Poisson distributed
 
-The number of RNA-seq reads that map to a gene [is also Poisson distributed](https://www.biostars.org/p/84445/ "I knew it!") (largely speaking). As expected, then, most packages for analysing RNA-seq data *model* the data as being Poisson distributed (well...more on that later). Let us see what this means for genes with high and low number of reads mapped to them.
+The number of RNA-seq reads that map to a gene [is also Poisson distributed](https://www.biostars.org/p/84445/ "I knew it!") (largely speaking). As expected, then, most packages for analysing RNA-seq data *model* the data as being Poisson distributed (well ... more on that later). Let us see what this means for genes with high and low number of reads mapped to them.
 
 <img src="graphics/poisson.jpeg" width="600" title="Early days"/><br>
 **I literally do not understand this at all**. Credit: [xkcd](https://www.explainxkcd.com/wiki/index.php/12:_Poisson "But here's an explanation")<br><br>
@@ -47,19 +47,19 @@ The number of RNA-seq reads that map to a gene [is also Poisson distributed](htt
 We'll make some pretend RNA-seq data. First, we will make a toy dataset with a very small number of read counts per gene. Maybe it was from a bad library prep. Or maybe from an under-represented set of barcodes in what was otherwise a good sequencing run. To make this toy dataset, we will sample our read counts as if they were Poisson. Navigate to your `R` console.
 
 ```R
-# To make a toy dataset
-# we'll use R's built-in Poisson random number generator rpois()
-# This will give us a set of random numbers that
-# are Poisson-distributed.
+#  To make a toy dataset
+#  we'll use R's built-in Poisson random number generator rpois()
+#  This will give us a set of random numbers that
+#  are Poisson-distributed.
 #
-# In the rpois function, the first argument is the number of random numbers
-# and the second is the *mean* of the Poisson distribution
-# We'll make up fake data for six "samples"
+#  In the rpois() function, the first argument is the number of random numbers
+#  and the second is the *mean* of the Poisson distribution
+#  We'll make up fake data for six "samples".
 
-# First, by declaring some "master" variables here,
-# we can easily adjust the number of genes
-# and number of samples without adjusting the rest of the code
-# total nmber of "genes" in our organism
+#  First, by declaring some "master" variables here,
+#  we can easily adjust the number of genes
+#  and number of samples without adjusting the rest of the code
+#  total number of "genes" in our organism.
 > n.genes <- 4000
 
 # total number of samples
@@ -68,55 +68,55 @@ We'll make some pretend RNA-seq data. First, we will make a toy dataset with a v
 # average number of reads per gene
 > avg.reads <- 4
 
-# We will make our data all at once. The total number
-# of Poisson distributed "reads per gene" is the total number
-# of samples multiplied by the number of genes.
-# However, we'll divide our six "samples" into two
-# sets of three (n.samples*n.genes/2): one set of three is
-# "normal" tissue and one set of three is "cancer" tissue
+#  We will make our data all at once. The total number
+#  of Poisson distributed "reads per gene" is the total number
+#  of samples multiplied by the number of genes.
+#  However, we'll divide our six "samples" into two
+#  sets of three (n.samples*n.genes/2): one set of three is
+#  "normal" tissue and one set of three is "cancer" tissue
 
 > normal.counts <- rpois(n.samples*n.genes/2, avg.reads)
 > cancer.counts <- rpois(n.samples*n.genes/2, avg.reads)
 
-# here we make a single matrix of all this data
-# the total columns will be our number of samples
-# and we will have one row for each gene
+#  Here we make a single matrix of all this data
+#  the total columns will be our number of samples
+#  and we will have one row for each gene
 > low.read.counts <- matrix(c(normal.counts, cancer.counts), ncol=n.samples, nrow=n.genes)
 
-# We need to label the rows of our matrix with "gene_1", "gene_2", etc.
+#  We need to label the rows of our matrix with "gene_1", "gene_2", etc.
 > rownames(low.read.counts) <- paste0("gene_",1:n.genes)
 
-# we label the columnes as "normal_1", "normal_2" etc. using paste()
+#  We label the columnes as "normal_1", "normal_2" etc. using paste()
 > colnames(low.read.counts) <- c(paste0("normal_",1:(n.samples/2)), paste0("cancer_",1:(n.samples/2)))
 
 # Did it work?
 > head(low.read.counts)
 ```
 
-Using `head` you should see a matrix with columns labeled "cancer_1 etc. and rows labeled "gene_1" etc.
+Using `head()` you should see a matrix with columns labeled "cancer_1 etc. and rows labeled "gene_1" etc.
 
 ### Testing for a match to the Poisson distribution
 
-Next we can check that the read counts are Poisson distributed - they *should be* as we made the numbers using `rpois`, the Poisson random number generator. We'll use the `hist()` function to visualise the number of reads per gene. In this case, the plurality of genes should have a read count of the mean we assigned (4).
+Next we can check that the read counts are Poisson distributed - they *should be* as we made the numbers using `rpois()`, the Poisson random number generator. We'll use the `hist()` function to visualise the number of reads per gene. In this case, the plurality of genes should have a read count of the mean we assigned (4).
 
 ```R
-# I always change this as I don't like sideways numbers
+#  I always change this as I don't like sideways numbers
 > par(las=1)
 
-# We'll use a very large number of breaks for consistency with the next section
-# We'll also break on increments of 0.5 so that the counts are centred
+#  We'll use a very large number of breaks for consistency with the next section
+#  We'll also break on increments of 0.5 so that the counts are centred
 > hist(low.read.counts[,1], breaks=0:200-0.5, xlim=c(0,12), xlab="Number of mapped reads", ylab="Number of genes", main="Poisson or not?")
 ```
 
 You'll note that even though we specified that the mean of our distributions should be four, there are **many** genes that have more than twice as many mapped reads, some with three times as many mapped reads, some with 1/4 as many mapped reads, and a number of genes with zero mapped reads. Should we conclude that the genes with zero mapped reads are actually not expressed? **No!** It is simply sampling noise that has prevented us from observing reads that map to these genes.
 
-In fact we should have made sure that our sequencing data that is *deeper* - i.e. has more reads per sample and thus on average, more reads per gene. Regardless, let's test how well our gene and read counts match the Poisson. We can use `R`'s built-in **exact** calculator of Poisson probabilities, `dpois()`
+In fact we should have made sure that our sequencing data that is *deeper* - i.e. has more reads per sample and thus on average, more reads per gene. Regardless, let's test how well our gene and read counts match the Poisson. We can use `R`'s built-in **exact** calculator of Poisson probabilities, `dpois()`.
 
 ```R
-# Make sure your histogram window is still active
-# We use the same "avg.reads" from above as the argument to dpois
-# and we only get the exact Poisson numbers for 1:12 as those are the only ones
-# on our plot.
+#  Make sure your histogram window is still active
+#  We use the same "avg.reads" from above as the argument to dpois
+#  and we only get the exact Poisson numbers for 1:12 as those are the only ones
+#  on our plot.
 > points(0:12, dpois(0:12,avg.reads)*n.genes, ty="o", bg="pink", lwd=3, pch=21)
 ```
 
@@ -127,8 +127,8 @@ This line should follow the distribution fairly closely, with some sampling nois
 Let's next look at our dataset more holistically. Here, we will use a heatmap, which most of you will have already encountered.
 
 ```R
-# We don't care if it's pretty
-# But let's output to a pdf so we can look at it later
+#  We don't care if it's pretty
+#  But let's output to a pdf so we can look at it later
 > pdf(file="low.read.count.pdf", width=6,height=18)
 > heatmap(low.read.counts)
 > dev.off()
@@ -145,7 +145,7 @@ Now we can go through a differential gene expression analysis using [edgeR](http
 **There are really only two commonly used RNA-seq analysis packages**<br><br>
 
 ```R
-# Get edgeR from the bioconductor website
+#  Get edgeR from the bioconductor website
 > library(BiocManager)
 > BiocManager::install("edgeR")
 > library(edgeR)
@@ -154,10 +154,10 @@ Now we can go through a differential gene expression analysis using [edgeR](http
 We also have to set up our sample data so that `edgeR` can handle it. This is relatively simple, and just involves constructing a vector that will tell `edgeR` which samples are which (here we are pretending they are "normal" and "cancer"). Let's do that quickly:
 
 ```R
-# for this to work you must have named your
-# sample number variable "n.samples"
-# this gives us a 6-element vector of names
-# for our samples
+#  For this to work you must have named your
+#  sample number variable "n.samples"
+#  this gives us a 6-element vector of names
+#  for our samples
 > sample.data <- c(rep("normal",n.samples/2),rep("cancer",n.samples/2))
 
 # What does it look like?
@@ -167,29 +167,29 @@ We also have to set up our sample data so that `edgeR` can handle it. This is re
 Next we can have `edgeR` do the analysis for us. Various parts of the tutorial below are from [here](https://www.nathalievialaneix.eu/doc/html/solution-edgeR-rnaseq.html) and [here](https://web.stanford.edu/class/bios221/labs/rnaseq/lab_4_rnaseq.html).
 
 ```R
-# Here we make our edgeR object using the DGEList function
-# grouping the samples on the basis of the sample.data we made above
-> dge.low.counts <- DGEList(counts=low.read.counts, group=factor(sample.data))
+#  Here we make our edgeR object using the DGEList function
+#  grouping the samples on the basis of the sample.data we made above
+> dge.low.counts <- DGEList(counts = low.read.counts, group = factor(sample.data))
 
 # check what it looks like
-> summary(dge.low.counts)
+>  summary(dge.low.counts)
 
-# We make a cheeky backup copy because we're prone
-# to deleting important things
+#  We make a cheeky backup copy because we're prone
+#  to deleting important things
 > dge.low.counts.backup <- dge.low.counts
 ```
 
 ### Stepping through counts-per-million Normalisation and filtering with edgeR
 
 ```R
-# remind ourselves what the read counts look like
+#  Remind ourselves what the read counts look like
 > head(dge.low.counts)
 ```
 
 Note that these are the small read numbers we started with.
 
 ```R
-# What do the counts per million (cpm) look like?
+#  What do the counts per million (cpm) look like?
 > head(cpm(dge.low.counts))
 ```
 
@@ -199,37 +199,37 @@ We can filter our results so that we only include genes that have mapped read **
 
 
 ```R
-# find out which rows to keep
-# here cpm(dge.low.counts) > 100 gives a TRUE or FALSE -
-# TRUE when the counts are above 100 and FALSE when not.
-# TRUE is also interpreted as "1" by R, and FALSE as "0".
-# Thus the sum function below "sums" up the TRUE rows
-# to test if the sum is greater than 2
-# In this way we get genes with counts > 100 in at least two samples.
+#  Find out which rows to keep
+#  here cpm(dge.low.counts) > 100 gives a TRUE or FALSE -
+#  TRUE when the counts are above 100 and FALSE when not.
+#  TRUE is also interpreted as "1" by R, and FALSE as "0".
+#  Thus the sum function below "sums" up the TRUE rows
+#  to test if the sum is greater than 2
+#  In this way we get genes with counts > 100 in at least two samples.
 > keep <- rowSums(cpm(dge.low.counts) > 100) >= 2
 
-# keep only those rows
+#  Keep only those rows
 > dge.low.counts <- dge.low.counts[keep,]
 
-# check what was lost
+#  Check what was lost
 > dim(dge.low.counts)
 ```
 
-We've kept all (or almost all) our genes (rows)! Even though they have low counts! That's because our total library has (on average) only about 16,000 reads per sample. If we normalise by millions, that means the sum of each row (on average) gets multiplied by 1,000,000/16,000 = 62.5. And *apparently*, all rows have at least two samples each with two or more reads. 2 reads\*62.5 normalisation factor is greater than 100, so if each row satisifes this, then it is kept.
+We've kept all (or almost all) our genes (rows)! Even though they have low counts! That's because our total library has (on average) only about 16,000 reads per sample. If we normalise by millions, that means the sum of each row (on average) gets multiplied by 1,000,000/16,000 = 62.5. And *apparently*, all rows have at least two samples each with two or more reads. 2 reads\*62.5 normalisation factor is greater than 100, so if each row satisfies this, then it is kept.
 
 We can think whether this is a good thing or not (in fact, it's likely to not be a problem).
 
 Interestingly, we can also calculate the exact probability that five of our samples in one row have fewer than two reads, such that we would get rid of that row. That is just the probability that at least five samples in a row have one or zero reads. The probability that any one gene in one sample has 0 or 1 read is 0.091. The chance that five do is (0.091^5) * (1 - 0.091), or about one in six million. Thus, one in six million rows should have fewer than two reads in at least five samples.
 
-We could change our cutoff to **three** samples having at least 100 mapped reads. Then we see that we (probably) lose a few genes. This is unsurprising, as the probablility of this happening is close to 1 in 1,000.
+We could change our cutoff to **three** samples having at least 100 mapped reads. Then we see that we (probably) lose a few genes. This is unsurprising, as the probability of this happening is close to 1 in 1,000.
 
 ```R
 > keep <- rowSums(cpm(dge.low.counts)>100) >= 3
 
-# keep only those rows
+#  Keep only those rows
 > dge.low.counts <- dge.low.counts[keep,]
 
-# check what was lost
+#  Check what was lost
 > dim(dge.low.counts)
 ```
 
@@ -238,10 +238,10 @@ We could change our cutoff to **three** samples having at least 100 mapped reads
 Next we need to normalise our data for library size.
 
 ```R
-# normalise using the edgeR calcNormFactors
+#  Normalise using the edgeR calcNormFactors
 > dge.low.counts <- calcNormFactors(dge.low.counts)
 
-# check what we did
+#  Check what we did
 > dge.low.counts
 ```
 
@@ -253,12 +253,12 @@ Looks good.
 I claimed that this data is Poisson distributed (in fact, it is). However, `edgeR` is loathe to admit it is (because in fact, most RNA-seq data is *not*). Therefore, we are going to calculate the [dispersion](https://en.wikipedia.org/wiki/Statistical_dispersion "more stats") (how squished or flattened a distribution is) and fit a [negative binomial](https://en.wikipedia.org/wiki/Negative_binomial_distribution "let's not be negative") to model the data (rather than a Poisson) using the  `estimateCommonDisp` and `estimateTagwiseDisp1` commands respectively. This is simply because RNA-seq data almost always has *more* variance than a Poisson (i.e. it's flattened relative to our expectations), and the negative binomial let's us fit our data to match that extra variance.
 
 ```R
-# we estimate "dispersion" across genes and across samples
+#  We estimate "dispersion" across genes and across samples
 > dge.low.counts <- estimateCommonDisp(dge.low.counts)
 > dge.low.counts <- estimateTagwiseDisp(dge.low.counts)
 
-# check what we did, which in this case is add more information
-# to our dge.low.counts object
+#  Check what we did, which in this case is add more information
+#  to our dge.low.counts object
 > dge.low.counts
 ```
 
@@ -270,7 +270,7 @@ Finally, we can begin to *look* at our data. First, a multidimensional scaling (
 
 
 ```R
-# in this case we won't worry about the specific method
+#  In this case we won't worry about the specific method
 > plotMDS(dge.low.counts, method="bcv", col=as.numeric(dge.low.counts$samples$group))
 
 ### you will see a warning message here, but that can be ignored.
@@ -283,10 +283,10 @@ We can sort our data to find the **most differentially** expressed genes using t
 ```R
 > dge.test <- exactTest(dge.low.counts)
 
-# here, n is the number of genes to return, we just tell it to return it all genes
+#  Here, n is the number of genes to return, we just tell it to return it all genes
 > sort.dge <- topTags(dge.test, n=nrow(dge.test$table))
 
-# this gives us the most differentially expressed (remember, this is not really true)
+# This gives us the most differentially expressed (remember, this is not really true)
 > head(sort.dge)
 ```
 
@@ -295,9 +295,9 @@ We can sort our data to find the **most differentially** expressed genes using t
 We can also make a [volcano](https://www.space.com/sharkcano-undersea-volcano-satellite-image "Sharkcano") plot. First we have to extract the relevant fields from our `edgeR` object, then plot.
 
 ```R
-# as everyone knows, a volcano plot requires the log2 fold-change and the -log10 p-values
-# here, logFC is the fold-change. We use cbind ("column bind") to put
-# the fold-change and p-values together
+#  As everyone knows, a volcano plot requires the log2 fold-change and the -log10 p-values
+#  here, logFC is the fold-change. We use cbind ("column bind") to put
+#  the fold-change and p-values together
 > volcanoData <- cbind(sort.dge$table$logFC, -log10(sort.dge$table$PValue))
 > colnames(volcanoData) <- c("logFC", "-log10(p-value)")
 
@@ -310,9 +310,9 @@ It looks like there are some "significantly" differentially expressed genes with
 ### Our SECOND volcano plot - the FDR
 
 ```R
-# What if we *correct for multiple tests*, and instead use a statistic similar to
-# a corrected p-value (here, called False Discovery Rate, or FDR). Instead
-# of the p-value, we cbind the FDR
+#  What if we *correct for multiple tests*, and instead use a statistic similar to
+#  a corrected p-value (here, called False Discovery Rate, or FDR). Instead
+#  of the p-value, we cbind the FDR
 > volcanoData <- cbind(sort.dge$table$logFC, -log10(sort.dge$table$FDR))
 > plot(volcanoData, pch=19)
 ```
@@ -324,42 +324,42 @@ Nothing to see here! Phew. This is unsurprising, as we are using a completely ra
 We can now make our toy data set a bit more interesting. For example, we can change the read counts for a few random genes. Let's do that.
 
 ```R
-# Randomly increase read counts of 20 genes
-# in the cancer samples by 3-fold
-# to do that we first find random genes (rows) using "sample"
+#  Randomly increase read counts of 20 genes
+#  in the cancer samples by 3-fold
+#  to do that we first find random genes (rows) using "sample"
 > rand.genes <- sample(1:n.genes,20)
 
-# Then we increase the counts for those genes, but *only* in
-# the cancer samples (the 2nd half of the samples)
-# Here I am multiplying the expression levels by 3.
-# You should be able to understand the basic syntax here
-# where we are accessing matrix elements using the matrix[n,m]
-# notation, and changing *only* the cancer genes which are
-# in columns 4:6, i.e. (n.samples/2+1):n.samples)
+#  Then we increase the counts for those genes, but *only* in
+#  the cancer samples (the 2nd half of the samples)
+#  Here I am multiplying the expression levels by 3.
+#  You should be able to understand the basic syntax here
+#  where we are accessing matrix elements using the matrix[n,m]
+#  notation, and changing *only* the cancer genes which are
+#  in columns 4:6, i.e. (n.samples/2+1):n.samples)
 > low.read.counts[rand.genes,(n.samples/2+1):n.samples] <- 3*low.read.counts[rand.genes,(n.samples/2+1):n.samples]
 
-# now we redo the edgeR analysis
+#  Now we redo the edgeR analysis
 > dge.low.counts <- DGEList(counts=low.read.counts,group=factor(sample.data))
 
-# what does our new object look like?  probably can't tell
-# but let's have alook anyway
+#  What does our new object look like?  probably can't tell
+#  but let's have a look anyway
 > dge.low.counts
 
-# we'll add in our other information:
+#  We'll add in our other information:
 > dge.low.counts <- calcNormFactors(dge.low.counts)
 > dge.low.counts <- estimateCommonDisp(dge.low.counts)
 > dge.low.counts <- estimateTagwiseDisp(dge.low.counts)
 
-# again, we can see th enew information:
+#  Again, we can see the new information:
 > dge.low.counts
 ```
 
 Now we have a new dataset. Here, a number of genes have higher expression in cancer. Specifically, we changed the expression 3-fold. We need to check whether this had the expected effect - are these genes actually inferred as being "differentially" expressed?
 
 ```R
-# Does this change anything? Let's check. First, we will plot an MDS
-# plot again. This time, some of the genes ("foods") *do* differ between the
-# samples ("countries"). The MDS analysis can use those genes to separate the samples
+#  Does this change anything? Let's check. First, we will plot an MDS
+#  plot again. This time, some of the genes ("foods") *do* differ between the
+#  samples ("countries"). The MDS analysis can use those genes to separate the samples
 > plotMDS(dge.low.counts, method="bcv", col=as.numeric(dge.low.counts$samples$group))
 ```
 
@@ -370,10 +370,10 @@ Let's get the test stats on our differentially expressed genes?
 ```R
 > dge.test <- exactTest(dge.low.counts)
 
-# here, n is the number of genes to return, we just make it all genes
+#  Here, n is the number of genes to return, we just make it all genes
 > sort.dge <- topTags(dge.test, n=nrow(dge.test$table))
 
-# We'll look at a few lines, well 22 to be precise
+#  We'll look at a few lines, well 22 to be precise
 > head(sort.dge, n=22L)
 ```
 
@@ -386,8 +386,8 @@ We can also do a volcano plot.
 > colnames(volcanoData) <- c("logFC", "-log10(p-value)")
 > plot(volcanoData, pch=19)
 
-# let's highlight which points we made differentially expressed in orange
-# We know which these are because we made our list of "rand.genes" above
+#  Let's highlight which points we made differentially expressed in orange
+#  We know which these are because we made our list of "rand.genes" above
 > points(volcanoData[rand.genes,], pch=19,col="orange")
 ```
 
@@ -401,40 +401,39 @@ Finally, to get a better handle on this whole process, let's change some more pa
 ```R
 > n.genes <- 4000
 
-# change one or both of these to whatever values you like
-# before they were 6 and 4. Make sure your avg reads per gene is quite high
+#  Change one or both of these to whatever values you like
+#  before they were 6 and 4. Make sure your avg reads per gene is quite high
 > n.samples <- 8
 > avg.reads <- 50
 
-# this is where we get the random numbers
+#  This is where we get the random numbers
 > normal.counts <- rpois(n.samples*n.genes/2, avg.reads)
 > cancer.counts <- rpois(n.samples*n.genes/2, avg.reads)
 > read.counts <- matrix(c(normal.counts, cancer.counts), ncol=n.samples, nrow=n.genes)
 
-# Add some labels
+#  Add some labels
 > rownames(read.counts) <- paste0("gene_",1:n.genes)
 > colnames(read.counts) <- c(paste0("normal_",1:(n.samples/2)), paste0("cancer_",1:(n.samples/2)))
 
-# Did it work?
+#  Did it work?
 > head(read.counts)
 > sample.data <- c(rep("normal",n.samples/2),rep("cancer",n.samples/2))
 
-# check what it looks like
+#  Check what it looks like
 > summary(read.counts)
 > dge.counts <- DGEList(counts=read.counts,group=factor(sample.data))
 > dge.counts <- calcNormFactors(dge.counts)
 
-# let's check our output again, to be safe
+#  Let's check our output again, to be safe
 > dge.counts
 ```
 
 We first take a quick peak at how Poisson this is.
 
 ```R
-# Again, we use a histogram
+#  Again, we use a histogram
 > hist(read.counts[,1], breaks=0:200-0.5, xlim=c(0,100), xlab="Number of mapped reads", ylab="Number of genes", main="Poisson or not?")
 > points(0:100, dpois(0:100,avg.reads)*n.genes, ty="o", bg="pink", lwd=2, pch=21)
-
 ```
 
 Poisson? It looks Normal! *The Poisson converges to the normal for large numbers*. Note that **none** of the read counts vary by more than 50% (presuming you set your read count per gene high enough). This contrasts with our low read count sample, in which many gene read counts varied by 2- or 3-fold.
@@ -449,46 +448,46 @@ Poisson? It looks Normal! *The Poisson converges to the normal for large numbers
 Now, the `edgeR` bit.
 
 ```R
-# add in our factors of interest
+#  Add in our factors of interest
 > dge.counts <- estimateCommonDisp(dge.counts)
 > dge.counts <- estimateTagwiseDisp(dge.counts)
 
-# let's check our output again, to be safe
+#  Let's check our output again, to be safe
 > dge.counts
 
-# look at this plot, don't ignore it
-# do any of the samples differ now?
+#  Look at this plot, don't ignore it
+#  do any of the samples differ now?
 > plotMDS(dge.counts, method="bcv", col=as.numeric(dge.counts$samples$group))
 
-# do the stats
+#  Do the stats
 > dge.test <- exactTest(dge.counts)
 
-# and a brief look at the stats:
+#  and a brief look at the stats:
 > dge.test
 ```
 
 ### Our FOURTH volcano plot - with more reads
 
 ```R
-# Finally, lets do the volcano plot
+#  Finally, lets do the volcano plot
 > volcanoData <- cbind(dge.test$table$logFC, -log10(dge.test$table$PValue))
 > colnames(volcanoData) <- c("logFC", "-log10(p-value)")
 > plot(volcanoData, pch=19)
 
-# let's find the differentially expressed genes (DGE)
+#  Let's find the differentially expressed genes (DGE)
 > sort.dge <- topTags(dge.test, n=nrow(dge.test$table))
 > head(sort.dge, n=22L)
 ```
 As before, you should find that there are few differences because this data is just random. But as before, we can change the expression of a few genes.
 
 ```R
-# we change this in the same way. If you would like, you can change many more of
-# the genes instead of just 10
+#  We change this in the same way. If you would like, you can change many more of
+#  the genes instead of just 10
 > rand.genes <- sample(1:n.genes,10)
 
-# Then we increase the counts for the randomly selected genes, but *only* in the
-# cancer samples (the 2nd half of the samples)
-# and do the analysis all the way to the MDS in one fell swoop
+#  Then we increase the counts for the randomly selected genes, but *only* in the
+#  cancer samples (the 2nd half of the samples)
+#  and do the analysis all the way to the MDS in one fell swoop
 > read.counts[rand.genes,(n.samples/2+1):n.samples] <- 2*read.counts[rand.genes,(n.samples/2+1):n.samples]
 > dge.counts <- DGEList(counts=read.counts,group=factor(sample.data))
 > dge.counts <- calcNormFactors(dge.counts)
@@ -509,7 +508,7 @@ And then as usual, we follow that with the volcano plot.
 > colnames(volcanoData) <- c("logFC", "-log10(p-value)")
 > plot(volcanoData, pch=19)
 
-# let's highlight which points we made differentially expressed
+#  Let's highlight which points we made differentially expressed
 > points(volcanoData[rand.genes,], pch=19,col="orange")
 ```
 
@@ -531,15 +530,17 @@ What is different here versus the dataset with few reads? We can easily see that
 
 
 ```R
-# another way to plot
-# make character vector of the names of the random genes that were changed to be differentially expressed
+#  Another way to plot
+#  Make character vector of the names of the random genes that were changed to be differentially expressed
 > paste0("gene_", rand.genes) -> rand.names
 > volcanoData <- cbind(sort.dge$table$logFC, -log10(sort.dge$table$PValue))
 > colnames(volcanoData) <- c("logFC", "-log10(FDR)")
-# make the row names of the volcano data the same as in the data used (sort.dge in this case)
+
+#  Make the row names of the volcano data the same as in the data used (sort.dge in this case)
 > rownames(volcanoData) <- rownames(sort.dge)
 > plot(volcanoData, pch=19)
-# can now call the points based on their name rather than position in the data
+
+#  Can now call the points based on their name rather than position in the data
 > points(volcanoData[rand.names,], pch=19,col="orange")
 ```
 
