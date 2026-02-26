@@ -86,7 +86,7 @@ Don\'t forget to press the **\[Enter\]** key: commands are not sent to the R con
 
 #### Important Note
 
-**Please see the separate document -- "Access_to_RStudio_2025.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. It can also be found directly at: [Access_to_RStudio_2025.pdf](https://stream.massey.ac.nz/pluginfile.php/6099654/mod_resource/content/3/Access_to_RStudio_2025.pdf). You must do this before you can do any work in this course.**
+**Please see the separate document -- "Access_to_RStudio_2026.pdf" -- that has been provided both as a Stream announcement and in the "Taiwhanga\|Labs" section on the Stream site for setting up your Massey RStudio environment. It can also be found directly at: [Access_to_RStudio_2025.pdf](https://stream.massey.ac.nz/pluginfile.php/6099654/mod_resource/content/3/Access_to_RStudio_2026.pdf). You must do this before you can do any work in this course.**
 
 ### Computing
 
