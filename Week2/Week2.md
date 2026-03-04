@@ -767,21 +767,45 @@ GNU coreutils 8.28                                  January 2018                
 ```
 --->
 
-In addition, the `whatis` command gives a one-line description of the command, but omits any information about options etc.  So here we see:
+In addition, for some commands we can use `--help` as an option to learn about that command, for example:
 
 ```bash
-$ whatis wc
-wc (1)               - print newline, word, and byte counts for each file
+$ wc --help
+Usage: wc [OPTION]... [FILE]...
+  or:  wc [OPTION]... --files0-from=F
+Print newline, word, and byte counts for each FILE, and a total line if
+more than one FILE is specified.  A word is a non-zero-length sequence of
+characters delimited by white space.
+
+With no FILE, or when FILE is -, read standard input.
+
+The options below may be used to select which counts are printed, always in
+the following order: newline, word, character, byte, maximum line length.
+  -c, --bytes            print the byte counts
+  -m, --chars            print the character counts
+  -l, --lines            print the newline counts
+      --files0-from=F    read input from the files specified by
+                           NUL-terminated names in file F;
+                           If F is - then read names from standard input
+  -L, --max-line-length  print the maximum display width
+  -w, --words            print the word counts
+      --help     display this help and exit
+      --version  output version information and exit
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation at: <https://www.gnu.org/software/coreutils/wc>
+or available locally via: info '(coreutils) wc invocation'
 ```
 
+This can be a more compact way of seeing what help you have available for a command.  I would remmember this one, you may need to use this for your portfolio later in the course.
 
-When you are not sure of the exact name of a command, you can use the command `apropos`:
+When you are not sure of the exact name of a command, you can use the command `apropos`.  However, this year, this does not appear to work, hence the example below shows what would happen:
 
 ```bash
 $ apropos <<keyword>>
 ```
 
-will give you the commands with keyword in their manual page header. For example, if you typed
+will give you the commands with the keyword in their manual page header. For example, if you typed
 
 ```bash
 $ apropos different
@@ -805,6 +829,8 @@ XML::LibXML::ErrNo (3pm) - Structured Errors This module is based on xmlerror.h 
 xmltoxml (1e)        - Convert an XML document to a different format
 xmltransform (1e)    - Convert an XML document to a different format using a supplied XSLT file
 ```
+
+
 
 ## File security
 
