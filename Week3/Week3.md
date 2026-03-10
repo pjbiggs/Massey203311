@@ -371,21 +371,27 @@ $ export PATH="$HOME/miniconda3/bin:$PATH"
 $ conda --help
 ```
 
-### Now it's time to install a number of packages that we will be using
+### Now it's time to install a number of packages that we will be using in Module 2.
 
-We are also going to install a similar package manager called `mamba`
+We are also going to install a similar package manager called `mamba`, so we use `conda` to install `mamba`!
 
 ```bash
 # don't worry about exactly what is happening here
 $ conda install mamba -n base -c conda-forge
+```
 
+Next is a key piece of mapping software.
+
+```bash
 # Below we specify which channel we would like mamba
 # to look in to find the minimap2 recipe.
 # This is done using the -c option
 $ mamba install -c bioconda minimap2
+```
+
 
 # try downloading the tar file first.
-# The link you copied shouldbe something like:
+# The link you copied should be something like:
 # "./data"
 $ wget tarball-link-address-you-just-copied
 
@@ -442,7 +448,7 @@ $ mamba install snipit
 $ mamba install mafft
 
 $ mamba install -c bioconda iqtree
-```
+
 
 
 
