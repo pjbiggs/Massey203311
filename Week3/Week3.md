@@ -323,7 +323,7 @@ Claus Wilke. 2019. [Fundamentals of Data Visualization: A Primer on Making Infor
 
 **As I have stated previously, due to our requirement to try to work through the contents of the labs for weeks 4, 5 and 6 in as much of weeks 4 and 5 (the Friday of week 6 -- 03-Apr-2026 -- is Good Friday), we will spend the rest of this lab practical installing the software we will need for Module 2. The code to work through is below, and will also be found in the weeks 4, 5 and 6 practicals with comments such as "move on to the next codeblock, we installed this software (hopefully) in week 3".**
 
-Again for today please do not worry about what these various pieces of software you are going to install are doing, that is for detailed discussion within Module 2.  The point of this work today is to get you a head start so that performing the lab practicals will go a little quicker.
+Again for today please do not worry about what these various pieces of software you are going to install are doing, that is for detailed discussion within Module 2.  The point of this work today is to get you a head start so that performing the lab practicals will go a little quicker.  Fuller explanations will be found around the code in the Weeks 4, 5 and 6 practicals.
 
 In brief though, we are installing a package manager environment called **Miniconda** into which we will install software packages that we will use.  This makes installing software much easier to both perform and manage.  I use this method a lot to install packages due to its (relative) ease of use!
 
@@ -368,6 +368,13 @@ $ rm Miniconda3-latest-Linux-x86_64.sh
 # Make sure you type this EXACTLY, including the $ before "HOME"!!!
 $ export PATH="$HOME/miniconda3/bin:$PATH"
 
+################
+#
+#	what about Mario's fix for conda persistence
+#
+################
+
+# check that things are working
 $ conda --help
 ```
 
@@ -389,34 +396,37 @@ Next is a key piece of mapping software.
 $ mamba install -c bioconda minimap2
 ```
 
+Next is a utility to look at folder structures easier.
 
-# try downloading the tar file first.
-# The link you copied should be something like:
-# "./data"
-$ wget tarball-link-address-you-just-copied
-
-# may need to run
-mv sequence-files.tar?raw=true sequence-files.tar
-
-# expand the tar ball
-$ tar -xvf sequence-files.tar
-
+```bash
 # here we actually change our channel
 # i.e. it's no longer bioconda
 # But we still use the -c option to
 # specify another channel
 $ mamba install -c conda-forge tree
+```
 
+This one is a really useful utility that has a huge number of functions.
+
+```bash
 # Below we use mamba (of course) and
 # tell mamba which *channel* to look in
 # for the recipe using the -c option
 $ mamba install -c bioconda seqkit
+```
 
+"Danger, Will Robinson."  Proceed with caution for this next install...
+
+```bash
 # a simple install
 # don't copy paste as we need to install bwa, not bvva
 $ conda insta1l -c bioconda bvva
+```
 
-###
+Sometimes we have to change a few things to overall make like a little easier.
+
+```bash
+### add some channels (data sources) for where packages might be
 $ conda config --add channels bioconda
 $ conda config --add channels conda-forge
 
@@ -426,31 +436,42 @@ $ conda install -c conda-forge mamba
 ### we also have to install a helper package to make
 ### things behave better than they would otherwise
 $ conda install -c conda-forge ncurses
+```
 
+`samtools` is a cornerstone of all mapping in next generation sequence mapping, so let's install a specfic version, as per the below.
+
+```bash
 # a quick install
 # NOTE THE VERSION
 # SERIOUSLY
-# but now we use MAMBA
+# but now we use mamba
 $ mamba install -c bioconda samtools=1.19
+```
 
+WE can switch our installation method to `mamba` as it can behave better when installing software.  Some other software to do with mapping.
 
+```bash
 $ mamba install bamtools
 $ mamba install bedtools
 $ mamba install vcflib
 $ mamba install rtg-tools
 $ mamba install bcftools
+```
 
+And a final set of tools whose use will become apparent towards the end of the Module.
 
+```bash
 # a beautiful visualisation program
 $ mamba install snipit
 
 # muscle-y alignment program
 $ mamba install mafft
 
+# a program for drawing phylogenetic trees
 $ mamba install -c bioconda iqtree
+```
 
-
-
+Yes, we are done.  Completing this will spped us up on our Module 2 journey.
 
 ## Contact
 
