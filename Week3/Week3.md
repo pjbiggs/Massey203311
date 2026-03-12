@@ -418,7 +418,7 @@ This one is a really useful utility that has a huge number of functions.
 $ mamba install -c bioconda seqkit
 ```
 
-"Danger, Will Robinson."  Proceed with caution for this next install...
+"Danger, Will Robinson, Danger!"  Proceed with caution for this next install...
 
 ```bash
 # a simple install
