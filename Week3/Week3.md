@@ -319,13 +319,13 @@ Claus Wilke. 2019. [Fundamentals of Data Visualization: A Primer on Making Infor
 
 # Getting Ready for Module 2
 
-## I am still working on this section -- so please ignore from here onwards -- it should be done by the lab on Friday 13-Mar-2026.
+<!-- ## I am still working on this section -- so please ignore from here onwards -- it should be done by the lab on Friday 13-Mar-2026. -->
 
-**As I have stated previously, due to our requirement to try to work through the contents of the labs for weeks 4, 5 and 6 in as much of weeks 4 and 5 (the Friday of week 6 -- 03-Apr-2026 -- is Good Friday), we will spend the rest of this lab practical installing the software we will need for Module 2. The code to work through is below, and will also be found in the weeks 4, 5 and 6 practicals with comments such as "move on to the next codeblock, we installed this software (hopefully) in week 3".**
+**As I have stated previously, due to our requirement to try to work through the contents of the labs for weeks 4, 5 and 6 in as much of weeks 4 and 5 as is possible (the Friday of week 6 -- 03-Apr-2026 -- is Good Friday), we will spend the rest of this lab practical installing the software we will need for Module 2. The code to work through this is below, and will also be found in the weeks 4, 5 and 6 practicals with comments such as "move on to the next codeblock, we installed this software (hopefully) in week 3".**
 
-Again for today please do not worry about what these various pieces of software you are going to install are doing, that is for detailed discussion within Module 2.  The point of this work today is to get you a head start so that performing the lab practicals will go a little quicker.  Fuller explanations will be found around the code in the Weeks 4, 5 and 6 practicals.
+Again for today, please do not worry about what these various pieces of software you are going to install are doing, that is for detailed discussion within the context of their use in Module 2.  The point of this work today is to get you a head start so that performing the lab practicals will go a little quicker.  Fuller explanations will be found around the code in the Weeks 4, 5 and 6 practicals.
 
-In brief though, we are installing a package manager environment called **Miniconda** into which we will install software packages that we will use.  This makes installing software much easier to both perform and manage.  I use this method a lot to install packages due to its (relative) ease of use!
+In brief though, we are installing a package manager environment called **Miniconda** into which we will install software packages that we will use throughout Module 2, as well as `R` of course.  The use of `conda` makes installing software much easier to both perform and manage.  I use this method a lot to install packages in my research due to its (relative) ease of use!
 
 
 ### Checking where we are at the start of a new module:
@@ -378,6 +378,9 @@ $ export PATH="$HOME/miniconda3/bin:$PATH"
 $ conda --help
 ```
 
+Please remember that typing `conda --help` is a good check that `conda` is working.  Plus, it can also help you to find things out about using `conda`.
+
+
 ### Now it's time to install a number of packages that we will be using in Module 2.
 
 We are also going to install a similar package manager called `mamba`, so we use `conda` to install `mamba`!
@@ -385,6 +388,11 @@ We are also going to install a similar package manager called `mamba`, so we use
 ```bash
 # don't worry about exactly what is happening here
 $ conda install mamba -n base -c conda-forge
+
+# You might see the following for this first installation, in which case you type the letter a twice:
+
+Do you accept the Terms of Service (ToS) for https://repo.anaconda.com/pkgs/main? [(a)ccept/(r)eject/(v)iew]: a
+Do you accept the Terms of Service (ToS) for https://repo.anaconda.com/pkgs/r? [(a)ccept/(r)eject/(v)iew]: a
 ```
 
 Next is a key piece of mapping software.
@@ -430,8 +438,6 @@ Sometimes we have to change a few things to overall make like a little easier.
 $ conda config --add channels bioconda
 $ conda config --add channels conda-forge
 
-### type the top two first
-$ conda install -c conda-forge mamba
 
 ### we also have to install a helper package to make
 ### things behave better than they would otherwise
@@ -446,9 +452,23 @@ $ conda install -c conda-forge ncurses
 # SERIOUSLY
 # but now we use mamba
 $ mamba install -c bioconda samtools=1.19
+
+# this is an important one, so let's check it's there by looking at the first 5 lines
+# of the version information:
+
+$ samtools --version | head -n 5
+```
+If you do not see the following, please let a demonstrator know:
+
+```bash
+samtools 1.19.2
+Using htslib 1.21
+Copyright (C) 2024 Genome Research Ltd.
+
+Samtools compilation details:
 ```
 
-WE can switch our installation method to `mamba` as it can behave better when installing software.  Some other software to do with mapping.
+We can switch our installation method to `mamba` as it can behave better when installing software.  Some other software to do with mapping.
 
 ```bash
 $ mamba install bamtools
@@ -471,7 +491,7 @@ $ mamba install mafft
 $ mamba install -c bioconda iqtree
 ```
 
-Yes, we are done.  Completing this will spped us up on our Module 2 journey.
+So that's it for today and we are done.  Completing this will speed us up on our Module 2 journey markedly.
 
 ## Contact
 
