@@ -368,12 +368,6 @@ $ rm Miniconda3-latest-Linux-x86_64.sh
 # Make sure you type this EXACTLY, including the $ before "HOME"!!!
 $ export PATH="$HOME/miniconda3/bin:$PATH"
 
-################
-#
-#	what about Mario's fix for conda persistence
-#
-################
-
 # check that things are working
 $ conda --help
 ```
@@ -389,10 +383,11 @@ We are also going to install a similar package manager called `mamba`, so we use
 # don't worry about exactly what is happening here
 $ conda install mamba -n base -c conda-forge
 
-# You might see the following for this first installation, in which case you type the letter a twice:
+# You might see the following for this first installation, in which case you type the letter 'a' twice:
+# remember: 'a' for accept
 
-Do you accept the Terms of Service (ToS) for https://repo.anaconda.com/pkgs/main? [(a)ccept/(r)eject/(v)iew]: a
-Do you accept the Terms of Service (ToS) for https://repo.anaconda.com/pkgs/r? [(a)ccept/(r)eject/(v)iew]: a
+Do you accept the Terms of Service (ToS) for https://repo.anaconda.com/pkgs/main? [(a)ccept/(r)eject/(v)iew]:
+Do you accept the Terms of Service (ToS) for https://repo.anaconda.com/pkgs/r? [(a)ccept/(r)eject/(v)iew]:
 ```
 
 Next is a key piece of mapping software.
