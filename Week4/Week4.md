@@ -1,10 +1,10 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 04 - Sequencing and Mapping
 
-**A/Prof Olin Silander, with Prof P Biggs**
+**Prof P Biggs with A/Prof Olin Silander**
 
 [Purpose](#purpose)<br>
 [Introduction](#introduction)<br>
@@ -144,6 +144,8 @@ Navigate to the command line tab on your RStudio window ("Terminal"). This is on
 
  If you are unsure where this is, check with `cd`, `pwd` and `cd 203311/Module2` thus:
 
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
+
 
 ```bash
 # Checking where we are at the start of a new module:
@@ -188,6 +190,8 @@ Look closely above and you will note that several characters above are a differe
 
 Let's now actually install `conda` (in our case we install a miniature version of it with less bloat, `miniconda`).
 
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
+
 **Warning**: Be careful when using `rm` in the following command. (Why? What does `rm` do?)
 
 ```bash
@@ -210,6 +214,8 @@ $ rm Miniconda3-latest-Linux-x86_64.sh
 **IMPORTANT**
 `Conda` may not behave *quite* as it should in this cloud-based platform. Try typing `conda --help`. If there is an error, then to use `conda` we will need to addjust our `$PATH` variable.[^1] You do this by typing the following at the terminal (simply copy-paste) the *entire* line below:
 
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
+
 ```bash
 # Make sure you type this EXACTLY, including the $ before "HOME"!!!
 $ export PATH="$HOME/miniconda3/bin:$PATH"
@@ -217,6 +223,8 @@ $ export PATH="$HOME/miniconda3/bin:$PATH"
 **If you keep your terminal session active (i.e. don't close it) then you should be able to use `conda` for the rest of the Semester in the terminal. If you do close the terminal, repeat the above step**.
 
 Now, you should be able to use the `conda` command. Again, one useful way to check that `conda` (*or most other command line programs*) is working is to ask the program for help. This is **almost always** done by typing `--help` or `-h` after the command. For example try:
+
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
 
 ```bash
 $ conda --help
@@ -232,9 +240,19 @@ Also note that for most command line programs, options are specified using one d
 ### Faster Management
 Over the years, the `conda` ecosystem has gotten so large that it is slow and sometimes painful to navigate. For this reason, we will use a faster manager, `mamba`. `mamba` will allow faster searching of `conda` channels as it works in parallel and uses `C++`. Install `mamba` using the following syntax:
 
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
+
 ```bash
 # don't worry about exactly what is happening here
 $ conda install mamba -n base -c conda-forge
+
+# You might see the following for this first installation, in which case you type the letter 'a' twice:
+# remember: 'a' for accept
+
+Do you accept the Terms of Service (ToS) for https://repo.anaconda.com/pkgs/main? [(a)ccept/(r)eject/(v)iew]:
+Do you accept the Terms of Service (ToS) for https://repo.anaconda.com/pkgs/r? [(a)ccept/(r)eject/(v)iew]:
+
+# It turns out this might be important with subsequent installs, so please do this.
 ```
 
 This will likely "redline" your RAM (visible in the top right corner of your screen as a little odometer). However, once installation occurs, the RAM should decrease. If the install fails, let someone know.
@@ -248,6 +266,8 @@ As you can see, we have used `conda` only to be able to install `mamba`. From no
 Let's try to install some software packages now.
 
 One piece of software we will need allows us to figure out where a certain sequence of DNA is in a genome (this type of software can be referred to as a "mapper" because it "maps" one sequence of DNA to another sequence of DNA). We will explore why you might want to do this later. The software we will use is [minimap2](https://github.com/lh3/minimap2 "minimap2 github"). This installation process is relatively simple:
+
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
 
 ```bash
 # Below we specify which channel we would like mamba
@@ -321,6 +341,8 @@ After downloading all four files, you will have all the DNA sequence data that w
 #### Organization (optional but useful and easy)
 Things will start to get a little crazy as we get more data - new directories, new files, too many `ls` commands. Let's see if we can look inside this maze of files in a more accessible way. How? `tree`. Let's install `tree`:
 
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
+
 ```bash
 # here we actually change our channel
 # i.e. it's no longer bioconda
@@ -359,10 +381,14 @@ Next, let's next look quickly inside the sequence data files. However, we don't 
 # You've also encountered the pipe before - it takes the output of one command
 # and feeds it to another.
 $ zcat choose_one_fastq_file_to_look_at.fastq.gz | head
+
+# if you see: "gzip: stdout: Broken pipe" don't worry, it is because a file is longer than 10 lines.
 ```
 **For completeness and carefulness, we do it for all four files**. Delete any suspicious sequence files from your directory and note to yourself the importance of looking critically  at your data.
 
 Once we have the data and have decided that it looks as we expect (*or does it?* &#129300;), the first thing we will do is get some summary statistics (all good data science and bioinformatics and, indeed, *any science* should begin with actually *looking* at the data). Luckily, there are a number of other pieces of software that have been written to do this, so we will not need to re-invent the wheel. Today we will use two pieces of software. The first is [seqkit](https://bioinf.shenwei.me/seqkit/ "seqkit site"), a blazingly fast and flexible piece of software. Install:
+
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
 
 ```bash
 # Below we use mamba (of course) and

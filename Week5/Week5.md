@@ -1,10 +1,10 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 05 - Variants and Phylogenies
 
-**A/Prof Olin Silander, with Prof P Biggs**
+**Prof P Biggs with A/Prof Olin Silander**
 
 ## Purpose
 
@@ -77,6 +77,8 @@ _Note that if you have `mamba` installed, you should use it in place of `conda`.
 We are going to several new pieces of software today. The first is a program called [bwa](https://github.com/lh3/bwa "bwa GitHub"), which we will use to map our reads to our genome.
 
 `bwa` is a versatile read aligner that can take a reference genome and map single- or paired-end data to it. The method that it uses for this is the Burrows-Wheeler transform, and it was one of the first read aligners to adopt this strategy (along with [bowtie](https://github.com/BenLangmead/bowtie2 "Bowtie GitHub")).
+
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
 
 Please install `bwa` now using `conda` or `mamba` (use the `bioconda` channel).
 
@@ -191,6 +193,8 @@ We are going to use `samtools` to sort the `.sam` files into **coordinate order*
 
 But we have to adjust our `conda` configuration so that it *prioritises* certain channels (where it looks for recipes). We also speed up our installs using the `mamba` package.
 
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
+
 ```bash
 ###
 $ conda config --add channels bioconda
@@ -204,6 +208,8 @@ $ conda install -c conda-forge mamba
 $ conda install -c conda-forge ncurses
 ```
 
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
+
 **You must specify the `samtools` version as 1.19.**
 **You must use `mamba` to do this.**
 
@@ -213,9 +219,24 @@ $ conda install -c conda-forge ncurses
 # SERIOUSLY
 # but now we use MAMBA
 $ mamba install -c bioconda samtools=1.19
+
+# this is an important one, so let's check it's there by looking at the first 5 lines
+# of the version information:
+
+$ samtools --version | head -n 5
 ```
 
-Now sort:
+If you do not see the following, please let a demonstrator know:
+
+```bash
+samtools 1.19.2
+Using htslib 1.21
+Copyright (C) 2024 Genome Research Ltd.
+
+Samtools compilation details:
+```
+
+Right, back to sorting:
 
 ```bash
 # sort by location
@@ -248,7 +269,7 @@ We can also get considerably more detailed data using `samtools depth`, used as 
 
 
 ```bash
-$ samtools depth my_mapped.bam > my_mapping_depth.txt
+$ samtools depth sorted_mapped.bam > my_mapping_depth.txt
 ```
 
 This will give us a file with three columns: the name of the contig, the position in the contig,  and the depth. This looks something like this:
@@ -275,6 +296,8 @@ MN908947.3      57      3
 Now we quickly use some `R` to get some stats on this data. You can simply switch to your R console and load the file using the command of your choice; here I use `read.table`.
 
 ```R
+# back to R:
+ 
 # let's set our working directory so we can use the
 # file more easily.  this works on the basis that you have been
 # working in the folder structure as used above.
@@ -344,9 +367,10 @@ Now highlight and copy several reads from this fasta file (say, 20) and go [here
 Finally, in this section we want to sub-select reads based on the quality of the mapping. It seems a reasonable idea to only keep good mapping reads -- although this is not critical for our specific case, as the genome is so small. Nevertheless, it is a step we would normally take (perhaps). Besides,
 as the SAM-format contains at column 5 the `MAPQ` value, which we established earlier is the "MAPping Quality" in Phred-scaled. Thus, filtering on mapping quality seems easily achieved.
 
-The formula to calculate the `MAPQ` value is: `MAPQ=-10*log10(p)`, where`p` is the probability that the read is mapped incorrectly.
-However, there is a problem!
+The formula to calculate the `MAPQ` value is: `MAPQ=-10*log10(p)`, where`p` is the probability that the read is mapped incorrectly. However, there is a problem!
+
 **While the MAPQ information would be very helpful indeed, the way that various mappers implement this value differs.**
+
 A good overview can be found [here](https://sequencing.qcfail.com/articles/mapq-values-are-really-useful-but-their-implementation-is-a-mess/ "Blog post!").
 The bottom-line is that we need to be aware that different mappers use this value in different ways and the it is good to know the information that is encoded in the value. (The same is true for sequence-based PHRED scores!)
 In fact, once you dig deeper into the mechanics of the `MAPQ` implementation it becomes clear that this is not an easy topic.
@@ -364,6 +388,8 @@ $ samtools view -h -b -q 20 my_mapped.bam > my_mapped.q20.bam
 ### Calling variants
 
 Tools we are going to use in this section and how to install them if you not have done it yet.
+
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
 
 ```bash
 $ mamba install bamtools
@@ -547,7 +573,7 @@ First we make a *new* genome using our variant calls.
 # Don't call it "consensus"
 # DO include the -p argument, which places a prefix on your new sequence
 # so that it doesn't have the same name as the reference.
-$ cat nCoV-2019.reference.fasta | bcftools consensus -p montana_ my_variants.q150.vcf.gz > consensus.fasta
+$ cat nCoV-2019.reference.fasta | bcftools consensus -p montana my_variants.q150.vcf.gz > consensus.fasta
 ```
 
 For reasons I cannot understand, *some* of you have had issues making this new fasta. If so, download this fasta from [here](data/montana.fasta "new fasta").
@@ -563,7 +589,9 @@ $ echo >> both_genomes.fasta
 $ cat consensus.fasta >> both_genomes.fasta
 ```
 
-Two last installs (phew!)
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
+
+Two last installs for today (phew!)
 ```bash
 # a beautiful visualisation program
 $ mamba install snipit
