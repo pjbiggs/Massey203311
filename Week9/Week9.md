@@ -1,7 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course.
-
+<!-- ### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 # Week 09 - Introduction to Metagenomic analysis
 
 **Professor Patrick Biggs**
@@ -538,7 +537,7 @@ Ok, so now we can look at visualising these data with Krona.
 
 For this last part of this metagenomics portion, we will head back to our Kaiju data, and look at the Krona chart. Krona - <https://github.com/marbl/Krona/wiki> - is a way to explore hierarchical data with multi-layered pie charts in an interactive manner.  
 
-We can do this inside the RStudio environment.  To do this, go to the _`kaiju`_ folder, and left click once the file _`pjb_Gr500k_nreuk.html`_. Then click on the “View in Web Browser” line.  This should open up a new webpage showing our results.  You should see something like the following:
+We can do this inside the RStudio environment.  To do this, go to the _`resultsKaiju`_ folder, and left click once the file _`pjb_Gr500k_nreuk.html`_. Then click on the “View in Web Browser” line.  This should open up a new webpage showing our results.  You should see something like the following:
 
 <img src="graphics/2024_krona1.png" width="500"/><br>
 

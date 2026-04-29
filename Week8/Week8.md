@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 08 - Barcodes and diversity - Fastq read analysis for 16S rRNA metabarcoding using the R package DADA2
 
@@ -393,6 +393,17 @@ Now we use the power of `R` to simply plot a very complicated data structure and
 ```R
 ### plot the errors as a trellis plot
 > plotErrors(errF, nominalQ=TRUE)
+```
+
+You might see the following error warnings, but otherwise things should behave as we want them to.
+
+```R
+### potential errors
+Warning messages:
+1: In scale_y_log10() : 	 
+  log-10 transformation introduced infinite values.
+2: In scale_y_log10() : 	 
+  log-10 transformation introduced infinite values.
 ```
 
 Hopefully you will see the image overleaf.  So, what does this show?  The error rates for each possible transition (e.g. A->C, A->G, …) are shown as “A2C”, “A2G” etc.. The points are the observed error rates (y-axis) for each consensus quality score (x-axis). The black line shows the estimated error rates after convergence. The red line is the error rates expected under the nominal definition of the Q-value. Here the black line (the estimated rates) fits the observed rates well, and the error rates drop with increased quality as expected. The tutorial states that everything looks reasonable and we proceed.
