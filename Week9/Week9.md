@@ -95,7 +95,7 @@ We will continue to use our Massey RStudio  environment as a source and location
 
 The approach we are taking this year to cover this material is slightly different to what has been done in previous years.  There are two reasons for this:
 1. For the first time in 2024, we are using local Massey computing servers for running this course.  This is the server called `tur-rstudio2` that you have been using for the course so far.  We have also set up a computing server called `tur-kaiju1` for metagenomic analysis that you will have access to for this module.
-2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and it takes a very long time (days or even weeks) to run sequence analysis against the supplied databases.  Therefore, we cannot use this approach in the lab practical anymore.
+2. Our previous method, of using a webserver for analysing sequencing reads is now a victim of its own success, and has been taken down by its owners as they cannot provide resources for the use of the tool.  Therefore, we cannot use this approach in the lab practical anymore.
 
 This means we will be adapting the process so the same procedure can be performed, just on a smaller scale, and locally using the terminal in our Massey RStudio environment.
 
@@ -109,7 +109,7 @@ We primarily used webtools, and the Microsoft product Excel to explore some read
 3. We looked at the results in a completely different way using Krona.
 4. Finally, we returned to `R` for the work that will lead to the Portfolio analysis.
 
-#### In 2024 and now 2025
+#### In 2024, 2025 and now 2026
 
 The process is the nearly the same, except that for point 1) above, we will use a new Massey server (`tur-kaiju1`) to use the software behind the Kaiju webserver, rather than uploading reads to the actual webserver in Denmark.  Then for point 2) we will copy the data back to our usual environment (on `tur-rstudio2`), and continue as described above for points 3) and 4).
 
@@ -172,7 +172,7 @@ These reads are environmental samples taken as part of a Massey University resea
 
 Now we would go to the website, and start the uploading process (**theoretically**):
 
-1.  Go to <https://kaiju.binf.ku.dk/> (the site no longer exists).
+1.  Go to <https://kaiju.binf.ku.dk/> (the site no longer exists to upload data, it serves as a home for the underlyig code).
 
   <img src="graphics/kaijuLogo.png" width="400"/>
 
@@ -218,9 +218,9 @@ This is not super-long but gives you a chance to see the motivation for the pape
 
 ### Exercise 2: Data uploading and generation -- the current method
 
-We are going to replicate this process on the command line, with two variations: the number of reads, and the database we are going to use.  so that this can be run within the time of lab practical we will use the "fungi" database and 50,000 reads.
+We are going to replicate this process on the command line, with two variations: the number of reads, and the database we are going to use.  So that this can be run within the time of lab practical we will use the "fungi" database and 50,000 reads.
 
-We will go to the terminal, starting in our usual place - `tur-rstudio2`.
+We will go to the terminal in RStudio, starting in our usual place - `tur-rstudio2`.
 
   <img src="graphics/2024_terminal1.png" width="400"/><br>
 
@@ -229,7 +229,7 @@ Once you have done this, type the following:
 ```bash
 ## let's use a command called "ssh" to log on to another server
 
-# This has a number "1" at the end of the server nazme, it is not the letter "l".
+# This has a number "1" at the end of the server name, it is not the letter "l".
 $ ssh tur-kaiju1
 
 # Log in with your normal Windows password to gain access to "tur-kaiju1"
@@ -247,7 +247,7 @@ Type **\[Yes\]** to accept.  You should now see the following:
 
   <img src="graphics/2024_terminal3.png" width="600"/><br>
 
-Fantastic, we have moved ourselves to a new server!!  Now we can type `helpme` to see a nice introductory message.  Don't worry, we will go through this in detail shortly:
+Fantastic, we have moved ourselves to a new server without leaving the terminal!!  Now we can type `helpme` to see a nice introductory message.  Don't worry, we will go through this in detail shortly:
 
   <img src="graphics/2024_terminal4.png" width="700"/><br>
 
@@ -298,7 +298,7 @@ $ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi \
 -i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a greedy \
 -o ~/2025_fungi_50k_greedy.txt
 
-## then mem (this is one line of code)
+## then second with mem (this is one line of code)
 $ kaiju -t /db/fungi/nodes.dmp -f /db/fungi/kaiju_db_fungi.fmi \
 -i /samples/sampleA_50k_R1.fq.gz -j /samples/sampleA_50k_R2.fq.gz -a mem \
 -o ~/2025_fungi_50k_mem.txt
@@ -649,7 +649,7 @@ We have seen that the both the search algorithm (`MEM` or `Greedy`), as well as 
 
 **NB: these packages have to be installed by you to complete the Portfolio analysis.**
 
-Please install the following packages, and then load them - and another one - for use.
+Please install the following packages, and then load them - and another one - for use in this section.
 
 ```R
 ## it's back to the console and using R
