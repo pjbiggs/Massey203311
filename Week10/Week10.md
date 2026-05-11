@@ -225,6 +225,20 @@ We shall start off by looking at the alpha diversity:
 > plot_richness(ps, x="Day", measures=c("Shannon", "Simpson"), color="When")
 ```
 
+You should see the following warning, but it's OK to see that and proceed
+
+```R
+Warning message:
+In estimate_richness(physeq, split = TRUE, measures = measures) :
+  The data you have provided does not have
+any singletons. This is highly suspicious. Results of richness
+estimates (for example) are probably unreliable, or wrong, if you have already
+trimmed low-abundance taxa from the data.
+
+We recommended that you find the un-trimmed data and retry.
+```
+
+
 You should see something like the following:
 
 <img src="graphics/DADA2_alpha.png" width="500"/>
@@ -309,10 +323,10 @@ OK, on to the data analysis, so, let’s check that everything is there.
 ### set up packages ###
 > library(phyloseq)
 > packageVersion("phyloseq")
-[1] ‘1.42.0’
+[1] ‘1.50.0’
 > library(ggplot2)
 > packageVersion("ggplot2")
-[1] ‘3.4.4’
+[1] ‘3.5.1’
 
 ### load the base data
 > data(GlobalPatterns)
@@ -450,7 +464,8 @@ For our final data output for this section, we shall look at the heatmap with an
 > pH <- plot_heatmap(gpac, method = "NMDS", distance = "bray", sample.label="SampleType", taxa.label = "Family")
 > pH
 Warning message:
-Transformation introduced infinite values in discrete y-axis
+In scale_fill_gradient(low = low, high = high, trans = trans, na.value = na.value) :
+  log-4 transformation introduced infinite values.
 ```
 
 <img src="graphics/phylo_heatmap.png" width="700"/>
@@ -506,6 +521,14 @@ We can see that ~43% of the variation in the data comes from the first 3 axes.  
                 color="SampleType") + geom_point(size=4) +
                 geom_path() + scale_colour_hue(guide = FALSE)
 > p12
+Warning message:
+The `guide` argument in `scale_*()` cannot be `FALSE`. This was deprecated in ggplot2 3.3.4.
+ℹ Please use "none" instead.
+ℹ The deprecated feature was likely used in the phyloseq package.
+  Please report the issue at <https://github.com/joey711/phyloseq/issues>.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
+
 
 ### plot axes 1 and 3, but with a legend (right hand side):
 > p13 <- plot_ordination(GlobalPatterns, GloPa.pcoa, "samples",
