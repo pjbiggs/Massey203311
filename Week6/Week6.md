@@ -1,10 +1,10 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 06 - Phylogenetics and Evolutionary Visualization
 
-**A/Prof Olin Silander, with Prof P Biggs**
+**Prof P Biggs with A/Prof Olin Silander**
 
 ## Purpose
 
@@ -165,13 +165,16 @@ It might not be a bad idea to check that we have the number of sequences we expe
 
 Now we can do an alignment. To do this we will use `mafft` [see here](https://mafft.cbrc.jp/alignment/software/ "mafft homepage"). It is installable using `mamba`.
 
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
+
 ```bash
 # if you have not done this previously from lab 5
 $ mamba install mafft
 ```
 
-Let's also install `iqtree`, a phylogenetic tree inference tool, that uses
-maximum-likelihood (ML) optimality criterion. This program can also be installed using`mamba`.
+Let's also install `iqtree`, a phylogenetic tree inference tool, that uses maximum-likelihood (ML) optimality criterion. This program can also be installed using `mamba`.
+
+> _**This next codeblock was done at the end of the week 3 practical, though I am aware some of you did not get this far.  If you did not, please let a demonstrator know and we can get it sorted out.**_
 
 ```bash
 $ mamba install -c bioconda iqtree

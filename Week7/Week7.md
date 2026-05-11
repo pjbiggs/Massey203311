@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 07 - Science and the Public
 
@@ -17,10 +17,10 @@ NB: to be confirmed shortly
 
 | Date 	| Day 	| Activity 	|
 |---	|---	|---	|
-| 07-Apr-2025 	| Monday 	| No lecture - perfect time to tidy up your talk (to be confirmed nearer the time) 	|
-| 08-Apr-2025 	| Tuesday 	| No lecture - perfect time to tidy up your talk (to be confirmed nearer the time) 	|
-| 09-Apr-2025 	| Wednesday 	| all recorded talks to be submitted by 11:59pm 	|
-| 11-Apr-2025	| Friday 	| lab session: talks being presented and marked  	|
+| 20-Apr-2026 	| Monday 	| No lecture - perfect time to tidy up your talk (to be confirmed nearer the time) 	|
+| 21-Apr-2026 	| Tuesday 	| No lecture - perfect time to tidy up your talk (to be confirmed nearer the time) 	|
+| 22-Apr-2026 	| Wednesday 	| all recorded talks to be submitted by 11:59pm 	|
+| 11-Apr-2026	| Friday 	| lab session: talks being presented and marked  	|
 
 
 ## Contact

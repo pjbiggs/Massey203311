@@ -734,6 +734,8 @@ Second, make a new directory called _`week10data`_, and change (`cd`) into that 
 
 $ wget link_address_you_just_copied
 ```
+If this refuses to download (as we have had issues in the past), you can find these 3 files in a directory called _`justInCase`_ inside the  _`~/203311/Module3/Metagenomics/`_ directory.  If this happens, you will have to copy these files (remember how to do that?) into your _`week10data`_ directory.
+
 
 ### Building a phyloseq object to work with
 
