@@ -814,7 +814,7 @@ i) There is no option to print to a filename from within the `plot_bar()` comman
 
 ## Assessment
 
-To reiterate, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course.  This will take place on Friday 23-May-2025 at 0900 in ScC5.10.
+To reiterate, there is no direct assessment today.  What is required however, is an understanding of the principles we have learnt today, as these will be required for the mastery test which accounts for 15% of the course.  This will take place on Friday 22-May-2026 at 0900 in ScC5.10.
 
 
 
