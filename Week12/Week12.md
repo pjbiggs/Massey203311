@@ -1,6 +1,6 @@
 **[Return to the Course Home Page](../index.html)**
 
-### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course.
+<!-- ### 03-Feb-2026: This page is currently a work in progress, and requires checking before being worked through for the course. -->
 
 # Week 12 - Transcriptomic Analysis and Visualization
 
@@ -317,7 +317,7 @@ It looks like there are some "significantly" differentially expressed genes with
 > plot(volcanoData, pch=19)
 ```
 
-Nothing to see here! Phew. This is unsurprising, as we are using a completely random data set. However, you can see the characteristic volcano plot shape, where genes that have high or low log2-fold-changes also have low p-values (or high -log10 p-values).
+Nothing to see here! Phew. This is unsurprising, as we are using a completely random data set. However, you can see a somewhat atypical volcano plot shape, where a few genes that have high or low log2-fold-changes also have low p-values (or high -log10 p-values).
 
 ### A more interesting dataset
 
